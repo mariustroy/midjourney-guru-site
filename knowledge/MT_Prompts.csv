@@ -1,0 +1,1201 @@
+Prompt,Version,content_urls,style_urls,char_urls,content_alt,style_alt,char_alt,palette,mood,texture,subject,action,style_or_type,place,time,parameters,tension_note,meta_json
+"https://s.mj.run/khAQMPWrXoc https://s.mj.run/KKyn8luLS_A https://s.mj.run/ERbIScTxV4k https://s.mj.run/IXanJRjLzN8 https://s.mj.run/yOAUfy7ulVg 70s photograph of rain made of gold running down a tree made of fur with delicate details in a tuscan park after sunset, kodak portra --ar 4:5 --sref https://s.mj.run/rfIym3eb_ns https://s.mj.run/foN0nZH2x18",6.1,https://s.mj.run/khAQMPWrXoc https://s.mj.run/KKyn8luLS_A https://s.mj.run/ERbIScTxV4k https://s.mj.run/IXanJRjLzN8 https://s.mj.run/yOAUfy7ulVg ,https://s.mj.run/rfIym3eb_ns https://s.mj.run/foN0nZH2x18,,"Artistic gold ring with a pearl, featuring an organic design. | Abstract patterns of dark and light fluid textures. | Textured golden surface with wavy patterns and intricate details. | Gold abstract design with a pearl drop. Elegant and artistic. | Lush green landscape with uniquely shaped topiary trees.","Glossy blue ceramic with a gold accent, resembling organic forms. | Golden textured sculpture resembling a dog against a rich red backdrop.",,"gold, green",artistic,"fur, glossy",tree,running,photograph,Tuscan park,after sunset,Kodak Portra,delicate details,"{
+  ""palette"":""gold, green"",
+  ""mood"":""artistic"",
+  ""texture"":""fur, glossy"",
+  ""subject"":""tree"",
+  ""action"":""running"",
+  ""style_or_type"":""photograph"",
+  ""place"":""Tuscan park"",
+  ""time"":""after sunset"",
+  ""parameters"":""Kodak Portra"",
+  ""tension_note"":""delicate details""
+}"
+"https://s.mj.run/yOAUfy7ulVg https://s.mj.run/Yyt_cO6_ZYE https://s.mj.run/eJ98BRWcVU0 70s photograph of an organically shaped and solid cream colored sculpture with delicate gold details in paris at dusk, kodak portra --ar 4:5 --sref https://s.mj.run/3zgt6fPd1Ng https://s.mj.run/khAQMPWrXoc --profile hreu13h --v 7",7,https://s.mj.run/yOAUfy7ulVg https://s.mj.run/Yyt_cO6_ZYE https://s.mj.run/eJ98BRWcVU0 ,https://s.mj.run/3zgt6fPd1Ng https://s.mj.run/khAQMPWrXoc ,,"Lush green landscape with uniquely shaped topiary trees. | Textured fabric in orange and white, featuring layered pleats. | Textured metal surface with a patterned, golden rectangular piece.","Vibrant orange and soft pastel hues create a dynamic, textured installation. | Artistic gold ring with a pearl, featuring an organic design.",,"cream, gold",artistic,"smooth, delicate",sculpture,,photograph,Paris,dusk,--ar 4:5 --sref --profile hreu13h --v 7,,"{
+  ""palette"":""cream, gold"",
+  ""mood"":""artistic"",
+  ""texture"":""smooth, delicate"",
+  ""subject"":""sculpture"",
+  ""action"":"""",
+  ""style_or_type"":""photograph"",
+  ""place"":""Paris"",
+  ""time"":""dusk"",
+  ""parameters"":""--ar 4:5 --sref --profile hreu13h --v 7"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/yOAUfy7ulVg https://s.mj.run/khAQMPWrXoc https://s.mj.run/Yyt_cO6_ZYE https://s.mj.run/YRxhRCJHHrg 70s fashion portrait of a female model wearing a skin tight mesh textile with delicate gold details in tuscany at dusk, kodak portra --ar 4:5 --sref https://s.mj.run/AWEQ53ExSC8 https://s.mj.run/eJ98BRWcVU0 https://s.mj.run/m9zYqFVXg5U --profile hreu13h",6.1,https://s.mj.run/yOAUfy7ulVg https://s.mj.run/khAQMPWrXoc https://s.mj.run/Yyt_cO6_ZYE https://s.mj.run/YRxhRCJHHrg ,https://s.mj.run/AWEQ53ExSC8 https://s.mj.run/eJ98BRWcVU0 https://s.mj.run/m9zYqFVXg5U ,,"Lush green landscape with uniquely shaped topiary trees. | Artistic gold ring with a pearl, featuring an organic design. | Textured fabric in orange and white, featuring layered pleats. | Model in a green netted dress against a soft backdrop.","Flowing blue fabric against a dark background, creating a mysterious silhouette. | Textured metal surface with a patterned, golden rectangular piece. | Sparkling, nude-toned fabric with shimmering details and soft textures.",,gold,elegant,mesh,female model,posing,70s fashion,tuscany,dusk,--ar 4:5 --sref --profile hreu13h,,"{
+  ""palette"":""gold"",
+  ""mood"":""elegant"",
+  ""texture"":""mesh"",
+  ""subject"":""female model"",
+  ""action"":""posing"",
+  ""style_or_type"":""70s fashion"",
+  ""place"":""tuscany"",
+  ""time"":""dusk"",
+  ""parameters"":""--ar 4:5 --sref --profile hreu13h"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/yOAUfy7ulVg https://s.mj.run/Yyt_cO6_ZYE https://s.mj.run/eJ98BRWcVU0 https://s.mj.run/R_fUKNYIKZc 70s photograph of a sculpture with delicate gold details in paris at dusk, spectators taking pictures with their phones, kodak portra --ar 4:5 --sref https://s.mj.run/eE67Q4hYXH4 https://s.mj.run/3zgt6fPd1Ng https://s.mj.run/khAQMPWrXoc --profile hreu13h",6.1,https://s.mj.run/yOAUfy7ulVg https://s.mj.run/Yyt_cO6_ZYE https://s.mj.run/eJ98BRWcVU0 https://s.mj.run/R_fUKNYIKZc ,https://s.mj.run/eE67Q4hYXH4 https://s.mj.run/3zgt6fPd1Ng https://s.mj.run/khAQMPWrXoc ,,"Lush green landscape with uniquely shaped topiary trees. | Textured fabric in orange and white, featuring layered pleats. | Textured metal surface with a patterned, golden rectangular piece. | A model poses elegantly in a unique, structured outfit.","Delicate, textured coral-like structure in soft beige and cream tones. | Vibrant orange and soft pastel hues create a dynamic, textured installation. | Artistic gold ring with a pearl, featuring an organic design.",,"gold, pastel",elegant,delicate,sculpture,taking pictures,photograph,Paris,dusk,Kodak Portra,,"{
+  ""palette"":""gold, pastel"",
+  ""mood"":""elegant"",
+  ""texture"":""delicate"",
+  ""subject"":""sculpture"",
+  ""action"":""taking pictures"",
+  ""style_or_type"":""photograph"",
+  ""place"":""Paris"",
+  ""time"":""dusk"",
+  ""parameters"":""Kodak Portra"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/eJ98BRWcVU0 https://s.mj.run/m9zYqFVXg5U https://s.mj.run/khAQMPWrXoc https://s.mj.run/rfIym3eb_ns 70s photograph of an opera with scenography of delicate gold details in a large museum hall, red light, shot from audience, kodak portra --ar 4:5 --sref https://s.mj.run/6HgwYDXPd6Q https://s.mj.run/3zgt6fPd1Ng --profile hreu13h",6.1,https://s.mj.run/eJ98BRWcVU0 https://s.mj.run/m9zYqFVXg5U https://s.mj.run/khAQMPWrXoc https://s.mj.run/rfIym3eb_ns ,https://s.mj.run/6HgwYDXPd6Q https://s.mj.run/3zgt6fPd1Ng ,,"Textured metal surface with a patterned, golden rectangular piece. | Sparkling, nude-toned fabric with shimmering details and soft textures. | Artistic gold ring with a pearl, featuring an organic design. | Glossy blue ceramic with a gold accent, resembling organic forms.","Silhouette against a vibrant red sky with a glowing sun. | Vibrant orange and soft pastel hues create a dynamic, textured installation.",,"gold, red",artistic,"soft, glossy",opera,performing,70s photograph,museum hall,evening,kodak portra,delicate,"{
+  ""palette"":""gold, red"",
+  ""mood"":""artistic"",
+  ""texture"":""soft, glossy"",
+  ""subject"":""opera"",
+  ""action"":""performing"",
+  ""style_or_type"":""70s photograph"",
+  ""place"":""museum hall"",
+  ""time"":""evening"",
+  ""parameters"":""kodak portra"",
+  ""tension_note"":""delicate""
+}"
+"https://s.mj.run/yOAUfy7ulVg https://s.mj.run/Yyt_cO6_ZYE https://s.mj.run/eJ98BRWcVU0 https://s.mj.run/R_fUKNYIKZc 70s fashion photograph of a model with delicate gold details in tuscany at dusk, kodak portra --ar 4:5 --sref https://s.mj.run/eE67Q4hYXH4 https://s.mj.run/3zgt6fPd1Ng https://s.mj.run/khAQMPWrXoc --profile hreu13h",6.1,https://s.mj.run/yOAUfy7ulVg https://s.mj.run/Yyt_cO6_ZYE https://s.mj.run/eJ98BRWcVU0 https://s.mj.run/R_fUKNYIKZc ,https://s.mj.run/eE67Q4hYXH4 https://s.mj.run/3zgt6fPd1Ng https://s.mj.run/khAQMPWrXoc ,,"Lush green landscape with uniquely shaped topiary trees. | Textured fabric in orange and white, featuring layered pleats. | Textured metal surface with a patterned, golden rectangular piece. | A model poses elegantly in a unique, structured outfit.","Delicate, textured coral-like structure in soft beige and cream tones. | Vibrant orange and soft pastel hues create a dynamic, textured installation. | Artistic gold ring with a pearl, featuring an organic design.",,"orange, pastel",elegant,textured,model,posing,70s fashion,tuscany,dusk,--ar 4:5 --sref --profile hreu13h,delicate details,"{
+  ""palette"":""orange, pastel"",
+  ""mood"":""elegant"",
+  ""texture"":""textured"",
+  ""subject"":""model"",
+  ""action"":""posing"",
+  ""style_or_type"":""70s fashion"",
+  ""place"":""tuscany"",
+  ""time"":""dusk"",
+  ""parameters"":""--ar 4:5 --sref --profile hreu13h"",
+  ""tension_note"":""delicate details""
+}"
+"https://s.mj.run/eJ98BRWcVU0 https://s.mj.run/m9zYqFVXg5U https://s.mj.run/ocxRt-h9QdY https://s.mj.run/3zgt6fPd1Ng 70s photograph of a fashion show with delicate gold details in a large museum hall, red sky light, kodak portra --ar 4:5 --sref https://s.mj.run/6HgwYDXPd6Q --profile hreu13h",6.1,https://s.mj.run/eJ98BRWcVU0 https://s.mj.run/m9zYqFVXg5U https://s.mj.run/ocxRt-h9QdY https://s.mj.run/3zgt6fPd1Ng ,https://s.mj.run/6HgwYDXPd6Q ,,"Textured metal surface with a patterned, golden rectangular piece. | Sparkling, nude-toned fabric with shimmering details and soft textures. | A young person with braided hair, tears on their face, somber expression. | Vibrant orange and soft pastel hues create a dynamic, textured installation.",Silhouette against a vibrant red sky with a glowing sun.,,"gold, red",somber,"textured, soft",fashion show,displaying,70s,museum hall,day,--ar 4:5 --sref --profile hreu13h,emotional,"{
+  ""palette"":""gold, red"",
+  ""mood"":""somber"",
+  ""texture"":""textured, soft"",
+  ""subject"":""fashion show"",
+  ""action"":""displaying"",
+  ""style_or_type"":""70s"",
+  ""place"":""museum hall"",
+  ""time"":""day"",
+  ""parameters"":""--ar 4:5 --sref --profile hreu13h"",
+  ""tension_note"":""emotional""
+}"
+"https://s.mj.run/eJ98BRWcVU0 https://s.mj.run/3zgt6fPd1Ng https://s.mj.run/khAQMPWrXoc https://s.mj.run/rfIym3eb_ns 70s photograph of a sculpture with delicate gold details in a large museum hall, red light, kodak portra --ar 4:5 --sref https://s.mj.run/6HgwYDXPd6Q --profile hreu13h",6.1,https://s.mj.run/eJ98BRWcVU0 https://s.mj.run/3zgt6fPd1Ng https://s.mj.run/khAQMPWrXoc https://s.mj.run/rfIym3eb_ns ,https://s.mj.run/6HgwYDXPd6Q ,,"Textured metal surface with a patterned, golden rectangular piece. | Vibrant orange and soft pastel hues create a dynamic, textured installation. | Artistic gold ring with a pearl, featuring an organic design. | Glossy blue ceramic with a gold accent, resembling organic forms.",Silhouette against a vibrant red sky with a glowing sun.,,"gold, red",artistic,textured,sculpture,,photograph,museum,70s,--ar 4:5 --sref --profile hreu13h,,"{
+  ""palette"":""gold, red"",
+  ""mood"":""artistic"",
+  ""texture"":""textured"",
+  ""subject"":""sculpture"",
+  ""action"":"""",
+  ""style_or_type"":""photograph"",
+  ""place"":""museum"",
+  ""time"":""70s"",
+  ""parameters"":""--ar 4:5 --sref --profile hreu13h"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/eJ98BRWcVU0 https://s.mj.run/povO46CkFqg https://s.mj.run/6HS4EO-HONk https://s.mj.run/2sEYALmyVY0 70s fashion portrait of a luminous goddess with skin made of delicate gold details and a sculptural outfit by the water on the french coast, long textiles blowing in the wind, red sky, beautiful eyes, kodak portra --ar 4:5 --sref https://s.mj.run/6HgwYDXPd6Q --profile hreu13h",6.1,https://s.mj.run/eJ98BRWcVU0 https://s.mj.run/povO46CkFqg https://s.mj.run/6HS4EO-HONk https://s.mj.run/2sEYALmyVY0 ,https://s.mj.run/6HgwYDXPd6Q ,,"Textured metal surface with a patterned, golden rectangular piece. | Black and white portrait of a person with curly, voluminous hair. | Close-up of a textured, white garment sleeve on a model. | Two large clam shells facing each other, showcasing intricate textures.",Silhouette against a vibrant red sky with a glowing sun.,,"gold, red",luminous,"metallic, textured",goddess,blowing,70s fashion,French coast,sunset,--ar 4:5 --sref,,"{
+  ""palette"":""gold, red"",
+  ""mood"":""luminous"",
+  ""texture"":""metallic, textured"",
+  ""subject"":""goddess"",
+  ""action"":""blowing"",
+  ""style_or_type"":""70s fashion"",
+  ""place"":""French coast"",
+  ""time"":""sunset"",
+  ""parameters"":""--ar 4:5 --sref"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/eJ98BRWcVU0 https://s.mj.run/povO46CkFqg https://s.mj.run/6HS4EO-HONk https://s.mj.run/2sEYALmyVY0 70s fashion portrait of a luminous goddess with skin made of delicate gold details in the water on the french coast, kodak portra --ar 4:5 --sref https://s.mj.run/6HgwYDXPd6Q --profile hreu13h",6.1,https://s.mj.run/eJ98BRWcVU0 https://s.mj.run/povO46CkFqg https://s.mj.run/6HS4EO-HONk https://s.mj.run/2sEYALmyVY0 ,https://s.mj.run/6HgwYDXPd6Q ,,"Textured metal surface with a patterned, golden rectangular piece. | Black and white portrait of a person with curly, voluminous hair. | Close-up of a textured, white garment sleeve on a model. | Two large clam shells facing each other, showcasing intricate textures.",Silhouette against a vibrant red sky with a glowing sun.,,gold,luminous,metallic,goddess,floating,70s fashion,French coast,,--ar 4:5 --sref,,"{
+  ""palette"": ""gold"",
+  ""mood"": ""luminous"",
+  ""texture"": ""metallic"",
+  ""subject"": ""goddess"",
+  ""action"": ""floating"",
+  ""style_or_type"": ""70s fashion"",
+  ""place"": ""French coast"",
+  ""time"": """",
+  ""parameters"": ""--ar 4:5 --sref"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/x1Xmq4tavzc https://s.mj.run/clmzmFnibY4 https://s.mj.run/khAQMPWrXoc https://s.mj.run/eJ98BRWcVU0 https://s.mj.run/povO46CkFqg https://s.mj.run/6HS4EO-HONk https://s.mj.run/2sEYALmyVY0 https://s.mj.run/LEVutonEu6A 70s fashion photography of a luminous goddess with skin made of delicate gold details by the water on the french coast early evening, kodak portra --ar 4:5 --profile hreu13h",6.1,https://s.mj.run/x1Xmq4tavzc https://s.mj.run/clmzmFnibY4 https://s.mj.run/khAQMPWrXoc https://s.mj.run/eJ98BRWcVU0 https://s.mj.run/povO46CkFqg https://s.mj.run/6HS4EO-HONk https://s.mj.run/2sEYALmyVY0 https://s.mj.run/LEVutonEu6A ,,,"Calm ocean scene under a bright moonlit sky. | Dark cliffs framing shimmering blue water under a night sky. | Artistic gold ring with a pearl, featuring an organic design. | Textured metal surface with a patterned, golden rectangular piece. | Black and white portrait of a person with curly, voluminous hair. | Close-up of a textured, white garment sleeve on a model. | Two large clam shells facing each other, showcasing intricate textures. | A figure in a flowing dress stands on driftwood at twilight.",,,"gold, blue",luminous,delicate,goddess,standing,70s fashion,French coast,early evening,"Kodak Portra, --ar 4:5, --profile hreu13h",calm,"{
+  ""palette"":""gold, blue"",
+  ""mood"":""luminous"",
+  ""texture"":""delicate"",
+  ""subject"":""goddess"",
+  ""action"":""standing"",
+  ""style_or_type"":""70s fashion"",
+  ""place"":""French coast"",
+  ""time"":""early evening"",
+  ""parameters"":""Kodak Portra, --ar 4:5, --profile hreu13h"",
+  ""tension_note"":""calm""
+}"
+"https://s.mj.run/x1Xmq4tavzc https://s.mj.run/clmzmFnibY4 https://s.mj.run/D7qp1Dp_WaM https://s.mj.run/khAQMPWrXoc https://s.mj.run/Eqm2FZLziAs https://s.mj.run/eJ98BRWcVU0 70s fashion photography of a luminous goddess with skin covered with delicate and sculptural gold details standing in the wind by the water on the french coast early evening, kodak portra --ar 4:5 --profile hreu13h",6.1,https://s.mj.run/x1Xmq4tavzc https://s.mj.run/clmzmFnibY4 https://s.mj.run/D7qp1Dp_WaM https://s.mj.run/khAQMPWrXoc https://s.mj.run/Eqm2FZLziAs https://s.mj.run/eJ98BRWcVU0 ,,,"Calm ocean scene under a bright moonlit sky. | Dark cliffs framing shimmering blue water under a night sky. | A figure in a flowing dress stands by the ocean under a cloudy sky. | Artistic gold ring with a pearl, featuring an organic design. | A translucent shell resting on golden sand. | Textured metal surface with a patterned, golden rectangular piece.",,,gold,luminous,sculptural,goddess,standing,fashion photography,French coast,early evening,Kodak Portra,,"{
+  ""palette"": ""gold"",
+  ""mood"": ""luminous"",
+  ""texture"": ""sculptural"",
+  ""subject"": ""goddess"",
+  ""action"": ""standing"",
+  ""style_or_type"": ""fashion photography"",
+  ""place"": ""French coast"",
+  ""time"": ""early evening"",
+  ""parameters"": ""Kodak Portra"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/x1Xmq4tavzc https://s.mj.run/clmzmFnibY4 https://s.mj.run/D7qp1Dp_WaM https://s.mj.run/khAQMPWrXoc https://s.mj.run/Eqm2FZLziAs https://s.mj.run/eJ98BRWcVU0 70s fashion photography of a luminous goddess with skin covered with delicate and sculptural gold details in the water on the french coast early evening, kodak portra --ar 4:5 --profile hreu13h",6.1,https://s.mj.run/x1Xmq4tavzc https://s.mj.run/clmzmFnibY4 https://s.mj.run/D7qp1Dp_WaM https://s.mj.run/khAQMPWrXoc https://s.mj.run/Eqm2FZLziAs https://s.mj.run/eJ98BRWcVU0 ,,,"Calm ocean scene under a bright moonlit sky. | Dark cliffs framing shimmering blue water under a night sky. | A figure in a flowing dress stands by the ocean under a cloudy sky. | Artistic gold ring with a pearl, featuring an organic design. | A translucent shell resting on golden sand. | Textured metal surface with a patterned, golden rectangular piece.",,,gold,luminous,delicate,goddess,standing,fashion photography,French coast,evening,Kodak Portra,,"{
+  ""palette"": ""gold"",
+  ""mood"": ""luminous"",
+  ""texture"": ""delicate"",
+  ""subject"": ""goddess"",
+  ""action"": ""standing"",
+  ""style_or_type"": ""fashion photography"",
+  ""place"": ""French coast"",
+  ""time"": ""evening"",
+  ""parameters"": ""Kodak Portra"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/yOAUfy7ulVg https://s.mj.run/khAQMPWrXoc https://s.mj.run/Yyt_cO6_ZYE https://s.mj.run/eJ98BRWcVU0 70s photograph of a large crochet textile sculpture with delicate gold details covering a large hill in tuscany at dusk, kodak portra --ar 4:5 --profile hreu13h",6.1,https://s.mj.run/yOAUfy7ulVg https://s.mj.run/khAQMPWrXoc https://s.mj.run/Yyt_cO6_ZYE https://s.mj.run/eJ98BRWcVU0 ,,,"Lush green landscape with uniquely shaped topiary trees. | Artistic gold ring with a pearl, featuring an organic design. | Textured fabric in orange and white, featuring layered pleats. | Textured metal surface with a patterned, golden rectangular piece.",,,"gold, green",artistic,textured,crochet sculpture,,photograph,Tuscany,dusk,Kodak Portra,,"{
+  ""palette"":""gold, green"",
+  ""mood"":""artistic"",
+  ""texture"":""textured"",
+  ""subject"":""crochet sculpture"",
+  ""action"":"""",
+  ""style_or_type"":""photograph"",
+  ""place"":""Tuscany"",
+  ""time"":""dusk"",
+  ""parameters"":""Kodak Portra"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/yOAUfy7ulVg https://s.mj.run/khAQMPWrXoc https://s.mj.run/Yyt_cO6_ZYE https://s.mj.run/0BQf0XGTXTw 70s photograph of a textile sculptural portal with delicate gold details on a rainy morning in Paris, with spectators, kodak portra --ar 4:5 --profile hreu13h",6.1,https://s.mj.run/yOAUfy7ulVg https://s.mj.run/khAQMPWrXoc https://s.mj.run/Yyt_cO6_ZYE https://s.mj.run/0BQf0XGTXTw ,,,"Lush green landscape with uniquely shaped topiary trees. | Artistic gold ring with a pearl, featuring an organic design. | Textured fabric in orange and white, featuring layered pleats. | Rainy street scene with elegant buildings and a motorcycle.",,,"gold, green, orange, white",elegant,"textured, layered",textile portal,spectating,70s photograph,Paris,morning,"kodak portra, --ar 4:5, --profile hreu13h",rainy,"{
+  ""palette"":""gold, green, orange, white"",
+  ""mood"":""elegant"",
+  ""texture"":""textured, layered"",
+  ""subject"":""textile portal"",
+  ""action"":""spectating"",
+  ""style_or_type"":""70s photograph"",
+  ""place"":""Paris"",
+  ""time"":""morning"",
+  ""parameters"":""kodak portra, --ar 4:5, --profile hreu13h"",
+  ""tension_note"":""rainy""
+}"
+"https://s.mj.run/yOAUfy7ulVg https://s.mj.run/khAQMPWrXoc https://s.mj.run/Yyt_cO6_ZYE https://s.mj.run/YRxhRCJHHrg https://s.mj.run/eJ98BRWcVU0 https://s.mj.run/povO46CkFqg 70s fashion photograph of a female model wearing a textile sculpture with delicate gold details in tuscany at dusk, kodak portra --ar 4:5 --profile hreu13h",6.1,https://s.mj.run/yOAUfy7ulVg https://s.mj.run/khAQMPWrXoc https://s.mj.run/Yyt_cO6_ZYE https://s.mj.run/YRxhRCJHHrg https://s.mj.run/eJ98BRWcVU0 https://s.mj.run/povO46CkFqg ,,,"Lush green landscape with uniquely shaped topiary trees. | Artistic gold ring with a pearl, featuring an organic design. | Textured fabric in orange and white, featuring layered pleats. | Model in a green netted dress against a soft backdrop. | Textured metal surface with a patterned, golden rectangular piece. | Black and white portrait of a person with curly, voluminous hair.",,,"gold, green",artistic,textured,female model,wearing,70s fashion,tuscany,dusk,--ar 4:5 --profile hreu13h,,"{
+  ""palette"":""gold, green"",
+  ""mood"":""artistic"",
+  ""texture"":""textured"",
+  ""subject"":""female model"",
+  ""action"":""wearing"",
+  ""style_or_type"":""70s fashion"",
+  ""place"":""tuscany"",
+  ""time"":""dusk"",
+  ""parameters"":""--ar 4:5 --profile hreu13h"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/yOAUfy7ulVg https://s.mj.run/khAQMPWrXoc https://s.mj.run/Yyt_cO6_ZYE 70s photograph of a textile sculptural portal with delicate gold details on a foggy morning in tuscany, kodak portra --ar 4:5 --profile hreu13h",6.1,https://s.mj.run/yOAUfy7ulVg https://s.mj.run/khAQMPWrXoc https://s.mj.run/Yyt_cO6_ZYE ,,,"Lush green landscape with uniquely shaped topiary trees. | Artistic gold ring with a pearl, featuring an organic design. | Textured fabric in orange and white, featuring layered pleats.",,,"gold, green, orange, white",artistic,"textured, layered",textile portal,,photograph,Tuscany,morning,"Kodak Portra, --ar 4:5, --profile hreu13h",foggy,"{
+  ""palette"":""gold, green, orange, white"",
+  ""mood"":""artistic"",
+  ""texture"":""textured, layered"",
+  ""subject"":""textile portal"",
+  ""action"":"""",
+  ""style_or_type"":""photograph"",
+  ""place"":""Tuscany"",
+  ""time"":""morning"",
+  ""parameters"":""Kodak Portra, --ar 4:5, --profile hreu13h"",
+  ""tension_note"":""foggy""
+}"
+https://s.mj.run/khAQMPWrXoc https://s.mj.run/rfIym3eb_ns https://s.mj.run/KKyn8luLS_A https://s.mj.run/YRxhRCJHHrg https://s.mj.run/VLu9a6Clupw https://s.mj.run/pK6R0jaD5WM textile with gold --ar 4:5 --profile hreu13h,6.1,https://s.mj.run/khAQMPWrXoc https://s.mj.run/rfIym3eb_ns https://s.mj.run/KKyn8luLS_A https://s.mj.run/YRxhRCJHHrg https://s.mj.run/VLu9a6Clupw https://s.mj.run/pK6R0jaD5WM ,,,"Artistic gold ring with a pearl, featuring an organic design. | Glossy blue ceramic with a gold accent, resembling organic forms. | Abstract patterns of dark and light fluid textures. | Model in a green netted dress against a soft backdrop. | Abstract fabric sculpture with folds against a simple background. | A flowing blue fabric drapes against a dark background.",,,"gold, blue",artistic,"glossy, fluid","ring, fabric",,abstract,,,--ar 4:5 --profile hreu13h,organic,"{
+  ""palette"":""gold, blue"",
+  ""mood"":""artistic"",
+  ""texture"":""glossy, fluid"",
+  ""subject"":""ring, fabric"",
+  ""action"":"""",
+  ""style_or_type"":""abstract"",
+  ""place"":"""",
+  ""time"":"""",
+  ""parameters"":""--ar 4:5 --profile hreu13h"",
+  ""tension_note"":""organic""
+}"
+"https://s.mj.run/khAQMPWrXoc https://s.mj.run/rfIym3eb_ns https://s.mj.run/KKyn8luLS_A 70s photograph of an ephemeral riveR of gold between rocks at dusk, kodak portra --ar 4:5 --profile hreu13h",6.1,https://s.mj.run/khAQMPWrXoc https://s.mj.run/rfIym3eb_ns https://s.mj.run/KKyn8luLS_A ,,,"Artistic gold ring with a pearl, featuring an organic design. | Glossy blue ceramic with a gold accent, resembling organic forms. | Abstract patterns of dark and light fluid textures.",,,"gold, blue",ephemeral,"glossy, organic","river, rocks",flowing,photograph,nature,dusk,--ar 4:5 --profile hreu13h,,"{
+  ""palette"":""gold, blue"",
+  ""mood"":""ephemeral"",
+  ""texture"":""glossy, organic"",
+  ""subject"":""river, rocks"",
+  ""action"":""flowing"",
+  ""style_or_type"":""photograph"",
+  ""place"":""nature"",
+  ""time"":""dusk"",
+  ""parameters"":""--ar 4:5 --profile hreu13h"",
+  ""tension_note"":""""
+}"
+https://s.mj.run/MTKWC4H9fjo https://s.mj.run/UONUb5uq2zM https://s.mj.run/Yyt_cO6_ZYE https://s.mj.run/N0dH67a2710 70s photograph of a golden sculpture on a volcanic beach --ar 4:5 --profile hreu13h,6.1,https://s.mj.run/MTKWC4H9fjo https://s.mj.run/UONUb5uq2zM https://s.mj.run/Yyt_cO6_ZYE https://s.mj.run/N0dH67a2710 ,,,"Shiny gold high-waisted shorts on a smooth leg. | Abstract red and white swirling patterns resembling fluid motion. | Textured fabric in orange and white, featuring layered pleats. | Close-up of a pink, fleshy object with a split center.",,,"gold, red, white, orange, pink",abstract,"smooth, textured",sculpture,,photograph,volcanic beach,70s,--ar 4:5 --profile hreu13h,,"{
+  ""palette"":""gold, red, white, orange, pink"",
+  ""mood"":""abstract"",
+  ""texture"":""smooth, textured"",
+  ""subject"":""sculpture"",
+  ""action"":"""",
+  ""style_or_type"":""photograph"",
+  ""place"":""volcanic beach"",
+  ""time"":""70s"",
+  ""parameters"":""--ar 4:5 --profile hreu13h"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/czM2wLWx8-g https://s.mj.run/TwfLatVatAo https://s.mj.run/MTKWC4H9fjo https://s.mj.run/g8mAlbXpRMk https://s.mj.run/UONUb5uq2zM https://s.mj.run/ocxRt-h9QdY https://s.mj.run/Yyt_cO6_ZYE https://s.mj.run/wj05l0tgf6A https://s.mj.run/N0dH67a2710 70s surreal full body photograph of a female model standing in intricate white sculptural textile with beautiful gold details on a red background, kodak portra --ar 4:5",6.1,https://s.mj.run/czM2wLWx8-g https://s.mj.run/TwfLatVatAo https://s.mj.run/MTKWC4H9fjo https://s.mj.run/g8mAlbXpRMk https://s.mj.run/UONUb5uq2zM https://s.mj.run/ocxRt-h9QdY https://s.mj.run/Yyt_cO6_ZYE https://s.mj.run/wj05l0tgf6A https://s.mj.run/N0dH67a2710 ,,,"Perfume bottle resting on a pineapple slice against a brown background. | Artistic vase with a glossy gold and textured white finish. | Shiny gold high-waisted shorts on a smooth leg. | A figure draped in sheer fabric against a serene ocean backdrop. | Abstract red and white swirling patterns resembling fluid motion. | A young person with braided hair, tears on their face, somber expression. | Textured fabric in orange and white, featuring layered pleats. | Abstract sculpture resembling a draped figure on a smooth surface. | Close-up of a pink, fleshy object with a split center.",,,"red, gold, white",surreal,"smooth, intricate",female model,standing,photograph,studio,70s,"Kodak Portra, --ar 4:5",,"{
+  ""palette"":""red, gold, white"",
+  ""mood"":""surreal"",
+  ""texture"":""smooth, intricate"",
+  ""subject"":""female model"",
+  ""action"":""standing"",
+  ""style_or_type"":""photograph"",
+  ""place"":""studio"",
+  ""time"":""70s"",
+  ""parameters"":""Kodak Portra, --ar 4:5"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/khAQMPWrXoc https://s.mj.run/rfIym3eb_ns https://s.mj.run/KKyn8luLS_A https://s.mj.run/5F9Mlo9kBUY photograph of a huge textile installation made of gold covering a building in Paris at golden hour, summer, spectators, streets, kodak portra --ar 4:5",6.1,https://s.mj.run/khAQMPWrXoc https://s.mj.run/rfIym3eb_ns https://s.mj.run/KKyn8luLS_A https://s.mj.run/5F9Mlo9kBUY ,,,"Artistic gold ring with a pearl, featuring an organic design. | Glossy blue ceramic with a gold accent, resembling organic forms. | Abstract patterns of dark and light fluid textures. | Abstract design featuring dark textures and colorful star-like lights.",,,gold,artistic,fluid,textile installation,covering,photograph,Paris,golden hour,Kodak Portra,spectators,"{
+  ""palette"":""gold"",
+  ""mood"":""artistic"",
+  ""texture"":""fluid"",
+  ""subject"":""textile installation"",
+  ""action"":""covering"",
+  ""style_or_type"":""photograph"",
+  ""place"":""Paris"",
+  ""time"":""golden hour"",
+  ""parameters"":""Kodak Portra"",
+  ""tension_note"":""spectators""
+}"
+"https://s.mj.run/khAQMPWrXoc https://s.mj.run/rfIym3eb_ns https://s.mj.run/KKyn8luLS_A https://s.mj.run/5F9Mlo9kBUY 70s photograph of a huge installation made of gold on a hill in Tuscany, kodak portra --ar 4:5",6.1,https://s.mj.run/khAQMPWrXoc https://s.mj.run/rfIym3eb_ns https://s.mj.run/KKyn8luLS_A https://s.mj.run/5F9Mlo9kBUY ,,,"Artistic gold ring with a pearl, featuring an organic design. | Glossy blue ceramic with a gold accent, resembling organic forms. | Abstract patterns of dark and light fluid textures. | Abstract design featuring dark textures and colorful star-like lights.",,,"gold, blue",artistic,organic,installation,,photograph,Tuscany,70s,kodak portra --ar 4:5,,"{
+  ""palette"":""gold, blue"",
+  ""mood"":""artistic"",
+  ""texture"":""organic"",
+  ""subject"":""installation"",
+  ""action"":"""",
+  ""style_or_type"":""photograph"",
+  ""place"":""Tuscany"",
+  ""time"":""70s"",
+  ""parameters"":""kodak portra --ar 4:5"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/khAQMPWrXoc https://s.mj.run/rfIym3eb_ns 70s photograph of a sculpture with surreal gold details standing next to water with reflection, kodak portra --ar 4:5",6.1,https://s.mj.run/khAQMPWrXoc https://s.mj.run/rfIym3eb_ns ,,,"Artistic gold ring with a pearl, featuring an organic design. | Glossy blue ceramic with a gold accent, resembling organic forms.",,,"gold, blue",surreal,glossy,sculpture,standing,70s photograph,next to water,70s,kodak portra --ar 4:5,reflection,"{
+  ""palette"":""gold, blue"",
+  ""mood"":""surreal"",
+  ""texture"":""glossy"",
+  ""subject"":""sculpture"",
+  ""action"":""standing"",
+  ""style_or_type"":""70s photograph"",
+  ""place"":""next to water"",
+  ""time"":""70s"",
+  ""parameters"":""kodak portra --ar 4:5"",
+  ""tension_note"":""reflection""
+}"
+"https://s.mj.run/khAQMPWrXoc https://s.mj.run/rfIym3eb_ns https://s.mj.run/KKyn8luLS_A https://s.mj.run/g8PI6Fve8iw https://s.mj.run/mymEHjoMNn0 70s photograph of model with surreal gold details standing next to water with reflection, kodak portra --ar 4:5 --sref https://s.mj.run/LNL94DYZaiI",6.1,https://s.mj.run/khAQMPWrXoc https://s.mj.run/rfIym3eb_ns https://s.mj.run/KKyn8luLS_A https://s.mj.run/g8PI6Fve8iw https://s.mj.run/mymEHjoMNn0 ,https://s.mj.run/LNL94DYZaiI,,"Artistic gold ring with a pearl, featuring an organic design. | Glossy blue ceramic with a gold accent, resembling organic forms. | Abstract patterns of dark and light fluid textures. | A person stands on a barren landscape with a reflective pool. | Abstract figure in monochrome, resembling a human silhouette.","Soft, ethereal tones with a textured golden headpiece and sheer fabric.",,"gold, blue",surreal,"glossy, organic",model,standing,photograph,water,70s,--ar 4:5 --sref,,"{
+  ""palette"":""gold, blue"",
+  ""mood"":""surreal"",
+  ""texture"":""glossy, organic"",
+  ""subject"":""model"",
+  ""action"":""standing"",
+  ""style_or_type"":""photograph"",
+  ""place"":""water"",
+  ""time"":""70s"",
+  ""parameters"":""--ar 4:5 --sref"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/8HavMuIsp5c https://s.mj.run/uPg3upQc2o8 https://s.mj.run/HC1XNBPQYGo 70s photograph of an organically shaped building covered in moss in Oslo on a summer night, Kodak portra. --ar 4:5",6.1,https://s.mj.run/8HavMuIsp5c https://s.mj.run/uPg3upQc2o8 https://s.mj.run/HC1XNBPQYGo ,,,"Large, sculpted green bushes resembling abstract shapes under cloudy sky. | Modern wooden house entrance with glass panels and grassy surroundings. | Modern buildings with illuminated windows beside a calm waterway.",,,green,calm,organic,building,,photograph,Oslo,summer night,Kodak portra,,"{
+  ""palette"":""green"",
+  ""mood"":""calm"",
+  ""texture"":""organic"",
+  ""subject"":""building"",
+  ""action"":"""",
+  ""style_or_type"":""photograph"",
+  ""place"":""Oslo"",
+  ""time"":""summer night"",
+  ""parameters"":""Kodak portra"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/T0SPnp4EqeQ https://s.mj.run/zFd7UKQroKE https://s.mj.run/iuST6jYMpWQ https://s.mj.run/dpoKNWNvL4w https://s.mj.run/XWVlqy2glaU https://s.mj.run/G5iwtbF1OaM 70s photograph psychedelic blue desert dunes at night, kodak portra --ar 4:5",6.1,https://s.mj.run/T0SPnp4EqeQ https://s.mj.run/zFd7UKQroKE https://s.mj.run/iuST6jYMpWQ https://s.mj.run/dpoKNWNvL4w https://s.mj.run/XWVlqy2glaU https://s.mj.run/G5iwtbF1OaM ,,,"Circular pattern etched in dark, textured surface. Soft, muted lighting. | Abstract shape in vibrant blue against a black background. | Blue lotus patterns on a dark background create a striking visual. | Solid blue canvas with textured surface, minimalistic and abstract. | Abstract swirling patterns in deep blue and shimmering gold tones. | A glowing blue jellyfish with radiating tentacles against a dark background.",,,blue,psychedelic,textured,desert dunes,,photograph,desert,night,"Kodak Portra, --ar 4:5",,"{
+  ""palette"":""blue"",
+  ""mood"":""psychedelic"",
+  ""texture"":""textured"",
+  ""subject"":""desert dunes"",
+  ""action"":"""",
+  ""style_or_type"":""photograph"",
+  ""place"":""desert"",
+  ""time"":""night"",
+  ""parameters"":""Kodak Portra, --ar 4:5"",
+  ""tension_note"":""""
+}"
+https://s.mj.run/wclFAYrrcIU https://s.mj.run/2QQH-JHDl8I https://s.mj.run/JZNcBTBh5hg https://s.mj.run/oYnn3aP3Xmc https://s.mj.run/3zgt6fPd1Ng 70s photograph of a surreal red luminous sculpture inside a dark museum hall with spectators and a water pool on the floor --ar 4:5,6.1,https://s.mj.run/wclFAYrrcIU https://s.mj.run/2QQH-JHDl8I https://s.mj.run/JZNcBTBh5hg https://s.mj.run/oYnn3aP3Xmc https://s.mj.run/3zgt6fPd1Ng ,,,"Red circular pattern on a black background, with a textured edge. | A reflective sphere with colorful light patterns against a dark background. | Abstract artwork with vibrant colors and textured patterns. | BROKEN_URL | Vibrant orange and soft pastel hues create a dynamic, textured installation.",,,red,surreal,textured,sculpture,displayed,abstract,museum,70s,--ar 4:5,dark,"{
+  ""palette"":""red"",
+  ""mood"":""surreal"",
+  ""texture"":""textured"",
+  ""subject"":""sculpture"",
+  ""action"":""displayed"",
+  ""style_or_type"":""abstract"",
+  ""place"":""museum"",
+  ""time"":""70s"",
+  ""parameters"":""--ar 4:5"",
+  ""tension_note"":""dark""
+}"
+"https://s.mj.run/2amKUYRKzxA https://s.mj.run/7tUo8HC5NSg https://s.mj.run/mymEHjoMNn0 https://s.mj.run/r2wfPaZ4ewc 70s still life photograph of an delicate sculpture with intricate gold details, Irving penn, Kodak portra, --ar 4:5",6.1,https://s.mj.run/2amKUYRKzxA https://s.mj.run/7tUo8HC5NSg https://s.mj.run/mymEHjoMNn0 https://s.mj.run/r2wfPaZ4ewc ,,,"BROKEN_URL | Glittering golden branches against a dark background. | Abstract figure in monochrome, resembling a human silhouette. | Abstract artwork featuring a brown background and white outlines.",,,"gold, dark",elegant,intricate,sculpture,,still life,,70s,--ar 4:5,,"{
+  ""palette"": ""gold, dark"",
+  ""mood"": ""elegant"",
+  ""texture"": ""intricate"",
+  ""subject"": ""sculpture"",
+  ""action"": """",
+  ""style_or_type"": ""still life"",
+  ""place"": """",
+  ""time"": ""70s"",
+  ""parameters"": ""--ar 4:5"",
+  ""tension_note"": """"
+}"
+https://s.mj.run/TiTK21uRcIE https://s.mj.run/2QQH-JHDl8I https://s.mj.run/iuST6jYMpWQ https://s.mj.run/T0SPnp4EqeQ https://s.mj.run/MHv3jdX6XDk https://s.mj.run/zwJtQDWZbDo 70s photograph of a fashion model with a delicate sculpture with gold details in a tuscan landscape at dusk --ar 4:5,6.1,https://s.mj.run/TiTK21uRcIE https://s.mj.run/2QQH-JHDl8I https://s.mj.run/iuST6jYMpWQ https://s.mj.run/T0SPnp4EqeQ https://s.mj.run/MHv3jdX6XDk https://s.mj.run/zwJtQDWZbDo ,,,"BROKEN_URL | A reflective sphere with colorful light patterns against a dark background. | Blue lotus patterns on a dark background create a striking visual. | Circular pattern etched in dark, textured surface. Soft, muted lighting. | Golden bull head sculpture with intricate details and decorative elements. | A surreal portrait of a figure with a distorted reflection.",,,gold,serene,smooth,model,,photograph,Tuscan landscape,dusk,4:5,,"{
+  ""palette"": ""gold"",
+  ""mood"": ""serene"",
+  ""texture"": ""smooth"",
+  ""subject"": ""model"",
+  ""action"": """",
+  ""style_or_type"": ""photograph"",
+  ""place"": ""Tuscan landscape"",
+  ""time"": ""dusk"",
+  ""parameters"": ""4:5"",
+  ""tension_note"": """"
+}"
+https://s.mj.run/TiTK21uRcIE https://s.mj.run/2QQH-JHDl8I https://s.mj.run/iuST6jYMpWQ https://s.mj.run/T0SPnp4EqeQ https://s.mj.run/MHv3jdX6XDk 70s film photograph of an immersive sensual indigo surreal sculpture with delicate gold details floating out on the floor in a large museum hall with spectators --ar 4:5,6.1,https://s.mj.run/TiTK21uRcIE https://s.mj.run/2QQH-JHDl8I https://s.mj.run/iuST6jYMpWQ https://s.mj.run/T0SPnp4EqeQ https://s.mj.run/MHv3jdX6XDk ,,,"BROKEN_URL | A reflective sphere with colorful light patterns against a dark background. | Blue lotus patterns on a dark background create a striking visual. | Circular pattern etched in dark, textured surface. Soft, muted lighting. | Golden bull head sculpture with intricate details and decorative elements.",,,"indigo, gold",sensual,reflective,sculpture,floating,surreal,museum,70s,immersive,,"{
+  ""palette"": ""indigo, gold"",
+  ""mood"": ""sensual"",
+  ""texture"": ""reflective"",
+  ""subject"": ""sculpture"",
+  ""action"": ""floating"",
+  ""style_or_type"": ""surreal"",
+  ""place"": ""museum"",
+  ""time"": ""70s"",
+  ""parameters"": ""immersive"",
+  ""tension_note"": """"
+}"
+https://s.mj.run/TiTK21uRcIE https://s.mj.run/2QQH-JHDl8I https://s.mj.run/iuST6jYMpWQ https://s.mj.run/T0SPnp4EqeQ https://s.mj.run/xeC3xwJBPxY https://s.mj.run/qYGxU8W32WQ 70s photograph of a large intricate deep green artwork with texture and layers in a large museum hall with spectators --ar 4:5,6.1,https://s.mj.run/TiTK21uRcIE https://s.mj.run/2QQH-JHDl8I https://s.mj.run/iuST6jYMpWQ https://s.mj.run/T0SPnp4EqeQ https://s.mj.run/xeC3xwJBPxY https://s.mj.run/qYGxU8W32WQ ,,,"A draped, deep blue fabric forms a mysterious, abstract shape. | A reflective sphere with colorful light patterns against a dark background. | Blue lotus patterns on a dark background create a striking visual. | Circular pattern etched in dark, textured surface. Soft, muted lighting. | BROKEN_URL | Lush green landscape with a waterfall cascading between rocky cliffs.",,,deep green,intricate,layered,artwork,displayed,photograph,museum,70s,ar 4:5,,"{
+  ""palette"": ""deep green"",
+  ""mood"": ""intricate"",
+  ""texture"": ""layered"",
+  ""subject"": ""artwork"",
+  ""action"": ""displayed"",
+  ""style_or_type"": ""photograph"",
+  ""place"": ""museum"",
+  ""time"": ""70s"",
+  ""parameters"": ""ar 4:5"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/N0dH67a2710 https://s.mj.run/iuST6jYMpWQ https://s.mj.run/xeC3xwJBPxY https://s.mj.run/MHv3jdX6XDk https://s.mj.run/6jsQgt2uk6c 70s photograph of a large art installation in a museum hall with spectators at night, kodak portra --ar 4:5",6.1,https://s.mj.run/N0dH67a2710 https://s.mj.run/iuST6jYMpWQ https://s.mj.run/xeC3xwJBPxY https://s.mj.run/MHv3jdX6XDk https://s.mj.run/6jsQgt2uk6c ,,,"Close-up of a pink, fleshy object with a split center. | Blue lotus patterns on a dark background create a striking visual. | BROKEN_URL | Golden bull head sculpture with intricate details and decorative elements. | BROKEN_URL",,,"pink, blue, gold",artistic,"fleshy, intricate",art installation,viewing,photograph,museum,night,"Kodak Portra, 70s",spectators,"{
+  ""palette"":""pink, blue, gold"",
+  ""mood"":""artistic"",
+  ""texture"":""fleshy, intricate"",
+  ""subject"":""art installation"",
+  ""action"":""viewing"",
+  ""style_or_type"":""photograph"",
+  ""place"":""museum"",
+  ""time"":""night"",
+  ""parameters"":""Kodak Portra, 70s"",
+  ""tension_note"":""spectators""
+}"
+"https://s.mj.run/N0dH67a2710 https://s.mj.run/iuST6jYMpWQ https://s.mj.run/xeC3xwJBPxY https://s.mj.run/MHv3jdX6XDk 70s still life photograph of delicate sculpture on a dark blue background, gold details, kodak portra --ar 4:5",6.1,https://s.mj.run/N0dH67a2710 https://s.mj.run/iuST6jYMpWQ https://s.mj.run/xeC3xwJBPxY https://s.mj.run/MHv3jdX6XDk ,,,"Close-up of a pink, fleshy object with a split center. | Blue lotus patterns on a dark background create a striking visual. | Abstract green swirl against a dark background, creating a dynamic effect. | Golden bull head sculpture with intricate details and decorative elements.",,,"blue, gold, pink, green",delicate,"fleshy, intricate",sculpture,,still life,,70s,"Kodak Portra, --ar 4:5",striking visual,"{
+  ""palette"":""blue, gold, pink, green"",
+  ""mood"":""delicate"",
+  ""texture"":""fleshy, intricate"",
+  ""subject"":""sculpture"",
+  ""action"":"""",
+  ""style_or_type"":""still life"",
+  ""place"":"""",
+  ""time"":""70s"",
+  ""parameters"":""Kodak Portra, --ar 4:5"",
+  ""tension_note"":""striking visual""
+}"
+"https://s.mj.run/TiTK21uRcIE https://s.mj.run/2QQH-JHDl8I https://s.mj.run/iuST6jYMpWQ https://s.mj.run/T0SPnp4EqeQ Giant delicate fabric forms covering a residential building in Paris during golden hour in summer, photo taken from across the street --ar 4:5",6.1,https://s.mj.run/TiTK21uRcIE https://s.mj.run/2QQH-JHDl8I https://s.mj.run/iuST6jYMpWQ https://s.mj.run/T0SPnp4EqeQ ,,,"A draped, deep blue fabric forms a mysterious, abstract shape. | A reflective sphere with colorful light patterns against a dark background. | Blue lotus patterns on a dark background create a striking visual. | Circular pattern etched in dark, textured surface. Soft, muted lighting.",,,blue,mysterious,soft,fabric,covering,abstract,Paris,golden hour,residential building,,"{
+  ""palette"": ""blue"",
+  ""mood"": ""mysterious"",
+  ""texture"": ""soft"",
+  ""subject"": ""fabric"",
+  ""action"": ""covering"",
+  ""style_or_type"": ""abstract"",
+  ""place"": ""Paris"",
+  ""time"": ""golden hour"",
+  ""parameters"": ""residential building"",
+  ""tension_note"": """"
+}"
+https://s.mj.run/TiTK21uRcIE https://s.mj.run/2QQH-JHDl8I https://s.mj.run/iuST6jYMpWQ https://s.mj.run/T0SPnp4EqeQ delicate fabric forms --ar 4:5,6.1,https://s.mj.run/TiTK21uRcIE https://s.mj.run/2QQH-JHDl8I https://s.mj.run/iuST6jYMpWQ https://s.mj.run/T0SPnp4EqeQ ,,,"A draped, deep blue fabric forms a mysterious, abstract shape. | A reflective sphere with colorful light patterns against a dark background. | Blue lotus patterns on a dark background create a striking visual. | Circular pattern etched in dark, textured surface. Soft, muted lighting.",,,blue,mysterious,soft,fabric,,abstract,,,ar 4:5,,"{
+  ""palette"": ""blue"",
+  ""mood"": ""mysterious"",
+  ""texture"": ""soft"",
+  ""subject"": ""fabric"",
+  ""action"": """",
+  ""style_or_type"": ""abstract"",
+  ""place"": """",
+  ""time"": """",
+  ""parameters"": ""ar 4:5"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/vWx9eGdrFLw https://s.mj.run/L9ciKi32uSQ https://s.mj.run/_M4lt5DT8ew https://s.mj.run/LqcvmYKIjJY https://s.mj.run/T0SPnp4EqeQ https://s.mj.run/xeC3xwJBPxY 70s still life photograph of an organically shaped art installation with delicate fabric in a large museum hall with spectators, kodak portra --ar 4:5",6.1,https://s.mj.run/vWx9eGdrFLw https://s.mj.run/L9ciKi32uSQ https://s.mj.run/_M4lt5DT8ew https://s.mj.run/LqcvmYKIjJY https://s.mj.run/T0SPnp4EqeQ https://s.mj.run/xeC3xwJBPxY ,,,"Abstract wavy lines in soft colors create a textured, flowing pattern. | Abstract pink and orange layered design resembling a glowing tunnel. | Close-up of flower petals with droplets, showcasing soft colors and textures. | Close-up of orange fruit with juice droplets. | Circular pattern etched in dark, textured surface. Soft, muted lighting. | Abstract green swirl against a dark background, creating a dynamic effect.",,,soft colors,delicate,textured,art installation,displaying,still life,museum,70s,kodak portra --ar 4:5,,"{
+  ""palette"":""soft colors"",
+  ""mood"":""delicate"",
+  ""texture"":""textured"",
+  ""subject"":""art installation"",
+  ""action"":""displaying"",
+  ""style_or_type"":""still life"",
+  ""place"":""museum"",
+  ""time"":""70s"",
+  ""parameters"":""kodak portra --ar 4:5"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/xT2RoVTa_-g https://s.mj.run/T0SPnp4EqeQ https://s.mj.run/7tUo8HC5NSg https://s.mj.run/oYnn3aP3Xmc https://s.mj.run/sstnXRCcTuw https://s.mj.run/WyEMSg83Hpg 70s photograph of a giant surreal art installation in a museum hall with spectators and walking into it, kodak portra --ar 4:5",6.1,https://s.mj.run/xT2RoVTa_-g https://s.mj.run/T0SPnp4EqeQ https://s.mj.run/7tUo8HC5NSg https://s.mj.run/oYnn3aP3Xmc https://s.mj.run/sstnXRCcTuw https://s.mj.run/WyEMSg83Hpg ,,,"Intricate circular pattern with vibrant colors on a dark background. | Circular pattern etched in dark, textured surface. Soft, muted lighting. | Glittering golden branches against a dark background. | A child stands in front of a large, translucent sphere. | Abstract swirling colors creating a hypnotic, eye-like shape. | A winding path leads to a glowing rectangular doorway.",,,vibrant,surreal,intricate,art installation,spectators walking,70s photograph,museum hall,70s,kodak portra --ar 4:5,,"{
+  ""palette"":""vibrant"",
+  ""mood"":""surreal"",
+  ""texture"":""intricate"",
+  ""subject"":""art installation"",
+  ""action"":""spectators walking"",
+  ""style_or_type"":""70s photograph"",
+  ""place"":""museum hall"",
+  ""time"":""70s"",
+  ""parameters"":""kodak portra --ar 4:5"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/CXg2tm1UcbQ https://s.mj.run/xeC3xwJBPxY https://s.mj.run/TiTK21uRcIE https://s.mj.run/2QQH-JHDl8I https://s.mj.run/G5iwtbF1OaM a 70s still life photograph of a psychedelic gold metal tree on a dark background, kodak portra --ar 4:5",6.1,https://s.mj.run/CXg2tm1UcbQ https://s.mj.run/xeC3xwJBPxY https://s.mj.run/TiTK21uRcIE https://s.mj.run/2QQH-JHDl8I https://s.mj.run/G5iwtbF1OaM ,,,"Abstract artwork featuring curved, textured lines in green and white. | Abstract green swirl against a dark background, creating a dynamic effect. | A draped, deep blue fabric forms a mysterious, abstract shape. | A reflective sphere with colorful light patterns against a dark background. | A glowing blue jellyfish with radiating tentacles against a dark background.",,,"gold, dark",psychedelic,metallic,tree,,still life,,70s,kodak portra --ar 4:5,,"{
+  ""palette"":""gold, dark"",
+  ""mood"":""psychedelic"",
+  ""texture"":""metallic"",
+  ""subject"":""tree"",
+  ""action"":"""",
+  ""style_or_type"":""still life"",
+  ""place"":"""",
+  ""time"":""70s"",
+  ""parameters"":""kodak portra --ar 4:5"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/CXg2tm1UcbQ https://s.mj.run/xeC3xwJBPxY https://s.mj.run/zwJtQDWZbDo https://s.mj.run/TiTK21uRcIE https://s.mj.run/2QQH-JHDl8I https://s.mj.run/G5iwtbF1OaM a 70s still life photograph of gold metal sculpture in layers and the legs of a female fashion model on a dark background, kodak portra --ar 4:5",6.1,https://s.mj.run/CXg2tm1UcbQ https://s.mj.run/xeC3xwJBPxY https://s.mj.run/zwJtQDWZbDo https://s.mj.run/TiTK21uRcIE https://s.mj.run/2QQH-JHDl8I https://s.mj.run/G5iwtbF1OaM ,,,"Abstract artwork featuring curved, textured lines in green and white. | Abstract green swirl against a dark background, creating a dynamic effect. | A surreal portrait of a figure with a distorted reflection. | A draped, deep blue fabric forms a mysterious, abstract shape. | A reflective sphere with colorful light patterns against a dark background. | A glowing blue jellyfish with radiating tentacles against a dark background.",,,dark,surreal,metallic,sculpture,,still life,,70s,kodak portra,,"{
+  ""palette"": ""dark"",
+  ""mood"": ""surreal"",
+  ""texture"": ""metallic"",
+  ""subject"": ""sculpture"",
+  ""action"": """",
+  ""style_or_type"": ""still life"",
+  ""place"": """",
+  ""time"": ""70s"",
+  ""parameters"": ""kodak portra"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/CXg2tm1UcbQ https://s.mj.run/xeC3xwJBPxY a 70s still life photograph of gold metal in layers on a dark background, kodak portra --ar 4:5",6.1,https://s.mj.run/CXg2tm1UcbQ https://s.mj.run/xeC3xwJBPxY ,,,"Abstract artwork featuring curved, textured lines in green and white. | Abstract green swirl against a dark background, creating a dynamic effect.",,,"gold, dark",nostalgic,metallic,still life,,photograph,,70s,"kodak portra, --ar 4:5",,"{
+  ""palette"":""gold, dark"",
+  ""mood"":""nostalgic"",
+  ""texture"":""metallic"",
+  ""subject"":""still life"",
+  ""action"":"""",
+  ""style_or_type"":""photograph"",
+  ""place"":"""",
+  ""time"":""70s"",
+  ""parameters"":""kodak portra, --ar 4:5"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/CXg2tm1UcbQ https://s.mj.run/rFodB4kLyZA https://s.mj.run/G5iwtbF1OaM https://s.mj.run/iYVMNdH0N2Q https://s.mj.run/qh1pvNIDoeU A 70s photograph of an art installation with an organically shaped large portal inside a museum hall with a close up of spectators, kodak portra --ar 4:5",6.1,https://s.mj.run/CXg2tm1UcbQ https://s.mj.run/rFodB4kLyZA https://s.mj.run/G5iwtbF1OaM https://s.mj.run/iYVMNdH0N2Q https://s.mj.run/qh1pvNIDoeU ,,,"Abstract artwork featuring curved, textured lines in green and white. | Abstract green pattern with wavy lines and dark accents. | A glowing blue jellyfish with radiating tentacles against a dark background. | Abstract pyramid of blue spheres under a glowing orb in darkness. | Abstract painting with vertical streaks of color against a dark background.",,,"green, white",abstract,curved,art installation,spectators,photograph,museum,70s,kodak portra --ar 4:5,,"{
+  ""palette"": ""green, white"",
+  ""mood"": ""abstract"",
+  ""texture"": ""curved"",
+  ""subject"": ""art installation"",
+  ""action"": ""spectators"",
+  ""style_or_type"": ""photograph"",
+  ""place"": ""museum"",
+  ""time"": ""70s"",
+  ""parameters"": ""kodak portra --ar 4:5"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/CXg2tm1UcbQ https://s.mj.run/_wSyvsgdkEs https://s.mj.run/NVWjFMKXGhU https://s.mj.run/rFodB4kLyZA https://s.mj.run/xeC3xwJBPxY A 70s photograph of an art installation with an organically shaped floor in a large museum hall with spectators sitting, kodak portra --ar 4:5",6.1,https://s.mj.run/CXg2tm1UcbQ https://s.mj.run/_wSyvsgdkEs https://s.mj.run/NVWjFMKXGhU https://s.mj.run/rFodB4kLyZA https://s.mj.run/xeC3xwJBPxY ,,,"Abstract artwork featuring curved, textured lines in green and white. | Abstract green texture with subtle variations and faint lines. | Abstract wavy lines in soft green and white tones. | Abstract green pattern with wavy lines and dark accents. | Abstract green swirl against a dark background, creating a dynamic effect.",,,green,dynamic,curved,art installation,spectating,abstract,museum,70s,kodak portra,,"{
+  ""palette"": ""green"",
+  ""mood"": ""dynamic"",
+  ""texture"": ""curved"",
+  ""subject"": ""art installation"",
+  ""action"": ""spectating"",
+  ""style_or_type"": ""abstract"",
+  ""place"": ""museum"",
+  ""time"": ""70s"",
+  ""parameters"": ""kodak portra"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/G5iwtbF1OaM https://s.mj.run/wQAyNjHGJnM https://s.mj.run/Vk8P9m2f0js https://s.mj.run/IoZHrKUkVDY a 70s art photograph on film of a large surreal art installation covering a large museum hall, with spectators, kodak portra --ar 4:5 --v 6",6,https://s.mj.run/G5iwtbF1OaM https://s.mj.run/wQAyNjHGJnM https://s.mj.run/Vk8P9m2f0js https://s.mj.run/IoZHrKUkVDY ,,,A glowing blue jellyfish with radiating tentacles against a dark background. | Abstract artwork with vibrant colors and textured patterns. | Colorful abstract waves with circular shapes and vibrant gradients. | A red pond surrounded by mossy terrain and mountains.,,,vibrant,surreal,textured,art installation,spectating,70s photograph,museum hall,70s,kodak portra,,"{
+  ""palette"":""vibrant"",
+  ""mood"":""surreal"",
+  ""texture"":""textured"",
+  ""subject"":""art installation"",
+  ""action"":""spectating"",
+  ""style_or_type"":""70s photograph"",
+  ""place"":""museum hall"",
+  ""time"":""70s"",
+  ""parameters"":""kodak portra"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/ZfDb-4slkDE https://s.mj.run/s-OYQ_r9duo https://s.mj.run/PeLQN9T3NG4 https://s.mj.run/5oUzSPxVAts https://s.mj.run/ZmQEKpIa1IM https://s.mj.run/st7SwI54mqs a 70s art photograph on film of a large underwater spiritual monument on the ocean floor with colorful structures, beautiful woman swimming across, kodak portra --ar 4:5 --v 6",6,https://s.mj.run/ZfDb-4slkDE https://s.mj.run/s-OYQ_r9duo https://s.mj.run/PeLQN9T3NG4 https://s.mj.run/5oUzSPxVAts https://s.mj.run/ZmQEKpIa1IM https://s.mj.run/st7SwI54mqs ,,,"Colorful circular pattern with intricate designs and textures. | Colorful abstract pattern with intricate, radiating shapes and lines. | Colorful fish swimming among vibrant sea anemones in clear water. | Colorful underwater scene featuring various sea anemones and corals. | BROKEN_URL | Layered mountains shrouded in mist, creating a serene atmosphere.",,,colorful,spiritual,intricate,monument,swimming,70s photograph,ocean floor,70s,kodak portra,,"{
+  ""palette"":""colorful"",
+  ""mood"":""spiritual"",
+  ""texture"":""intricate"",
+  ""subject"":""monument"",
+  ""action"":""swimming"",
+  ""style_or_type"":""70s photograph"",
+  ""place"":""ocean floor"",
+  ""time"":""70s"",
+  ""parameters"":""kodak portra"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/G5iwtbF1OaM https://s.mj.run/wQAyNjHGJnM https://s.mj.run/Vk8P9m2f0js https://s.mj.run/IoZHrKUkVDY a 70s art photograph on film of a large surreal art installation in a large museum hall, with spectators, kodak portra --ar 4:5 --v 6",6,https://s.mj.run/G5iwtbF1OaM https://s.mj.run/wQAyNjHGJnM https://s.mj.run/Vk8P9m2f0js https://s.mj.run/IoZHrKUkVDY ,,,A glowing blue jellyfish with radiating tentacles against a dark background. | Abstract artwork with vibrant colors and textured patterns. | Colorful abstract waves with circular shapes and vibrant gradients. | A red pond surrounded by mossy terrain and mountains.,,,vibrant,surreal,textured,art installation,spectating,70s photograph,museum hall,70s,kodak portra,,"{
+  ""palette"":""vibrant"",
+  ""mood"":""surreal"",
+  ""texture"":""textured"",
+  ""subject"":""art installation"",
+  ""action"":""spectating"",
+  ""style_or_type"":""70s photograph"",
+  ""place"":""museum hall"",
+  ""time"":""70s"",
+  ""parameters"":""kodak portra"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/wRE5-KenTrg https://s.mj.run/asK90QjRt2I https://s.mj.run/lzzGMKEaXPk https://s.mj.run/pvLCEGWLExA 70s futuristic glass sculptures in the desert in the evening, kodak portra, 35mm lens --ar 4:5 --v 5.2",5.2,https://s.mj.run/wRE5-KenTrg https://s.mj.run/asK90QjRt2I https://s.mj.run/lzzGMKEaXPk https://s.mj.run/pvLCEGWLExA ,,,BROKEN_URL | BROKEN_URL | Blue spheres floating above a dirt road in a grassy landscape. | Vibrant artwork depicting a mythical figure battling a serpent under a moon.,,,vibrant,futuristic,glass,sculptures,,70s,desert,evening,"kodak portra, 35mm lens",,"{
+  ""palette"":""vibrant"",
+  ""mood"":""futuristic"",
+  ""texture"":""glass"",
+  ""subject"":""sculptures"",
+  ""action"":"""",
+  ""style_or_type"":""70s"",
+  ""place"":""desert"",
+  ""time"":""evening"",
+  ""parameters"":""kodak portra, 35mm lens"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/Vk8P9m2f0js https://s.mj.run/rCzHW4y1MtY https://s.mj.run/UNKQMha_20c https://s.mj.run/9HzEX9ogLHw https://s.mj.run/vMuDnN51YZ8 70s photograph of an abstract luminous layered architectural sculpture inspired by gustav klimt in the tuscan country side after dusk, cypress trees, kodak portra --ar 4:5 --v 6",6,https://s.mj.run/Vk8P9m2f0js https://s.mj.run/rCzHW4y1MtY https://s.mj.run/UNKQMha_20c https://s.mj.run/9HzEX9ogLHw https://s.mj.run/vMuDnN51YZ8 ,,,"Colorful abstract waves with circular shapes and vibrant gradients. | Colorful abstract floral pattern with vibrant shapes and symmetry. | Lush green foliage with stylized leaves and two small birds. | Colorful, abstract flowers surrounded by spider webs on a dark background. | Vibrant flowers and abstract shapes against a dark background.",,,vibrant,abstract,luminous,sculpture,,70s photograph,Tuscan countryside,after dusk,Kodak Portra,inspired by Klimt,"{
+  ""palette"":""vibrant"",
+  ""mood"":""abstract"",
+  ""texture"":""luminous"",
+  ""subject"":""sculpture"",
+  ""action"":"""",
+  ""style_or_type"":""70s photograph"",
+  ""place"":""Tuscan countryside"",
+  ""time"":""after dusk"",
+  ""parameters"":""Kodak Portra"",
+  ""tension_note"":""inspired by Klimt""
+}"
+https://s.mj.run/g8mAlbXpRMk https://s.mj.run/rsAvGzdU0Gk https://s.mj.run/PeLQN9T3NG4 https://s.mj.run/yQZ6LixPB6o https://s.mj.run/st7SwI54mqs elusive female fashion model in a mountainous landscape --ar 4:5 --v 6,6,https://s.mj.run/g8mAlbXpRMk https://s.mj.run/rsAvGzdU0Gk https://s.mj.run/PeLQN9T3NG4 https://s.mj.run/yQZ6LixPB6o https://s.mj.run/st7SwI54mqs ,,,"A figure draped in sheer fabric against a serene ocean backdrop. | A figure partially obscured by flowing blue fabric against a soft background. | Colorful fish swimming among vibrant sea anemones in clear water. | Blue sun with wavy lines on a dark background, featuring a crescent moon. | Layered mountains shrouded in mist, creating a serene atmosphere.",,,blue,serene,sheer,female model,elusive,fashion,mountains,,4:5,,"{
+  ""palette"": ""blue"",
+  ""mood"": ""serene"",
+  ""texture"": ""sheer"",
+  ""subject"": ""female model"",
+  ""action"": ""elusive"",
+  ""style_or_type"": ""fashion"",
+  ""place"": ""mountains"",
+  ""time"": """",
+  ""parameters"": ""4:5"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/D3eMxQLmrz4 https://s.mj.run/75nPSGZpSKU https://s.mj.run/l6360DrUvjw https://s.mj.run/uPg3upQc2o8 https://s.mj.run/tLY5RPzlD1w https://s.mj.run/PHEMBPHtXRU https://s.mj.run/nMWoIiBRYZ4 https://s.mj.run/HC1XNBPQYGo a 70s film photograph of a futuristic oslo with organically shaped path ways in strong colors by the water in harmony with nature, birds eye view, people on the gras and greenery on all roofs, kodak portra --ar 4:5 --v 6",6,https://s.mj.run/D3eMxQLmrz4 https://s.mj.run/75nPSGZpSKU https://s.mj.run/l6360DrUvjw https://s.mj.run/uPg3upQc2o8 https://s.mj.run/tLY5RPzlD1w https://s.mj.run/PHEMBPHtXRU https://s.mj.run/nMWoIiBRYZ4 https://s.mj.run/HC1XNBPQYGo ,,,Modern architecture surrounded by lush greenery and pathways. | Dark figure emerging from grassy mounds under a cloudy sky. | Curved stone walls with narrow windows creating a serene atmosphere. | Modern wooden house entrance with glass panels and grassy surroundings. | Wooden interior of a modern auditorium with layered ceiling design. | Vibrant illustration of a flower with colorful petals and leaves. | BROKEN_URL | Modern buildings with illuminated windows beside a calm waterway.,,,strong colors,serene,organic,modern architecture,people relaxing,70s film,Oslo,futuristic,--ar 4:5 --v 6,harmony with nature,"{
+  ""palette"":""strong colors"",
+  ""mood"":""serene"",
+  ""texture"":""organic"",
+  ""subject"":""modern architecture"",
+  ""action"":""people relaxing"",
+  ""style_or_type"":""70s film"",
+  ""place"":""Oslo"",
+  ""time"":""futuristic"",
+  ""parameters"":""--ar 4:5 --v 6"",
+  ""tension_note"":""harmony with nature""
+}"
+"https://s.mj.run/D3eMxQLmrz4 https://s.mj.run/75nPSGZpSKU https://s.mj.run/l6360DrUvjw https://s.mj.run/uPg3upQc2o8 https://s.mj.run/tLY5RPzlD1w a film photograph of a city street in oslo with organically shaped wooden architecture in harmony with nature, restaurants and people in the evening, birds eye view, kodak portra --ar 4:5 --v 6",6,https://s.mj.run/D3eMxQLmrz4 https://s.mj.run/75nPSGZpSKU https://s.mj.run/l6360DrUvjw https://s.mj.run/uPg3upQc2o8 https://s.mj.run/tLY5RPzlD1w ,,,Modern architecture surrounded by lush greenery and pathways. | Dark figure emerging from grassy mounds under a cloudy sky. | Curved stone walls with narrow windows creating a serene atmosphere. | Modern wooden house entrance with glass panels and grassy surroundings. | Wooden interior of a modern auditorium with layered ceiling design.,,,natural,serene,wooden,city street,dining,film,Oslo,evening,Kodak Portra,,"{
+  ""palette"": ""natural"",
+  ""mood"": ""serene"",
+  ""texture"": ""wooden"",
+  ""subject"": ""city street"",
+  ""action"": ""dining"",
+  ""style_or_type"": ""film"",
+  ""place"": ""Oslo"",
+  ""time"": ""evening"",
+  ""parameters"": ""Kodak Portra"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/WabncbLPcJw 70s surreal photograph on film of a hill with colorful buildings, plants, animals and people at sunset, waterfalls in between buildings, kodak portra --ar 4:5 --v 6",6,https://s.mj.run/WabncbLPcJw ,,,Colorful intricate buildings with plants and animals throughout the scene.,,,colorful,surreal,film,buildings,none,70s,hill,sunset,--ar 4:5 --v 6,,"{
+  ""palette"":""colorful"",
+  ""mood"":""surreal"",
+  ""texture"":""film"",
+  ""subject"":""buildings"",
+  ""action"":""none"",
+  ""style_or_type"":""70s"",
+  ""place"":""hill"",
+  ""time"":""sunset"",
+  ""parameters"":""--ar 4:5 --v 6"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/cgcwOGn6Lp4 https://s.mj.run/clmzmFnibY4 https://s.mj.run/4SwfRdybG0U https://s.mj.run/Thw9szseXfo https://s.mj.run/aG_zLDmG5gg 70s surreal fashion photograph of a luminous beautiful model coming out of a starry ocean at night, kodak porta --ar 4:5 --v 6",6,https://s.mj.run/cgcwOGn6Lp4 https://s.mj.run/clmzmFnibY4 https://s.mj.run/4SwfRdybG0U https://s.mj.run/Thw9szseXfo https://s.mj.run/aG_zLDmG5gg ,,,"BROKEN_URL | Dark cliffs framing shimmering blue water under a night sky. | A figure draped in a shimmering, reflective fabric against a dark background. | BROKEN_URL | BROKEN_URL",,,blue,surreal,shimmering,model,emerging,fashion,ocean,night,--ar 4:5 --v 6,,"{
+  ""palette"":""blue"",
+  ""mood"":""surreal"",
+  ""texture"":""shimmering"",
+  ""subject"":""model"",
+  ""action"":""emerging"",
+  ""style_or_type"":""fashion"",
+  ""place"":""ocean"",
+  ""time"":""night"",
+  ""parameters"":""--ar 4:5 --v 6"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/5zbX1rI9XQQ https://s.mj.run/XI8VNAUjNCg 70s art photograph shot on film of an art installation with luminous organically shaped sculpture in a stream of water in a large museum hall at night with spectators on the sides, kodak portra --ar 4:5 --v 6",6,https://s.mj.run/5zbX1rI9XQQ https://s.mj.run/XI8VNAUjNCg ,,,"A figure floats in a waterfall surrounded by green hills. | Colorful, textured mountain-like formations against a dark background.",,,colorful,luminous,textured,sculpture,floating,70s art,museum,night,kodak portra,,"{
+  ""palette"":""colorful"",
+  ""mood"":""luminous"",
+  ""texture"":""textured"",
+  ""subject"":""sculpture"",
+  ""action"":""floating"",
+  ""style_or_type"":""70s art"",
+  ""place"":""museum"",
+  ""time"":""night"",
+  ""parameters"":""kodak portra"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/pDal4noYuoA https://s.mj.run/7tUo8HC5NSg a photograph of a gloomy forest at dusk with a large oak of gold, shot on expired 35mm kodak portra film --ar 4:5 --stylize 500 --v 6",6,https://s.mj.run/pDal4noYuoA https://s.mj.run/7tUo8HC5NSg ,,,A figure in a pink robe stands before glowing golden foliage. | Glittering golden branches against a dark background.,,,"gold, dark",gloomy,film,forest,,photograph,forest,dusk,--ar 4:5 --stylize 500 --v 6,,"{
+  ""palette"":""gold, dark"",
+  ""mood"":""gloomy"",
+  ""texture"":""film"",
+  ""subject"":""forest"",
+  ""action"":"""",
+  ""style_or_type"":""photograph"",
+  ""place"":""forest"",
+  ""time"":""dusk"",
+  ""parameters"":""--ar 4:5 --stylize 500 --v 6"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/XQxqkHX5KEo https://s.mj.run/rNYAWn_h_TM https://s.mj.run/1Iu99hipmvI https://s.mj.run/eb_bFqhEjxo https://s.mj.run/ggZH-8GTEs4 https://s.mj.run/uyVjoM8Rtd8 surreal fashion shoot with asian wearing a long gold dress by a lake in a gloomy forest at dusk, shot on expired 35mm kodak portra film --ar 4:5 --v 6",6,https://s.mj.run/XQxqkHX5KEo https://s.mj.run/rNYAWn_h_TM https://s.mj.run/1Iu99hipmvI https://s.mj.run/eb_bFqhEjxo https://s.mj.run/ggZH-8GTEs4 https://s.mj.run/uyVjoM8Rtd8 ,,,"BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL | A close-up portrait surrounded by white flowers, soft and serene atmosphere.",,,gold,gloomy,soft,asian model,posing,surreal fashion,lake in forest,dusk,expired film,,"{
+  ""palette"":""gold"",
+  ""mood"":""gloomy"",
+  ""texture"":""soft"",
+  ""subject"":""asian model"",
+  ""action"":""posing"",
+  ""style_or_type"":""surreal fashion"",
+  ""place"":""lake in forest"",
+  ""time"":""dusk"",
+  ""parameters"":""expired film"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/eb_bFqhEjxo https://s.mj.run/ggZH-8GTEs4 https://s.mj.run/uyVjoM8Rtd8 https://s.mj.run/0hCSzXlbFak https://s.mj.run/wzBLwqyGZJo conceptual fashion shoot with two asian models swimming underwater with a dress made of gold, shot on expired 35mm kodak portra film --ar 4:5 --v 6",6,https://s.mj.run/eb_bFqhEjxo https://s.mj.run/ggZH-8GTEs4 https://s.mj.run/uyVjoM8Rtd8 https://s.mj.run/0hCSzXlbFak https://s.mj.run/wzBLwqyGZJo ,,,"BROKEN_URL | BROKEN_URL | A close-up portrait surrounded by white flowers, soft and serene atmosphere. | A person partially submerged in dark water with sandy texture. | BROKEN_URL",,,gold,serene,sandy,models,swimming,conceptual fashion,underwater,,expired film,,"{
+  ""palette"": ""gold"",
+  ""mood"": ""serene"",
+  ""texture"": ""sandy"",
+  ""subject"": ""models"",
+  ""action"": ""swimming"",
+  ""style_or_type"": ""conceptual fashion"",
+  ""place"": ""underwater"",
+  ""time"": """",
+  ""parameters"": ""expired film"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/yCnRKHKTqT8 https://s.mj.run/yCXO_1Vi0jQ https://s.mj.run/MUhIfkbFSgY retro futuristic villa with white drapes in a 70s sci-fi movie set to the french riviera at dawn, people on a terrasse, kodak portra --ar 4:5 --v 6",6,https://s.mj.run/yCnRKHKTqT8 https://s.mj.run/yCXO_1Vi0jQ https://s.mj.run/MUhIfkbFSgY ,,,"BROKEN_URL | Sunset view through a rocky arch, ocean and sky blend softly. | BROKEN_URL",,,soft,nostalgic,smooth,villa,gathering,retro futuristic,French Riviera,dawn,--ar 4:5 --v 6,,"{
+  ""palette"":""soft"",
+  ""mood"":""nostalgic"",
+  ""texture"":""smooth"",
+  ""subject"":""villa"",
+  ""action"":""gathering"",
+  ""style_or_type"":""retro futuristic"",
+  ""place"":""French Riviera"",
+  ""time"":""dawn"",
+  ""parameters"":""--ar 4:5 --v 6"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/G2JjAZT6nDo https://s.mj.run/inxcjn3AYLQ pink and gold art installation with an immersive room in a large museum hall with spectators in it, kodak portra --ar 4:5 --v 6",6,https://s.mj.run/G2JjAZT6nDo https://s.mj.run/inxcjn3AYLQ ,,,BROKEN_URL | BROKEN_URL,,,"pink, gold",immersive,,art installation,spectating,contemporary,museum,,--ar 4:5 --v 6,,"{
+  ""palette"": ""pink, gold"",
+  ""mood"": ""immersive"",
+  ""texture"": """",
+  ""subject"": ""art installation"",
+  ""action"": ""spectating"",
+  ""style_or_type"": ""contemporary"",
+  ""place"": ""museum"",
+  ""time"": """",
+  ""parameters"": ""--ar 4:5 --v 6"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/G2JjAZT6nDo pink and gold art installation with a portal in a large museum hall with spectators walking in it, kodak portra --ar 4:5 --v 6",6,https://s.mj.run/G2JjAZT6nDo ,,,BROKEN_URL,,,"pink, gold",,,art installation,walking,,museum hall,,--ar 4:5 --v 6,,"{
+  ""palette"": ""pink, gold"",
+  ""mood"": """",
+  ""texture"": """",
+  ""subject"": ""art installation"",
+  ""action"": ""walking"",
+  ""style_or_type"": """",
+  ""place"": ""museum hall"",
+  ""time"": """",
+  ""parameters"": ""--ar 4:5 --v 6"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/8yE1SlqAs5c https://s.mj.run/S67Lyy3hQkQ 70s art photograph of a flower sculpture in a surreal layered space of mountains and a red sun, close-up, shot on kodak portra --ar 4:5 --v 6",6,https://s.mj.run/8yE1SlqAs5c https://s.mj.run/S67Lyy3hQkQ ,,,BROKEN_URL | BROKEN_URL,,,red,surreal,layered,flower sculpture,,70s art,mountains,,--ar 4:5 --v 6,,"{
+  ""palette"":""red"",
+  ""mood"":""surreal"",
+  ""texture"":""layered"",
+  ""subject"":""flower sculpture"",
+  ""action"":"""",
+  ""style_or_type"":""70s art"",
+  ""place"":""mountains"",
+  ""time"":"""",
+  ""parameters"":""--ar 4:5 --v 6"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/TlKzPbjYMYk https://s.mj.run/eSw0h-rUXxg fashion model flying across Parisian rooftops during sunset, 55m lens, kodak portra, --ar 4:5 --v 6",6,https://s.mj.run/TlKzPbjYMYk https://s.mj.run/eSw0h-rUXxg ,,,BROKEN_URL | BROKEN_URL,,,sunset,dynamic,soft,fashion model,flying,photography,Paris,sunset,--ar 4:5 --v 6,,"{
+  ""palette"": ""sunset"",
+  ""mood"": ""dynamic"",
+  ""texture"": ""soft"",
+  ""subject"": ""fashion model"",
+  ""action"": ""flying"",
+  ""style_or_type"": ""photography"",
+  ""place"": ""Paris"",
+  ""time"": ""sunset"",
+  ""parameters"": ""--ar 4:5 --v 6"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/8z_r82f3GFs a 70s surrealist photograph of a woman in a mountainous landscape at dusk with a very long dress, kodak portra --ar 4:5 --v 6",6,https://s.mj.run/8z_r82f3GFs ,,,"A person partially hidden behind a blue, textured garment with flowers.",,,blue,surreal,textured,woman,,photograph,mountains,dusk,--ar 4:5 --v 6,,"{
+  ""palette"":""blue"",
+  ""mood"":""surreal"",
+  ""texture"":""textured"",
+  ""subject"":""woman"",
+  ""action"":"""",
+  ""style_or_type"":""photograph"",
+  ""place"":""mountains"",
+  ""time"":""dusk"",
+  ""parameters"":""--ar 4:5 --v 6"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/5Rk08QQQXUI https://s.mj.run/DrwdDcfwz3w https://s.mj.run/M2lKIRrr-I8 https://s.mj.run/khOf8VmaKGM 70s surrealistic still life shoot of an organically shaped sculpture in a retro futuristic space, james turell, kodak portra --ar 4:5 --style 7sy0cemfs9 --v 5.2",5.2,https://s.mj.run/5Rk08QQQXUI https://s.mj.run/DrwdDcfwz3w https://s.mj.run/M2lKIRrr-I8 https://s.mj.run/khOf8VmaKGM ,,,"Sleek, cream-colored sports car displayed in a minimalist setting. | BROKEN_URL | Close-up of a delicate orchid flower with intricate patterns. | A person in colorful attire poses on a white background.",,,cream,surreal,smooth,sculpture,,retro futuristic,minimalist setting,70s,Kodak Portra,,"{
+  ""palette"": ""cream"",
+  ""mood"": ""surreal"",
+  ""texture"": ""smooth"",
+  ""subject"": ""sculpture"",
+  ""action"": """",
+  ""style_or_type"": ""retro futuristic"",
+  ""place"": ""minimalist setting"",
+  ""time"": ""70s"",
+  ""parameters"": ""Kodak Portra"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/edsChgnqKAU https://s.mj.run/5g68H0IkBNo https://s.mj.run/QDP9S8pLF3s https://s.mj.run/5JPPETIZpp4 https://s.mj.run/wjIxp9HJtdo https://s.mj.run/K6vqRPMutgA https://s.mj.run/x1Xmq4tavzc https://s.mj.run/clmzmFnibY4 35mm 70s photography of a retro futuristic sports car on the french coast early evening, a scene from a spy movie, kodak portra --ar 4:5 --style 1U48Gcm4I --v 5.2",5.2,https://s.mj.run/edsChgnqKAU https://s.mj.run/5g68H0IkBNo https://s.mj.run/QDP9S8pLF3s https://s.mj.run/5JPPETIZpp4 https://s.mj.run/wjIxp9HJtdo https://s.mj.run/K6vqRPMutgA https://s.mj.run/x1Xmq4tavzc https://s.mj.run/clmzmFnibY4 ,,,BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL,,,vintage,mysterious,smooth,sports car,driving,retro futuristic,French coast,evening,"35mm, kodak portra, --ar 4:5, --style 1U48Gcm4I, --v 5.2",spy movie,"{
+  ""palette"":""vintage"",
+  ""mood"":""mysterious"",
+  ""texture"":""smooth"",
+  ""subject"":""sports car"",
+  ""action"":""driving"",
+  ""style_or_type"":""retro futuristic"",
+  ""place"":""French coast"",
+  ""time"":""evening"",
+  ""parameters"":""35mm, kodak portra, --ar 4:5, --style 1U48Gcm4I, --v 5.2"",
+  ""tension_note"":""spy movie""
+}"
+"https://s.mj.run/6QsWxNdilYM https://s.mj.run/x1Xmq4tavzc https://s.mj.run/clmzmFnibY4 35mm 70s fashion photography with a model wearing a retro futuristic helmet next to a motorcycle by the french coast early evening, kodak portra --ar 4:5 --style 9sPfmYx2eC6DUe6 --v 5.2",5.2,https://s.mj.run/6QsWxNdilYM https://s.mj.run/x1Xmq4tavzc https://s.mj.run/clmzmFnibY4 ,,,BROKEN_URL | BROKEN_URL | BROKEN_URL,,,vintage,nostalgic,film,model,posing,70s fashion,French coast,early evening,kodak portra,,"{
+  ""palette"": ""vintage"",
+  ""mood"": ""nostalgic"",
+  ""texture"": ""film"",
+  ""subject"": ""model"",
+  ""action"": ""posing"",
+  ""style_or_type"": ""70s fashion"",
+  ""place"": ""French coast"",
+  ""time"": ""early evening"",
+  ""parameters"": ""kodak portra"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/d5jy2DQ04Hg https://s.mj.run/YXTDK6q_yCc https://s.mj.run/ZIsgZQQETPM https://s.mj.run/nQJI5mbZ7ys https://s.mj.run/x1Xmq4tavzc https://s.mj.run/clmzmFnibY4 35mm 70s photography of a woman riding a retro futuristic motorcycle on the french coast early evening, kodak portra --ar 4:5 --style 8YUzBkdSv --v 5.2",5.2,https://s.mj.run/d5jy2DQ04Hg https://s.mj.run/YXTDK6q_yCc https://s.mj.run/ZIsgZQQETPM https://s.mj.run/nQJI5mbZ7ys https://s.mj.run/x1Xmq4tavzc https://s.mj.run/clmzmFnibY4 ,,,BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL,,,vintage,nostalgic,film,woman,riding,70s photography,French coast,early evening,kodak portra,,"{
+  ""palette"":""vintage"",
+  ""mood"":""nostalgic"",
+  ""texture"":""film"",
+  ""subject"":""woman"",
+  ""action"":""riding"",
+  ""style_or_type"":""70s photography"",
+  ""place"":""French coast"",
+  ""time"":""early evening"",
+  ""parameters"":""kodak portra"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/5Byor18ou4k https://s.mj.run/7yYzbNM6cq8 a scanned and expired photograph of this fashion model with a mountain and waterfall behind in a jungle in Yves Klein blue, 35mm lens --ar 4:5 --v 5.2",5.2,https://s.mj.run/5Byor18ou4k https://s.mj.run/7yYzbNM6cq8 ,,,BROKEN_URL | BROKEN_URL,,,Yves Klein blue,nostalgic,scanned,fashion model,,expired photograph,jungle,,"35mm lens, --ar 4:5, --v 5.2",,"{
+  ""palette"":""Yves Klein blue"",
+  ""mood"":""nostalgic"",
+  ""texture"":""scanned"",
+  ""subject"":""fashion model"",
+  ""action"":"""",
+  ""style_or_type"":""expired photograph"",
+  ""place"":""jungle"",
+  ""time"":"""",
+  ""parameters"":""35mm lens, --ar 4:5, --v 5.2"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/7vldGY72gvw https://s.mj.run/pB7TlafGI4Y https://s.mj.run/emWGWMAcEcA https://s.mj.run/yS0A4XeYhrw 70s still life shoot in studio with sculptures made of pearls, giant flowers and crystals, kodak portra --ar 4:5 --style 7syD2l8ylI --v 5.2",5.2,https://s.mj.run/7vldGY72gvw https://s.mj.run/pB7TlafGI4Y https://s.mj.run/emWGWMAcEcA https://s.mj.run/yS0A4XeYhrw ,,,BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL,,,vibrant,nostalgic,smooth,sculptures,displayed,still life,studio,70s,--ar 4:5 --style 7syD2l8ylI --v 5.2,,"{
+  ""palette"":""vibrant"",
+  ""mood"":""nostalgic"",
+  ""texture"":""smooth"",
+  ""subject"":""sculptures"",
+  ""action"":""displayed"",
+  ""style_or_type"":""still life"",
+  ""place"":""studio"",
+  ""time"":""70s"",
+  ""parameters"":""--ar 4:5 --style 7syD2l8ylI --v 5.2"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/JWMcRi1_a_8 https://s.mj.run/Pr5FNs44NaU nouvelle vague fashion shoot in a surreal palace, french retro, kodak portra --ar 4:5 --v 5.2",5.2,https://s.mj.run/JWMcRi1_a_8 https://s.mj.run/Pr5FNs44NaU ,,,BROKEN_URL | BROKEN_URL,,,retro,surreal,,fashion,,nouvelle vague,palace,,--ar 4:5 --v 5.2,,"{
+  ""palette"": ""retro"",
+  ""mood"": ""surreal"",
+  ""texture"": """",
+  ""subject"": ""fashion"",
+  ""action"": """",
+  ""style_or_type"": ""nouvelle vague"",
+  ""place"": ""palace"",
+  ""time"": """",
+  ""parameters"": ""--ar 4:5 --v 5.2"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/Fb78GHXrzac https://s.mj.run/W8zOMyEnXh8 https://s.mj.run/z_ouZ6f_Zn0 https://s.mj.run/_lusLDYeQTg https://s.mj.run/-m9A0QtXGhs 70s photograph of an abstract art installation in a large hall, kodak portra --ar 4:5 --style zaCa8vYAvN --v 5.2",5.2,https://s.mj.run/Fb78GHXrzac https://s.mj.run/W8zOMyEnXh8 https://s.mj.run/z_ouZ6f_Zn0 https://s.mj.run/_lusLDYeQTg https://s.mj.run/-m9A0QtXGhs ,,,BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL,,,,,,abstract art,,70s photograph,large hall,70s,"kodak portra, --ar 4:5, --style zaCa8vYAvN, --v 5.2",,"{
+  ""palette"": """",
+  ""mood"": """",
+  ""texture"": """",
+  ""subject"": ""abstract art"",
+  ""action"": """",
+  ""style_or_type"": ""70s photograph"",
+  ""place"": ""large hall"",
+  ""time"": ""70s"",
+  ""parameters"": ""kodak portra, --ar 4:5, --style zaCa8vYAvN, --v 5.2"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/pvlenPqwcQY https://s.mj.run/ULl3Qu34qbg https://s.mj.run/i4Zzk87GDEE an art installation with a room with mirroreed floors containing abstract organic shapes floating mid air, optical illusion, kodak portra --ar 4:5 --style 7faU9VOwVihMC4 --v 5.2",5.2,https://s.mj.run/pvlenPqwcQY https://s.mj.run/ULl3Qu34qbg https://s.mj.run/i4Zzk87GDEE ,,,BROKEN_URL | BROKEN_URL | BROKEN_URL,,,vibrant,surreal,smooth,abstract shapes,floating,art installation,room,,--ar 4:5 --style 7faU9VOwVihMC4 --v 5.2,optical illusion,"{
+  ""palette"": ""vibrant"",
+  ""mood"": ""surreal"",
+  ""texture"": ""smooth"",
+  ""subject"": ""abstract shapes"",
+  ""action"": ""floating"",
+  ""style_or_type"": ""art installation"",
+  ""place"": ""room"",
+  ""time"": """",
+  ""parameters"": ""--ar 4:5 --style 7faU9VOwVihMC4 --v 5.2"",
+  ""tension_note"": ""optical illusion""
+}"
+"https://s.mj.run/LEa35RmPPQE https://s.mj.run/IVK-FFRfweA https://s.mj.run/ZDbKR1NsS08 https://s.mj.run/RiM4JjswsxM https://s.mj.run/efxmzHRYx9s https://s.mj.run/whvZz3roGlM https://s.mj.run/h3RULlwzjiY 70s photograph of imaginary burning flower in a mountainous landscape at dawn, kodak portra --ar 4:5 --style 1nbrekMNiR8whxtE --v 5.2",5.2,https://s.mj.run/LEa35RmPPQE https://s.mj.run/IVK-FFRfweA https://s.mj.run/ZDbKR1NsS08 https://s.mj.run/RiM4JjswsxM https://s.mj.run/efxmzHRYx9s https://s.mj.run/whvZz3roGlM https://s.mj.run/h3RULlwzjiY ,,,BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL,,,warm,dreamy,soft,flower,burning,photograph,mountains,dawn,"kodak portra, --ar 4:5, --style 1nbrekMNiR8whxtE, --v 5.2",,"{
+  ""palette"":""warm"",
+  ""mood"":""dreamy"",
+  ""texture"":""soft"",
+  ""subject"":""flower"",
+  ""action"":""burning"",
+  ""style_or_type"":""photograph"",
+  ""place"":""mountains"",
+  ""time"":""dawn"",
+  ""parameters"":""kodak portra, --ar 4:5, --style 1nbrekMNiR8whxtE, --v 5.2"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/ZDbKR1NsS08 https://s.mj.run/RiM4JjswsxM https://s.mj.run/efxmzHRYx9s https://s.mj.run/whvZz3roGlM https://s.mj.run/h3RULlwzjiY 70s photograph of imaginary flower with thin stem in a mountainous landscape at dawn, kodak portra --ar 4:5 --style lJwItNrSCOKRUm --v 5.2",5.2,https://s.mj.run/ZDbKR1NsS08 https://s.mj.run/RiM4JjswsxM https://s.mj.run/efxmzHRYx9s https://s.mj.run/whvZz3roGlM https://s.mj.run/h3RULlwzjiY ,,,BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL,,,vibrant,serene,soft,flower,,photograph,mountains,dawn,Kodak Portra,,"{
+  ""palette"":""vibrant"",
+  ""mood"":""serene"",
+  ""texture"":""soft"",
+  ""subject"":""flower"",
+  ""action"":"""",
+  ""style_or_type"":""photograph"",
+  ""place"":""mountains"",
+  ""time"":""dawn"",
+  ""parameters"":""Kodak Portra"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/JWMcRi1_a_8 https://s.mj.run/Pr5FNs44NaU 70s photograph of surreal sculptures in a mountainous landscape, kodak portra --ar 4:5 --v 5.2",5.2,https://s.mj.run/JWMcRi1_a_8 https://s.mj.run/Pr5FNs44NaU ,,,BROKEN_URL | BROKEN_URL,,,,surreal,,sculptures,,photograph,mountains,70s,--ar 4:5 --v 5.2,,"{
+  ""palette"": """",
+  ""mood"": ""surreal"",
+  ""texture"": """",
+  ""subject"": ""sculptures"",
+  ""action"": """",
+  ""style_or_type"": ""photograph"",
+  ""place"": ""mountains"",
+  ""time"": ""70s"",
+  ""parameters"": ""--ar 4:5 --v 5.2"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/4Ka5j7BE0Zc https://s.mj.run/GJpcLzFJp_w 70s photograph of retro futuristic spa in morocco with green plants, with a view, kodak portra --ar 4:5 --v 5.2",5.2,https://s.mj.run/4Ka5j7BE0Zc https://s.mj.run/GJpcLzFJp_w ,,,BROKEN_URL | BROKEN_URL,,,green,retro,smooth,spa,,futuristic,Morocco,70s,--ar 4:5 --v 5.2,,"{
+  ""palette"":""green"",
+  ""mood"":""retro"",
+  ""texture"":""smooth"",
+  ""subject"":""spa"",
+  ""action"":"""",
+  ""style_or_type"":""futuristic"",
+  ""place"":""Morocco"",
+  ""time"":""70s"",
+  ""parameters"":""--ar 4:5 --v 5.2"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/4Ka5j7BE0Zc https://s.mj.run/GJpcLzFJp_w 70s renaissance painting close-up of face of a scandinavian fashion models with long blonde hair in a beautiful holy blue room in morocco, kodak portra --ar 4:5 --v 5.2",5.2,https://s.mj.run/4Ka5j7BE0Zc https://s.mj.run/GJpcLzFJp_w ,,,BROKEN_URL | BROKEN_URL,,,blue,serene,smooth,model,,renaissance,Morocco,70s,--ar 4:5 --v 5.2,,"{
+  ""palette"": ""blue"",
+  ""mood"": ""serene"",
+  ""texture"": ""smooth"",
+  ""subject"": ""model"",
+  ""action"": """",
+  ""style_or_type"": ""renaissance"",
+  ""place"": ""Morocco"",
+  ""time"": ""70s"",
+  ""parameters"": ""--ar 4:5 --v 5.2"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/ob6OGmJ47IE https://s.mj.run/zySWKxL19n0 https://s.mj.run/g0bQ-n9337I https://s.mj.run/X3sc0Mu_J1M https://s.mj.run/qA-h7h0cLbU 70s photograph of a red abstract sculpture with edges on a blue background, kodak portra --ar 4:5 --v 5.2",5.2,https://s.mj.run/ob6OGmJ47IE https://s.mj.run/zySWKxL19n0 https://s.mj.run/g0bQ-n9337I https://s.mj.run/X3sc0Mu_J1M https://s.mj.run/qA-h7h0cLbU ,,,BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL,,,"red, blue",abstract,smooth,sculpture,,70s photograph,,70s,--ar 4:5 --v 5.2,,"{
+  ""palette"":""red, blue"",
+  ""mood"":""abstract"",
+  ""texture"":""smooth"",
+  ""subject"":""sculpture"",
+  ""action"":"""",
+  ""style_or_type"":""70s photograph"",
+  ""place"":"""",
+  ""time"":""70s"",
+  ""parameters"":""--ar 4:5 --v 5.2"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/8z_r82f3GFs https://s.mj.run/TiTK21uRcIE https://s.mj.run/-5fJ4FXtI-U a 70s surrealist photograph of a woman in a mountainous landscape at dusk with a very long dress among giant flowers, kodak portra --ar 4:5 --v 5.2",5.2,https://s.mj.run/8z_r82f3GFs https://s.mj.run/TiTK21uRcIE https://s.mj.run/-5fJ4FXtI-U ,,,"A person partially hidden behind a blue, textured garment with flowers. | A draped, deep blue fabric forms a mysterious, abstract shape. | Stylized mountain silhouette against a vibrant red background.",,,"blue, red",surreal,textured,woman,,70s surrealist,mountains,dusk,--ar 4:5 --v 5.2,mysterious,"{
+  ""palette"":""blue, red"",
+  ""mood"":""surreal"",
+  ""texture"":""textured"",
+  ""subject"":""woman"",
+  ""action"":"""",
+  ""style_or_type"":""70s surrealist"",
+  ""place"":""mountains"",
+  ""time"":""dusk"",
+  ""parameters"":""--ar 4:5 --v 5.2"",
+  ""tension_note"":""mysterious""
+}"
+"https://s.mj.run/8z_r82f3GFs https://s.mj.run/BZi3TECq_TE a 70s surrealist photograph of a green flower in a mountainous landscape at dusk, kodak portra --ar 4:5 --v 5.2",5.2,https://s.mj.run/8z_r82f3GFs https://s.mj.run/BZi3TECq_TE ,,,"A person partially hidden behind a blue, textured garment with flowers. | BROKEN_URL",,,green,surreal,textured,flower,,photograph,mountains,dusk,kodak portra,,"{
+  ""palette"":""green"",
+  ""mood"":""surreal"",
+  ""texture"":""textured"",
+  ""subject"":""flower"",
+  ""action"":"""",
+  ""style_or_type"":""photograph"",
+  ""place"":""mountains"",
+  ""time"":""dusk"",
+  ""parameters"":""kodak portra"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/8z_r82f3GFs a 70s surrealist photograph of a woman in a mountainous landscape at dusk with a very long dress, kodak portra --ar 4:5 --v 5.2",5.2,https://s.mj.run/8z_r82f3GFs ,,,"A person partially hidden behind a blue, textured garment with flowers.",,,blue,surreal,textured,woman,,photograph,mountains,dusk,kodak portra,,"{
+  ""palette"":""blue"",
+  ""mood"":""surreal"",
+  ""texture"":""textured"",
+  ""subject"":""woman"",
+  ""action"":"""",
+  ""style_or_type"":""photograph"",
+  ""place"":""mountains"",
+  ""time"":""dusk"",
+  ""parameters"":""kodak portra"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/iYVMNdH0N2Q https://s.mj.run/PDGSCynsoZM https://s.mj.run/ED4ySCF8E88 https://s.mj.run/8z_r82f3GFs a 70s surrealist photograph of a woman sitting in a mountainous landscape at dusk with blue spheres, kodak portra --ar 4:5 --v 5.2",5.2,https://s.mj.run/iYVMNdH0N2Q https://s.mj.run/PDGSCynsoZM https://s.mj.run/ED4ySCF8E88 https://s.mj.run/8z_r82f3GFs ,,,"Abstract pyramid of blue spheres under a glowing orb in darkness. | A surreal landscape with a tall building and colorful floating spheres. | A woman in a black outfit poses on rocky shore. | A person partially hidden behind a blue, textured garment with flowers.",,,blue,surreal,textured,woman,sitting,photograph,mountains,dusk,--ar 4:5 --v 5.2,,"{
+  ""palette"":""blue"",
+  ""mood"":""surreal"",
+  ""texture"":""textured"",
+  ""subject"":""woman"",
+  ""action"":""sitting"",
+  ""style_or_type"":""photograph"",
+  ""place"":""mountains"",
+  ""time"":""dusk"",
+  ""parameters"":""--ar 4:5 --v 5.2"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/iYVMNdH0N2Q https://s.mj.run/PDGSCynsoZM a 70s surrealist photograph of illuminated blue spheres levitating above a mountainous landscape at dusk, kodak portra --ar 4:5 --v 5.2",5.2,https://s.mj.run/iYVMNdH0N2Q https://s.mj.run/PDGSCynsoZM ,,,Abstract pyramid of blue spheres under a glowing orb in darkness. | A surreal landscape with a tall building and colorful floating spheres.,,,blue,surreal,,spheres,levitating,surrealist,mountainous landscape,dusk,--ar 4:5 --v 5.2,,"{
+  ""palette"": ""blue"",
+  ""mood"": ""surreal"",
+  ""texture"": """",
+  ""subject"": ""spheres"",
+  ""action"": ""levitating"",
+  ""style_or_type"": ""surrealist"",
+  ""place"": ""mountainous landscape"",
+  ""time"": ""dusk"",
+  ""parameters"": ""--ar 4:5 --v 5.2"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/YJHKwWG_aGg https://s.mj.run/2QVHhJsEENI https://s.mj.run/0SxNwpKTGco https://s.mj.run/Ad8Z5PnNBLY bedroom in a house in the jungle in a 70s futuristic sci-fi movie set in lush utopia where mankind is in harmony with nature, evening, kodak portra, 35mm lens --ar 4:5 --v 5.2",5.2,https://s.mj.run/YJHKwWG_aGg https://s.mj.run/2QVHhJsEENI https://s.mj.run/0SxNwpKTGco https://s.mj.run/Ad8Z5PnNBLY ,,,"Lush green foliage with birds, depicting a serene natural scene. | BROKEN_URL | BROKEN_URL | BROKEN_URL",,,lush green,serene,,bedroom,,70s sci-fi,jungle,evening,"kodak portra, 35mm lens",,"{
+  ""palette"": ""lush green"",
+  ""mood"": ""serene"",
+  ""texture"": """",
+  ""subject"": ""bedroom"",
+  ""action"": """",
+  ""style_or_type"": ""70s sci-fi"",
+  ""place"": ""jungle"",
+  ""time"": ""evening"",
+  ""parameters"": ""kodak portra, 35mm lens"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/fzlf6Is67u8 https://s.mj.run/kgKbVtPoNLY https://s.mj.run/GLF1-KP1dEg 70s man with a cigarette in the streets of tokyo at dusk, pink sky, kodak portra, --ar 4:5 --v 5.2",5.2,https://s.mj.run/fzlf6Is67u8 https://s.mj.run/kgKbVtPoNLY https://s.mj.run/GLF1-KP1dEg ,,,BROKEN_URL | BROKEN_URL | BROKEN_URL,,,pink,nostalgic,film,man,smoking,70s,Tokyo,dusk,--ar 4:5 --v 5.2,,"{
+  ""palette"":""pink"",
+  ""mood"":""nostalgic"",
+  ""texture"":""film"",
+  ""subject"":""man"",
+  ""action"":""smoking"",
+  ""style_or_type"":""70s"",
+  ""place"":""Tokyo"",
+  ""time"":""dusk"",
+  ""parameters"":""--ar 4:5 --v 5.2"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/q4VX6CiRb8k https://s.mj.run/H9wgRrwvVJU https://s.mj.run/HRr8-claOJ0 https://s.mj.run/w1i1V3mMHJQ 70s red sphere sculpture on top of skyscraper in tokyo at dusk, pink sky, kodak portra, --ar 4:5 --v 5.2",5.2,https://s.mj.run/q4VX6CiRb8k https://s.mj.run/H9wgRrwvVJU https://s.mj.run/HRr8-claOJ0 https://s.mj.run/w1i1V3mMHJQ ,,,BROKEN_URL | BROKEN_URL | BROKEN_URL | Busy urban street with neon signs and pedestrians at dusk.,,,pink,urban,smooth,sculpture,sitting,70s,Tokyo,dusk,--ar 4:5 --v 5.2,,"{
+  ""palette"":""pink"",
+  ""mood"":""urban"",
+  ""texture"":""smooth"",
+  ""subject"":""sculpture"",
+  ""action"":""sitting"",
+  ""style_or_type"":""70s"",
+  ""place"":""Tokyo"",
+  ""time"":""dusk"",
+  ""parameters"":""--ar 4:5 --v 5.2"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/zi-brL8Vz-w https://s.mj.run/-VkrHeRgNVQ https://s.mj.run/us3Yc4l0QyI https://s.mj.run/Gb7-_j4z5XM Parisian buildings covered in colorful butterflies during sunset in summer, birds eye view, kodak portra, 35mm lens, --ar 4:5 --v 5.2",5.2,https://s.mj.run/zi-brL8Vz-w https://s.mj.run/-VkrHeRgNVQ https://s.mj.run/us3Yc4l0QyI https://s.mj.run/Gb7-_j4z5XM ,,,BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL,,,colorful,serene,smooth,butterflies,covering,photography,Paris,sunset,35mm lens,,"{
+  ""palette"":""colorful"",
+  ""mood"":""serene"",
+  ""texture"":""smooth"",
+  ""subject"":""butterflies"",
+  ""action"":""covering"",
+  ""style_or_type"":""photography"",
+  ""place"":""Paris"",
+  ""time"":""sunset"",
+  ""parameters"":""35mm lens"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/1UKIYwY-idc https://s.mj.run/W4CFdIchhDE https://s.mj.run/NNrsBvgwiUU https://s.mj.run/UrGnZ6H-9AE a lush park with furry sculptures in vibrant colors designed by Alejandro Jodorowski, a scene from a 70s sci-fi movie, kodak portra, 35mm lens --ar 4:5 --v 5.2",5.2,https://s.mj.run/1UKIYwY-idc https://s.mj.run/W4CFdIchhDE https://s.mj.run/NNrsBvgwiUU https://s.mj.run/UrGnZ6H-9AE ,,,BROKEN_URL | BROKEN_URL | Colorful dunes under a vibrant sky with a large red moon. | Colorful abstract sculpture with layered shapes against a blue background.,,,vibrant,playful,furry,sculptures,,sci-fi,park,70s,35mm,,"{
+  ""palette"":""vibrant"",
+  ""mood"":""playful"",
+  ""texture"":""furry"",
+  ""subject"":""sculptures"",
+  ""action"":"""",
+  ""style_or_type"":""sci-fi"",
+  ""place"":""park"",
+  ""time"":""70s"",
+  ""parameters"":""35mm"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/PyXrEsfNKkw https://s.mj.run/NNrsBvgwiUU https://s.mj.run/UrGnZ6H-9AE cClose up of beautiful female in lingerie dancing among colorful sculptures desert at dawn, 70s sci - fi movie, kodak portra, 35mm lens --ar 4:5 --v 5.2",5.2,https://s.mj.run/PyXrEsfNKkw https://s.mj.run/NNrsBvgwiUU https://s.mj.run/UrGnZ6H-9AE ,,,"Colorful rock formations illuminated by soft, warm light at dusk. | Colorful dunes under a vibrant sky with a large red moon. | Colorful abstract sculpture with layered shapes against a blue background.",,,colorful,vibrant,soft,female,dancing,sci-fi,desert,dawn,--ar 4:5 --v 5.2,,"{
+  ""palette"":""colorful"",
+  ""mood"":""vibrant"",
+  ""texture"":""soft"",
+  ""subject"":""female"",
+  ""action"":""dancing"",
+  ""style_or_type"":""sci-fi"",
+  ""place"":""desert"",
+  ""time"":""dawn"",
+  ""parameters"":""--ar 4:5 --v 5.2"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/NNrsBvgwiUU https://s.mj.run/UrGnZ6H-9AE scene from a 70s sci-fi movie with colorful scultpures in a colorful desert, kodak portra, 35mm lens --ar 4:5 --v 5.2",5.2,https://s.mj.run/NNrsBvgwiUU https://s.mj.run/UrGnZ6H-9AE ,,,Colorful dunes under a vibrant sky with a large red moon. | Colorful abstract sculpture with layered shapes against a blue background.,,,colorful,vibrant,abstract,sculptures,,sci-fi,desert,70s,"kodak portra, 35mm lens, --ar 4:5, --v 5.2",,"{
+  ""palette"":""colorful"",
+  ""mood"":""vibrant"",
+  ""texture"":""abstract"",
+  ""subject"":""sculptures"",
+  ""action"":"""",
+  ""style_or_type"":""sci-fi"",
+  ""place"":""desert"",
+  ""time"":""70s"",
+  ""parameters"":""kodak portra, 35mm lens, --ar 4:5, --v 5.2"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/l13O-VRTjGA https://s.mj.run/u9vQoqy4fhY https://s.mj.run/7IVtYrAMAIE a native american woman wearing retro futuristic outift with gold and flowers in the desert at dawn, kodak portra, 35mm lens --ar 4:5 --v 5.2",5.2,https://s.mj.run/l13O-VRTjGA https://s.mj.run/u9vQoqy4fhY https://s.mj.run/7IVtYrAMAIE ,,,BROKEN_URL | BROKEN_URL | BROKEN_URL,,,gold,nostalgic,smooth,woman,,retro futuristic,desert,dawn,--ar 4:5 --v 5.2,,"{
+  ""palette"": ""gold"",
+  ""mood"": ""nostalgic"",
+  ""texture"": ""smooth"",
+  ""subject"": ""woman"",
+  ""action"": """",
+  ""style_or_type"": ""retro futuristic"",
+  ""place"": ""desert"",
+  ""time"": ""dawn"",
+  ""parameters"": ""--ar 4:5 --v 5.2"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/DIbLAR3ilbY https://s.mj.run/4bMZXTT5Y8k https://s.mj.run/4RhuLPM-uXw https://s.mj.run/xqfmW2sxqCo a scene from a 70s sci-fi movie with a cave with water and mountains futuristic glass sculptures, kodak portra --ar 4:5 --v 5.2",5.2,https://s.mj.run/DIbLAR3ilbY https://s.mj.run/4bMZXTT5Y8k https://s.mj.run/4RhuLPM-uXw https://s.mj.run/xqfmW2sxqCo ,,,"Four squares in orange and yellow shades. Simple geometric design. | Colorful butterflies floating against a dark, blurred background. | Vibrant gradient of orange and red colors in a rectangular composition. | Colorful abstract patterns with swirling shapes and gradients.",,,"orange, yellow",futuristic,smooth,"cave, water, mountains",,sci-fi,cave,70s,"kodak portra, --ar 4:5, --v 5.2",,"{
+  ""palette"":""orange, yellow"",
+  ""mood"":""futuristic"",
+  ""texture"":""smooth"",
+  ""subject"":""cave, water, mountains"",
+  ""action"":"""",
+  ""style_or_type"":""sci-fi"",
+  ""place"":""cave"",
+  ""time"":""70s"",
+  ""parameters"":""kodak portra, --ar 4:5, --v 5.2"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/nj9jIX5zdgo https://s.mj.run/7CW8RD4FQyA https://s.mj.run/aeWNlEMuPZE https://s.mj.run/qoFhpS2s9hE https://s.mj.run/QVQjmlnpPD4 https://s.mj.run/bt6i5nPFoCw 70s shared futuristic spiritual space for worship without walls on top on a mountain in the evening, kodak portra, --ar 4:5 --v 5.2",5.2,https://s.mj.run/nj9jIX5zdgo https://s.mj.run/7CW8RD4FQyA https://s.mj.run/aeWNlEMuPZE https://s.mj.run/qoFhpS2s9hE https://s.mj.run/QVQjmlnpPD4 https://s.mj.run/bt6i5nPFoCw ,,,BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL | BROKEN_URL,,,warm,spiritual,smooth,worship space,,futuristic,mountain,evening,"Kodak Portra, --ar 4:5, --v 5.2",,"{
+  ""palette"": ""warm"",
+  ""mood"": ""spiritual"",
+  ""texture"": ""smooth"",
+  ""subject"": ""worship space"",
+  ""action"": """",
+  ""style_or_type"": ""futuristic"",
+  ""place"": ""mountain"",
+  ""time"": ""evening"",
+  ""parameters"": ""Kodak Portra, --ar 4:5, --v 5.2"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/k8BQLyx4gQ8 https://s.mj.run/gfZ-YaTocM4 70s orange floating glass sculpture in front of a deep green backgrop, kodak portra --ar 4:5 --v 5.2",5.2,https://s.mj.run/k8BQLyx4gQ8 https://s.mj.run/gfZ-YaTocM4 ,,,BROKEN_URL | BROKEN_URL,,,"orange, green",vintage,glass,sculpture,floating,70s,,70s,--ar 4:5 --v 5.2,,"{
+  ""palette"":""orange, green"",
+  ""mood"":""vintage"",
+  ""texture"":""glass"",
+  ""subject"":""sculpture"",
+  ""action"":""floating"",
+  ""style_or_type"":""70s"",
+  ""place"":"""",
+  ""time"":""70s"",
+  ""parameters"":""--ar 4:5 --v 5.2"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/wRE5-KenTrg https://s.mj.run/asK90QjRt2I https://s.mj.run/lzzGMKEaXPk https://s.mj.run/pvLCEGWLExA interiors of a 70s futuristic home with green plants near the water on the mediterranean at dusk, pastel colors, kodak portra, 35mm lens --ar 4:5 --v 5.2",5.2,https://s.mj.run/wRE5-KenTrg https://s.mj.run/asK90QjRt2I https://s.mj.run/lzzGMKEaXPk https://s.mj.run/pvLCEGWLExA ,,,Abstract red building with geometric windows and doorways. | Red vertical structures create a striking architectural entrance. | Blue spheres floating above a dirt road in a grassy landscape. | Vibrant artwork depicting a mythical figure battling a serpent under a moon.,,,pastel,futuristic,smooth,interiors,,70s,mediterranean,dusk,35mm,,"{
+  ""palette"":""pastel"",
+  ""mood"":""futuristic"",
+  ""texture"":""smooth"",
+  ""subject"":""interiors"",
+  ""action"":"""",
+  ""style_or_type"":""70s"",
+  ""place"":""mediterranean"",
+  ""time"":""dusk"",
+  ""parameters"":""35mm"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/wRE5-KenTrg https://s.mj.run/asK90QjRt2I https://s.mj.run/lzzGMKEaXPk https://s.mj.run/pvLCEGWLExA 70s futuristic village near the water on the mediterranean in the afternoon, with people, pastel colors, kodak portra, 35mm lens --ar 4:5 --v 5.2",5.2,https://s.mj.run/wRE5-KenTrg https://s.mj.run/asK90QjRt2I https://s.mj.run/lzzGMKEaXPk https://s.mj.run/pvLCEGWLExA ,,,Abstract red building with geometric windows and doorways. | Red vertical structures create a striking architectural entrance. | Blue spheres floating above a dirt road in a grassy landscape. | Vibrant artwork depicting a mythical figure battling a serpent under a moon.,,,pastel,futuristic,,village,battling,70s,Mediterranean,afternoon,"Kodak Portra, 35mm lens",,"{
+  ""palette"": ""pastel"",
+  ""mood"": ""futuristic"",
+  ""texture"": """",
+  ""subject"": ""village"",
+  ""action"": ""battling"",
+  ""style_or_type"": ""70s"",
+  ""place"": ""Mediterranean"",
+  ""time"": ""afternoon"",
+  ""parameters"": ""Kodak Portra, 35mm lens"",
+  ""tension_note"": """"
+}"
+"https://s.mj.run/9MpYMzF-hlY https://s.mj.run/bn4kOUOaVKA 60s photography of shell shaped golden sculptures in a mountanous landscape at dusk, fujifilm fujicolor --ar 4:5 --v 5.2",5.2,https://s.mj.run/9MpYMzF-hlY https://s.mj.run/bn4kOUOaVKA ,,,"Golden shell-shaped object with ridges, hanging on a wall. | Colorful layered mountains under a clear blue sky.",,,gold,nostalgic,smooth,sculptures,,60s photography,mountains,dusk,--ar 4:5 --v 5.2,,"{
+  ""palette"":""gold"",
+  ""mood"":""nostalgic"",
+  ""texture"":""smooth"",
+  ""subject"":""sculptures"",
+  ""action"":"""",
+  ""style_or_type"":""60s photography"",
+  ""place"":""mountains"",
+  ""time"":""dusk"",
+  ""parameters"":""--ar 4:5 --v 5.2"",
+  ""tension_note"":""""
+}"
+"https://s.mj.run/wRE5-KenTrg https://s.mj.run/asK90QjRt2I https://s.mj.run/lzzGMKEaXPk https://s.mj.run/pvLCEGWLExA 70s futuristic oasis village in the desert in the evening, with people, kodak portra, 35mm lens --ar 4:5 --v 5.2",5.2,https://s.mj.run/wRE5-KenTrg https://s.mj.run/asK90QjRt2I https://s.mj.run/lzzGMKEaXPk https://s.mj.run/pvLCEGWLExA ,,,Abstract red building with geometric windows and doorways. | Red vertical structures create a striking architectural entrance. | Blue spheres floating above a dirt road in a grassy landscape. | Vibrant artwork depicting a mythical figure battling a serpent under a moon.,,,"red, blue",futuristic,geometric,oasis village,battling,vibrant,desert,evening,35mm lens,mythical,"{
+  ""palette"":""red, blue"",
+  ""mood"":""futuristic"",
+  ""texture"":""geometric"",
+  ""subject"":""oasis village"",
+  ""action"":""battling"",
+  ""style_or_type"":""vibrant"",
+  ""place"":""desert"",
+  ""time"":""evening"",
+  ""parameters"":""35mm lens"",
+  ""tension_note"":""mythical""
+}"
+"https://s.mj.run/wRE5-KenTrg https://s.mj.run/asK90QjRt2I https://s.mj.run/lzzGMKEaXPk https://s.mj.run/pvLCEGWLExA 70s futuristic glass sculptures in the desert in the evening, kodak portra, 35mm lens --ar 4:5 --v 5.2",5.2,https://s.mj.run/wRE5-KenTrg https://s.mj.run/asK90QjRt2I https://s.mj.run/lzzGMKEaXPk https://s.mj.run/pvLCEGWLExA ,,,Abstract red building with geometric windows and doorways. | Red vertical structures create a striking architectural entrance. | Blue spheres floating above a dirt road in a grassy landscape. | Vibrant artwork depicting a mythical figure battling a serpent under a moon.,,,"red, blue",futuristic,glass,sculptures,,abstract,desert,evening,35mm lens,geometric,"{
+  ""palette"":""red, blue"",
+  ""mood"":""futuristic"",
+  ""texture"":""glass"",
+  ""subject"":""sculptures"",
+  ""action"":"""",
+  ""style_or_type"":""abstract"",
+  ""place"":""desert"",
+  ""time"":""evening"",
+  ""parameters"":""35mm lens"",
+  ""tension_note"":""geometric""
+}"
+"https://s.mj.run/G5iwtbF1OaM https://s.mj.run/wQAyNjHGJnM https://s.mj.run/Vk8P9m2f0js https://s.mj.run/IoZHrKUkVDY a 70s art photograph on film of a large surreal art installation in a large museum hall, with spectators, kodak portra --ar 4:5 --v 7",7,https://s.mj.run/G5iwtbF1OaM https://s.mj.run/wQAyNjHGJnM https://s.mj.run/Vk8P9m2f0js https://s.mj.run/IoZHrKUkVDY ,,,A glowing blue jellyfish with radiating tentacles against a dark background. | Abstract artwork with vibrant colors and textured patterns. | Colorful abstract waves with circular shapes and vibrant gradients. | A red pond surrounded by mossy terrain and mountains.,,,vibrant,surreal,textured,art installation,spectating,70s photograph,museum hall,70s,kodak portra,,"{
+  ""palette"":""vibrant"",
+  ""mood"":""surreal"",
+  ""texture"":""textured"",
+  ""subject"":""art installation"",
+  ""action"":""spectating"",
+  ""style_or_type"":""70s photograph"",
+  ""place"":""museum hall"",
+  ""time"":""70s"",
+  ""parameters"":""kodak portra"",
+  ""tension_note"":""""
+}"

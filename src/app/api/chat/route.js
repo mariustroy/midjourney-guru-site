@@ -1,16 +1,23 @@
 /**
- * Midjourney Guru backend endpoint
+ * Midjourney Guru – API route (App Router)
  * Path:  src/app/api/chat/route.js
  */
 
+import { readFileSync } from "fs";
 import { NextResponse } from "next/server";
 
+/* ---------- 0.  Load your knowledge files once per cold‑start ---------- */
+const mjGuide  = readFileSync("knowledge/MT_Guide.txt",  "utf8");
+const prompts  = readFileSync("knowledge/MT_Prompts.csv",   "utf8");
+const captions = readFileSync("knowledge/MT_Captions.csv",  "utf8");
+// Add more files the same way, slice below if large.
+
+/* ---------- 1.  POST handler ---------- */
 export async function POST(request) {
   try {
-    /* ---------- 1. Read user messages ---------- */
-    const { messages } = await request.json();   // array of {role, content}
+    const { messages } = await request.json();  // user + assistant history
 
-    /* ---------- 2. System prompt ---------- */
+    /* ---------- 2.  Core system prompt ---------- */
     const systemPrompt = `
 You are Midjourney Guru, a Midjourney copilot that speaks with the concise, spirited tone of Marius Troy.
 
@@ -28,25 +35,28 @@ You are Midjourney Guru, a Midjourney copilot that speaks with the concise, sp
 
 — ALWAYS answer in Marius Troy’s voice:
    • Short, spirited sentences. 
-   • Use one vivid adjective (“shimmering”, “velvet‑dark”) not three.
-   • Maximum one emoji per answer; never at the start.
-   • No hashtags.
+   • One vivid adjective (“shimmering”, “velvet‑dark”) not three.
+   • Maximum one emoji per answer; never at the start. No hashtags.
 
 — If user asks a general Midjourney question, answer first;
   then offer a “Quick prompt tweak” if relevant.
 `;
 
-    /* ---------- 3. Build the OpenAI payload ---------- */
+    /* ---------- 3.  Build payload with knowledge injected ---------- */
     const payload = {
       model: "gpt-4o-mini",
       messages: [
         { role: "system", content: systemPrompt },
+        /* Inject the knowledge files here (truncate to keep request small) */
+        { role: "system", content: mjGuide.slice(0, 12000) },
+        { role: "system", content: prompts.slice(0, 8000) },
+        { role: "system", content: captions.slice(0, 8000) },
+        /* finally add the conversation so far */
         ...messages
       ]
-      // stream is OFF for now (simpler)
     };
 
-    /* ---------- 4. Call OpenAI Chat Completions ---------- */
+    /* ---------- 4.  Call OpenAI ---------- */
     const openaiRes = await fetch(
       "https://api.openai.com/v1/chat/completions",
       {
@@ -60,16 +70,14 @@ You are Midjourney Guru, a Midjourney copilot that speaks with the concise, sp
     );
 
     if (!openaiRes.ok) {
-      const errText = await openaiRes.text();
-      return new NextResponse(errText, { status: 500 });
+      const err = await openaiRes.text();
+      return new NextResponse(err, { status: 500 });
     }
 
-    /* ---------- 5. Return JSON back to the client ---------- */
     const data = await openaiRes.json();
     return NextResponse.json(data);
 
-  } catch (err) {
-    /* Catch any unexpected error */
-    return new NextResponse(String(err), { status: 500 });
+  } catch (e) {
+    return new NextResponse(String(e), { status: 500 });
   }
 }
