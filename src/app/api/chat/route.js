@@ -7,15 +7,12 @@ import { readFileSync } from "fs";
 import { join } from "path";
 import { NextResponse } from "next/server";
 
-/* ---------- 0. Helper: absolute path under /public ---------- */
+/* ---------- Helper: absolute path under /public ---------- */
 const root = process.cwd();
-const read = (file) => readFileSync(join(root, "public", "knowledge", file), "utf8");
+const read = (file) =>
+  readFileSync(join(root, "public", "knowledge", file), "utf8");
 
-/* ---------- 0.  Helper to resolve absolute path ---------- */
-const root = process.cwd();
-const read = (p) => readFileSync(join(root, p), "utf8");
-
-/* ---------- 1.  Load knowledge files (trim to stay small) ---------- */
+/* ---------- Load knowledge files (trim to stay small) ---------- */
 const mjGuide  = read("MT_Guide.txt").slice(0, 12000);
 const prompts  = read("MT_Prompts.csv").slice(0, 8000);
 const captions = read("MT_Captions.csv").slice(0, 8000);
@@ -24,9 +21,8 @@ export async function POST(request) {
   try {
     const { messages } = await request.json();
 
-    /* ---------- 2.  SYSTEM PROMPT ---------- */
+    /* ---------- SYSTEM PROMPT ---------- */
     const systemPrompt = `
-──────────────── SYSTEM PROMPT START ────────────────
 You are Midjourney Guru, a Midjourney copilot that speaks with the concise, spirited tone of Marius Troy.
 
 — When the user submits an idea, return:
@@ -48,10 +44,9 @@ You are Midjourney Guru, a Midjourney copilot that speaks with the concise, sp
 
 — If user asks a general Midjourney question, answer first;
   then offer a “Quick prompt tweak” if relevant.
-───────────────── SYSTEM PROMPT END ─────────────────
 `.trim();
 
-    /* ---------- 3.  Build OpenAI payload ---------- */
+    /* ---------- Build OpenAI payload ---------- */
     const payload = {
       model: "gpt-4o-mini",
       messages: [
@@ -59,29 +54,29 @@ You are Midjourney Guru, a Midjourney copilot that speaks with the concise, sp
         { role: "system", content: mjGuide },
         { role: "system", content: prompts },
         { role: "system", content: captions },
-        ...messages
-      ]
+        ...messages,
+      ],
     };
 
-    /* ---------- 4.  Call OpenAI ---------- */
-    const openaiRes = await fetch(
+    /* ---------- Call OpenAI ---------- */
+    const res = await fetch(
       "https://api.openai.com/v1/chat/completions",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
+          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
       }
     );
 
-    if (!openaiRes.ok) {
-      const err = await openaiRes.text();
+    if (!res.ok) {
+      const err = await res.text();
       return new NextResponse(err, { status: 500 });
     }
 
-    const data = await openaiRes.json();
+    const data = await res.json();
     return NextResponse.json(data);
 
   } catch (e) {
