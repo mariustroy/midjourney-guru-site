@@ -7,14 +7,18 @@ import { readFileSync } from "fs";
 import { join } from "path";
 import { NextResponse } from "next/server";
 
+/* ---------- 0. Helper: absolute path under /public ---------- */
+const root = process.cwd();
+const read = (file) => readFileSync(join(root, "public", "knowledge", file), "utf8");
+
 /* ---------- 0.  Helper to resolve absolute path ---------- */
 const root = process.cwd();
 const read = (p) => readFileSync(join(root, p), "utf8");
 
 /* ---------- 1.  Load knowledge files (trim to stay small) ---------- */
-const mjGuide  = read("knowledge/MT_Guide.txt").slice(0, 12000);
-const prompts  = read("knowledge/MT_Prompts.csv").slice(0, 8000);
-const captions = read("knowledge/MT_Captions.csv").slice(0, 8000);
+const mjGuide  = read("MT_Guide.txt").slice(0, 12000);
+const prompts  = read("MT_Prompts.csv").slice(0, 8000);
+const captions = read("MT_Captions.csv").slice(0, 8000);
 
 export async function POST(request) {
   try {
