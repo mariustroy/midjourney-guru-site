@@ -1,24 +1,28 @@
 /**
- * Midjourney Guru – API route (App Router)
+ * Midjourney Guru – API route (App Router)
  * Path:  src/app/api/chat/route.js
  */
 
 import { readFileSync } from "fs";
+import { join } from "path";
 import { NextResponse } from "next/server";
 
-/* ---------- 0.  Load your knowledge files once per cold‑start ---------- */
-const mjGuide  = readFileSync("knowledge/MT_Guide.txt",  "utf8");
-const prompts  = readFileSync("knowledge/MT_Prompts.csv",   "utf8");
-const captions = readFileSync("knowledge/MT_Captions.csv",  "utf8");
-// Add more files the same way, slice below if large.
+/* ---------- 0.  Helper to resolve absolute path ---------- */
+const root = process.cwd();
+const read = (p) => readFileSync(join(root, p), "utf8");
 
-/* ---------- 1.  POST handler ---------- */
+/* ---------- 1.  Load knowledge files (trim to stay small) ---------- */
+const mjGuide  = read("knowledge/MT_Guide.txt").slice(0, 12000);
+const prompts  = read("knowledge/MT_Prompts.csv").slice(0, 8000);
+const captions = read("knowledge/MT_Captions.csv").slice(0, 8000);
+
 export async function POST(request) {
   try {
-    const { messages } = await request.json();  // user + assistant history
+    const { messages } = await request.json();
 
-    /* ---------- 2.  Core system prompt ---------- */
+    /* ---------- 2.  SYSTEM PROMPT ---------- */
     const systemPrompt = `
+──────────────── SYSTEM PROMPT START ────────────────
 You are Midjourney Guru, a Midjourney copilot that speaks with the concise, spirited tone of Marius Troy.
 
 — When the user submits an idea, return:
@@ -40,18 +44,17 @@ You are Midjourney Guru, a Midjourney copilot that speaks with the concise, sp
 
 — If user asks a general Midjourney question, answer first;
   then offer a “Quick prompt tweak” if relevant.
-`;
+───────────────── SYSTEM PROMPT END ─────────────────
+`.trim();
 
-    /* ---------- 3.  Build payload with knowledge injected ---------- */
+    /* ---------- 3.  Build OpenAI payload ---------- */
     const payload = {
       model: "gpt-4o-mini",
       messages: [
         { role: "system", content: systemPrompt },
-        /* Inject the knowledge files here (truncate to keep request small) */
-        { role: "system", content: mjGuide.slice(0, 12000) },
-        { role: "system", content: prompts.slice(0, 8000) },
-        { role: "system", content: captions.slice(0, 8000) },
-        /* finally add the conversation so far */
+        { role: "system", content: mjGuide },
+        { role: "system", content: prompts },
+        { role: "system", content: captions },
         ...messages
       ]
     };
