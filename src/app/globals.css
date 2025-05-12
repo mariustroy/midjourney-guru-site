@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import "tailwindcss";
 
 :root {
@@ -14,7 +18,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #131B0E;
     --foreground: #ededed;
   }
 }
@@ -23,4 +27,27 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+h1 {
+	font-size: 44px;
+}
+
+.chat-bubble {
+display: block; 
+padding: 16px;
+border-radius: 24px;
+max-width: 80%;
+clear: both;
+}
+.chat-bubble.from-user {
+	background-color: #1C261D;
+	max-width: 80%;
+	float: right;
+	clear: both;
+}
+
+#inputmessage{
+max-width: 95%;
+margin-left: auto;
+margin-right: auto;
 }
