@@ -56,3 +56,9 @@ margin-right: auto;
 	padding-left: 16px !important;
 	
 }
+.break{
+	color: #e6e3cc;
+	clear: left;
+	display: block;
+	margin-top: 16px;
+}

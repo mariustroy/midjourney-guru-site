@@ -37,7 +37,7 @@ export default function Home() {
     setInput("");
     resizeTextarea();
 
-    /* 2. call backend (non-stream for simplicity) */
+    /* 2. call backend */
     const res = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -45,7 +45,8 @@ export default function Home() {
         messages: newMsgs.map(m =>
           m.id === 0
             ? { role: "user", content: m.text }
-            : { role: "assistant", content: m.text })
+            : { role: "assistant", content: m.text }
+        )
       })
     });
 
@@ -67,8 +68,20 @@ export default function Home() {
   }
 
   return (
-    <main style={{ maxWidth: 640, margin: "40px auto", fontFamily: "sans-serif" }}>
-      <header className="w-full py-4 flex justify-center">
+    <main
+  style={{
+    maxWidth: 640,
+    margin: "0 auto",
+    fontFamily: "sans-serif",
+
+    // ADD THESE THREE LINES ↓
+    display: "flex",
+    flexDirection: "column",
+    height: "100vh",
+    paddingBottom: "2rem", 
+  }}
+>
+      <header className="w-full py-4 flex justify-center" style={{ flexShrink: 0 }}>
         <Link href="/" className="flex items-center gap-2">
           <Image
             src="/images/logo.svg"
@@ -80,57 +93,102 @@ export default function Home() {
         </Link>
       </header>
 
-      {/* Chat window */}
-      <div
-        style={{
-          border: "0px solid #eee",
-          borderRadius: 8,
-          padding: 10,
-          height: 500,
-          overflowY: "auto",
-          marginBottom: 20,
-        }}
-      >
-        {messages.map((m, i) => (
-          <div key={i}>
-            <div className={`chat-bubble ${m.id === 0 ? "from-user" : "from-bot"}`}>
-  <ReactMarkdown>{m.text}</ReactMarkdown>
-</div>
+   {/* Chat window */}
+<div
+  style={{
+    border: "0px solid #eee",
+    borderRadius: 8,
+    padding: 10,
 
-            {m.id === 1 && (
-              feedbackStatus[i] === "submitted" ? (
-                <p className="text-gray-400 text-sm my-1 feedbacktext">
-                  Thank you! This will help us make Guru even better.
-                </p>
-              ) : feedbackStatus[i] === "loading" ? (
-                <p className="text-gray-500 text-sm my-1 feedbacktext">
-                  Submitting…
-                </p>
-              ) : (
-                <div className="mt-1 flex gap-2 text-gray-400 text-sm feedbacktext">
-                  <button
-                    onClick={() => rate(i, 1)}
-                    disabled={feedbackStatus[i] === "loading"}
-                  >
-                    👍
-                  </button>
-                  <button style={{marginLeft: 8 + 'px'}}
-                    onClick={() => rate(i, -1)}
-                    disabled={feedbackStatus[i] === "loading"}
-                  >
-                    👎
-                  </button>
-                </div>
-              )
-            )}
-          </div>
-        ))}
+    // REPLACE height with flex:1
+    flex: 1,
+    overflowY: "auto",
+    marginBottom: 20,
+  }}
+>
+        {messages.map((m, i) => {
+          const isPrompt = m.id === 1 && m.text.startsWith("/imagine");
+          return (
+            <div key={i}>
+              <div className={`chat-bubble ${m.id === 0 ? "from-user" : "from-bot"}`}>
+                {isPrompt ? (
+                  // Simple prompt + gray-parameters formatter
+                  (() => {
+                    // Split base vs. all "--" params
+                    const [base, ...params] = m.text.split(/--/);
+                    return (
+                      <div>
+                        {base.trim()}{" "}
+                        {params.map((p, idx) => (
+                          <span key={idx} className="text-gray-400 mx-1 break">
+                            --{p.trim()}
+                          </span>
+                        ))}
+                      </div>
+                    );
+                  })()
+                ) : (
+                  /* Render everything else as Markdown to preserve line breaks */
+                  <ReactMarkdown>{m.text}</ReactMarkdown>
+                )}
+              </div>
+
+              {m.id === 1 && (
+                feedbackStatus[i] === "submitted" ? (
+                  <p className="text-gray-400 text-sm my-1 feedbacktext">
+                    Thank you! This will help us make Guru even better.
+                  </p>
+                ) : feedbackStatus[i] === "loading" ? (
+                  <p className="text-gray-500 text-sm my-1 feedbacktext">
+                    Submitting…
+                  </p>
+                ) : (
+                  <div className="mt-1 flex gap-2 text-gray-400 text-sm feedbacktext">
+                    <button
+                      onClick={() => rate(i, 1)}
+                      disabled={feedbackStatus[i] === "loading"}
+                    >
+                      👍
+                    </button>
+                    <button
+                      style={{ marginLeft: "8px" }}
+                      onClick={() => rate(i, -1)}
+                      disabled={feedbackStatus[i] === "loading"}
+                    >
+                      👎
+                    </button>
+                  </div>
+                )
+              )}
+            </div>
+          );
+        })}
 
         <div ref={bottomRef} />
       </div>
 
-      {/* Input form (converted to auto-resizing textarea) */}
-      <form id="inputmessage" onSubmit={sendMessage} style={{ display: "flex" }}>
+      {/* Input form (auto-resizing textarea) */}
+      <form
+  id="inputmessage"
+  onSubmit={sendMessage}
+  style={{
+    display: "flex",
+    flexShrink: 0,
+    width: "100%",
+
+    // — stick this form to the bottom of the viewport
+    position: "sticky",
+    bottom: 0,
+    zIndex: 10,
+
+    // — match your textarea background so it looks seamless
+   
+
+    // — add a little vertical padding and safe-area inset for mobile keyboards
+    paddingTop: "0.5rem",
+    paddingBottom: "env(safe-area-inset-bottom, 1rem)",
+  }}
+>
         <textarea
           ref={textareaRef}
           value={input}
@@ -138,12 +196,12 @@ export default function Home() {
             setInput(e.target.value);
             resizeTextarea();
           }}
-onKeyDown={(e) => {
-       if (e.key === "Enter" && !e.shiftKey) {
-         e.preventDefault();   // don’t insert newline
-         sendMessage(e);       // submit
-       }
-     }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              sendMessage(e);
+            }
+          }}
           rows={1}
           placeholder="Ask me anything about Midjourney…"
           style={{
@@ -154,6 +212,7 @@ onKeyDown={(e) => {
             borderRadius: 12,
             resize: "none",
             overflow: "hidden",
+            width: "100%",  
           }}
         />
       </form>
