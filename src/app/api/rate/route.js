@@ -1,5 +1,11 @@
+import { createClient } from "@supabase/supabase-js";
+const supa = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_KEY
+);
+
 export async function POST(request) {
   const { message, score } = await request.json();
-  console.log("FEEDBACK", score, message); // appears in Vercel logs
+  await supa.from("feedback").insert({ text: message, score });
   return new Response("ok");
 }

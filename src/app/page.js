@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
+const [feedbackStatus, setFeedbackStatus] = useState({});
   const [messages, setMessages] = useState([]);   // {id:0|1, text:""}
   const [input, setInput] = useState("");
   const bottomRef = useRef(null);
@@ -70,26 +71,36 @@ export default function Home() {
     marginBottom: 20,
   }}
 >
-  {messages.map((m, i) => (
-    <>
-      <p
-        key={`msg-${i}`}
-        className={`chat-bubble ${m.id === 0 ? "from-user" : "from-bot"}`}
-      >
-        {m.text}
-      </p>
+{messages.map((m, i) => (
+  <div key={i}>
+    <p className={`chat-bubble ${m.id === 0 ? "from-user" : "from-bot"}`}>
+      {m.text}
+    </p>
 
-      {m.id === 1 && (
-        <div
-          key={`fb-${i}`}
-          className="mt-1 flex gap-2 text-gray-400 text-sm"
-        >
-          <button onClick={() => rate(i, 1)}>👍</button>
-          <button onClick={() => rate(i, -1)}>👎</button>
+    {m.id === 1 && (
+      feedbackStatus[i] === "submitted" ? (
+        <p className="text-gray-400 text-sm my-1 feedbacktext">Thank you! This will help us make Guru even better.</p>
+      ) : feedbackStatus[i] === "loading" ? (
+        <p className="text-gray-500 text-sm my-1 feedbacktext">Submitting…</p>
+      ) : (
+        <div className="mt-1 flex gap-2 text-gray-400 text-sm">
+          <button
+            onClick={() => rate(i, 1)}
+            disabled={feedbackStatus[i] === "loading"}
+          >
+            👍
+          </button>
+          <button
+            onClick={() => rate(i, -1)}
+            disabled={feedbackStatus[i] === "loading"}
+          >
+            👎
+          </button>
         </div>
-      )}
-    </>
-  ))}
+      )
+    )}
+  </div>
+))}
 
   <div ref={bottomRef} />
 </div>
@@ -110,20 +121,23 @@ export default function Home() {
     </main>
   );
 async function rate(index, score) {
-  const message = messages[index].text;
+  // 1. mark as loading
+  setFeedbackStatus((prev) => ({ ...prev, [index]: "loading" }));
 
-  // Optimistically grey-out the buttons
-  setMessages((prev) =>
-    prev.map((m, i) =>
-      i === index ? { ...m, rated: score } : m
-    )
-  );
-
-  // POST to /api/rate
-  await fetch("/api/rate", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ message, score }),
-  });
-}
-}
+  try {
+    await fetch("/api/rate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message: messages[index].text,
+        score,
+      }),
+    });
+    // 2. on success, mark as submitted
+    setFeedbackStatus((prev) => ({ ...prev, [index]: "submitted" }));
+  } catch (e) {
+    console.error("Rate error", e);
+    // revert to idle on error
+    setFeedbackStatus((prev) => ({ ...prev, [index]: "idle" }));
+  }
+}}
