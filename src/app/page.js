@@ -59,29 +59,40 @@ export default function Home() {
   </a>
 </header>
 
-      {/* Chat window */}
-      <div
-        style={{
-          border: "0px solid #eee",
-          borderRadius: 8,
-          padding: 10,
-          height: 500,
-          overflowY: "auto",
-          marginBottom: 20
-        }}
-      >
-        {messages.map((m, i) => (
-          <p
-  key={i}
-  className={`chat-bubble ${
-    m.id === 0 ? "from-user" : "from-bot"
-  }`}
+     {/* Chat window */}
+<div
+  style={{
+    border: "0px solid #eee",
+    borderRadius: 8,
+    padding: 10,
+    height: 500,
+    overflowY: "auto",
+    marginBottom: 20,
+  }}
 >
-  {m.id === 0 ? "" : ""} {m.text}
-</p>
-        ))}
-        <div ref={bottomRef} />
-      </div>
+  {messages.map((m, i) => (
+    <>
+      <p
+        key={`msg-${i}`}
+        className={`chat-bubble ${m.id === 0 ? "from-user" : "from-bot"}`}
+      >
+        {m.text}
+      </p>
+
+      {m.id === 1 && (
+        <div
+          key={`fb-${i}`}
+          className="mt-1 flex gap-2 text-gray-400 text-sm"
+        >
+          <button onClick={() => rate(i, 1)}>👍</button>
+          <button onClick={() => rate(i, -1)}>👎</button>
+        </div>
+      )}
+    </>
+  ))}
+
+  <div ref={bottomRef} />
+</div>
 
       {/* Input form */}
       <form id="inputmessage" onSubmit={sendMessage} style={{ display: "flex" }}>
@@ -98,4 +109,21 @@ export default function Home() {
       </form>
     </main>
   );
+async function rate(index, score) {
+  const message = messages[index].text;
+
+  // Optimistically grey-out the buttons
+  setMessages((prev) =>
+    prev.map((m, i) =>
+      i === index ? { ...m, rated: score } : m
+    )
+  );
+
+  // POST to /api/rate
+  await fetch("/api/rate", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message, score }),
+  });
+}
 }
