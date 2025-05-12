@@ -11,6 +11,15 @@ export default function Home() {
   const [input, setInput] = useState("");
   const bottomRef = useRef(null);
   const textareaRef = useRef(null);
+  
+  useEffect(() => {
+  const setVh = () => {
+    document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+  };
+  window.addEventListener('resize', setVh);
+  setVh();
+  return () => window.removeEventListener('resize', setVh);
+}, []);
 
   /* auto-scroll to newest message */
   useEffect(() => {
@@ -77,7 +86,7 @@ export default function Home() {
     // ADD THESE THREE LINES ↓
     display: "flex",
     flexDirection: "column",
-    height: "100vh",
+    height: "100dvh",
     paddingBottom: "env(safe-area-inset-bottom, 1rem)",
   }}
 >
