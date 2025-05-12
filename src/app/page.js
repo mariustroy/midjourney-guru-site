@@ -94,6 +94,10 @@ export default function Home() {
      position: "sticky",
      top: "env(safe-area-inset-top, 0)",  // respects notch/sensor area
      zIndex: 10,
+     maxWidth: 640,
+     left: "50%",
+          transform: "translateX(-50%)",
+          width: "100%",
      flexShrink: 0, }}>
         <Link href="/" className="flex items-center gap-2">
           <Image
@@ -112,12 +116,15 @@ export default function Home() {
     border: "0px solid #eee",
     borderRadius: 8,
     padding: 10,
+    position: "fixed",
+          top:   "calc(env(safe-area-inset-top,0) + 56px)",  // header height
+          bottom:"calc(env(safe-area-inset-bottom,0) + 64px)",// form height
 
     // REPLACE height with flex:1
     flex: 1,
     overflowY: "auto",
-    marginBottom: 20,
-    paddingBottom: "calc(20px + env(safe-area-inset-bottom, 1rem))",
+    maxWidth:   640,
+         margin:     "0 auto",
   }}
 >
         {messages.map((m, i) => {
