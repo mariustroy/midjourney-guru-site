@@ -49,12 +49,20 @@ export default function Home() {
 
   return (
     <main style={{ maxWidth: 640, margin: "40px auto", fontFamily: "sans-serif" }}>
-      <h1 style={{ textAlign: "center" }}>Midjourney Guru</h1>
+      <header className="w-full py-4 flex justify-center">
+  <a href="/" className="flex items-center gap-2">
+    <img
+      src="/images/logo.svg"
+      alt="Midjourney Guru logo"
+      className="h-8 w-auto"
+    />
+  </a>
+</header>
 
       {/* Chat window */}
       <div
         style={{
-          border: "1px solid #eee",
+          border: "0px solid #eee",
           borderRadius: 8,
           padding: 10,
           height: 500,
@@ -64,23 +72,19 @@ export default function Home() {
       >
         {messages.map((m, i) => (
           <p
-            key={i}
-            style={{
-              background: m.id === 0 ? "#e0f7fa" : "#fce4ec",
-              padding: 8,
-              borderRadius: 6,
-              whiteSpace: "pre-wrap",
-              margin: "6px 0"
-            }}
-          >
-            {m.id === 0 ? "🧑 " : "🤖 "} {m.text}
-          </p>
+  key={i}
+  className={`chat-bubble ${
+    m.id === 0 ? "from-user" : "from-bot"
+  }`}
+>
+  {m.id === 0 ? "" : ""} {m.text}
+</p>
         ))}
         <div ref={bottomRef} />
       </div>
 
       {/* Input form */}
-      <form onSubmit={sendMessage} style={{ display: "flex" }}>
+      <form id="inputmessage" onSubmit={sendMessage} style={{ display: "flex" }}>
         <input
           value={input}
           onChange={e => setInput(e.target.value)}
@@ -88,21 +92,9 @@ export default function Home() {
           style={{
             flex: 1,
             padding: 10,
-            border: "1px solid #ccc",
-            borderRadius: 6
+            border: "1px solid #242724", background: "#0D170C",borderRadius: 12
           }}
         />
-        <button
-          type="submit"
-          style={{
-            marginLeft: 10,
-            padding: "0 24px",
-            borderRadius: 6,
-            cursor: "pointer"
-          }}
-        >
-          Send
-        </button>
       </form>
     </main>
   );
