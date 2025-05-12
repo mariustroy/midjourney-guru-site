@@ -17,6 +17,7 @@ export const metadata = {
   description: "Your personal Midjourney co-pilot —craft perfect prompts in seconds.",
   icons: {
     icon:       "/favicon.ico",           // next will emit <link rel="icon" href=…>
+    shortcut:   "/favicon.ico",           // optional
     // you can also specify `other: [{ rel, url }, …]`
   },
   openGraph: {
