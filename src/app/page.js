@@ -195,8 +195,7 @@ export default function Home() {
     position: "sticky",
     bottom: 0,
     zIndex: 10,
-
-    background: "#0D170C",
+    margin: "20px",
     padding: "2rem 0  env(safe-area-inset-bottom, 1rem) 0",
   }}
 >
