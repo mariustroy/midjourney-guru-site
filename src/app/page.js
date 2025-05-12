@@ -1,5 +1,7 @@
 "use client";                       // ⭐️  tells Next.js this is a Client Component
 
+import Link from "next/link"; 
+import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
@@ -51,13 +53,16 @@ const [feedbackStatus, setFeedbackStatus] = useState({});
   return (
     <main style={{ maxWidth: 640, margin: "40px auto", fontFamily: "sans-serif" }}>
       <header className="w-full py-4 flex justify-center">
-  <a href="/" className="flex items-center gap-2">
-    <img
+  <Link href="/" className="flex items-center gap-2">
+    <Image
       src="/images/logo.svg"
       alt="Midjourney Guru logo"
+      width={32}
+      height={32}
       className="h-8 w-auto"
     />
-  </a>
+   
+  </Link>
 </header>
 
      {/* Chat window */}
