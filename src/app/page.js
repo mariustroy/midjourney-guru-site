@@ -78,10 +78,14 @@ export default function Home() {
     display: "flex",
     flexDirection: "column",
     height: "100vh",
-    paddingBottom: "2rem", 
+    paddingBottom: "env(safe-area-inset-bottom, 1rem)",
   }}
 >
-      <header className="w-full py-4 flex justify-center" style={{ flexShrink: 0 }}>
+      <header className="w-full py-4 flex justify-center" style={{
+     position: "sticky",
+     top: "env(safe-area-inset-top, 0)",  // respects notch/sensor area
+     zIndex: 10,
+     flexShrink: 0, }}>
         <Link href="/" className="flex items-center gap-2">
           <Image
             src="/images/logo.svg"
@@ -104,6 +108,7 @@ export default function Home() {
     flex: 1,
     overflowY: "auto",
     marginBottom: 20,
+    paddingBottom: "calc(20px + env(safe-area-inset-bottom, 1rem))",
   }}
 >
         {messages.map((m, i) => {

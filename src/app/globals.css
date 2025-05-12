@@ -53,8 +53,7 @@ margin-right: auto;
 }
 
 .feedbacktext{
-	padding-left: 16px !important;
-	
+	margin-left: 16px;
 }
 .break{
 	color: #e6e3cc;
