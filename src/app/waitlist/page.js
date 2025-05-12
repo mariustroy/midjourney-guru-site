@@ -34,7 +34,7 @@ export default function Waitlist() {
       className="max-w-md mx-auto mt-16 flex flex-col gap-4"
     >
       <h1 className="text-2xl font-semibold text-center">
-        Midjourney&nbsp;Guru&nbsp;— Wait‑List
+        Midjourney&nbsp;Guru&nbsp;— Waitlist
       </h1>
 
       <input
@@ -67,7 +67,7 @@ export default function Waitlist() {
         className="bg-cyan-600 text-white py-2 rounded disabled:opacity-50"
         disabled={!form.email}
       >
-        Join Wait‑List
+        Join Waitlist
       </button>
     </form>
   );
