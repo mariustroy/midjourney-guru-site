@@ -77,38 +77,35 @@ export default function Home() {
   }
 
   return (
-    <main
+<main
   style={{
     maxWidth: 640,
     margin: "0 auto",
     fontFamily: "sans-serif",
-
-    // ADD THESE THREE LINES ↓
     display: "flex",
     flexDirection: "column",
-    height: "100dvh",
-    paddingBottom: "env(safe-area-inset-bottom, 1rem)",
+    height: "100vh",
   }}
 >
-      <header className="w-full py-4 flex justify-center" style={{
-     position: "sticky",
-     top: "env(safe-area-inset-top, 0)",  // respects notch/sensor area
-     zIndex: 10,
-     maxWidth: 640,
-     left: "50%",
-          transform: "translateX(-50%)",
-          width: "100%",
-     flexShrink: 0, }}>
-        <Link href="/" className="flex items-center gap-2">
-          <Image
-            src="/images/logo.svg"
-            alt="Midjourney Guru logo"
-            width={32}
-            height={32}
-            className="h-8 w-auto"
-          />
-        </Link>
-      </header>
+      <header
+  className="w-full py-4 flex justify-center"
+  style={{
+    position: "sticky",
+    top: 0,
+    zIndex: 10,
+    flexShrink: 0,
+  }}
+>
+  <Link href="/" className="flex items-center gap-2">
+    <Image
+      src="/images/logo.svg"
+      alt="Midjourney Guru logo"
+      width={32}
+      height={32}
+      className="h-8 w-auto"
+    />
+  </Link>
+</header>
 
    {/* Chat window */}
 <div
@@ -116,15 +113,13 @@ export default function Home() {
     border: "0px solid #eee",
     borderRadius: 8,
     padding: 10,
-    position: "fixed",
-          top:   "calc(env(safe-area-inset-top,0) + 56px)",  // header height
-          bottom:"calc(env(safe-area-inset-bottom,0) + 64px)",// form height
 
-    // REPLACE height with flex:1
-    flex: 1,
+    flex: 1,               // fill available vertical space
     overflowY: "auto",
-    maxWidth:   640,
-         margin:     "0 auto",
+    marginBottom: 0,       // footer will overlap by sticky
+
+    // bottom padding so messages don’t hide under the input
+    paddingBottom: "calc(1rem + env(safe-area-inset-bottom, 0))",
   }}
 >
         {messages.map((m, i) => {
@@ -197,17 +192,12 @@ export default function Home() {
     flexShrink: 0,
     width: "100%",
 
-    // — stick this form to the bottom of the viewport
     position: "sticky",
     bottom: 0,
     zIndex: 10,
 
-    // — match your textarea background so it looks seamless
-   
-
-    // — add a little vertical padding and safe-area inset for mobile keyboards
-    paddingTop: "0.5rem",
-    paddingBottom: "env(safe-area-inset-bottom, 1rem)",
+    background: "#0D170C",
+    padding: "2rem 0  env(safe-area-inset-bottom, 1rem) 0",
   }}
 >
         <textarea
