@@ -83,7 +83,7 @@ margin-right: auto;
     color: #FFFFFF;
 }
 
-.starterbutton:hover{
+.starterbutton.hover{
 	    background-color: #1C261D;
 }
 
