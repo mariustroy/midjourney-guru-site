@@ -1,35 +1,33 @@
-// src/app/login/page.js
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { createClient } from "@supabase/supabase-js";
+
+const supa = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
 
 export default function Login() {
-  const [pw, setPw] = useState("");
-  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [sent, setSent] = useState(false);
 
-  async function submit(e) {
+  async function sendLink(e) {
     e.preventDefault();
-    if (pw === process.env.NEXT_PUBLIC_GURU_PW) {
-      document.cookie = "guruAuth=1; path=/";
-      router.push("/");
-    } else {
-      alert("Wrong password 🙅‍♂️");
-    }
+    const { error } = await supa.auth.signInWithOtp({ email });
+    if (!error) setSent(true);
   }
 
+  if (sent) return <p>Magic link sent! Check your inbox.</p>;
+
   return (
-    <form onSubmit={submit} className="max-w-xs mx-auto mt-40 flex flex-col gap-3">
+    <form onSubmit={sendLink} className="max-w-xs mx-auto mt-40 flex flex-col gap-3">
       <h1 className="text-xl text-center">Beta access</h1>
       <input
-        type="password"
+        type="email" required placeholder="Email"
         className="border p-2 rounded"
-        placeholder="Password"
-        value={pw}
-        onChange={(e) => setPw(e.target.value)}
+        value={email} onChange={e=>setEmail(e.target.value)}
       />
-      <button className="bg-cyan-600 text-white py-2 rounded" type="submit">
-        Enter
-      </button>
+      <button className="bg-cyan-600 text-white py-2 rounded">Send link</button>
     </form>
   );
 }

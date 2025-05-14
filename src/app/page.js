@@ -11,6 +11,38 @@ export default function Home() {
   const [input, setInput] = useState("");
   const bottomRef = useRef(null);
   const textareaRef = useRef(null);
+  const [isTyping, setIsTyping] = useState(false);
+  
+  /* ---------- static help markdown ---------- */
+const HELP_RESPONSE = `
+**Midjourney Guru – Quick Guide**  
+
+1. **Ask anything** → _“sun‑drenched brutalist tower”_  
+2. **Shift + Enter** → newline in the box  
+3. **👍 / 👎** under replies → trains the bot  
+4. **Reference tips**  
+   • Warm prompt → add a cold photo for tension  
+   • Use \`--iw\` 0.25 – 0.5 so the ref doesn’t overpower  
+5. **Shortcuts**  
+   \`/imagine\` auto‑added – just type the idea  
+   \`--v7\` is default if you omit version  
+6. **Need more?** Ping me on IG @ mariustroy 👋
+`;
+ 
+/* ---------- onboarding popup ---------- */
+const [showIntro, setShowIntro] = useState(true);   // always start visible
+
+// ⬇️  comment‑out this block while you’re designing
+// useEffect(() => {
+//   const seen = localStorage.getItem("guruIntroSeen");
+//   if (seen) setShowIntro(false);
+// }, []);
+
+function closeIntro() {
+  setShowIntro(false);
+  // leave the line below commented for now
+  // localStorage.setItem("guruIntroSeen", "1");
+}
   
   useEffect(() => {
   const setVh = () => {
@@ -45,6 +77,14 @@ export default function Home() {
     setMessages(newMsgs);
     setInput("");
     resizeTextarea();
+         // ② intercept the help command locally
+if (text.toLowerCase() === "help" || text.toLowerCase() === "/help") {
+   setMessages([...newMsgs, { id: 1, text: HELP_RESPONSE }]);
+   return;                        // skip backend
+ }
+    setIsTyping(true);          // ← show indicator
+    
+
 
     /* 2. call backend */
     const res = await fetch("/api/chat", {
@@ -61,6 +101,7 @@ export default function Home() {
 
     if (!res.ok) {
       setMessages([...newMsgs, { id: 1, text: "⚠️ Error from server." }]);
+      setIsTyping(false);
       return;
     }
 
@@ -70,6 +111,7 @@ export default function Home() {
 
     /* 4. add assistant message */
     setMessages([...newMsgs, { id: 1, text: botText }]);
+    setIsTyping(false);         // ← hide indicator
   }
 
   async function rate(index, score) {
@@ -127,27 +169,45 @@ export default function Home() {
           return (
             <div key={i}>
               <div className={`chat-bubble ${m.id === 0 ? "from-user" : "from-bot"}`}>
-                {isPrompt ? (
-                  // Simple prompt + gray-parameters formatter
-                  (() => {
-                    // Split base vs. all "--" params
-                    const [base, ...params] = m.text.split(/--/);
-                    return (
-                      <div>
-                        {base.trim()}{" "}
-                        {params.map((p, idx) => (
-                          <span key={idx} className="text-gray-400 mx-1 break">
-                            --{p.trim()}
-                          </span>
-                        ))}
-                      </div>
-                    );
-                  })()
-                ) : (
-                  /* Render everything else as Markdown to preserve line breaks */
-                  <ReactMarkdown>{m.text}</ReactMarkdown>
-                )}
-              </div>
+               {isPrompt ? (
+  // ----- Prompt parser: base • flags • suggested ref‑image -----
+  (() => {
+    // 1. Split the bot message by line‑breaks
+    const lines = m.text.split("\n").map((l) => l.trim()).filter(Boolean);
+
+    // 2. First line is always the base prompt (without flags)
+    const base = lines.shift();
+
+    // 3. Separate flag lines vs. the “Suggested ref‑image …” line
+    const flagLines = [];
+    let suggested = "";
+    lines.forEach((l) => {
+      if (l.startsWith("--")) flagLines.push(l);
+      else suggested = l;                 // assumes only one suggestion line
+    });
+
+    return (
+      <div>
+        {/* base prompt */}
+        {base}{" "}
+
+        {/* all flags inline */}
+        {flagLines.map((flag, idx) => (
+          <span key={idx} className="text-gray-400 mx-1">
+            {flag}
+          </span>
+        ))}
+
+        {/* line‑break then suggestion */}
+        {suggested && (
+          <div className="text-gray-400 mt-1">{suggested}</div>
+        )}
+      </div>
+    );
+  })()
+) : (
+  <ReactMarkdown>{m.text}</ReactMarkdown>
+)}              </div>
 
               {m.id === 1 && (
                 feedbackStatus[i] === "submitted" ? (
@@ -179,7 +239,14 @@ export default function Home() {
             </div>
           );
         })}
-
+{isTyping && (
+  <div className="chat-bubble from-bot flex items-center gap-2">
+<span className="typing-dot" style={{ animationDelay: "0s" }} />
+<span className="typing-dot" style={{ animationDelay: "0.15s" }} />
+<span className="typing-dot" style={{ animationDelay: "0.3s" }} />
+    <span className="text-sm text-gray-400">Guru is thinking…</span>
+  </div>
+)}
         <div ref={bottomRef} />
       </div>
 
@@ -226,6 +293,35 @@ export default function Home() {
           }}
         />
       </form>
+      <a
+  href="https://docs.google.com/forms/d/e/1FAIpQLScpfr6zzb0JBkTRkeEgzeU4eV6_b7SsX27q-nPLNMIiBQ1tDA/viewform?usp=header"    /* change to your form URL */
+  target="_blank"
+  rel="noreferrer"
+  className="fixed top-4 right-4 bg-black/70 text-white text-sm
+             py-2 px-3 rounded-full backdrop-blur z-40"
+>
+  💬 Feedback
+</a>
+      {showIntro && (
+  <div
+    className="fixed inset-0 bg-black/60 flex items-center justify-center z-50"
+  >
+    <div className="guruintro rounded-lg max-w-md p-6 shadow-xl text-center">
+      <h2 className="text-xl font-semibold mb-3">Welcome to Midjourney Guru! 🎨</h2>
+      <p className="text-sm leading-relaxed mb-4">
+        Ask me for a prompt idea, paste your own prompt for feedback,
+        or type <code>help</code> to see tips.<br />
+        Shift+Enter = newline • 👍 / 👎 trains the bot.
+      </p>
+      <button
+        onClick={closeIntro}
+        className="bg-white text-black py-2 px-4 rounded"
+      >
+        Got it
+      </button>
+    </div>
+  </div>
+)}
     </main>
   );
 }
