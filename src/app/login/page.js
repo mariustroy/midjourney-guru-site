@@ -15,47 +15,25 @@ export default function Login() {
   const [sent, setSent]  = useState(false);
 
   /* — redirect if already logged in OR if magic‑link just returned — */
-  useEffect(() => {
-    async function handleRedirect() {
-      // ① Check if magic‑link params are in the URL
-      const url = new URL(window.location.href);
-      const access_token  = url.searchParams.get("access_token");
-      const refresh_token = url.searchParams.get("refresh_token");
-
-      if (access_token && refresh_token) {
-        // store session cookie/localStorage
-        await supa.auth.setSession({ access_token, refresh_token });
-
-        // clean sensitive params from the URL
-        url.searchParams.delete("access_token");
-        url.searchParams.delete("refresh_token");
-        window.history.replaceState({}, "", url.pathname);
-
-        router.replace("/");     // go to Guru
-        return;
-      }
-
-      // ② Already logged‑in user hitting /login manually
-      const { data: { session } } = await supa.auth.getSession();
-      if (session) router.replace("/");
-    }
-    handleRedirect();
-  }, [router]);
+useEffect(() => {
+  supa.auth.getSession().then(({ data: { session } }) => {
+    if (session) router.replace("/");
+  });
+}, [router]);
 
   /* — send magic link — */
-  async function sendLink(e) {
-    e.preventDefault();
-    const { error } = await supa.auth.signInWithOtp({
-      email,
-      options: {
-        emailRedirectTo: `${
-          process.env.NEXT_PUBLIC_SITE_URL || window.location.origin
-        }/login`,
-      },
-    });
-    if (!error) setSent(true);
-  }
-
+async function sendLink(e) {
+  e.preventDefault();
+  const { error } = await supa.auth.signInWithOtp({
+    email,
+    options: {
+      emailRedirectTo: `${
+        process.env.NEXT_PUBLIC_SITE_URL || window.location.origin
+      }/auth/callback`,           // <── new target
+    },
+  });
+  if (!error) setSent(true);
+}
   /* — UI — */
   if (sent)
     return (
