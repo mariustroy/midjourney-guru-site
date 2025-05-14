@@ -13,6 +13,13 @@ export default function Home() {
   const textareaRef = useRef(null);
   const [isTyping, setIsTyping] = useState(false);
   
+  const STARTERS = [
+  "Give me a dream‑like cityscape prompt",
+  "Help me fix muddy colours in my prompt",
+  "Suggest a contrasting reference image",
+];
+const [showStarters, setShowStarters] = useState(true);
+  
   /* ---------- static help markdown ---------- */
 const HELP_RESPONSE = `
 **Midjourney Guru – Quick Guide**  
@@ -117,6 +124,17 @@ if (text.toLowerCase() === "help" || text.toLowerCase() === "/help") {
   async function rate(index, score) {
     // …your existing rate() implementation…
   }
+  
+  async function sendStarter(text) {
+  setShowStarters(false);         // hide chips after first click
+  setInput("");                   // clear the textarea
+  // call the existing sendMessage logic with a faux event
+  await sendMessage({
+    preventDefault: () => {},
+    target: { value: { trim: () => text } },
+  });
+}
+
 
   return (
 <main
