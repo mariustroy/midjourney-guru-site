@@ -3,17 +3,20 @@ import { cookies } from "next/headers";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 
 export async function GET(request) {
-  const { searchParams } = new URL(request.url);
-  const code = searchParams.get("code");          // Supabase sends ?code=...
+  const url = new URL(request.url);
+  const access_token  = url.searchParams.get("access_token");
+  const refresh_token = url.searchParams.get("refresh_token");
 
-  if (code) {
-    // server‑side client bound to response cookies
+  if (access_token && refresh_token) {
+    // Bind Supabase client to response cookies
     const supabase = createRouteHandlerClient({ cookies });
 
-    // exchange code → set sb-access-token / sb-refresh-token cookies
-    await supabase.auth.exchangeCodeForSession(code);
+    // Store session cookies (http‑only, secure)
+    await supabase.auth.setSession({ access_token, refresh_token });
   }
 
-  // always land users on the app root
-  return NextResponse.redirect(new URL("/", request.url));
+  // Strip the sensitive params from the URL and redirect to app root
+  url.searchParams.delete("access_token");
+  url.searchParams.delete("refresh_token");
+  return NextResponse.redirect(`${url.origin}/`);
 }
