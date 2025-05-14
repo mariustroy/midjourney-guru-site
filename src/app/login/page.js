@@ -1,5 +1,8 @@
 "use client";
-import { useState } from "react";
+"use client";
+
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { createClient } from "@supabase/supabase-js";
 
 const supa = createClient(
@@ -8,12 +11,27 @@ const supa = createClient(
 );
 
 export default function Login() {
+  /* ---------- hooks must be inside the component ---------- */
+  const router = useRouter();   // ← now safely inside
   const [email, setEmail] = useState("");
-  const [sent, setSent] = useState(false);
+  const [sent,  setSent]  = useState(false);
+
+  /* redirect if already logged in */
+  useEffect(() => {
+    supa.auth.getSession().then(({ data: { session } }) => {
+      if (session) router.replace("/");
+    });
+  }, [router]);
 
   async function sendLink(e) {
     e.preventDefault();
-    const { error } = await supa.auth.signInWithOtp({ email });
+    const { error } = await supa.auth.signInWithOtp({
+      email,
+      options: {
+        emailRedirectTo:
+          process.env.NEXT_PUBLIC_SITE_URL || window.location.origin,
+      },
+    });
     if (!error) setSent(true);
   }
 
