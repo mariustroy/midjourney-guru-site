@@ -78,6 +78,11 @@ margin-right: auto;
 	padding-left: 24px;
 }
 
+.starterbutton{
+	    background-color: #253326;
+    color: #FFFFFF;
+}
+
 .guruintro{
 	background-color: #131B0E;
 }
