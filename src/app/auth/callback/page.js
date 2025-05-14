@@ -13,26 +13,33 @@ export default function Callback() {
   const router = useRouter();
 
   useEffect(() => {
-    async function finishMagicLink() {
-      // 1 · Parse the URL fragment for tokens: #access_token=…&refresh_token=…
+    async function finish() {
+      // 1. Parse #fragment tokens
       const hash = window.location.hash.substring(1);
       const params = new URLSearchParams(hash);
       const access_token  = params.get("access_token");
       const refresh_token = params.get("refresh_token");
 
-      if (access_token && refresh_token) {
-        // 2 · Store session (sets sb-access-token / sb-refresh-token cookies)
-        await supa.auth.setSession({ access_token, refresh_token });
-
-        // 3 · Clean URL and enter the app
-        window.history.replaceState({}, "", "/");
-        router.replace("/");
-      } else {
-        // fallback: nothing to process
-        router.replace("/login?error=magiclink");
+      if (!access_token || !refresh_token) {
+        router.replace("/login?error=no_tokens");
+        return;
       }
+
+      // 2. Store session on client (optional but harmless)
+      await supa.auth.setSession({ access_token, refresh_token });
+
+      // 3. Ask server to set http‑only cookies
+      await fetch("/api/auth/set-cookie", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ access_token, refresh_token }),
+      });
+
+      // 4. Clean URL & enter the app
+      window.history.replaceState({}, "", "/");
+      router.replace("/");
     }
-    finishMagicLink();
+    finish();
   }, [router]);
 
   return (
