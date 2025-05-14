@@ -268,7 +268,25 @@ if (text.toLowerCase() === "help" || text.toLowerCase() === "/help") {
         <div ref={bottomRef} />
       </div>
 
+{/* Conversation starters */}
+{showStarters && messages.length === 0 && (
+  <div className="mt-4 flex flex-wrap gap-2">
+    {STARTERS.map((s) => (
+      <button
+        key={s}
+        onClick={() => sendStarter(s)}
+        className="px-3 py-1 text-sm rounded-full bg-gray-700 text-gray-100 hover:bg-gray-600"
+      >
+        {s}
+      </button>
+    ))}
+  </div>
+)}
+
+
       {/* Input form (auto-resizing textarea) */}
+      
+
       <form
   id="inputmessage"
   onSubmit={sendMessage}
