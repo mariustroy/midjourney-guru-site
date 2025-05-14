@@ -16,6 +16,7 @@ export default function Login() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [sent, setSent]  = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   /* — redirect if already logged in OR if magic‑link just returned — */
 useEffect(() => {
@@ -29,11 +30,18 @@ async function sendLink(e) {
   e.preventDefault();
   const { error } = await supa.auth.signInWithOtp({
     email,
-    options: {
-      emailRedirectTo: `${SITE_URL}/auth/callback`,
-    },
+options: {
+  emailRedirectTo: `${
+    process.env.NEXT_PUBLIC_SITE_URL || window.location.origin
+  }/auth/callback`,
+},
   });
-  if (!error) setSent(true);
+if (error) {                 // ← NEW
+      setErrorMsg(error.message);
+      return;
+    }
+    setErrorMsg("");             // clear any previous errors
+    setSent(true);
 }
   /* — UI — */
   if (sent)
@@ -58,6 +66,10 @@ async function sendLink(e) {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
+      
+      {errorMsg && (             /* ← NEW */
+        <p className="text-sm text-red-600">{errorMsg}</p>
+      )}
 
       <button className="bg-cyan-600 text-white py-2 rounded">
         Send link
