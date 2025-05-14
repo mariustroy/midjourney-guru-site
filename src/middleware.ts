@@ -1,44 +1,57 @@
-import { createMiddlewareSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { NextResponse } from "next/server";
+import { createMiddlewareSupabaseClient } from "@supabase/auth-helpers-nextjs";
 
 export async function middleware(req) {
+  // Create a response object Supabase can attach cookies to
   const res = NextResponse.next();
-  const supa = createMiddlewareSupabaseClient({ req, res });
+  const supabase = createMiddlewareSupabaseClient({ req, res });
 
-  const { data: { session } } = await supa.auth.getSession();
+  // Read any existing session from cookies
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
-  const url = req.nextUrl;
+  const path = req.nextUrl.pathname;
 
-  // Public routes
-  if (url.pathname.startsWith("/login") || url.pathname.startsWith("/waitlist"))
-    return res;
+  /* -------- public (non‑guarded) routes -------- */
+  const isLogin     = path.startsWith("/login");
+  const isWaitlist  = path.startsWith("/waitlist");
+  const isCallback  = path.startsWith("/auth/callback");
 
-  // No session → redirect to login
-  if (!session) {
+  const isPublic =
+    isLogin ||
+    isWaitlist ||
+    isCallback ||
+    path.startsWith("/favicon.ico") ||
+    path.startsWith("/images");
+
+  /* -------- unauthenticated user hitting a private page -------- */
+  if (!session && !isPublic) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
-  // Fetch profile to check plan / beta expiry
-  const { data: profile } = await supa
-    .from("profiles")
-    .select("beta_expires, plan")
-    .eq("id", session.user.id)
-    .single();
+  /* -------- authenticated user: enforce beta limit -------- */
+  if (session && !isPublic) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("beta_expires, plan")
+      .eq("id", session.user.id)
+      .single();
 
-  // If no profile row (first login) → Supabase trigger can auto‑insert
-  // or insert here manually.
+    const expired =
+      profile?.beta_expires &&
+      new Date(profile.beta_expires).getTime() < Date.now();
+    const notPaid = profile?.plan !== "pro";
 
-  const now = Date.now();
-  const expired = new Date(profile?.beta_expires).getTime() < now;
-  const notPaid = profile?.plan !== "pro";
-
-  if (expired && notPaid) {
-    return NextResponse.redirect(new URL("/waitlist?expired=1", req.url));
+    if (expired && notPaid) {
+      return NextResponse.redirect(new URL("/waitlist?expired=1", req.url));
+    }
   }
 
-  return res;
+  return res; // everything OK -> continue
 }
 
+/* Apply middleware to all routes except Next internal files & API routes */
 export const config = {
-  matcher: ["/((?!_next|favicon.ico|images|api/auth).*)"],
+  matcher: ["/((?!_next/|api/).*)"],
 };
