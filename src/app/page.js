@@ -265,7 +265,7 @@ async function sendStarter(text) {
 
 {/* Conversation starters */}
 {showStarters && messages.length === 0 && (
-  <div className="mt-4 flex flex-wrap gap-2">
+  <div className="mt-4 flex flex-wrap gap-2 starterpadding">
     {STARTERS.map((s) => (
       <button
         key={s}
