@@ -270,7 +270,7 @@ async function sendStarter(text) {
       <button
         key={s}
         onClick={() => sendStarter(s)}
-        className="starterbutton px-3 py-1 text-sm rounded-full bg-gray-700 text-gray-100 hover:bg-gray-600"
+        className="starterbutton px-3 py-1 text-sm rounded-full bg-gray-700 text-gray-100"
       >
         {s}
       </button>
