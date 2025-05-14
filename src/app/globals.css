@@ -83,6 +83,10 @@ margin-right: auto;
     color: #FFFFFF;
 }
 
+.starterbutton:hover{
+	    background-color: #1C261D;
+}
+
 .guruintro{
 	background-color: #131B0E;
 }
