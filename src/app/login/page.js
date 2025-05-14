@@ -27,9 +27,7 @@ async function sendLink(e) {
   const { error } = await supa.auth.signInWithOtp({
     email,
     options: {
-      emailRedirectTo: `${
-        process.env.NEXT_PUBLIC_SITE_URL || window.location.origin
-      }/auth/callback`,           // <── new target
+      emailRedirectTo: `${SITE_URL}/auth/callback`,
     },
   });
   if (!error) setSent(true);
