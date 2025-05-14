@@ -3,12 +3,17 @@ import { cookies } from "next/headers";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 
 export async function GET(request) {
-  // 1 · Create server‑side Supabase client bound to response cookies
-  const supabase = createRouteHandlerClient({ cookies });
+  const { searchParams } = new URL(request.url);
+  const code = searchParams.get("code");          // Supabase sends ?code=...
 
-  // 2 · Exchange ?code=... query for JWT cookies
-  await supabase.auth.exchangeCodeForSession(request);
+  if (code) {
+    // server‑side client bound to response cookies
+    const supabase = createRouteHandlerClient({ cookies });
 
-  // 3 · Redirect user into the app
+    // exchange code → set sb-access-token / sb-refresh-token cookies
+    await supabase.auth.exchangeCodeForSession(code);
+  }
+
+  // always land users on the app root
   return NextResponse.redirect(new URL("/", request.url));
 }
