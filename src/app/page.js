@@ -74,10 +74,10 @@ function closeIntro() {
     }
   }
 
-  async function sendMessage(e) {
-    e.preventDefault();
-    const text = input.trim();
-    if (!text) return;
+async function sendMessage(e, textOverride) {
+  if (e?.preventDefault) e.preventDefault();      // keep form behaviour
+  const text = (textOverride ?? input).trim();    // ← use override if given
+  if (!text) return;
 
     /* 1. show user message immediately */
     const newMsgs = [...messages, { id: 0, text }];
@@ -125,14 +125,9 @@ if (text.toLowerCase() === "help" || text.toLowerCase() === "/help") {
     // …your existing rate() implementation…
   }
   
-  async function sendStarter(text) {
-  setShowStarters(false);         // hide chips after first click
-  setInput("");                   // clear the textarea
-  // call the existing sendMessage logic with a faux event
-  await sendMessage({
-    preventDefault: () => {},
-    target: { value: { trim: () => text } },
-  });
+async function sendStarter(text) {
+  setShowStarters(false);          // hide chips
+  await sendMessage(null, text);   // call with override text
 }
 
 
