@@ -6,5 +6,5 @@ export default {
   corePlugins: {
     animation: true                        // keep animate‑bounce utilities
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 };

@@ -219,7 +219,7 @@ async function sendStarter(text) {
     );
   })()
 ) : (
-  <ReactMarkdown>{m.text}</ReactMarkdown>
+  <ReactMarkdown className="prose prose-invert leading-relaxed space-y-2">{m.text}</ReactMarkdown>
 )}              </div>
 
               {m.id === 1 && (
