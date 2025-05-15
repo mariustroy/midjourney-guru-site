@@ -12,11 +12,10 @@ And the best part? This guide is designed to be simple and actionable, so you ca
 So let your creativity soar, and let Imagine: Midjourney for Creatives be your guide on this exciting new journey. Thanks again for your purchase - I can't wait to see what you create!
 
 Getting Started With Midjourney
-Getting started with Midjourney can seem like a daunting task, but if complete these simple steps you’ll be through the door in no time. Here’s how to get started: Go to Midjourney.com and click SIgn Up.
-- Now you can either up using your either your Google or Discord account.
+Getting started with Midjourney can seem like a daunting task, but if you complete these simple steps you’ll be through the door in no time. Here’s how to get started: Go to Midjourney.com and click SIgn Up.
+- Now you can either sign up with your Google or Discord account.
 - If you are using DIscord you can log straight into Midjourney’s Discord server either through your browser or the Discord App (Desktop or Mobile), navigate to one 
-of the #Newbie-rooms channels. Until you sign up for a paid subscription this is where you will interact with Midjourney. These open channels seem like motorways packed with traffic, and they can be pretty off-putting at first. However, one of the positive aspects of 
-these open channels is that you get to watch and learn how others are writing prompts and using Midjourney to their benefit. That said, once you have a subscription you will have your own dedicated Midjourney Bot to interact with in private, and that is a calmer 
+of the #Newbie-rooms channels. Until you sign up for a paid subscription this is where you will interact with Midjourney. These open channels seem like motorways packed with traffic, and they can be pretty off-putting at first. However, one of the positive aspects of these open channels is that you get to watch and learn how others are writing prompts and using Midjourney to their benefit. That said, once you have a subscription you will have your own dedicated Midjourney Bot to interact with in private, and that is a calmer 
 interface to interact with.
 - Now that you’re in, take a minute to read the quick start guide where you’ll learn the basics of using Midjourney. You will need to understand the basics in order to get the most out of this guide.
 
@@ -485,6 +484,22 @@ Adjust Stylization: Control the influence of your personalization with the --sty
 Sharing and Exploring Styles
 Each personalization profile has a unique code that can be shared. By using someone else’s code with the --p parameter, you can generate images in their style.
 
+Complex Prompts with Multiple Subjects
+I have preached keeping prompts simple and to the bone. But what happens when you want to generate a complex scene with multiple subjects or items? 
+
+The Key: Use “Scene Blocks”
+
+Build your prompt like a cinematic scene: each subject gets a tight bundle of info – what they’re doing, wearing, and where they are.
+
+Example 1: “woman wearing a velvet dress sitting by a window, sipping tea in the afternoon light, man in a tailored suit reading a book across from her, Parisian apartment, soft shadows, cinematic lens --ar 3:2 --v 5”
+
+Example 2: “two women sitting on opposite ends of a velvet couch, one wearing a crimson kimono reading a book, the other in a sequined gown sipping champagne, gold art deco living room, moody lighting, 85mm lens –ar 16:9 –v 5”
+
+Quick tips:
+Group per subject: Don’t intermix actions or clothing—each character gets their own mini-prompt.
+Use commas to separate scene elements, but group character attributes tightly.
+Specify time of day and light last—this affects the full mood.
+Add –ar to frame the scene and avoid overlap chaos.
 
 Common pitfalls in MIdjourney
 As you now know Midjourney is a cumbersome but powerful tool to work with, and although the imagery generated can at times take your breath away, there are certain things Midjourney really struggle to get right.
