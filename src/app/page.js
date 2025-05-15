@@ -340,8 +340,10 @@ async function sendStarter(text) {
     <div className="guruintro rounded-lg max-w-md p-6 shadow-xl text-center">
       <h2 className="text-xl font-semibold mb-3">Welcome to Midjourney Guru! 🎨</h2>
       <p className="text-sm leading-relaxed mb-4">
+      I am here to help you get the most out of Midjourney. <br />
         Ask me for a prompt idea, paste your own prompt for feedback,
         or type <code>help</code> to see tips.<br />
+        I am comfortably multilingual - so speak to me in your language if you wish. <br />
         Shift+Enter = newline • 👍 / 👎 trains the bot.
       </p>
       <button
