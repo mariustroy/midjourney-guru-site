@@ -14,8 +14,9 @@ const read = (file) =>
 
 /* ---------- Load knowledge files (trim to stay small) ---------- */
 const mjGuide  = read("MT_Guide.txt").slice(0, 12000);
-const prompts  = read("MT_Prompts.csv").slice(0, 8000);
-const captions = read("MT_Captions.csv").slice(0, 8000);
+const prompts  = read("MT_Prompts.csv").slice(0, 12000);
+const captions = read("MT_Captions.csv").slice(0, 12000);
+const mjv7 = read("MJv7.txt").slice(0, 12000); // ← your new file
 
 export async function POST(request) {
   try {
@@ -87,6 +88,20 @@ Row schema: palette, mood, texture, subject, action, style_or_type, place, time,
 ◆ **Cosmic Prompt Randomizer** – user requests “random cosmic prompt” or “surreal archetype”.
 
 → Output an abstract, poetic /imagine line + one reference‑image idea.
+
+
+Knowledge Base:
+${mjGuide}
+
+Midjourney v7 Guide:
+${mjv7}
+
+## Marius Troy's Captions (tone-of-voice examples):
+${captions}
+
+## Marius Troy's Midjourney Prompts (reference style):
+${prompts}
+
 
 ────────────────────────  FALLBACK BEHAVIOUR  ──────────────────────────
 If the user’s request doesn’t match any mode above:
