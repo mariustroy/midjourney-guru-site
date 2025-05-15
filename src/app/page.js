@@ -14,9 +14,9 @@ export default function Home() {
   const [isTyping, setIsTyping] = useState(false);
   
   const STARTERS = [
-  "Give me a dream‑like cityscape prompt",
-  "Help me fix muddy colours in my prompt",
-  "Suggest a contrasting reference image",
+  "I need help structuring my prompt",
+  "Which version of Midjourney should I use",
+  "I need a creative prompt idea",
 ];
 const [showStarters, setShowStarters] = useState(true);
   
