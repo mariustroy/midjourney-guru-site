@@ -453,6 +453,38 @@ Considerations:
 	•	Not compatible with inpainting, outpainting, Draft Mode, or Fast Mode.
 	•	Using Omni-Reference doubles the GPU time required for rendering.
 
+Using Style Reference --sref
+Midjourney’s Style Reference feature (--sref) lets you infuse your prompts with the aesthetic essence of an existing image—capturing its color palette, texture, lighting, and mood—without replicating its specific content.
+
+Think of --sref as a style transfer tool. It extracts the visual vibe from your reference image and applies it to your new creation, ensuring stylistic consistency across different subjects. This is particularly useful for maintaining a cohesive look in a series of images. 
+How to Use It
+Upload Your Reference Image: If your image isn’t already online, upload it to Discord or another hosting service to obtain a URL. 
+Construct Your Prompt: Use the /imagine command followed by your descriptive prompt. 
+Add the Style Reference Parameter: Append --sref followed by the image URL to your prompt.
+Adjust Style Influence (Optional): Use the --sw parameter to control how strongly the style is applied. The default is 100; increase up to 1000 for a stronger influence.
+Combine Multiple Styles (Optional): You can reference multiple images by adding multiple URLs after --sref. Assign weights to each using double colons ::
+
+Best Practices
+Keep Prompts Content-Focused: Describe what you want to see, not how it should look. Let the style reference handle the aesthetics. 
+Avoid Conflicting Style Descriptors: Adding style-related adjectives in your prompt can clash with the reference image’s style. 
+Use High-Quality Reference Images: Clear, well-lit images with distinct styles yield better results.
+Experiment with Style Weight: Adjust the --sw parameter to find the right balance between your prompt and the style influence.
+
+Personalisation of Midjourney
+Personalization allows you to create a custom model by teaching Midjourney your visual tastes. By ranking image pairs or curating moodboards, you guide the AI to understand and replicate your preferred styles in generated images.
+
+How to Set It Up
+Rank Image Pairs: On the Midjourney website, navigate to the “Personalize” section. You’ll be presented with pairs of images—select the one that resonates more with your style. Aim to rank at least 40 images to activate the feature, though 200+ rankings yield better results.  
+Create Moodboards: Alternatively, you can upload or link images that exemplify your desired style. This method allows the AI to learn from specific visuals you provide.
+
+Using Personalization in Prompts
+Basic Usage: Add --p to your prompt to apply your personalized style.
+Specify a Profile: If you have multiple personalization profiles, you can specify one using its unique code
+Adjust Stylization: Control the influence of your personalization with the --stylize parameter (values range from 0 to 1000). Higher values apply more of your style preferences.
+
+Sharing and Exploring Styles
+Each personalization profile has a unique code that can be shared. By using someone else’s code with the --p parameter, you can generate images in their style.
+
 
 Common pitfalls in MIdjourney
 As you now know Midjourney is a cumbersome but powerful tool to work with, and although the imagery generated can at times take your breath away, there are certain things Midjourney really struggle to get right.
