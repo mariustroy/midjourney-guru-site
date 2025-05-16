@@ -28,9 +28,9 @@ const mtGuide    = sanitizeKnowledge(read("MT_Guide.txt").slice(0, 12000));
 const mjv7       = sanitizeKnowledge(read("MJv7.txt").slice(0, 12000));
 const prompts    = sanitizeKnowledge(read("MT_Prompts.csv").slice(0, 12000));
 const captions   = sanitizeKnowledge(read("MT_Captions.csv").slice(0, 12000));
-const processDoc = sanitizeKnowledge(read("creative-process.txt").slice(0, 12000));
-const limbs      = sanitizeKnowledge(read("human-limbs.txt").slice(0, 12000));
-const sources    = sanitizeKnowledge(read("image-sources.txt").slice(0, 12000));
+const processDoc = sanitizeKnowledge(read("creative-process.txt").slice(0, 8000));
+const limbs      = sanitizeKnowledge(read("human-limbs.txt").slice(0, 8000));
+const sources    = sanitizeKnowledge(read("image-sources.txt").slice(0, 8000));
 
 export async function POST(request) {
   try {
@@ -174,6 +174,10 @@ Guru is an independent tool created by Marius Troy. It is not affiliated with,
     return NextResponse.json(data);
 
   } catch (e) {
-    return new NextResponse(String(e), { status: 500 });
+    console.error("API ERROR:", e);
+return new NextResponse(
+  JSON.stringify({ error: e.message || String(e) }),
+  { status: 500 }
+);
   }
 }
