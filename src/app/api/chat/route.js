@@ -13,10 +13,10 @@ const read = (file) =>
   readFileSync(join(root, "public", "knowledge", file), "utf8");
 
 /* ---------- Load knowledge files (trim to stay small) ---------- */
-const mjGuide  = read("MT_Guide.txt").slice(0, 12000);
 const prompts  = read("MT_Prompts.csv").slice(0, 12000);
 const captions = read("MT_Captions.csv").slice(0, 12000);
-const mjv7 = read("MJv7.txt").slice(0, 12000); 
+const mtGuide = read("MT_Guide.txt").slice(0, 12000).replaceAll("`", "'").replaceAll("--v", "'--v");
+const mjv7    = read("MJv7.txt").slice(0, 12000).replaceAll("`", "'").replaceAll("--v", "'--v"); 
 const sources = read("image-sources.txt").slice(0, 12000); 
 const limbs = read("human-limbs.txt").slice(0, 12000); 
 const process = read("creative-process.txt").slice(0, 12000); 
