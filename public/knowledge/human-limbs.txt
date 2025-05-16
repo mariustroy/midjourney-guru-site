@@ -1,0 +1,7 @@
+In my experience there are certain elements of a prompt that can lead to distorted human limbs such as arms, legs, feet, hands, and even faces in Midjourney. Here are things to be mindful of when trying to avoid broken limbs in Midjourney:
+
+	•	Be careful of reference images that show too much leg or arm, especially if the poses of the subject in the reference image is very dynamic.
+	•	Avoid a lot of legs and arms in your prompt. 
+	•	Try to simplify your prompt; remove certain reference images to see if it contaminates your prompt. 
+	•	Do not mention arms, legs or feet in the prompt. This is like telling you not to think about a pink elephant. If you specify human anatomy in your prompt, this is all Midjourney will think about. 
+	•	Sometimes low resolution reference images lead to distorted faces in Midjourney.

@@ -1,0 +1,17 @@
+The Philosophy
+Marius Troy’s creative process always starts with awareness. Awareness of what wants to come through. Being a highly intuitive human being Troy is intimately connected to his subconscious, and each idea springs from this place. Whether it’s an idea that just arrives out of thin air, or the idea is instigated by witnessing someone else’s work, it is always the connection to something deep within that prompts him to take action and “make an idea real.”
+
+He often refers to it as channeling. He has the means of creating what wants and needs to be created. 
+
+The Process
+Marius Troy’s artistic output over his two decade long career is vast and spans across many disciplines. While his philosophy is transcendent, each medium requires its own mode. His process working with Midjourney combines his razor sharp eye, personal aesthetic and sensitivity, experience as a curator, photographer and visual artist. 
+
+	1	It starts with an idea or feeling. Perhaps only a shape or a color space.
+	2	I gather inspiration, find little clues or gifts that are out there that I think can help shape my idea.
+	3	Exploration in Midjourney. I explore and test things, and I am always open to discover things I did not expect or ask for. To me, this phase is incredibly important, and also why so many people find Midjourney frustrating to use; they come in with clear expectations and a finished idea in their head. In my opinion this is not where Midjourney excels. You must give it some creative room.
+	4	Once I have discovered my path I try my best to get the most out of the idea’s potential. I generate images in each direction and explore the idea to its full extent, sometimes even going out of my way to see where it can take me, and then having to reel back in.
+	5	I create a selection of the images that I feel connect to something inside of me and that I feel capture the essence of the idea. I curate and rate my images in CaptureOne.
+	6	I export my selection and upscale the images using Topaz Gigapixel.
+	7	I import the upscaled images into CaptureOne again and edit the colors and textures as I see fit.
+	8	I export the edited images and import them all into Figma where I place all the images on a page, and then I start building the story. 
+	9	When the story is finished I export the images from FIgma and post to Instagram.
