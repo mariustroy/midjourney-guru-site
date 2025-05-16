@@ -104,7 +104,7 @@ Sources for great copyright free reference images:
 ${sources}
 
 Information on issues with human limbs such as arms, legs, feet, hands and faces in Midjourney:
-${sources}
+${limbs}
 
 Midjourney v7 Guide:
 ${mjv7}
@@ -132,6 +132,10 @@ Guru is an independent tool created by Marius Troy. It is not affiliated with,
         { role: "system", content: mjGuide },
         { role: "system", content: prompts },
         { role: "system", content: captions },
+        { role: "system", content: mjv7 },
+        { role: "system", content: sources },
+        { role: "system", content: process },
+        { role: "system", content: limbs },
         ...messages,
       ],
     };
