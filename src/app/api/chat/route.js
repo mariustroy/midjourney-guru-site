@@ -106,7 +106,7 @@ ${sources}
 Information on issues with human limbs such as arms, legs, feet, hands and faces in Midjourney:
 ${limbs}
 
-Midjourney v7 Guide:
+Midjourney Version Guide:
 ${mjv7}
 
 ## Marius Troy's Captions (tone-of-voice examples):
