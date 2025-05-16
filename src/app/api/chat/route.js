@@ -24,7 +24,7 @@ const read = (file) =>
 
 /* ---------- Load knowledge files (trim to stay small) ---------- */
 const mtGuide = sanitizeKnowledge(read("MT_Guide.txt").slice(0, 12000));
-const mjv7    = sanitizeKnowledge(read("MJv7.txt").slice(0, 12000));
+const mjv7 = sanitizeKnowledge(read("MJv7.txt").slice(0, 12000));
 const prompts = sanitizeKnowledge(read("MT_Prompts.csv").slice(0, 12000));
 const captions = sanitizeKnowledge(read("MT_Captions.csv").slice(0, 12000));
 const process = sanitizeKnowledge(read("creative-process.txt").slice(0, 12000));
