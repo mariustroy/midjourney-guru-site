@@ -24,7 +24,7 @@ const read = (file) =>
 }
 
 /* ---------- Load knowledge files (trim to stay small) ---------- */
-const mtGuide    = sanitizeKnowledge(read("MT_Guide.txt").slice(0, 12000));
+const mjGuide    = sanitizeKnowledge(read("MT_Guide.txt").slice(0, 12000));
 const mjv7       = sanitizeKnowledge(read("MJv7.txt").slice(0, 12000));
 const prompts    = sanitizeKnowledge(read("MT_Prompts.csv").slice(0, 12000));
 const captions   = sanitizeKnowledge(read("MT_Captions.csv").slice(0, 12000));
@@ -153,6 +153,8 @@ Guru is an independent tool created by Marius Troy. It is not affiliated with,
     };
 
     /* ---------- Call OpenAI ---------- */
+    console.log("Payload preview:", JSON.stringify(payload, null, 2).slice(0, 1000));
+    
     const res = await fetch(
       "https://api.openai.com/v1/chat/completions",
       {
