@@ -1,26 +1,26 @@
 Midjourney Versions:
 
-V5 (Mar 2023):
+Version 5 (Mar 2023):
 	•	Key traits: Much more photorealistic and responsive to prompt nuance. Improved lighting, proportions, and textures.
 	•	Strengths: Exceptional for cinematic shots, editorial photography, hyper-realism.
 	•	Limitations: Softer default style. Some users felt it lacked the “imaginative spark” of earlier versions.
 
-V5.1 (May 2023):
+Version 5.1 (May 2023):
 	•	Key traits: Sharper, more opinionated version of V5. Stronger style bias and bolder compositions.
 	•	Strengths: Great balance of control and creativity. Ideal for commercial visuals.
 	•	Note: Introduced “raw mode” to preserve neutrality if needed.
 
-V5.2 (June 2023):
+Version 5.2 (June 2023):
 	•	Key traits: More responsive to shorter prompts. Introduced “high variation mode” and “zoom out” features.
 	•	Strengths: Great for conceptual explorations and iterative workflows.
 	•	Limitations: Still no inpainting or major reference image tools.
 
-V6 (Dec 2023):
+Version 6 (Dec 2023):
 	•	Key traits: First version with native text understanding (e.g., prompt syntax and sentence logic).
 	•	Strengths: Great at coherent scenes, improved hands, more accurate text rendering.
 	•	Big leap: Could now produce typography and more readable lettering in images.
 
-V6.1 (Mar 2024):
+Version 6.1 (Mar 2024):
 	•	Marius Troy’s preferred version.
 	•	Key traits: Balanced aesthetics, lush visual quality, improved prompt fidelity.
 	•	Strengths: Gorgeous lighting, better consistency, and smoother human subjects.
@@ -28,7 +28,7 @@ V6.1 (Mar 2024):
 
 
 
-v7 (April 2024):
+Version 7 (April 2024):
 Midjourney v7 excels in replicating specific framing techniques like “close-up” and “bird’s eye view,” but users must carefully phrase prompts to avoid unintended literal interpretations.
 
 Cinematic terms related to motion, such as “tracking shot” and “crane shot,” often struggle to translate effectively into static images, highlighting the platform’s limitations with dynamic concepts.
