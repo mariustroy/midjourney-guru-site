@@ -8,12 +8,15 @@ import { join } from "path";
 import { NextResponse } from "next/server";
 
 function sanitizeKnowledge(text) {
-  return text
-    .replaceAll("`", "'")
-    .replaceAll("${", "\\${")       // avoid JS template injection
-    .replace(/--([a-zA-Z]+)/g, "'--$1");  // neutralize any double-dash param
+  return (
+    "```\n" +
+    text
+      .replaceAll("`", "'")
+      .replaceAll("${", "\\${")        // protect from template injection
+      .replaceAll("\\", "\\\\")        // escape any backslashes
+    + "\n```"
+  );
 }
-
 /* ---------- Helper: absolute path under /public ---------- */
 const root = process.cwd();
 const read = (file) =>
