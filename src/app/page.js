@@ -121,9 +121,24 @@ if (text.toLowerCase() === "help" || text.toLowerCase() === "/help") {
     setIsTyping(false);         // ← hide indicator
   }
 
-  async function rate(index, score) {
-    // …your existing rate() implementation…
+async function rate(index, score) {
+  setFeedbackStatus((prev) => ({ ...prev, [index]: "loading" }));
+
+  try {
+    await fetch("/api/rate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message: messages[index].text,
+        score,
+      }),
+    });
+    setFeedbackStatus((prev) => ({ ...prev, [index]: "submitted" }));
+  } catch (e) {
+    console.error("Rate error:", e);
+    setFeedbackStatus((prev) => ({ ...prev, [index]: "idle" }));
   }
+}
   
 async function sendStarter(text) {
   setShowStarters(false);          // hide chips
