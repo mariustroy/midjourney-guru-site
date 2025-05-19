@@ -45,6 +45,11 @@ const [showIntro, setShowIntro] = useState(true);   // always start visible
 //   if (seen) setShowIntro(false);
 // }, []);
 
+useEffect(() => {
+  // Auto-insert a friendly welcome message from the bot
+  setMessages([{ id: 1, text: "Hi there! I'm Midjourney Guru. How can I help you today?" }]);
+}, []);
+
 function closeIntro() {
   setShowIntro(false);
   // leave the line below commented for now
@@ -279,7 +284,7 @@ async function sendStarter(text) {
       </div>
 
 {/* Conversation starters */}
-{showStarters && messages.length === 0 && (
+{showStarters && messages.filter(m => m.id === 0).length === 0 && (
   <div className="mt-4 flex flex-wrap gap-2 starterpadding">
     {STARTERS.map((s) => (
       <button
