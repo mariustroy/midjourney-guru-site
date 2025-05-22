@@ -60,3 +60,8 @@ export async function POST(req) {
 
   return new NextResponse("ok");
 }
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
