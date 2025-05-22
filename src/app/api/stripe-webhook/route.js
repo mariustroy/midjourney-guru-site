@@ -2,91 +2,96 @@ import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 
+/* ------- Stripe + Supabase clients ------- */
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-const supa = createClient(
+const supabase = createClient(
   process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_KEY
+  process.env.SUPABASE_SERVICE_KEY       // service role key
 );
 
+/* ------- Webhook handler ------- */
 export async function POST(req) {
-  const sig = req.headers.get("stripe-signature");
-  const body = await req.text();
+  /* 0. Verify signature — NEED raw body */
+  const rawBody = await req.text();
+  const signature = req.headers.get("stripe-signature");
 
-  let evt;
+  let stripeEvent;
   try {
-    evt = stripe.webhooks.constructEvent(
-      body, sig, process.env.STRIPE_WEBHOOK_SECRET
+    stripeEvent = stripe.webhooks.constructEvent(
+      rawBody,
+      signature,
+      process.env.STRIPE_WEBHOOK_SECRET
     );
   } catch (err) {
-    console.error("❌ Webhook signature error:", err.message);
-    return new NextResponse(`Webhook error: ${err.message}`, { status: 400 });
+    console.error("❌ Bad Stripe signature:", err.message);
+    return new NextResponse("Invalid signature", { status: 400 });
   }
 
-  if (evt.type === "checkout.session.completed") {
-	  console.log("▶️ Webhook triggered: checkout.session.completed");
-console.log("User ID:", session.metadata?.user_id);
-console.log("Customer ID:", session.customer);
-console.log("Subscription ID:", session.subscription);
-    const session = evt.data.object;
-    const userId = session.metadata?.user_id;
+  /* 1. Handle “checkout.session.completed” */
+  if (stripeEvent.type === "checkout.session.completed") {
+    const session = stripeEvent.data.object;
+    const userId = session.metadata?.user_id;          // <-- MUST be set in Checkout
     const customerId = session.customer;
 
-    let coupon = null;
-    let discount = null;
+    console.log("▶️  Checkout completed for UID:", userId);
+
+    /* ----- 1a. (optional) pull coupon/discount info safely ----- */
+    let couponCode = null;
+    let discountPercent = null;
     let discountExpires = null;
 
     try {
-      const subscription = await stripe.subscriptions.retrieve(session.subscription);
-      const stripeDiscount = subscription.discount;
-
-      if (stripeDiscount?.coupon) {
-        coupon = stripeDiscount.coupon.id;
-        discount = stripeDiscount.coupon.percent_off ?? null;
-
-        if (stripeDiscount.end) {
-          discountExpires = new Date(stripeDiscount.end * 1000);
+      if (session.subscription) {
+        const subscription = await stripe.subscriptions.retrieve(
+          session.subscription
+        );
+        const stripeDiscount = subscription.discount;
+        if (stripeDiscount?.coupon) {
+          couponCode = stripeDiscount.coupon.id;
+          discountPercent = stripeDiscount.coupon.percent_off ?? null;
+          if (stripeDiscount.end) {
+            discountExpires = new Date(stripeDiscount.end * 1000);
+          }
         }
       }
     } catch (err) {
-      console.warn("⚠️ Could not retrieve subscription or discount info:", err.message);
+      console.warn("⚠️  Could not load subscription details:", err.message);
     }
-console.log("Updating profile with:");
-console.log({
-  plan: "pro",
-  stripe_customer_id: session.customer,
-  beta_expires: null,
-  coupon_code: coupon,
-  discount_percent: discount,
-  discount_expires: discountExpires
-});
-    const { error } = await supa.from("profiles")
+
+    /* ----- 1b. Update profile in Supabase ----- */
+    const { error } = await supabase
+      .from("profiles")
       .update({
         plan: "pro",
         stripe_customer_id: customerId,
         beta_expires: null,
-        coupon_code: coupon,
-        discount_percent: discount,
-        discount_expires: discountExpires
+        coupon_code: couponCode,
+        discount_percent: discountPercent,
+        discount_expires: discountExpires,
       })
       .eq("id", userId);
 
-   if (error) {
-  console.error("❌ Supabase update failed:", error.message);
-} else {
-  console.log("✅ Supabase update succeeded for:", userId);
-}
+    if (error) {
+      console.error("❌ Supabase update failed:", error.message);
+    } else {
+      console.log("✅ Plan set to PRO for", userId);
+    }
   }
 
-  if (evt.type === "customer.subscription.deleted") {
-    const sub = evt.data.object;
-    await supa.from("profiles")
+  /* 2. Handle cancellation (optional) */
+  if (stripeEvent.type === "customer.subscription.deleted") {
+    const subscription = stripeEvent.data.object;
+    await supabase
+      .from("profiles")
       .update({ plan: "free" })
-      .eq("stripe_customer_id", sub.customer);
+      .eq("stripe_customer_id", subscription.customer);
+    console.log("⚠️  Subscription cancelled — downgraded:", subscription.customer);
   }
 
   return new NextResponse("ok");
 }
 
+/* Stripe needs the raw body → disable Next’s body parsing */
 export const config = {
   api: {
     bodyParser: false,
