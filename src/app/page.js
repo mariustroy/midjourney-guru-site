@@ -344,6 +344,9 @@ async function sendStarter(text) {
           }}
         />
       </form>
+      <a href="/settings" className="fixed top-4 left-4 text-sm text-gray-400 hover:text-white">
+  Manage subscription
+</a>
       <a
   href="https://docs.google.com/forms/d/e/1FAIpQLScpfr6zzb0JBkTRkeEgzeU4eV6_b7SsX27q-nPLNMIiBQ1tDA/viewform?usp=header"    /* change to your form URL */
   target="_blank"

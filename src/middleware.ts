@@ -32,21 +32,19 @@ export async function middleware(req) {
 
   /* -------- authenticated user: enforce beta limit -------- */
   if (session && !isPublic) {
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("beta_expires, plan")
-      .eq("id", session.user.id)
-      .single();
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("plan, beta_expires")
+    .eq("id", session.user.id)
+    .single();
 
-    const expired =
-      profile?.beta_expires &&
-      new Date(profile.beta_expires).getTime() < Date.now();
-    const notPaid = profile?.plan !== "pro";
+  const expired = profile?.beta_expires && new Date(profile.beta_expires) < Date.now();
+  const notPaid = profile?.plan !== "pro";
 
-    if (expired && notPaid) {
-      return NextResponse.redirect(new URL("/waitlist?expired=1", req.url));
-    }
+  if (expired || notPaid) {
+    return NextResponse.redirect(new URL("/subscribe", req.url));
   }
+}
 
   return res; // everything OK -> continue
 }
