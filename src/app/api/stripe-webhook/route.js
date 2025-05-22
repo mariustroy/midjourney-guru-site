@@ -64,7 +64,6 @@ export async function POST(req) {
       .update({
         plan: "pro",
         stripe_customer_id: customerId,
-        beta_expires: null,
         coupon_code: couponCode,
         discount_percent: discountPercent,
         discount_expires: discountExpires,
