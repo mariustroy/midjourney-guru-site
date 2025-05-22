@@ -18,12 +18,16 @@ export async function middleware(req) {
   const isWaitlist  = path.startsWith("/waitlist");
   const isCallback  = path.startsWith("/auth/callback");
 
-  const isPublic =
-    isLogin ||
-    isWaitlist ||
-    isCallback ||
-    path.startsWith("/favicon.ico") ||
-    path.startsWith("/images");
+const isPublic =
+  isLogin ||
+  isWaitlist ||
+  isCallback ||
+  path.startsWith("/subscribe") ||
+  path.startsWith("/success") ||
+  path.startsWith("/cancelled") ||
+  path.startsWith("/settings") ||
+  path.startsWith("/favicon.ico") ||
+  path.startsWith("/images");
 
   /* -------- unauthenticated user hitting a private page -------- */
   if (!session && !isPublic) {
