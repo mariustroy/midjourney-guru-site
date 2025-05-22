@@ -1,20 +1,15 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
-import { cookies } from "next/headers";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-export async function POST(req) {
+export async function POST() {
   const supabase = createRouteHandlerClient({ cookies });
-  const { data: { user } } = await supabase.auth.getUser();
-  
-  const session = await stripe.checkout.sessions.create({
-  ...,
-  discounts: req.body.coupon
-    ? [{ coupon: req.body.coupon }]
-    : undefined,
-});
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   const session = await stripe.checkout.sessions.create({
     mode: "subscription",
@@ -22,15 +17,15 @@ export async function POST(req) {
     customer_email: user.email,
     line_items: [
       {
-        price: process.env.STRIPE_PRICE_ID, // from Stripe dashboard
+        price: process.env.STRIPE_PRICE_ID,
         quantity: 1,
       },
     ],
-    success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/success`,
-    cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/cancelled`,
     metadata: {
       user_id: user.id,
     },
+    success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/success`,
+    cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/cancelled`,
   });
 
   return NextResponse.json({ url: session.url });
