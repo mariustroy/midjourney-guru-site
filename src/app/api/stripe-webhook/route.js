@@ -18,37 +18,51 @@ export async function POST(req) {
       body, sig, process.env.STRIPE_WEBHOOK_SECRET
     );
   } catch (err) {
+    console.error("❌ Webhook signature error:", err.message);
     return new NextResponse(`Webhook error: ${err.message}`, { status: 400 });
   }
 
   if (evt.type === "checkout.session.completed") {
     const session = evt.data.object;
+    const userId = session.metadata?.user_id;
+    const customerId = session.customer;
 
     let coupon = null;
     let discount = null;
     let discountExpires = null;
 
-    if (session.subscription) {
+    try {
       const subscription = await stripe.subscriptions.retrieve(session.subscription);
-      if (subscription?.discount?.coupon) {
-        coupon = subscription.discount.coupon.id;
-        discount = subscription.discount.coupon.percent_off || null;
-        if (subscription.discount.end) {
-          discountExpires = new Date(subscription.discount.end * 1000);
+      const stripeDiscount = subscription.discount;
+
+      if (stripeDiscount?.coupon) {
+        coupon = stripeDiscount.coupon.id;
+        discount = stripeDiscount.coupon.percent_off ?? null;
+
+        if (stripeDiscount.end) {
+          discountExpires = new Date(stripeDiscount.end * 1000);
         }
       }
+    } catch (err) {
+      console.warn("⚠️ Could not retrieve subscription or discount info:", err.message);
     }
 
-    await supa.from("profiles")
-  .update({
-    plan: "pro",
-    stripe_customer_id: session.customer,
-    beta_expires: null,               // optional: clear beta expiration
-    coupon_code: coupon,
-    discount_percent: discount,
-    discount_expires: discountExpires
-  })
-  .eq("id", session.metadata.user_id);
+    const { error } = await supa.from("profiles")
+      .update({
+        plan: "pro",
+        stripe_customer_id: customerId,
+        beta_expires: null,
+        coupon_code: coupon,
+        discount_percent: discount,
+        discount_expires: discountExpires
+      })
+      .eq("id", userId);
+
+    if (error) {
+      console.error("❌ Supabase update failed:", error.message);
+    } else {
+      console.log("✅ User upgraded:", userId);
+    }
   }
 
   if (evt.type === "customer.subscription.deleted") {
@@ -60,6 +74,7 @@ export async function POST(req) {
 
   return new NextResponse("ok");
 }
+
 export const config = {
   api: {
     bodyParser: false,
