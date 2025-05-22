@@ -77,9 +77,3 @@ if (error) {                 // ← NEW
     </form>
   );
 }
- <p className="text-center text-sm mt-4 text-gray-400">
-  Want full access?{" "}
-  <a href="/subscribe" className="text-cyan-500 hover:underline">
-    Get Guru Pro
-  </a>
-</p>
