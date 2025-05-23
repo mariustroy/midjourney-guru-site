@@ -1,6 +1,7 @@
 "use client";
 import { useState, useMemo } from "react";
 import formulas from "@/data/formulas";      // temp local file
+import FormulaCard from "@/components/FormulaCard";
 import { Copy, Search, X } from "lucide-react";
 
 export default function Formulas() {
