@@ -2,7 +2,11 @@
 export default {
   darkMode: "class",                       // lock UI to dark theme
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
-  theme: { extend: {} },
+  theme: { extend: {
+	  colors: {
+      brand: "#FFFD91",
+    },
+  } },
   corePlugins: {
     animation: true                        // keep animate‑bounce utilities
   },

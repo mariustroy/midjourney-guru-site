@@ -37,7 +37,15 @@ const HELP_RESPONSE = `
 `;
  
 /* ---------- onboarding popup ---------- */
-const [showIntro, setShowIntro] = useState(true);   // always start visible
+const [showIntro, setShowIntro] = useState(
+  () => localStorage.getItem("guruIntroSeen") !== "1"
+);
+
+/* Persist dismissal so navigation doesn’t re-open it */
+function closeIntro() {
+  localStorage.setItem("guruIntroSeen", "1");
+  setShowIntro(false);
+}  // always start visible
 
 // ⬇️  comment‑out this block while you’re designing
 // useEffect(() => {
