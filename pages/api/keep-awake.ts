@@ -1,22 +1,18 @@
-// Scheduled Edge Function: runs every 4 minutes on Vercel
+// pages/api/keep-awake.ts
 export const config = {
   runtime:  "edge",
-  schedule: "*/4 * * * *",   // cron expression
+  schedule: "*/4 * * * *"        // every 4 minutes
 };
 
 export default async function handler() {
+  // Small, harmless query: ask for 1 row's id
   await fetch(
-    "https://pwxgqslsurivhznlbrmw.supabase.co/functions/v1/smart-api",
+    "https://pwxgqslsurivhznlbrmw.supabase.co/rest/v1/formulas?id=eq.0&select=id",
     {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${process.env.SUPABASE_ANON_KEY}`,
-      },
+      headers: { apiKey: process.env.SUPABASE_ANON_KEY! },
+      cache:   "no-store",
     }
   );
 
-  return new Response(JSON.stringify({ ok: true }), {
-    headers: { "Content-Type": "application/json" },
-    status: 200,
-  });
+  return new Response("ok");
 }
