@@ -55,7 +55,7 @@ function ResourceLink({ href, label }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-cyan-400 underline"
+      className="text-brand underline"
     >
       {label}
     </a>

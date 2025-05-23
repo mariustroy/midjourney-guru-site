@@ -1,43 +1,76 @@
-// Very simple starter – replace with real data or fetch from Supabase later
-const formulas = [
-  {
-    prompt:
-      "/imagine 70s photograph of rain made of gold running down a tree made of fur … --ar 4:5 --v 6.1",
-    refs: [
-      "https://s.mj.run/khAQMPWrXoc",
-      "https://s.mj.run/KKyn8luLS_A",
-    ],
-    output: "/images/sample1.jpg",
-  },
-];
+"use client";
+import { useState, useMemo } from "react";
+import formulas from "@/data/formulas";      // temp local file
+import { Copy, Search, X } from "lucide-react";
 
-export default function FormulasPage() {
+export default function Formulas() {
+  /* ------------- state ------------- */
+  const [search, setSearch]     = useState("");
+  const [activeCat, setCat]     = useState(null);
+
+  /* ------------- derived list ------------- */
+  const filtered = useMemo(() => {
+    return formulas.filter(f => {
+      const matchesSearch =
+        f.prompt.toLowerCase().includes(search.toLowerCase()) ||
+        f.title .toLowerCase().includes(search.toLowerCase());
+
+      const matchesCat = !activeCat || f.category.includes(activeCat);
+      return matchesSearch && matchesCat;
+    });
+  }, [search, activeCat]);
+
   return (
-       <div
-      className="
-        max-w-2xl mx-auto
-        px-4 py-6           /* existing side + vertical padding           */
-        pt-16 md:pt-8       /* extra space under the hamburger icon      */
-        space-y-6
-      "
-    >
-      <h1 className="text-2xl font-semibold">Prompt Formulas</h1>
+    <div className="max-w-5xl mx-auto px-4 pt-16 md:pt-8 space-y-6">
+      <h1 className="text-2xl font-semibold">Formulas</h1>
 
-      {formulas.map((f, i) => (
-        <article key={i} className="space-y-2">
-          <img src={f.output} alt="Resulting image" className="rounded-md" />
-          <code className="block whitespace-pre-wrap text-sm bg-black/30 p-3 rounded">
-            {f.prompt}
-          </code>
-          <div className="flex gap-2">
-            {f.refs.map((r) => (
-              <a key={r} href={r} target="_blank">
-                <img src={r} className="w-16 h-16 object-cover rounded" />
-              </a>
-            ))}
-          </div>
-        </article>
-      ))}
+      {/* ------------- search ------------- */}
+      <div className="relative max-w-sm">
+        <input
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          placeholder="Search formula…"
+          className="w-full bg-background/60 backdrop-blur border rounded pl-10 pr-10 py-2"
+        />
+        <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+        {search && (
+          <button
+            className="absolute right-2 top-2.5"
+            onClick={() => setSearch("")}
+            aria-label="Clear search"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        )}
+      </div>
+
+      {/* ------------- category chips ------------- */}
+      <div className="flex gap-2 overflow-x-auto pb-2">
+        {["portrait","surreal","fashion","architecture"].map(cat => {
+          const active = activeCat === cat;
+          return (
+            <button
+              key={cat}
+              onClick={() => setCat(active ? null : cat)}
+              className={`
+                whitespace-nowrap rounded-full px-3 py-1 text-sm
+                ${active
+                  ? "bg-brand text-black"
+                  : "bg-muted hover:bg-muted/70"}
+              `}
+            >
+              {cat}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* ------------- list ------------- */}
+      <div className="space-y-8">
+        {filtered.map(formula => (
+          <FormulaCard key={formula.id} data={formula} />
+        ))}
+      </div>
     </div>
   );
 }
