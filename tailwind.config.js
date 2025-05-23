@@ -7,4 +7,5 @@ export default {
     animation: true                        // keep animate‑bounce utilities
   },
   plugins: [require('@tailwindcss/typography')],
+  plugins: [require("tailwindcss-animate")],
 };
