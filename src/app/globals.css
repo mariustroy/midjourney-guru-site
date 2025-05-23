@@ -1,6 +1,12 @@
+/* existing Tailwind directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* --- shadcn component styles --- */
+@import "@/components/ui/sheet.css";
+@import "@/components/ui/tabs.css";
+@import "@/components/ui/separator.css";
 
 @import "tailwindcss";
 
