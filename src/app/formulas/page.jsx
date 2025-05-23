@@ -9,8 +9,8 @@ export const revalidate = 60;
 /** Server side: fetch formulas with *anon* creds only. */
 export default async function FormulasPage() {
   const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   );
 
   const { data: formulas, error } = await supabase
