@@ -153,13 +153,13 @@ async function sendStarter(text) {
 
   return (
 <main
-  className="md:ml-64"          /* pushes content right of 16-rem sidebar */
+  className="max-w-screen-md mx-auto p-4 md:ml-64"          /* pushes content right of 16-rem sidebar */
   style={{
     maxWidth: 640,
     fontFamily: "sans-serif",
     display: "flex",
     flexDirection: "column",
-    height: "100vh",
+    height: "100dvh",
   }}
 >
       <header

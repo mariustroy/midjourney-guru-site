@@ -48,14 +48,19 @@ export default function SideDrawer() {
 
       {/* ---------- Mobile overlay drawer ---------- */}
       <Sheet>
-        <SheetTrigger asChild>
-          <button
-            aria-label="Open menu"
-            className="md:hidden p-2 rounded focus:outline-none focus:ring"
-          >
-            <Menu className="h-6 w-6" />
-          </button>
-        </SheetTrigger>
+        +<SheetTrigger asChild>
+  <button
+    aria-label="Open menu"
+    className="
+      md:hidden
+      fixed top-4 left-4 z-50
+      p-2 rounded bg-background/80 backdrop-blur
+      focus:outline-none focus:ring
+    "
+  >
+    <Menu className="h-5 w-5" />
+  </button>
+</SheetTrigger>
 
         <SheetContent
           side="left"
