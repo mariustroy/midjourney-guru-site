@@ -160,12 +160,6 @@ function Shell({ children, phase, onCTA }) {
 
       {children}
 
-      {/* sticky mobile CTA */}
-      {phase === "cta" && (
-        <div className="md:hidden fixed inset-x-0 bottom-0 backdrop-blur bg-black/50 p-4">
-          <CTAButton onClick={onCTA} />
-        </div>
-      )}
-    </main>
+          </main>
   );
 }
