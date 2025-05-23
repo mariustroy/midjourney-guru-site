@@ -1,5 +1,6 @@
 "use client";
-import { usePathname } from "next/navigation"; 
+
+import { usePathname } from "next/navigation";
 import {
   Sheet,
   SheetContent,
@@ -11,55 +12,77 @@ import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { Menu } from "lucide-react";
 
-const NavLinks = ({ close }) => (
-  <>
-    {/* Primary menu */}
-    <nav className="flex-1 space-y-1 text-lg font-medium">
-      {[
-        { href: "/resources", label: "Resources" },
-        { href: "/formulas",  label: "Formulas" },
-      ].map(({ href, label }) => (
-        <Link
-          key={href}
-          href={href}
-          onClick={close}
-          className="
-            block rounded px-3 py-2
-            transition-colors
-            hover:bg-accent/20 hover:text-accent-foreground
-            focus-visible:outline-none focus-visible:ring
-          "
-        >
-          {label}
-        </Link>
-      ))}
-    </nav>
+/* ------------------------------------------------------------------ */
+/*  NavLinks                                                          */
+/* ------------------------------------------------------------------ */
 
-    {/* Footer action */}
-    <Separator className="my-4" />
+const links = [
+  { href: "/",          label: "Guru"      },
+  { href: "/resources", label: "Resources" },
+  { href: "/formulas",  label: "Formulas"  },
+];
 
-    <Link
-      href="/settings"
-      onClick={close}
-      className="
-        block text-sm text-cyan-500
-        hover:underline
-        focus-visible:outline-none focus-visible:ring
-      "
-    >
-      Manage subscription
-    </Link>
-  </>
-);
-export default function SideDrawer() {
-	  /* ---- hide on auth routes ---- */
+function NavLinks({ close }) {
   const pathname = usePathname();
+
+  return (
+    <>
+      {/* main menu -------------------------------------------------- */}
+      <nav className="flex-1 space-y-1 text-lg font-medium">
+        {links.map(({ href, label }) => {
+          const active =
+            pathname === href || pathname.startsWith(`${href}/`);
+          return (
+            <Link
+              key={href}
+              href={href}
+              onClick={close}
+              className={`
+                block rounded px-3 py-2 transition-colors
+                ${active
+                  ? "bg-accent text-accent-foreground"
+                  : "hover:bg-accent/20 hover:text-accent-foreground"}
+              `}
+            >
+              {label}
+            </Link>
+          );
+        })}
+      </nav>
+
+      {/* footer action --------------------------------------------- */}
+      <Separator className="my-4" />
+      <Link
+        href="/settings"
+        onClick={close}
+        className="
+          block text-sm text-cyan-500
+          hover:underline
+          focus-visible:outline-none focus-visible:ring
+        "
+      >
+        Manage subscription
+      </Link>
+    </>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  SideDrawer component                                              */
+/* ------------------------------------------------------------------ */
+
+export default function SideDrawer() {
+  const pathname = usePathname();
+
+  /* ---- hide on auth & login routes ---- */
   if (
     pathname.startsWith("/login") ||
-    pathname.startsWith("/auth")   // e.g. /auth/callback
+    pathname.startsWith("/auth") ||
+    pathname.startsWith("/waitlist")
   ) {
     return null;
   }
+
   return (
     <>
       {/* ---------- Desktop static sidebar ---------- */}
@@ -76,18 +99,18 @@ export default function SideDrawer() {
       {/* ---------- Mobile overlay drawer ---------- */}
       <Sheet>
         <SheetTrigger asChild>
-  <button
-    aria-label="Open menu"
-    className="
-      md:hidden
-      fixed top-4 left-4 z-50
-      p-2 rounded bg-background/80 backdrop-blur
-      focus:outline-none focus:ring
-    "
-  >
-    <Menu className="h-5 w-5" />
-  </button>
-</SheetTrigger>
+          <button
+            aria-label="Open menu"
+            className="
+              md:hidden
+              fixed top-4 left-4 z-50
+              p-2 rounded bg-background/80 backdrop-blur
+              focus:outline-none focus:ring
+            "
+          >
+            <Menu className="h-5 w-5" />
+          </button>
+        </SheetTrigger>
 
         <SheetContent
           side="left"
