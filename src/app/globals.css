@@ -188,3 +188,8 @@ margin-right: auto;
     @apply bg-background text-foreground;
   }
 }
+/* Force global background #131B0E */
+html,
+body {
+  background: #131b0e;
+}
