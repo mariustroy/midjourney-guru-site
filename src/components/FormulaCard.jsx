@@ -57,6 +57,7 @@ export default function FormulaCard({ data }) {
               alt={img.alt}
               width={512}
               height={512}
+              unoptimized  
               className={`
                 rounded object-cover object-center
                 h-40 md:h-48
