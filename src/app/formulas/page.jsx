@@ -15,7 +15,7 @@ export default function Formulas() {
         f.prompt.toLowerCase().includes(search.toLowerCase()) ||
         f.title .toLowerCase().includes(search.toLowerCase());
 
-      const matchesCat = !activeCat || f.category.includes(activeCat);
+     const matchesCat = !activeCat || (f.category ?? []).includes(activeCat);
       return matchesSearch && matchesCat;
     });
   }, [search, activeCat]);
