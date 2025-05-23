@@ -12,4 +12,6 @@ export default {
   },
   plugins: [require('@tailwindcss/typography')],
   plugins: [require("tailwindcss-animate")],
+  animation: { "fade-in": "fadeIn .4s ease-out both" },
+keyframes: { fadeIn: { from:{opacity:0}, to:{opacity:1} } },
 };
