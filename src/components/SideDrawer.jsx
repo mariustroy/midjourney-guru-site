@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { Menu } from "lucide-react";
@@ -26,6 +26,10 @@ export default function SideDrawer() {
         side="left"
         className="w-64 md:static md:translate-x-0 md:shadow-none p-4 flex flex-col"
       >
+      <SheetHeader>
+    {/* visually hidden title to satisfy Radix a11y check */}
+    <SheetTitle className="sr-only">Navigation</SheetTitle>
+  </SheetHeader>
         <nav className="flex-1 space-y-4">
           <Link href="/resources" onClick={() => setOpen(false)}>
             Resources
