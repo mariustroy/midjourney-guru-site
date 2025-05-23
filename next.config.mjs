@@ -1,19 +1,25 @@
 // next.config.mjs
+import path from "path";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  /* ---------- image remotePatterns (unchanged) ---------- */
   images: {
-    // simplest: exact-domain allow-list
-    // domains: ['images.unsplash.com'],
-
-    // or, if you prefer the newer wildcard syntax:
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'mariustroy.com',
-        port: '',          // empty string means “any port”
-        pathname: 'guru-images/**',   // allow every path
+        protocol: "https",
+        hostname: "mariustroy.com",
+        port: "",
+        pathname: "guru-images/**",
       },
     ],
+  },
+
+  /* ---------- alias @ → ./src ---------- */
+  webpack: (config) => {
+    // make "@/..." resolve to "<project-root>/src/…"
+    config.resolve.alias["@"] = path.resolve(__dirname, "src");
+    return config;
   },
 };
 
