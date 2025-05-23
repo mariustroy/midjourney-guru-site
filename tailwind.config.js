@@ -1,22 +1,23 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: "class",
-  content: ["./src/**/*.{js,jsx,ts,tsx}", "./pages/**/*.{js,ts,jsx,tsx}"],
+
+  /* 1 – include both /src and /pages */
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./pages/**/*.{js,jsx,ts,tsx}",
+  ],
 
   theme: {
+    /* 2 – put the colour in extend and as an object so /opacity works */
     extend: {
-      /* ---- brand colour with opacity support ---- */
       colors: {
         brand: {
-          DEFAULT: "#FFFD91",          // plain hex gives text-brand / bg-brand
-          50: "#FFFEE0",               // optional tints if you want
-          100: "#FFFDBF",
-          200: "#FFFB9F",
-          300: "#FFF97E",
+          DEFAULT: "#FFFD91",    // text-brand, bg-brand
         },
       },
 
-      /* ---- fade-in keyframe ---- */
+      /* 3 – fade-in keyframe */
       keyframes: {
         fadeIn: { from: { opacity: 0 }, to: { opacity: 1 } },
       },
@@ -26,7 +27,7 @@ export default {
     },
   },
 
-  /* plug-ins (merge the array, don’t duplicate the key) */
+  /* 4 – one plugins array (no duplicate keys) */
   plugins: [
     require("@tailwindcss/typography"),
     require("tailwindcss-animate"),
