@@ -1,3 +1,4 @@
+import "@/app/globals.css";
 import SideDrawer from "@/components/SideDrawer";
 
 export default function RootLayout({ children }) {
