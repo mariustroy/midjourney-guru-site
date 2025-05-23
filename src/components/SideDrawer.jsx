@@ -1,5 +1,5 @@
 "use client";
-
+import { usePathname } from "next/navigation"; 
 import {
   Sheet,
   SheetContent,
@@ -33,6 +33,14 @@ const NavLinks = ({ close }) => (
 );
 
 export default function SideDrawer() {
+	  /* ---- hide on auth routes ---- */
+  const pathname = usePathname();
+  if (
+    pathname.startsWith("/login") ||
+    pathname.startsWith("/auth")   // e.g. /auth/callback
+  ) {
+    return null;
+  }
   return (
     <>
       {/* ---------- Desktop static sidebar ---------- */}
