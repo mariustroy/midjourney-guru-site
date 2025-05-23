@@ -23,7 +23,7 @@ export default function Formulas() {
 
   return (
    <div
-+   className="
+   className="
      max-w-2xl mx-auto        /* same width constraint as Resources */
      px-4 py-6               /* horizontal + vertical padding       */
      pt-16 md:pt-8           /* extra room under the hamburger      */
