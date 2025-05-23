@@ -152,16 +152,16 @@ async function sendStarter(text) {
 
 
   return (
-<main
-  style={{
-    maxWidth: 640,
-    margin: "0 auto",
-    fontFamily: "sans-serif",
-    display: "flex",
-    flexDirection: "column",
-    height: "100vh",
-  }}
->
++<main
++  className="md:ml-64"          /* pushes content right of 16-rem sidebar */
++  style={{
++    maxWidth: 640,
++    fontFamily: "sans-serif",
++    display: "flex",
++    flexDirection: "column",
++    height: "100vh",
++  }}
++>
       <header
   className="w-full py-4 flex justify-center"
   style={{
