@@ -12,15 +12,14 @@ const supa = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
-/* ---------- Main ---------- */
 export default function Login() {
   const router             = useRouter();
-  const [phase, setPhase]  = useState("cta"); // cta | form | sent
+  const [phase, setPhase]  = useState("cta");      // cta | form | sent
   const [email, setEmail]  = useState("");
-  const [error, setError]  = useState("");
+  const [errorMsg, setErr] = useState("");
   const inputRef           = useRef(null);
 
-  /* redirect if logged-in */
+  /* redirect if already logged in */
   useEffect(() => {
     supa.auth.getSession().then(({ data: { session } }) => {
       if (session) router.replace("/");
@@ -40,8 +39,8 @@ export default function Login() {
       },
     });
 
-    if (error) { setError(error.message); return; }
-    setError("");
+    if (error) { setErr(error.message); return; }
+    setErr("");
     setPhase("sent");
   }
 
@@ -52,7 +51,7 @@ export default function Login() {
         bg-black text-[var(--brand)]
       "
     >
-      {/* -- background & overlay -- */}
+      {/* -------- background & overlay -------- */}
       <Image
         src="/images/hero.jpg"
         alt=""
@@ -63,42 +62,54 @@ export default function Login() {
       />
       <div className="absolute inset-0 bg-black/60 -z-10" />
 
-      {/* ---------- header (logo + tagline) ---------- */}
-      <header className="pt-20 text-center px-4">
+      {/* -------- header (logo + tagline) -------- */}
+      <header
+        className="
+          pt-16 md:pt-12            /*  ↓ 64 px from top on mobile, 48 px on desktop */
+          text-center px-4
+          md:absolute md:top-12 md:left-1/2 md:-translate-x-1/2
+        "
+      >
         <Image
           src="/images/logo.svg"
           alt="Midjourney Guru"
-          width={176}
-          height={60}
-          className="w-36 md:w-44 mx-auto mb-6"
+          width={176} height={60}
+          className="w-36 md:w-44 mx-auto mb-6"   /* 144 px mobile */
           priority
         />
 
-        <ul className="space-y-1 text-lg md:text-xl font-light mb-8">
+        <ul
+          className="
+            space-y-1
+            text-lg md:text-xl
+            font-light tracking-wide           /*   thinner but readable   */
+            mb-8
+            max-w-md mx-auto
+          "
+        >
           <li>Midjourney AI Copilot</li>
           <li>Prompts Vault</li>
           <li>Resources &amp; Tutorials</li>
         </ul>
       </header>
 
-      {/* ---------- CTA / form wrapper ---------- */}
+      {/* -------- CTA / form wrapper -------- */}
       <section
         className="
           flex-1 flex flex-col items-center
           justify-end md:justify-center
-          px-4
+          px-4 pb-24 md:pb-0           /*  ↓  keeps CTA clear of iOS bottom bar   */
         "
       >
-        {/* ---------- phase blocks ---------- */}
         {phase === "cta" && (
           <>
             <CTAButton onClick={() => setPhase("form")} />
-            <SubNote className="mt-3 mb-10 md:mb-0" />
+            <SubNote className="mt-3" />
           </>
         )}
 
         {phase === "form" && (
-          <form onSubmit={sendLink} className="w-full max-w-xs mx-auto mb-10 md:mb-0">
+          <form onSubmit={sendLink} className="w-full max-w-xs mx-auto">
             <div className="relative">
               <input
                 ref={inputRef}
@@ -106,7 +117,7 @@ export default function Login() {
                 required
                 placeholder="you@example.com"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
                 className="
                   w-full rounded-full px-5 py-3
                   border-2 border-[var(--brand)]
@@ -128,13 +139,16 @@ export default function Login() {
               </button>
             </div>
 
-            {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
+            {errorMsg && (
+              <p className="mt-2 text-sm text-red-600">{errorMsg}</p>
+            )}
+
             <SubNote className="mt-4" />
           </form>
         )}
 
         {phase === "sent" && (
-          <div className="mb-10 md:mb-0 text-center space-y-1">
+          <div className="text-center space-y-1 mb-10 md:mb-0">
             <p className="text-lg font-medium text-[var(--brand)]">
               ✅ Check your inbox!
             </p>
@@ -148,7 +162,8 @@ export default function Login() {
   );
 }
 
-/* ---------- tiny helpers ---------- */
+/* ---------- helpers ---------- */
+
 function CTAButton({ onClick }) {
   return (
     <button
@@ -168,7 +183,7 @@ function CTAButton({ onClick }) {
 
 function SubNote({ className = "" }) {
   return (
-    <p className={`text-xs text-center opacity-60 ${className}`}>
+    <p className={`text-xs text-center text-[var(--brand)/0.5] ${className}`}>
       (subscription required)
     </p>
   );
