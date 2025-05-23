@@ -22,7 +22,14 @@ export default function Formulas() {
   }, [search, activeCat]);
 
   return (
-    <div className="max-w-5xl mx-auto px-4 pt-16 md:pt-8 space-y-6">
+   <div
++   className="
+     max-w-2xl mx-auto        /* same width constraint as Resources */
+     px-4 py-6               /* horizontal + vertical padding       */
+     pt-16 md:pt-8           /* extra room under the hamburger      */
+     space-y-6
+   "
+ >
       <h1 className="text-2xl font-semibold">Formulas</h1>
 
       {/* ------------- search ------------- */}
