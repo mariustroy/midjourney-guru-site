@@ -42,7 +42,9 @@ const isPublic =
     .eq("id", session.user.id)
     .single();
 
-  const expired = profile?.beta_expires && new Date(profile.beta_expires) < Date.now();
+  const expired =
+  !!profile?.beta_expires &&              // guard against null
+  new Date(profile.beta_expires) < new Date();
   const notPaid = profile?.plan !== "pro";
 
   if (expired || notPaid) {
