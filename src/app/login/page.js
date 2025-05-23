@@ -6,21 +6,19 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 
-/* ─ Supabase client ─ */
 const supa = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
-/* ─ Main component ─ */
 export default function Login() {
-  const router                 = useRouter();
-  const [phase, setPhase]      = useState("cta");      // cta | form | sent
-  const [email, setEmail]      = useState("");
-  const [errorMsg, setError]   = useState("");
-  const inputRef               = useRef(null);
+  const router = useRouter();
+  const [phase, setPhase] = useState("cta");   // cta | form | sent
+  const [email, setEmail] = useState("");
+  const [errorMsg, setError] = useState("");
+  const inputRef = useRef(null);
 
-  /* redirect if already logged-in */
+  /* redirect if already signed-in */
   useEffect(() => {
     supa.auth.getSession().then(({ data: { session } }) => {
       if (session) router.replace("/");
@@ -45,16 +43,36 @@ export default function Login() {
     setPhase("sent");
   }
 
-  /* reveal input after CTA click */
   const showForm = () => {
     setPhase("form");
     setTimeout(() => inputRef.current?.focus(), 50);
   };
 
-  /* ─────────── render ─────────── */
   return (
-    <Shell phase={phase} onCTA={showForm}>
-      {phase === "cta" && <CTAButton onClick={showForm} />}
+    <Shell phase={phase}>
+      {/* ---------- logo ---------- */}
+      <Image
+        src="/images/logo.svg"
+        alt="Midjourney Guru"
+        width={176} height={60}           /* intrinsic size */
+        className="w-36 md:w-44 mx-auto mb-6"   /* 144 px mobile, 176 px desktop */
+        priority
+      />
+
+      {/* ---------- tagline ---------- */}
+      <ul className="space-y-1 text-center text-lg md:text-xl font-medium mb-12">
+        <li>Midjourney AI Copilot</li>
+        <li>Prompts Vault</li>
+        <li>Resources &amp; Tutorials</li>
+      </ul>
+
+      {/* ---------- main slot ---------- */}
+      {phase === "cta" && (
+        <>
+          <CTAButton onClick={showForm} />
+          <SubscriptionNote />
+        </>
+      )}
 
       {phase === "form" && (
         <form onSubmit={sendLink} className="w-full max-w-xs mx-auto">
@@ -65,7 +83,7 @@ export default function Login() {
               required
               placeholder="you@example.com"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={e => setEmail(e.target.value)}
               className="
                 w-full rounded-full px-5 py-3
                 border-2 border-[var(--brand)] bg-transparent text-[var(--brand)]
@@ -75,11 +93,11 @@ export default function Login() {
             />
             <button
               type="submit"
+              aria-label="Send magic link"
               className="
                 absolute right-3 top-1/2 -translate-y-1/2
                 p-1 rounded-full bg-[var(--brand)] text-black hover:bg-[var(--brand)/0.9]
               "
-              aria-label="Send magic link"
             >
               <ArrowRight className="h-5 w-5" />
             </button>
@@ -89,9 +107,7 @@ export default function Login() {
             <p className="mt-2 text-sm text-red-600">{errorMsg}</p>
           )}
 
-          <p className="mt-2 text-xs text-center opacity-60">
-            (subscription required)
-          </p>
+          <SubscriptionNote className="mt-4" />
         </form>
       )}
 
@@ -109,7 +125,8 @@ export default function Login() {
   );
 }
 
-/* ─ CTA button ─ */
+/* ---------- reusable components ---------- */
+
 function CTAButton({ onClick }) {
   return (
     <button
@@ -126,11 +143,26 @@ function CTAButton({ onClick }) {
   );
 }
 
-/* ─ Shell layout ─ */
-function Shell({ children, phase, onCTA }) {
+function SubscriptionNote({ className = "" }) {
   return (
-    <main className="relative isolate min-h-screen flex flex-col items-center justify-center md:justify-start md:pt-24 px-4 text-[var(--brand)]">
-      {/* background */}
+    <p className={`text-xs text-center opacity-60 ${className}`}>
+      (subscription required)
+    </p>
+  );
+}
+
+/* ---------- Layout shell ---------- */
+function Shell({ children, phase }) {
+  return (
+    <main
+      className="
+        relative isolate min-h-screen flex flex-col items-center
+        /* mobile: start near top; desktop: centre vertically */
+        pt-20 justify-start md:justify-center
+        px-4 text-[var(--brand)]
+      "
+    >
+      {/* background image + overlay */}
       <Image
         src="/images/hero.jpg"
         alt=""
@@ -141,25 +173,11 @@ function Shell({ children, phase, onCTA }) {
       />
       <div className="absolute inset-0 bg-black/60 -z-10" />
 
-      {/* logo */}
-      <Image
-        src="/images/logo.svg"
-        width={180}
-        height={60}
-        alt="Midjourney Guru"
-        className="mx-auto mb-8"
-        priority
-      />
-
-      {/* tag-line */}
-      <ul className="space-y-1 text-center text-lg md:text-xl font-light mb-10">
-        <li>Midjourney AI Copilot</li>
-        <li>Prompts Vault</li>
-        <li>Resources &amp; Tutorials</li>
-      </ul>
-
+      {/* flex-column content */}
       {children}
 
-          </main>
+      {/* spacer pushes content up so button centres desktop only */}
+      {phase === "cta" && <div className="flex-1 md:flex-none" />}
+    </main>
   );
 }
