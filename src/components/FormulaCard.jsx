@@ -82,7 +82,7 @@ export default function FormulaCard({ data }) {
    alt={ref.label || ""}
    width={96}
    height={96}
-   unoptimized                               {/* ⬅ critical */}
+   unoptimized                             
    className="rounded hover:opacity-80 object-cover object-center h-24 w-24"
  />
               </a>
