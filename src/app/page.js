@@ -37,20 +37,20 @@ const HELP_RESPONSE = `
 `;
  
 /* ---------- onboarding popup ---------- */
-const [showIntro, setShowIntro] = useState(true);   // default true on server
+const [showIntro, setShowIntro] = useState(false);  // default hidden on SSR
 
-// run only on client
+// ─── Run once on client ────────────────────────────────────────────
 useEffect(() => {
-  const seen = window.localStorage.getItem("guruIntroSeen") === "1";
-  setShowIntro(!seen);
+  const seen = sessionStorage.getItem("guruIntroSeen") === "1";
+  if (!seen) {
+    setShowIntro(true);                 // show overlay
+    sessionStorage.setItem("guruIntroSeen", "1"); // mark as seen for this tab
+  }
 }, []);
 
 /* Persist dismissal so navigation doesn’t re-open it */
 function closeIntro() {
-  if (typeof window !== "undefined") {
-    window.localStorage.setItem("guruIntroSeen", "1");
-  }
-  setShowIntro(false);
+  setShowIntro(false);                  // already recorded in sessionStorage
 }
 
 // ⬇️  comment‑out this block while you’re designing
