@@ -1,4 +1,4 @@
-// supabase/functions/keep-awake/index.ts
+// @ts-nocheck
 import { createClient } from "https://esm.sh/@supabase/supabase-js";
 
 Deno.serve(async () => {
