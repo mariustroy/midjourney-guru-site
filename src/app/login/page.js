@@ -6,30 +6,30 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 
+/* ---------- Supabase ---------- */
 const supa = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
+/* ---------- Main component ---------- */
 export default function Login() {
-  const router = useRouter();
+  const router       = useRouter();
+  const [phase, setPhase]     = useState("cta");    // "cta" | "form" | "sent"
+  const [email, setEmail]     = useState("");
+  const [errorMsg, setError]  = useState("");
+  const inputRef = useRef(null);
 
-  /* -------------- local state -------------- */
-  const [phase, setPhase]       = useState<"cta" | "form" | "sent">("cta");
-  const [email, setEmail]       = useState("");
-  const [errorMsg, setError]    = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  /* -------------- redirect if already signed-in -------------- */
+  /* redirect if already logged-in */
   useEffect(() => {
     supa.auth.getSession().then(({ data: { session } }) => {
       if (session) router.replace("/");
     });
   }, [router]);
 
-  /* -------------- send magic link -------------- */
-  async function sendLink(e?: React.FormEvent) {
-    e?.preventDefault();
+  /* send magic link */
+  async function sendLink(e) {
+    e.preventDefault();
     if (!email) { inputRef.current?.focus(); return; }
 
     const { error } = await supa.auth.signInWithOtp({
@@ -46,23 +46,16 @@ export default function Login() {
     setPhase("sent");
   }
 
-  /* -------------- UI -------------- */
-  return (
-    <Shell phase={phase}>
-      {phase === "sent" && (
-        <>
-          <p className="text-center text-lg font-medium text-brand">
-            ✅ Check your inbox!
-          </p>
-          <p className="text-center text-sm opacity-80">
-            We just sent you a magic link to sign&nbsp;in.
-          </p>
-        </>
-      )}
+  /* show input after CTA click */
+  function showForm() {
+    setPhase("form");
+    setTimeout(() => inputRef.current?.focus(), 50);
+  }
 
-      {phase === "cta" && (
-        <CTAButton onClick={() => { setPhase("form"); setTimeout(()=>inputRef.current?.focus(),50); }} />
-      )}
+  /* ----------------- render ----------------- */
+  return (
+    <Shell phase={phase} onCTA={showForm}>
+      {phase === "cta" && <CTAButton onClick={showForm} />}
 
       {phase === "form" && (
         <form onSubmit={sendLink} className="w-full max-w-xs mx-auto">
@@ -71,11 +64,11 @@ export default function Login() {
               ref={inputRef}
               type="email"
               required
-              placeholder="your@email.com"
+              placeholder="you@example.com"
               value={email}
               onChange={e => setEmail(e.target.value)}
               className="
-                w-full rounded-full px-5 py-3 text-base
+                w-full rounded-full px-5 py-3
                 border-2 border-brand bg-transparent text-brand
                 placeholder:text-brand/60
                 focus:outline-none focus:ring-2 focus:ring-brand
@@ -102,12 +95,23 @@ export default function Login() {
           </p>
         </form>
       )}
+
+      {phase === "sent" && (
+        <>
+          <p className="text-center text-lg font-medium text-brand">
+            ✅ Check your inbox!
+          </p>
+          <p className="text-center text-sm opacity-80">
+            We just sent you a magic link to sign&nbsp;in.
+          </p>
+        </>
+      )}
     </Shell>
   );
 }
 
-/* ---------- CTA component ---------- */
-function CTAButton({ onClick }: { onClick: () => void }) {
+/* ---------- Re-usable CTA button ---------- */
+function CTAButton({ onClick }) {
   return (
     <button
       onClick={onClick}
@@ -123,26 +127,18 @@ function CTAButton({ onClick }: { onClick: () => void }) {
   );
 }
 
-/* ---------- Shared layout shell ---------- */
-function Shell({
-  children,
-  phase,
-}: {
-  children: React.ReactNode;
-  phase: string;
-}) {
+/* ---------- Layout shell (background, logo, sticky mobile CTA) ---------- */
+function Shell({ children, phase, onCTA }) {
   return (
     <main
       className="
-        relative isolate min-h-screen flex flex-col
-        items-center justify-center
-        md:justify-start md:pt-24
-        px-4 text-brand animate-fade-in
+        relative isolate min-h-screen flex flex-col items-center
+        justify-center md:justify-start md:pt-24 px-4 text-brand
       "
     >
-      {/* bg image */}
+      {/* background image */}
       <Image
-        src="/hero.jpg"
+        src="/hero.jpg"            /* swap for your own */
         alt=""
         fill
         priority
@@ -162,17 +158,17 @@ function Shell({
         priority
       />
 
-      {/* tag-line always visible */}
+      {/* tag-line (always visible) */}
       <ul className="space-y-1 text-center text-lg md:text-xl font-light mb-10">
         <li>Midjourney AI Copilot</li>
         <li>Prompts Vault</li>
         <li>Resources &amp; Tutorials</li>
       </ul>
 
-      {/* main content */}
+      {/* main slot */}
       {children}
 
-      {/* sticky mobile CTA (only in phase 'cta') */}
+      {/* sticky mobile CTA (only while in "cta" phase) */}
       {phase === "cta" && (
         <div
           className="
@@ -180,7 +176,7 @@ function Shell({
             backdrop-blur bg-black/50 p-4
           "
         >
-          <CTAButton onClick={onClick => {}} />{/* click passes from parent */}
+          <CTAButton onClick={onCTA} />
         </div>
       )}
     </main>
