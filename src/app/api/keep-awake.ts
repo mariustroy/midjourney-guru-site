@@ -1,9 +1,13 @@
 // pages/api/keep-awake.ts
 import type { VercelRequest, VercelResponse } from "vercel";
 
+/**
+ * Vercel will detect `config.schedule` and run this handler
+ * every 4 minutes, completely independent of the rest of your app.
+ */
 export const config = {
-  runtime: "edge",           // lightweight Edge Function
-  schedule: "*/4 * * * *"    // every 4 minutes  ⬅ Vercel will auto-register
+  runtime:  "edge",         // tiny Edge Function
+  schedule: "*/4 * * * *"   // every 4 minutes
 };
 
 export default async function handler(
@@ -16,7 +20,7 @@ export default async function handler(
       method: "GET",
       headers: {
         Authorization: `Bearer ${process.env.SUPABASE_ANON_KEY}`,
-      }
+      },
     }
   );
 
