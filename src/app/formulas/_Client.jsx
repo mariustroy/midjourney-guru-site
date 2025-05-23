@@ -5,16 +5,24 @@ import FormulaCard from "@/components/FormulaCard";
 import { Search, X } from "lucide-react";
 
 export default function FormulasClient({ initial }) {
-  /* ------------- state ------------- */
-  const [search, setSearch] = useState("");
-  const [activeCat, setCat] = useState(null);
+  /* ---------- state ---------- */
+  const [search, setSearch]   = useState("");
+  const [activeCat, setCat]   = useState(null);
 
-  /* ------------- derived list ------------- */
+  /* ---------- derive categories from data ---------- */
+  const categories = useMemo(() => {
+    const set = new Set();
+    initial.forEach(f => (f.category ?? []).forEach(c => set.add(c)));
+    return Array.from(set).sort();          // alphabetise; remove .sort() if you prefer raw order
+  }, [initial]);
+
+  /* ---------- filtered list ---------- */
   const filtered = useMemo(() => {
     return initial.filter(f => {
       const q = search.toLowerCase();
       const matchesSearch =
-        f.prompt.toLowerCase().includes(q) || f.title.toLowerCase().includes(q);
+        f.prompt.toLowerCase().includes(q) ||
+        f.title .toLowerCase().includes(q);
 
       const matchesCat =
         !activeCat || (f.category ?? []).includes(activeCat);
@@ -23,6 +31,7 @@ export default function FormulasClient({ initial }) {
     });
   }, [search, activeCat, initial]);
 
+  /* ---------- render ---------- */
   return (
     <div
       className="
@@ -54,28 +63,30 @@ export default function FormulasClient({ initial }) {
         )}
       </div>
 
-      {/* category chips */}
-      <div className="flex gap-2 overflow-x-auto pb-2">
-        {["portrait", "surreal", "fashion", "architecture"].map(cat => {
-          const active = activeCat === cat;
-          return (
-            <button
-              key={cat}
-              onClick={() => setCat(active ? null : cat)}
-              className={`
-                whitespace-nowrap rounded-full px-3 py-1 text-sm
-                ${active
-                  ? "bg-brand text-black"
-                  : "bg-muted hover:bg-muted/70"}
-              `}
-            >
-              {cat}
-            </button>
-          );
-        })}
-      </div>
+      {/* dynamic category chips */}
+      {categories.length > 0 && (
+        <div className="flex gap-2 overflow-x-auto pb-2">
+          {categories.map(cat => {
+            const active = activeCat === cat;
+            return (
+              <button
+                key={cat}
+                onClick={() => setCat(active ? null : cat)}
+                className={`
+                  whitespace-nowrap rounded-full px-3 py-1 text-sm
+                  ${active
+                    ? "bg-brand text-black"
+                    : "bg-muted hover:bg-muted/70"}
+                `}
+              >
+                {cat}
+              </button>
+            );
+          })}
+        </div>
+      )}
 
-      {/* list */}
+      {/* formulas list */}
       <div className="space-y-8">
         {filtered.map(f => (
           <FormulaCard key={f.id} data={f} />
