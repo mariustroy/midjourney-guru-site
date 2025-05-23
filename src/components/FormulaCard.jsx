@@ -59,10 +59,9 @@ export default function FormulaCard({ data }) {
               height={512}
               unoptimized  
               className={`
-                rounded object-cover object-center
-                h-40 md:h-48
-                ${i === 0 ? "w-[85vw] md:w-72" : "w-40 md:w-48"}
-              `}
+     rounded object-contain object-center     /* ⬅ keep whole image, no crop */
+     max-h-40 md:max-h-48                     /* ⬅ cap height */
+     ${i === 0 ? "w-[85vw] md:w-72" : "w-40 md:w-48"}              `}
             />
           ))}
         </div>
@@ -78,13 +77,14 @@ export default function FormulaCard({ data }) {
                 rel="noreferrer"
                 className="shrink-0"
               >
-                <Image
-                  src={ref.src}
-                  alt={ref.label || ""}
-                  width={96}
-                  height={96}
-                  className="rounded hover:opacity-80 object-cover object-center h-24 w-24"
-                />
+              <Image
+   src={ref.src}
+   alt={ref.label || ""}
+   width={96}
+   height={96}
+   unoptimized                               {/* ⬅ critical */}
+   className="rounded hover:opacity-80 object-cover object-center h-24 w-24"
+ />
               </a>
             ))}
           </div>
