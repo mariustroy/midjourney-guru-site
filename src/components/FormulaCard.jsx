@@ -60,7 +60,7 @@ export default function FormulaCard({ data }) {
   unoptimized
   className={`
     rounded object-contain object-center
-    h-60 md:h-72        /* cap height, keep aspect */
+    h-64 md:h-80        /* cap height, keep aspect */
     w-auto              /* ✨ let width size itself */
   `}
 />
