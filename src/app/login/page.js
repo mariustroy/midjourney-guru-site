@@ -6,26 +6,28 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 
+/* ---------- Supabase ---------- */
 const supa = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
+/* ---------- Main ---------- */
 export default function Login() {
-  const router = useRouter();
-  const [phase, setPhase] = useState("cta");   // cta | form | sent
-  const [email, setEmail] = useState("");
-  const [errorMsg, setError] = useState("");
-  const inputRef = useRef(null);
+  const router             = useRouter();
+  const [phase, setPhase]  = useState("cta"); // cta | form | sent
+  const [email, setEmail]  = useState("");
+  const [error, setError]  = useState("");
+  const inputRef           = useRef(null);
 
-  /* redirect if already signed-in */
+  /* redirect if logged-in */
   useEffect(() => {
     supa.auth.getSession().then(({ data: { session } }) => {
       if (session) router.replace("/");
     });
   }, [router]);
 
-  /* send magic link */
+  /* send magic-link */
   async function sendLink(e) {
     e.preventDefault();
     if (!email) { inputRef.current?.focus(); return; }
@@ -43,126 +45,14 @@ export default function Login() {
     setPhase("sent");
   }
 
-  const showForm = () => {
-    setPhase("form");
-    setTimeout(() => inputRef.current?.focus(), 50);
-  };
-
-  return (
-    <Shell phase={phase}>
-      {/* ---------- logo ---------- */}
-      <Image
-        src="/images/logo.svg"
-        alt="Midjourney Guru"
-        width={176} height={60}           /* intrinsic size */
-        className="w-36 md:w-44 mx-auto mb-6"   /* 144 px mobile, 176 px desktop */
-        priority
-      />
-
-      {/* ---------- tagline ---------- */}
-      <ul className="space-y-1 text-center text-lg md:text-xl font-medium mb-12">
-        <li>Midjourney AI Copilot</li>
-        <li>Prompts Vault</li>
-        <li>Resources &amp; Tutorials</li>
-      </ul>
-
-      {/* ---------- main slot ---------- */}
-      {phase === "cta" && (
-        <>
-          <CTAButton onClick={showForm} />
-          <SubscriptionNote />
-        </>
-      )}
-
-      {phase === "form" && (
-        <form onSubmit={sendLink} className="w-full max-w-xs mx-auto">
-          <div className="relative">
-            <input
-              ref={inputRef}
-              type="email"
-              required
-              placeholder="you@example.com"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              className="
-                w-full rounded-full px-5 py-3
-                border-2 border-[var(--brand)] bg-transparent text-[var(--brand)]
-                placeholder:text-[var(--brand)/0.6]
-                focus:outline-none focus:ring-2 focus:ring-[var(--brand)]
-              "
-            />
-            <button
-              type="submit"
-              aria-label="Send magic link"
-              className="
-                absolute right-3 top-1/2 -translate-y-1/2
-                p-1 rounded-full bg-[var(--brand)] text-black hover:bg-[var(--brand)/0.9]
-              "
-            >
-              <ArrowRight className="h-5 w-5" />
-            </button>
-          </div>
-
-          {errorMsg && (
-            <p className="mt-2 text-sm text-red-600">{errorMsg}</p>
-          )}
-
-          <SubscriptionNote className="mt-4" />
-        </form>
-      )}
-
-      {phase === "sent" && (
-        <>
-          <p className="text-center text-lg font-medium text-[var(--brand)]">
-            ✅ Check your inbox!
-          </p>
-          <p className="text-center text-sm opacity-80">
-            We just sent you a magic link to sign&nbsp;in.
-          </p>
-        </>
-      )}
-    </Shell>
-  );
-}
-
-/* ---------- reusable components ---------- */
-
-function CTAButton({ onClick }) {
-  return (
-    <button
-      onClick={onClick}
-      className="
-        w-full max-w-xs mx-auto
-        rounded-full py-3 text-lg font-medium
-        bg-[var(--brand)] text-black hover:bg-[var(--brand)/0.9] transition
-        shadow-md shadow-[var(--brand)/0.3]
-      "
-    >
-      Get&nbsp;Started
-    </button>
-  );
-}
-
-function SubscriptionNote({ className = "" }) {
-  return (
-    <p className={`text-xs text-center opacity-60 ${className}`}>
-      (subscription required)
-    </p>
-  );
-}
-
-/* ---------- Layout shell ---------- */
-function Shell({ children, phase }) {
   return (
     <main
       className="
-        relative isolate min-h-screen flex flex-col items-center
-        /* mobile: start near top; desktop: centre vertically */
-        pt-20 justify-start md:justify-center
-        px-4 text-[var(--brand)]
+        relative isolate min-h-screen flex flex-col
+        bg-black text-[var(--brand)]
       "
     >
-      {/* background image + overlay */}
+      {/* -- background & overlay -- */}
       <Image
         src="/images/hero.jpg"
         alt=""
@@ -173,11 +63,113 @@ function Shell({ children, phase }) {
       />
       <div className="absolute inset-0 bg-black/60 -z-10" />
 
-      {/* flex-column content */}
-      {children}
+      {/* ---------- header (logo + tagline) ---------- */}
+      <header className="pt-20 text-center px-4">
+        <Image
+          src="/images/logo.svg"
+          alt="Midjourney Guru"
+          width={176}
+          height={60}
+          className="w-36 md:w-44 mx-auto mb-6"
+          priority
+        />
 
-      {/* spacer pushes content up so button centres desktop only */}
-      {phase === "cta" && <div className="flex-1 md:flex-none" />}
+        <ul className="space-y-1 text-lg md:text-xl font-light mb-8">
+          <li>Midjourney AI Copilot</li>
+          <li>Prompts Vault</li>
+          <li>Resources &amp; Tutorials</li>
+        </ul>
+      </header>
+
+      {/* ---------- CTA / form wrapper ---------- */}
+      <section
+        className="
+          flex-1 flex flex-col items-center
+          justify-end md:justify-center
+          px-4
+        "
+      >
+        {/* ---------- phase blocks ---------- */}
+        {phase === "cta" && (
+          <>
+            <CTAButton onClick={() => setPhase("form")} />
+            <SubNote className="mt-3 mb-10 md:mb-0" />
+          </>
+        )}
+
+        {phase === "form" && (
+          <form onSubmit={sendLink} className="w-full max-w-xs mx-auto mb-10 md:mb-0">
+            <div className="relative">
+              <input
+                ref={inputRef}
+                type="email"
+                required
+                placeholder="you@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="
+                  w-full rounded-full px-5 py-3
+                  border-2 border-[var(--brand)]
+                  bg-transparent text-[var(--brand)]
+                  placeholder:text-[var(--brand)/0.6]
+                  focus:outline-none focus:ring-2 focus:ring-[var(--brand)]
+                "
+              />
+              <button
+                type="submit"
+                aria-label="Send magic link"
+                className="
+                  absolute right-3 top-1/2 -translate-y-1/2
+                  p-1 rounded-full bg-[var(--brand)]
+                  text-black hover:bg-[var(--brand)/0.9]
+                "
+              >
+                <ArrowRight className="h-5 w-5" />
+              </button>
+            </div>
+
+            {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
+            <SubNote className="mt-4" />
+          </form>
+        )}
+
+        {phase === "sent" && (
+          <div className="mb-10 md:mb-0 text-center space-y-1">
+            <p className="text-lg font-medium text-[var(--brand)]">
+              ✅ Check your inbox!
+            </p>
+            <p className="text-sm opacity-80">
+              We just sent you a magic link to sign&nbsp;in.
+            </p>
+          </div>
+        )}
+      </section>
     </main>
+  );
+}
+
+/* ---------- tiny helpers ---------- */
+function CTAButton({ onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      className="
+        w-full max-w-xs mx-auto
+        rounded-full py-3 text-lg font-medium
+        bg-[var(--brand)] text-black
+        hover:bg-[var(--brand)/0.9] transition
+        shadow-md shadow-[var(--brand)/0.3]
+      "
+    >
+      Get&nbsp;Started
+    </button>
+  );
+}
+
+function SubNote({ className = "" }) {
+  return (
+    <p className={`text-xs text-center opacity-60 ${className}`}>
+      (subscription required)
+    </p>
   );
 }
