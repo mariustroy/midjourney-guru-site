@@ -1,70 +1,73 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
   SheetHeader,
-  SheetTitle
+  SheetTitle,
 } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { Menu } from "lucide-react";
 
+const NavLinks = ({ close }) => (
+  <>
+    <nav className="flex-1 space-y-4">
+      <Link href="/resources" onClick={close}>
+        Resources
+      </Link>
+      <Link href="/formulas" onClick={close}>
+        Formulas
+      </Link>
+    </nav>
+    <Separator className="my-4" />
+    <Link
+      href="/settings"
+      className="text-sm text-cyan-500"
+      onClick={close}
+    >
+      Manage subscription
+    </Link>
+  </>
+);
+
 export default function SideDrawer() {
-  const [open, setOpen] = useState(false);
-
-  /* ───────── open by default on desktop ───────── */
-  useEffect(() => {
-    if (window.innerWidth >= 768) setOpen(true);
-  }, []);
-
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
-      {/* ────── Mobile hamburger (hidden ≥ md) ────── */}
-      <SheetTrigger asChild>
-        <button
-          aria-label="Open menu"
-          className="p-2 md:hidden rounded focus:outline-none focus:ring"
-        >
-          <Menu className="h-6 w-6" />
-        </button>
-      </SheetTrigger>
-
-      {/* ────── Drawer / Sidebar ────── */}
-      <SheetContent
-        side="left"
+    <>
+      {/* ---------- Desktop static sidebar ---------- */}
+      <aside
         className="
-          w-64  bg-background text-foreground
-          p-4 flex flex-col
-          md:static md:translate-x-0 md:shadow-none md:border-r
+          hidden md:flex md:flex-col
+          md:fixed md:inset-y-0 md:left-0 md:w-64
+          md:bg-background md:text-foreground md:border-r md:p-4
         "
       >
-        {/* invisible title → satisfies Radix a11y check */}
-        <SheetHeader>
-          <SheetTitle className="sr-only">Navigation</SheetTitle>
-        </SheetHeader>
+        <NavLinks close={() => {}} />
+      </aside>
 
-        <nav className="flex-1 space-y-4">
-          <Link href="/resources" onClick={() => setOpen(false)}>
-            Resources
-          </Link>
-          <Link href="/formulas" onClick={() => setOpen(false)}>
-            Formulas
-          </Link>
-        </nav>
+      {/* ---------- Mobile overlay drawer ---------- */}
+      <Sheet>
+        <SheetTrigger asChild>
+          <button
+            aria-label="Open menu"
+            className="md:hidden p-2 rounded focus:outline-none focus:ring"
+          >
+            <Menu className="h-6 w-6" />
+          </button>
+        </SheetTrigger>
 
-        <Separator className="my-4" />
-
-        <Link
-          href="/settings"
-          className="text-sm text-cyan-500"
-          onClick={() => setOpen(false)}
+        <SheetContent
+          side="left"
+          className="w-64 bg-background text-foreground p-4 md:hidden"
         >
-          Manage subscription
-        </Link>
-      </SheetContent>
-    </Sheet>
+          <SheetHeader>
+            <SheetTitle className="sr-only">Navigation</SheetTitle>
+          </SheetHeader>
+
+          <NavLinks close={() => document.activeElement?.click()} />
+        </SheetContent>
+      </Sheet>
+    </>
   );
 }
