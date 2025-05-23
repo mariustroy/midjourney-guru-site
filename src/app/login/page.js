@@ -138,7 +138,7 @@ function Shell({ children, phase, onCTA }) {
     >
       {/* background image */}
       <Image
-        src="/hero.jpg"            /* swap for your own */
+        src="/images/hero.jpg"            /* swap for your own */
         alt=""
         fill
         priority
@@ -150,7 +150,7 @@ function Shell({ children, phase, onCTA }) {
 
       {/* logo */}
       <Image
-        src="/logo.svg"
+        src="/images/logo.svg"
         width={180}
         height={60}
         alt="Midjourney Guru"
