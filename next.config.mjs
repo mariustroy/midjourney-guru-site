@@ -11,7 +11,7 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'mariustroy.com',
         port: '',          // empty string means “any port”
-        pathname: '/**',   // allow every path
+        pathname: 'guru-images/**',   // allow every path
       },
     ],
   },
