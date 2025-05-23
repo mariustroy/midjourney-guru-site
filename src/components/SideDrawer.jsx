@@ -1,6 +1,13 @@
 "use client";
+
 import { useEffect, useState } from "react";
-import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetHeader,
+  SheetTitle
+} from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { Menu } from "lucide-react";
@@ -8,28 +15,37 @@ import { Menu } from "lucide-react";
 export default function SideDrawer() {
   const [open, setOpen] = useState(false);
 
-  // 🖥️  open by default ≥768 px
+  /* ───────── open by default on desktop ───────── */
   useEffect(() => {
     if (window.innerWidth >= 768) setOpen(true);
   }, []);
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      {/* mobile hamburger */}
+      {/* ────── Mobile hamburger (hidden ≥ md) ────── */}
       <SheetTrigger asChild>
-        <button className="md:hidden p-2">
-          <Menu size={24} />
+        <button
+          aria-label="Open menu"
+          className="p-2 md:hidden rounded focus:outline-none focus:ring"
+        >
+          <Menu className="h-6 w-6" />
         </button>
       </SheetTrigger>
 
+      {/* ────── Drawer / Sidebar ────── */}
       <SheetContent
         side="left"
-        className="w-64 md:static md:translate-x-0 md:shadow-none p-4 flex flex-col"
+        className="
+          w-64  bg-background text-foreground
+          p-4 flex flex-col
+          md:static md:translate-x-0 md:shadow-none md:border-r
+        "
       >
-      <SheetHeader>
-    {/* visually hidden title to satisfy Radix a11y check */}
-    <SheetTitle className="sr-only">Navigation</SheetTitle>
-  </SheetHeader>
+        {/* invisible title → satisfies Radix a11y check */}
+        <SheetHeader>
+          <SheetTitle className="sr-only">Navigation</SheetTitle>
+        </SheetHeader>
+
         <nav className="flex-1 space-y-4">
           <Link href="/resources" onClick={() => setOpen(false)}>
             Resources
