@@ -1,9 +1,7 @@
+// src/app/api/keep-awake/route.ts
 import { NextResponse } from "next/server";
 
-// --- SCHEDULED EDGE FUNCTION --- //
-// Vercel will run this handler every 4 minutes automatically.
-export const runtime  = "edge";
-export const schedule = "*/4 * * * *";        // cron: every 4 min
+export const runtime = "edge";
 
 export async function GET() {
   await fetch(
@@ -11,7 +9,6 @@ export async function GET() {
     {
       method: "GET",
       headers: {
-        // safer: keep the key out of your repo & set in Vercel → Env Vars
         Authorization: `Bearer ${process.env.SUPABASE_ANON_KEY}`,
       },
       cache: "no-store",
