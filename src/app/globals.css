@@ -194,3 +194,6 @@ body {
   background: #131b0e;
 }
 a, button { --tw-text-opacity: 1; color: rgb(255 253 145 / var(--tw-text-opacity)); }
+:root {
+  --brand: #fffd91;        /* your yellow */
+}
