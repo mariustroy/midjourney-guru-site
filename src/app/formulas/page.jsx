@@ -2,12 +2,12 @@
 import { supabase } from "@/lib/supabaseServer";
 import FormulasClient from "./_Client";
 
-export const dynamic = "force-dynamic";  // skip static prerender
+export const revalidate = 60;  // rebuild the HTML once per minute
 
 export default async function FormulasPage() {
   const { data: formulas, error } = await supabase()
     .from("formulas")
-    .select("*")
+    .select("id, title, prompt, category, images, refs")
     .order("created_at", { ascending: false });
 
   if (error) {
