@@ -48,7 +48,7 @@ export default function SideDrawer() {
 
       {/* ---------- Mobile overlay drawer ---------- */}
       <Sheet>
-        +<SheetTrigger asChild>
+        <SheetTrigger asChild>
   <button
     aria-label="Open menu"
     className="
