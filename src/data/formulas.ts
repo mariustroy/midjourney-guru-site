@@ -1,38 +1,41 @@
 /**
  * Data model for a Midjourney “formula” card
  * ------------------------------------------------
- * id       ─ unique key for React lists / routing
- * title    ─ short human-readable name
- * prompt   ─ the full prompt text we’ll copy to clipboard
- * images   ─ example outputs (first one is shown larger)
- * refs     ─ optional reference images / links
+ * id        – unique key for React lists / routing
+ * title     – short human-readable name
+ * prompt    – the full prompt text we’ll copy to clipboard
+ * category  – array of category slugs for filtering
+ * images    – example outputs (first one is shown larger)
+ * refs      – optional reference images / links
  */
 
 export type Formula = {
   id: string;
   title: string;
   prompt: string;
-  category: string[];   // ← ADD THIS
+  category: string[];
   images: {
     id: string;
-    src: string; // absolute URL or /public/… path
+    src: string;
     alt: string;
   }[];
   refs: {
     id: string;
     src: string;
-    href?: string;  // click-through URL (defaults to src)
-    label?: string; // tooltip text
+    href?: string;
+    label?: string;
   }[];
 };
 
-export const formulas: Formula[] = [
+/* ---------- data ---------- */
+
+const formulas: Formula[] = [
   {
     id: "golden-spiral",
     title: "Golden Spiral Landscape",
     prompt:
       "majestic mountain valley at sunrise, composed with the golden spiral, warm rim light, shot on 50 mm lens —ar 3:2",
-      category: ['landscape', 'composition'], // ← MUST exist (can be [])
+    category: ["landscape", "composition"],
     images: [
       {
         id: "gs-hero",
@@ -53,7 +56,7 @@ export const formulas: Formula[] = [
     refs: [
       {
         id: "spiral-diagram",
-        src: "/refs/golden-spiral.svg", // could live in /public/refs/
+        src: "/refs/golden-spiral.svg",
         href: "https://en.wikipedia.org/wiki/Golden_ratio",
         label: "Golden-spiral reference",
       },
@@ -65,7 +68,7 @@ export const formulas: Formula[] = [
     title: "Neon-Noir Cityscape",
     prompt:
       "futuristic neon-noir street at night, wet asphalt reflections, volumetric fog, shot on anamorphic lens —ar 21:9",
-      category: ['landscape', 'composition'], // ← MUST exist (can be [])
+    category: ["surreal", "architecture"],
     images: [
       {
         id: "nn-hero",
@@ -83,6 +86,11 @@ export const formulas: Formula[] = [
         alt: "Second alternate render",
       },
     ],
-    refs: [], // no reference images for this one
+    refs: [],
   },
 ];
+
+/* ---------- exports ---------- */
+
+export { formulas };   // named export (optional but handy)
+export default formulas; // default export for `import formulas from…`
