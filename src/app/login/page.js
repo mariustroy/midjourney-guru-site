@@ -172,7 +172,7 @@ function CTAButton({ onClick }) {
         w-full max-w-xs mx-auto
         rounded-full py-3 text-lg font-medium
         bg-[var(--brand)] text-black
-        hover:bg-[var(--brand)/0.9] transition
+        hover:bg-[#E8E455] transition
         shadow-md shadow-[var(--brand)/0.3]
       "
     >
