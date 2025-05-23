@@ -155,7 +155,6 @@ async function sendStarter(text) {
 <main
   className="w-full max-w-screen-md mx-auto p-4 md:pl-64"          /* pushes content right of 16-rem sidebar */
   style={{
-    maxWidth: 640,
     fontFamily: "sans-serif",
     display: "flex",
     flexDirection: "column",
