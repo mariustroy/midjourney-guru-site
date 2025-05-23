@@ -1,17 +1,34 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: "class",                       // lock UI to dark theme
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
-  theme: { extend: {
-	  colors: {
-      brand: "#FFFD91",
+  darkMode: "class",
+  content: ["./src/**/*.{js,jsx,ts,tsx}", "./pages/**/*.{js,ts,jsx,tsx}"],
+
+  theme: {
+    extend: {
+      /* ---- brand colour with opacity support ---- */
+      colors: {
+        brand: {
+          DEFAULT: "#FFFD91",          // plain hex gives text-brand / bg-brand
+          50: "#FFFEE0",               // optional tints if you want
+          100: "#FFFDBF",
+          200: "#FFFB9F",
+          300: "#FFF97E",
+        },
+      },
+
+      /* ---- fade-in keyframe ---- */
+      keyframes: {
+        fadeIn: { from: { opacity: 0 }, to: { opacity: 1 } },
+      },
+      animation: {
+        "fade-in": "fadeIn .4s ease-out both",
+      },
     },
-  } },
-  corePlugins: {
-    animation: true                        // keep animate‑bounce utilities
   },
-  plugins: [require('@tailwindcss/typography')],
-  plugins: [require("tailwindcss-animate")],
-  animation: { "fade-in": "fadeIn .4s ease-out both" },
-keyframes: { fadeIn: { from:{opacity:0}, to:{opacity:1} } },
+
+  /* plug-ins (merge the array, don’t duplicate the key) */
+  plugins: [
+    require("@tailwindcss/typography"),
+    require("tailwindcss-animate"),
+  ],
 };
