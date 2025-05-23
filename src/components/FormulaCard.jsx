@@ -52,17 +52,18 @@ export default function FormulaCard({ data }) {
         <div className="flex gap-2 overflow-x-auto [&>*]:shrink-0">
           {data.images.map((img, i) => (
             <Image
-              key={img.id}
-              src={img.src}
-              alt={img.alt}
-              width={512}
-              height={512}
-              unoptimized  
-              className={`
-     rounded object-contain object-center     /* ⬅ keep whole image, no crop */
-     max-h-40 md:max-h-48                     /* ⬅ cap height */
-     ${i === 0 ? "w-[85vw] md:w-72" : "w-40 md:w-48"}              `}
-            />
+  key={img.id}
+  src={img.src}
+  alt={img.alt}
+  width={512}
+  height={512}
+  unoptimized
+  className={`
+    rounded object-contain object-center
+    h-40 md:h-48        /* cap height, keep aspect */
+    w-auto              /* ✨ let width size itself */
+  `}
+/>
           ))}
         </div>
 
