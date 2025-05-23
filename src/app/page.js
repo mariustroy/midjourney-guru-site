@@ -37,15 +37,21 @@ const HELP_RESPONSE = `
 `;
  
 /* ---------- onboarding popup ---------- */
-const [showIntro, setShowIntro] = useState(
-  () => localStorage.getItem("guruIntroSeen") !== "1"
-);
+const [showIntro, setShowIntro] = useState(true);   // default true on server
+
+// run only on client
+useEffect(() => {
+  const seen = window.localStorage.getItem("guruIntroSeen") === "1";
+  setShowIntro(!seen);
+}, []);
 
 /* Persist dismissal so navigation doesn’t re-open it */
 function closeIntro() {
-  localStorage.setItem("guruIntroSeen", "1");
+  if (typeof window !== "undefined") {
+    window.localStorage.setItem("guruIntroSeen", "1");
+  }
   setShowIntro(false);
-}  // always start visible
+}
 
 // ⬇️  comment‑out this block while you’re designing
 // useEffect(() => {
