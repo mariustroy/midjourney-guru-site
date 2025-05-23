@@ -13,25 +13,44 @@ import { Menu } from "lucide-react";
 
 const NavLinks = ({ close }) => (
   <>
-    <nav className="flex-1 space-y-4">
-      <Link href="/resources" onClick={close}>
-        Resources
-      </Link>
-      <Link href="/formulas" onClick={close}>
-        Formulas
-      </Link>
+    {/* Primary menu */}
+    <nav className="flex-1 space-y-1 text-lg font-medium">
+      {[
+        { href: "/resources", label: "Resources" },
+        { href: "/formulas",  label: "Formulas" },
+      ].map(({ href, label }) => (
+        <Link
+          key={href}
+          href={href}
+          onClick={close}
+          className="
+            block rounded px-3 py-2
+            transition-colors
+            hover:bg-accent/20 hover:text-accent-foreground
+            focus-visible:outline-none focus-visible:ring
+          "
+        >
+          {label}
+        </Link>
+      ))}
     </nav>
+
+    {/* Footer action */}
     <Separator className="my-4" />
+
     <Link
       href="/settings"
-      className="text-sm text-cyan-500"
       onClick={close}
+      className="
+        block text-sm text-cyan-500
+        hover:underline
+        focus-visible:outline-none focus-visible:ring
+      "
     >
       Manage subscription
     </Link>
   </>
 );
-
 export default function SideDrawer() {
 	  /* ---- hide on auth routes ---- */
   const pathname = usePathname();

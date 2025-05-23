@@ -13,7 +13,14 @@ const formulas = [
 
 export default function FormulasPage() {
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-8">
+       <div
+      className="
+        max-w-2xl mx-auto
+        px-4 py-6           /* existing side + vertical padding           */
+        pt-16 md:pt-8       /* extra space under the hamburger icon      */
+        space-y-6
+      "
+    >
       <h1 className="text-2xl font-semibold">Prompt Formulas</h1>
 
       {formulas.map((f, i) => (
