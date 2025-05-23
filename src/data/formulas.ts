@@ -12,6 +12,7 @@ export type Formula = {
   id: string;
   title: string;
   prompt: string;
+  category: string[];   // ← ADD THIS
   images: {
     id: string;
     src: string; // absolute URL or /public/… path
@@ -31,7 +32,7 @@ export const formulas: Formula[] = [
     title: "Golden Spiral Landscape",
     prompt:
       "majestic mountain valley at sunrise, composed with the golden spiral, warm rim light, shot on 50 mm lens —ar 3:2",
-       tags: ['composition', 'photography'],   // ← add / keep this
+      category: ['landscape', 'composition'], // ← MUST exist (can be [])
     images: [
       {
         id: "gs-hero",
@@ -64,7 +65,7 @@ export const formulas: Formula[] = [
     title: "Neon-Noir Cityscape",
     prompt:
       "futuristic neon-noir street at night, wet asphalt reflections, volumetric fog, shot on anamorphic lens —ar 21:9",
-      tags: ['cyberpunk', 'night'],
+      category: ['landscape', 'composition'], // ← MUST exist (can be [])
     images: [
       {
         id: "nn-hero",
