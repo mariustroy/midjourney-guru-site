@@ -153,7 +153,7 @@ async function sendStarter(text) {
 
   return (
 <main
-  className="w-full max-w-3xl mx-auto px-3 py-4 md:px-6 md:pl-64"          /* pushes content right of 16-rem sidebar */
+  className="w-full max-w-4xl mx-auto px-3 py-4 md:px-6 md:pl-64"          /* pushes content right of 16-rem sidebar */
   style={{
     fontFamily: "sans-serif",
     display: "flex",
