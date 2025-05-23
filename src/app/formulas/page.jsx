@@ -1,21 +1,19 @@
-// *** SERVER COMPONENT – no "use client" here ***
-import { supabase } from "@/lib/supabaseServer";   // helper shown earlier
-import FormulasClient from "./_Client";            // interactive UI
+// src/app/formulas/page.jsx (server component)
+import { supabase } from "@/lib/supabaseServer";
+import FormulasClient from "./_Client";
 
-// Incremental static regeneration: rebuild every 2 minutes
-export const revalidate = 120;
+export const dynamic = "force-dynamic";  // skip static prerender
 
 export default async function FormulasPage() {
-  // pull every column from the 'formulas' table
   const { data: formulas, error } = await supabase()
     .from("formulas")
     .select("*")
     .order("created_at", { ascending: false });
 
   if (error) {
-    console.error(error);
-    throw new Error("Failed to load formulas");
+    console.error("Supabase error:", error);  // shows up in Vercel logs
   }
 
+  // send an empty array if we couldn’t fetch
   return <FormulasClient initial={formulas ?? []} />;
 }
