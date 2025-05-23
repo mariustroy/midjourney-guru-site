@@ -1,19 +1,10 @@
-// pages/api/keep-awake.ts
-import type { VercelRequest, VercelResponse } from "vercel";
-
-/**
- * Vercel will detect `config.schedule` and run this handler
- * every 4 minutes, completely independent of the rest of your app.
- */
+// Scheduled Edge Function: runs every 4 minutes on Vercel
 export const config = {
-  runtime:  "edge",         // tiny Edge Function
-  schedule: "*/4 * * * *"   // every 4 minutes
+  runtime:  "edge",
+  schedule: "*/4 * * * *",   // cron expression
 };
 
-export default async function handler(
-  _req: VercelRequest,
-  res: VercelResponse
-) {
+export default async function handler() {
   await fetch(
     "https://pwxgqslsurivhznlbrmw.supabase.co/functions/v1/smart-api",
     {
@@ -24,5 +15,8 @@ export default async function handler(
     }
   );
 
-  return res.status(200).json({ ok: true });
+  return new Response(JSON.stringify({ ok: true }), {
+    headers: { "Content-Type": "application/json" },
+    status: 200,
+  });
 }
