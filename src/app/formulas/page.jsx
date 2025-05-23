@@ -1,19 +1,26 @@
-// src/app/formulas/page.jsx (server component)
-import { supabase } from "@/lib/supabaseServer";
+// src/app/formulas/page.jsx  (server component)
+
+import { createClient } from "@supabase/supabase-js";
 import FormulasClient from "./_Client";
 
-export const revalidate = 60;  // rebuild the HTML once per minute
+// Revalidate at most once per minute (keep if you already had this)
+export const revalidate = 60;
 
+/** Server side: fetch formulas with *anon* creds only. */
 export default async function FormulasPage() {
-  const { data: formulas, error } = await supabase()
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
+
+  const { data: formulas, error } = await supabase
     .from("formulas")
-    .select("id, title, prompt, category, images, refs")
+    .select("id,title,prompt,category,images,refs")
     .order("created_at", { ascending: false });
 
   if (error) {
-    console.error("Supabase error:", error);  // shows up in Vercel logs
+    console.error("Supabase error:", error);
   }
 
-  // send an empty array if we couldn’t fetch
   return <FormulasClient initial={formulas ?? []} />;
 }
