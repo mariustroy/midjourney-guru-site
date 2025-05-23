@@ -6,19 +6,19 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 
-/* ---------- Supabase ---------- */
+/* ─ Supabase client ─ */
 const supa = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
-/* ---------- Main component ---------- */
+/* ─ Main component ─ */
 export default function Login() {
-  const router = useRouter();
-  const [phase, setPhase]   = useState("cta");   // "cta" | "form" | "sent"
-  const [email, setEmail]   = useState("");
-  const [errorMsg, setErr]  = useState("");
-  const inputRef            = useRef(null);
+  const router                 = useRouter();
+  const [phase, setPhase]      = useState("cta");      // cta | form | sent
+  const [email, setEmail]      = useState("");
+  const [errorMsg, setError]   = useState("");
+  const inputRef               = useRef(null);
 
   /* redirect if already logged-in */
   useEffect(() => {
@@ -40,18 +40,18 @@ export default function Login() {
       },
     });
 
-    if (error) { setErr(error.message); return; }
-    setErr("");
+    if (error) { setError(error.message); return; }
+    setError("");
     setPhase("sent");
   }
 
   /* reveal input after CTA click */
-  function showForm() {
+  const showForm = () => {
     setPhase("form");
     setTimeout(() => inputRef.current?.focus(), 50);
-  }
+  };
 
-  /* ---------------- render ---------------- */
+  /* ─────────── render ─────────── */
   return (
     <Shell phase={phase} onCTA={showForm}>
       {phase === "cta" && <CTAButton onClick={showForm} />}
@@ -68,16 +68,16 @@ export default function Login() {
               onChange={(e) => setEmail(e.target.value)}
               className="
                 w-full rounded-full px-5 py-3
-                border-2 border-[--brand] bg-transparent text-[--brand]
-                placeholder:text-[--brand]/60
-                focus:outline-none focus:ring-2 focus:ring-[--brand]
+                border-2 border-[var(--brand)] bg-transparent text-[var(--brand)]
+                placeholder:text-[var(--brand)/0.6]
+                focus:outline-none focus:ring-2 focus:ring-[var(--brand)]
               "
             />
             <button
               type="submit"
               className="
                 absolute right-3 top-1/2 -translate-y-1/2
-                p-1 rounded-full bg-[--brand] text-black hover:bg-[--brand]/90
+                p-1 rounded-full bg-[var(--brand)] text-black hover:bg-[var(--brand)/0.9]
               "
               aria-label="Send magic link"
             >
@@ -97,7 +97,7 @@ export default function Login() {
 
       {phase === "sent" && (
         <>
-          <p className="text-center text-lg font-medium text-[--brand]">
+          <p className="text-center text-lg font-medium text-[var(--brand)]">
             ✅ Check your inbox!
           </p>
           <p className="text-center text-sm opacity-80">
@@ -109,7 +109,7 @@ export default function Login() {
   );
 }
 
-/* ---------- CTA button ---------- */
+/* ─ CTA button ─ */
 function CTAButton({ onClick }) {
   return (
     <button
@@ -117,8 +117,8 @@ function CTAButton({ onClick }) {
       className="
         w-full max-w-xs mx-auto
         rounded-full py-3 text-lg font-medium
-        bg-[--brand] text-black hover:bg-[--brand]/90 transition
-        shadow-md shadow-[--brand]/30
+        bg-[var(--brand)] text-black hover:bg-[var(--brand)/0.9] transition
+        shadow-md shadow-[var(--brand)/0.3]
       "
     >
       Get&nbsp;Started
@@ -126,15 +126,11 @@ function CTAButton({ onClick }) {
   );
 }
 
-/* ---------- Shell ---------- */
+/* ─ Shell layout ─ */
 function Shell({ children, phase, onCTA }) {
   return (
-    <main
-      className="
-        relative isolate min-h-screen flex flex-col items-center
-        justify-center md:justify-start md:pt-24 px-4 text-[--brand]
-      "
-    >
+    <main className="relative isolate min-h-screen flex flex-col items-center justify-center md:justify-start md:pt-24 px-4 text-[var(--brand)]">
+      {/* background */}
       <Image
         src="/images/hero.jpg"
         alt=""
@@ -145,6 +141,7 @@ function Shell({ children, phase, onCTA }) {
       />
       <div className="absolute inset-0 bg-black/60 -z-10" />
 
+      {/* logo */}
       <Image
         src="/images/logo.svg"
         width={180}
@@ -154,6 +151,7 @@ function Shell({ children, phase, onCTA }) {
         priority
       />
 
+      {/* tag-line */}
       <ul className="space-y-1 text-center text-lg md:text-xl font-light mb-10">
         <li>Midjourney AI Copilot</li>
         <li>Prompts Vault</li>
@@ -162,6 +160,7 @@ function Shell({ children, phase, onCTA }) {
 
       {children}
 
+      {/* sticky mobile CTA */}
       {phase === "cta" && (
         <div className="md:hidden fixed inset-x-0 bottom-0 backdrop-blur bg-black/50 p-4">
           <CTAButton onClick={onCTA} />
