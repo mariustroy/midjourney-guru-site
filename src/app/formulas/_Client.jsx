@@ -37,7 +37,7 @@ export default function FormulasClient({ initial }) {
       className="
         max-w-2xl mx-auto
         px-4 py-6
-        pt-18 md:pt-8
+        pt-16 md:pt-8
         space-y-6
       "
     >
