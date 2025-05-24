@@ -98,7 +98,7 @@ export default function Login() {
         className="
           flex-1 flex flex-col items-center
           justify-end md:justify-center
-          px-4 pb-24 md:pb-0           /*  ↓  keeps CTA clear of iOS bottom bar   */
+          px-4 pb-32 md:pb-0           /*  ↓  keeps CTA clear of iOS bottom bar   */
         "
       >
         {phase === "cta" && (
