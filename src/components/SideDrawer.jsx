@@ -119,7 +119,7 @@ export default function SideDrawer() {
             aria-label="Open menu"
             className="
               md:hidden
-              fixed top-4 left-4 z-50
+              fixed top-6 left-4 z-50
               p-2 rounded bg-background/80 backdrop-blur
               focus:outline-none focus:ring
             "
