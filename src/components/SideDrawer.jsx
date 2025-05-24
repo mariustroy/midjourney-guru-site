@@ -15,7 +15,6 @@ import { Menu } from "lucide-react";
 /* ------------------------------------------------------------------ */
 /*  NavLinks                                                          */
 /* ------------------------------------------------------------------ */
-
 const links = [
   { href: "/",          label: "Guru"      },
   { href: "/resources", label: "Resources" },
@@ -48,25 +47,25 @@ function NavLinks({ close }) {
             </Link>
           );
         })}
+
+        {/* feedback link (right after main nav items) --------------- */}
+        <Link
+          href="https://docs.google.com/forms/d/e/1FAIpQLScpfr6zzb0JBkTRkeEgzeU4eV6_b7SsX27q-nPLNMIiBQ1tDA/viewform?usp=header"
+          target="_blank"
+          rel="noreferrer"
+          onClick={close}
+          className="
+            block text-sm text-cyan-500 mt-3
+            hover:underline
+            focus-visible:outline-none focus-visible:ring
+          "
+        >
+          💬 Feedback
+        </Link>
       </nav>
 
       {/* footer action --------------------------------------------- */}
       <Separator className="my-4" />
-
-      {/* feedback link (opens in new tab) */}
-      <Link
-        href="https://docs.google.com/forms/d/e/1FAIpQLScpfr6zzb0JBkTRkeEgzeU4eV6_b7SsX27q-nPLNMIiBQ1tDA/viewform?usp=header"
-        target="_blank"
-        rel="noreferrer"
-        onClick={close}
-        className="
-          block text-sm text-cyan-500
-          hover:underline
-          focus-visible:outline-none focus-visible:ring
-        "
-      >
-        💬 Feedback
-      </Link>
 
       <Link
         href="/settings"
@@ -86,11 +85,10 @@ function NavLinks({ close }) {
 /* ------------------------------------------------------------------ */
 /*  SideDrawer component                                              */
 /* ------------------------------------------------------------------ */
-
 export default function SideDrawer() {
   const pathname = usePathname();
 
-  /* ---- hide on auth & login routes ---- */
+  /* hide drawer on auth/login routes */
   if (
     pathname.startsWith("/login") ||
     pathname.startsWith("/auth") ||
@@ -101,7 +99,7 @@ export default function SideDrawer() {
 
   return (
     <>
-      {/* ---------- Desktop static sidebar ---------- */}
+      {/* Desktop static sidebar */}
       <aside
         className="
           hidden md:flex md:flex-col
@@ -112,7 +110,7 @@ export default function SideDrawer() {
         <NavLinks close={() => {}} />
       </aside>
 
-      {/* ---------- Mobile overlay drawer ---------- */}
+      {/* Mobile overlay drawer */}
       <Sheet>
         <SheetTrigger asChild>
           <button
