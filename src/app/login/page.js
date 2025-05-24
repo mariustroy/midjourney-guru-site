@@ -60,7 +60,7 @@ export default function Login() {
         unoptimized
         className="object-cover object-center -z-10"
       />
-      <div className="absolute inset-0 bg-black/60 -z-10" />
+      <div className="absolute inset-0 bg-black/40 -z-10" />
 
       {/* -------- header (logo + tagline) -------- */}
       <header
