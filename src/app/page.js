@@ -1,15 +1,36 @@
 "use client";                       // ⭐️ Client Component
 
-import Link from "next/link"; 
+/* ---------- chat store (persisted to localStorage) ----------
+   src/store/chatStore.js
+   ------------------------------------------------------------
+   import { create } from "zustand";
+   import { persist } from "zustand/middleware";
+
+   export const useChatStore = create(
+     persist(
+       (set) => ({
+         messages: [],
+         setMessages: (fn) => set((s) => ({ messages: fn(s.messages) })),
+       }),
+       { name: "guru-chat" }
+     )
+   );
+----------------------------------------------------------------*/
+import { useChatStore } from "@/store/chatStore";   /* ← NEW */
+
+import Link from "next/link";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
   const [feedbackStatus, setFeedbackStatus] = useState({});
-  const [messages, setMessages] = useState([]);   // {id:0|1, text:""}
+  /* ---------- use persistent messages ---------- */
+  const messages     = useChatStore((s) => s.messages);
+  const setMessages  = useChatStore((s) => s.setMessages);
+
   const [input, setInput] = useState("");
-  const bottomRef = useRef(null);
+  const bottomRef   = useRef(null);
   const textareaRef = useRef(null);
   const [isTyping, setIsTyping] = useState(false);
   
@@ -59,10 +80,13 @@ function closeIntro() {
 //   if (seen) setShowIntro(false);
 // }, []);
 
-useEffect(() => {
-  // Auto-insert a friendly welcome message from the bot
-  setMessages([{ id: 1, text: "Hi there! I'm Midjourney Guru. How can I help you today?" }]);
-}, []);
+ useEffect(() => {
+    if (messages.length === 0) {
+      setMessages(() => [
+        { id: 1, text: "Hi there! I'm Midjourney Guru. How can I help you today?" }
+      ]);
+    }
+  }, [messages.length, setMessages]);
 
 function closeIntro() {
   setShowIntro(false);
