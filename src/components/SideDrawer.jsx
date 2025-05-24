@@ -57,6 +57,7 @@ function NavLinks({ close }) {
         onClick={close}
         className="
           block text-sm mt-4
+          bottomlinks
           hover:underline
           focus-visible:outline-none focus-visible:ring
         "
@@ -72,6 +73,7 @@ function NavLinks({ close }) {
         onClick={close}
         className="
           block text-sm
+          bottomlinks
           hover:underline
           focus-visible:outline-none focus-visible:ring
         "
