@@ -1,14 +1,23 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-/*  The store keeps chat messages + any other flags you need.
-    `persist` writes to localStorage under the key "guru-chat". */
+/* Persisted chat state — survives route changes + refresh */
 export const useChatStore = create(
   persist(
     (set) => ({
-      messages: [],                              // [{ role, content }, ...]
+      messages: [],
+
+      /* Replace the whole array or update it functionally */
+      setMessages: (update) =>
+        set((state) => ({
+          messages:
+            typeof update === "function" ? update(state.messages) : update,
+        })),
+
+      /* Convenience helpers (unchanged) */
       addMessage: (m) =>
-        set((s) => ({ messages: [...s.messages, m] })),
+        set((state) => ({ messages: [...state.messages, m] })),
+
       resetChat: () => set({ messages: [] }),
     }),
     { name: "guru-chat" }
