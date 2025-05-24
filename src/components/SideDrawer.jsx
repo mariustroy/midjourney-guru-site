@@ -37,9 +37,9 @@ function NavLinks({ close }) {
               href={href}
               onClick={close}
               className={`
-                block rounded px-3 py-2 transition-colors
+                block rounded px-3 py-2 font-light transition-colors
                 ${active
-                  ? "bg-accent text-accent-foreground"
+                  ? "bg-[#141A10] text-[#FFFEE6]"
                   : "hover:bg-accent/20 hover:text-accent-foreground"}
               `}
             >
