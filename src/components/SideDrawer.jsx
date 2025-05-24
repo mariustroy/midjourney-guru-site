@@ -49,7 +49,12 @@ function NavLinks({ close }) {
           );
         })}
       </nav>
-
+<NavItem
+   href="https://docs.google.com/forms/d/e/1FAIpQLScpfr6zzb0JBkTRkeEgzeU4eV6_b7SsX27q-nPLNMIiBQ1tDA/viewform?usp=header"
+   label="Feedback"
+   icon={<span className="text-lg">💬</span>}
+   external               /* if NavItem supports an external flag */
+ />
       {/* footer action --------------------------------------------- */}
       <Separator className="my-4" />
       <Link
@@ -61,7 +66,7 @@ function NavLinks({ close }) {
           focus-visible:outline-none focus-visible:ring
         "
       >
-        Manage subscription
+        Manage Subscription
       </Link>
     </>
   );

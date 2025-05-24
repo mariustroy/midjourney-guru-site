@@ -381,15 +381,6 @@ async function sendStarter(text) {
           }}
         />
       </form>
-      <a
-  href="https://docs.google.com/forms/d/e/1FAIpQLScpfr6zzb0JBkTRkeEgzeU4eV6_b7SsX27q-nPLNMIiBQ1tDA/viewform?usp=header"    /* change to your form URL */
-  target="_blank"
-  rel="noreferrer"
-  className="fixed top-4 right-4 bg-black/70 text-white text-sm
-             py-2 px-3 rounded-full backdrop-blur z-40"
->
-  💬 Feedback
-</a>
       {showIntro && (
   <div
     className="fixed inset-0 bg-black/60 flex items-center justify-center z-50"
