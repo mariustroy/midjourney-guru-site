@@ -47,22 +47,22 @@ function NavLinks({ close }) {
             </Link>
           );
         })}
-
-        {/* feedback link (right after main nav items) --------------- */}
-        <Link
-          href="https://docs.google.com/forms/d/e/1FAIpQLScpfr6zzb0JBkTRkeEgzeU4eV6_b7SsX27q-nPLNMIiBQ1tDA/viewform?usp=header"
-          target="_blank"
-          rel="noreferrer"
-          onClick={close}
-          className="
-            block text-sm text-cyan-500 mt-3
-            hover:underline
-            focus-visible:outline-none focus-visible:ring
-          "
-        >
-          💬 Feedback
-        </Link>
       </nav>
+
+      {/* feedback link — bottom of drawer, just above separator ----- */}
+      <Link
+        href="https://docs.google.com/forms/d/e/1FAIpQLScpfr6zzb0JBkTRkeEgzeU4eV6_b7SsX27q-nPLNMIiBQ1tDA/viewform?usp=header"
+        target="_blank"
+        rel="noreferrer"
+        onClick={close}
+        className="
+          block text-sm text-cyan-500 mt-4
+          hover:underline
+          focus-visible:outline-none focus-visible:ring
+        "
+      >
+        💬 Feedback
+      </Link>
 
       {/* footer action --------------------------------------------- */}
       <Separator className="my-4" />
