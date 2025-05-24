@@ -98,7 +98,7 @@ export default function Login() {
         className="
           flex-1 flex flex-col items-center
           justify-end md:justify-center
-          px-4 pb-32 md:pb-0           /*  ↓  keeps CTA clear of iOS bottom bar   */
+          px-4 pb-2 md:pb-0           /*  ↓  keeps CTA clear of iOS bottom bar   */
         "
       >
         {phase === "cta" && (
@@ -132,7 +132,7 @@ export default function Login() {
                 className="
                   absolute right-3 top-1/2 -translate-y-1/2
                   p-1 rounded-full bg-[var(--brand)]
-                  text-black hover:bg-[var(--brand)/0.9]
+                  text-black hover:bg-[#E8E455] transition
                 "
               >
                 <ArrowRight className="h-5 w-5" />
