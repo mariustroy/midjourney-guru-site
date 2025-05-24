@@ -56,7 +56,7 @@ function NavLinks({ close }) {
         rel="noreferrer"
         onClick={close}
         className="
-          block text-sm text-cyan-500 mt-4
+          block text-sm mt-4
           hover:underline
           focus-visible:outline-none focus-visible:ring
         "
@@ -71,7 +71,7 @@ function NavLinks({ close }) {
         href="/settings"
         onClick={close}
         className="
-          block text-sm text-cyan-500
+          block text-sm
           hover:underline
           focus-visible:outline-none focus-visible:ring
         "
