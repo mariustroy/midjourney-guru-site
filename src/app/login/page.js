@@ -176,7 +176,7 @@ function CTAButton({ onClick }) {
         shadow-md shadow-[var(--brand)/0.3]
       "
     >
-      Get&nbsp;Started
+      Get&nbsp;Started &#47; (/) Log in
     </button>
   );
 }
@@ -184,7 +184,7 @@ function CTAButton({ onClick }) {
 function SubNote({ className = "" }) {
   return (
     <p className={`text-xs text-center text-[var(--brand)/0.5] ${className}`}>
-      (subscription required)
+      By signing up you agree to our terms. Subscribtion is required. 
     </p>
   );
 }
