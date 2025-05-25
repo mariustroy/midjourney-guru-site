@@ -21,9 +21,9 @@ export default function ResourcesPage() {
 
       <Tabs defaultValue="images" className="w-full">
         <TabsList>
+        <TabsTrigger value="tutorials">Tutorials</TabsTrigger>
+        <TabsTrigger value="guides">Guides</TabsTrigger>
           <TabsTrigger value="images">Image Libraries</TabsTrigger>
-          <TabsTrigger value="guides">Guides</TabsTrigger>
-          <TabsTrigger value="tutorials">Tutorials</TabsTrigger>
         </TabsList>
 
         {/* ---------- IMAGE LIBRARIES ---------- */}
