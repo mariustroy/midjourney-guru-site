@@ -41,11 +41,7 @@ export default function Login() {
 
     const { error } = await supa.auth.signInWithOtp({
       email: addr,
-      options: {
-        shouldCreateUser : true,
-        emailRedirectTo  : null           // we’ll use the code, not the link
-      }
-    });
+      options: { shouldCreateUser: true } // ⬅ no redirect link at all    });
 
     if (error) { setErr(error.message); return; }
     setErr("");
@@ -56,9 +52,9 @@ export default function Login() {
 
   /* ---------- verify pasted code ---------- */
   async function verify(e) {
-    e?.preventDefault?.();                  // allow dummy calls
-    const clean = code.trim().replace(/\D/g, "");
- if (clean.length !== 6) { codeRef.current?.focus(); return; }
+        e?.preventDefault?.();
+    const clean = code.replace(/[^0-9]/g, "");        // digits only
+    if (clean.length !== 6) { codeRef.current?.focus(); return; }
 
 
     const { error } = await supa.auth.verifyOtp({
@@ -74,7 +70,7 @@ export default function Login() {
 
   /* ---------- allow “auto-submit” when 6 digits typed ---------- */
   useEffect(() => {
-     if (phase === "code" && code.length === 6 && !autoDone) {
+      if (phase === "code" && code.replace(/[^0-9]/g, "").length === 6 && !autoDone) {
       setAutoDone(true);                  // run only once per OTP
       verify();
     }     }, [phase, code, autoDone]);             // eslint-disable line removed
