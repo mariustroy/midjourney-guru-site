@@ -16,11 +16,11 @@ export default function Login() {
   const router = useRouter();
 
   /* ui state ----------------------------------------------------- */
-  const [phase, setPhase]  = useState("cta");          // cta → email → code
-  const [email, setEmail]  = useState("");
-  const [code,  setCode]   = useState("");             // 6-digit OTP
-  const [errorMsg, setErr] = useState("");
-  const [busy, setBusy]    = useState(false);          // lock UI while verifying
+  const [phase, setPhase]   = useState("cta");   // cta → email → code
+  const [email, setEmail]   = useState("");
+  const [code,  setCode]    = useState("");      // 6-digit OTP
+  const [errorMsg, setErr]  = useState("");
+  const [busy, setBusy]     = useState(false);   // disable while verifying
 
   const emailRef = useRef(null);
   const codeRef  = useRef(null);
@@ -51,44 +51,33 @@ export default function Login() {
     setTimeout(() => codeRef.current?.focus(), 50);
   }
 
-  /* ── 2. verify helper (tries login then signup) ──────────────── */
+  /* ── 2. verify helper (single attempt, type='email') ─────────── */
   async function verifyToken(token) {
-    if (busy) return;                // guard against double-click
     setBusy(true);
     setErr("");
 
-    const addr = email.trim().toLowerCase();
-
-    const attempt = (type) =>
-      supa.auth.verifyOtp({ email: addr, token, type });
-
-    let { error } = await attempt("email");        // existing users
-    if (error?.status === 403) {                   // maybe new user
-      ({ error, data: session } = await attempt("signup"));
-    }
+    const { error } = await supa.auth.verifyOtp({
+      email : email.trim().toLowerCase(),
+      token,
+      type  : "email"          // ✔ correct for 6-digit e-mail OTP
+    });
 
     setBusy(false);
 
-    if (error) { setErr(error.message); return; }
+    if (error) {                       // invalid / expired
+      setErr(error.message);
+      return;
+    }
 
-    /*  success: refresh → redirect so middleware sees cookie  */
-/*  success: tell the server to drop the auth cookies      */
-    await fetch("/api/auth/set-cookie", {
-      method : "POST",
-      body   : JSON.stringify({
-        access_token  : session.access_token,
-        refresh_token : session.refresh_token
-      })
-    });
-
-    router.replace("/");   // middleware now receives the cookie
+    // success ⇒ redirect (session cookie is now set)
+    router.replace("/");
   }
 
   /* ── 3. on-input handler with auto-submit ---------------------- */
   function handleCodeInput(e) {
     const digits = e.target.value.replace(/\D/g, "");
     setCode(digits);
-    if (digits.length === 6) verifyToken(digits);   // fires only once
+    if (digits.length === 6 && !busy) verifyToken(digits);
   }
 
   /* ui ----------------------------------------------------------- */
@@ -148,48 +137,27 @@ export default function Login() {
 
         {/* code form */}
         {phase === "code" && (
-          <form
-            onSubmit={(e) => { e.preventDefault(); verifyToken(code); }}
-            className="w-full max-w-xs mx-auto space-y-4"
-          >
-            <input
-              ref={codeRef}
-              inputMode="numeric"
-              maxLength={6}
-              required
-              placeholder="123456"
-              value={code}
-              onChange={handleCodeInput}
-              className="w-full text-center tracking-widest text-2xl font-medium
-                         bg-transparent border-b-2 border-[var(--brand)]
-                         placeholder:text-[var(--brand)/60%] py-2
-                         focus:outline-none focus:border-[var(--brand)]"
-            />
-
-            <button
-              type="submit"
-              disabled={busy}
-              className="w-full rounded-full py-3 bg-[var(--brand)]
-                         text-[#131B0E] font-medium
-                         hover:bg-[#E8E455] transition disabled:opacity-50"
-            >
-              {busy ? "Verifying…" : "Sign in"}
+          <form onSubmit={e => { e.preventDefault(); if (!busy) verifyToken(code); }}
+                className="w-full max-w-xs mx-auto space-y-4">
+            <input ref={codeRef} inputMode="numeric" maxLength={6} required
+                   placeholder="123456" value={code} onChange={handleCodeInput}
+                   className="w-full text-center tracking-widest text-2xl font-medium
+                              bg-transparent border-b-2 border-[var(--brand)]
+                              placeholder:text-[var(--brand)/60%] py-2
+                              focus:outline-none focus:border-[var(--brand)]" />
+            <button type="submit" disabled={busy}
+                    className="w-full rounded-full py-3 bg-[var(--brand)]
+                               text-[#131B0E] font-medium
+                               hover:bg-[#E8E455] transition disabled:opacity-50">
+              {busy ? "Signing in…" : "Sign in"}
             </button>
-
-            <button
-              type="button"
-              onClick={sendCode}
-              disabled={busy}
-              className="block w-full text-center text-sm underline
-                         text-[var(--brand)/80%] hover:text-[var(--brand)]
-                         disabled:opacity-50"
-            >
+            <button type="button" onClick={sendCode} disabled={busy}
+                    className="block w-full text-center text-sm underline
+                               text-[var(--brand)/80%] hover:text-[var(--brand)]
+                               disabled:opacity-50">
               Resend code
             </button>
-
-            {errorMsg && (
-              <p className="text-sm text-red-600 text-center">{errorMsg}</p>
-            )}
+            {errorMsg && <p className="text-sm text-red-600 text-center">{errorMsg}</p>}
           </form>
         )}
       </section>
@@ -200,12 +168,10 @@ export default function Login() {
 /* ─── helpers ──────────────────────────────────────────────────── */
 function CTAButton({ onClick }) {
   return (
-    <button
-      onClick={onClick}
-      className="w-full max-w-xs mx-auto rounded-full py-3 text-lg font-medium
-                 bg-[var(--brand)] text-black hover:bg-[#E8E455] transition
-                 shadow-md shadow-[var(--brand)/30%]"
-    >
+    <button onClick={onClick}
+            className="w-full max-w-xs mx-auto rounded-full py-3 text-lg font-medium
+                       bg-[var(--brand)] text-black hover:bg-[#E8E455] transition
+                       shadow-md shadow-[var(--brand)/30%]">
       Get&nbsp;Started / Log in
     </button>
   );
