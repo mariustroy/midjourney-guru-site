@@ -17,9 +17,8 @@ export default function Login() {
 
   /* phases: cta → email → code → (redirect) */
   const [phase, setPhase] = useState("cta");
-
   const [email, setEmail] = useState("");
-  const [code, setCode]   = useState("");           // 6-digit OTP
+  const [code,  setCode ] = useState("");        // 6-digit OTP
   const [errorMsg, setErr] = useState("");
 
   const emailRef = useRef(null);
@@ -39,51 +38,37 @@ export default function Login() {
     if (!addr) { emailRef.current?.focus(); return; }
 
     const { error } = await supa.auth.signInWithOtp({
-      email: addr,
-      options: { shouldCreateUser: true }   // numeric code, no redirect
+      email  : addr,
+      options: { shouldCreateUser: true }  // numeric code, no redirect
     });
 
     if (error) { setErr(error.message); return; }
     setErr("");
     setPhase("code");
-    setCode("");                // clear any previous digits
+    setCode("");                                // clear old input
     setTimeout(() => codeRef.current?.focus(), 50);
   }
 
   /* ---------- verify code ---------- */
-/* --- verify pasted code ---------------------------------------- */
-async function verify(e) {
-  e?.preventDefault?.();
-  const clean = code.replace(/\D/g, "");
-  if (clean.length !== 6) return;
+  async function verify(e) {
+    e?.preventDefault?.();
 
-  // helper that tries one channel
-  async function tryVerify(type) {
+    const clean = code.replace(/\D/g, "");      // keep digits only
+    if (clean.length !== 6) return;
+
     const { error } = await supa.auth.verifyOtp({
       email: email.trim().toLowerCase(),
       token: clean,
-      type          // "signup" or "signin"
+      type : "email"          // ✅ correct channel for numeric codes
     });
-    return error;
+
+    if (error) { setErr(error.message); return; }
+
+    // success → redirect (session cookie is now set)
+    router.replace("/");
   }
 
-  // 1️⃣ try as existing user
-  let error = await tryVerify("signin");
-
-  // 2️⃣ if that fails with 403, try as new-user signup
-  if (error?.status === 403) {
-    error = await tryVerify("signup");
-  }
-
-  if (error) {            // still failed → show message
-    setErr(error.message);
-    return;
-  }
-
-  // success!
-  router.replace("/");
-}
-
+  /* ---------- UI ---------- */
   return (
     <main
       className="
@@ -91,7 +76,7 @@ async function verify(e) {
         bg-black text-[var(--brand)]
       "
     >
-      {/* background ------------------------------------------------ */}
+      {/* background */}
       <Image
         src="/images/hero.jpg"
         alt=""
@@ -255,7 +240,7 @@ function CTAButton({ onClick }) {
         shadow-md shadow-[var(--brand)/0.3]
       "
     >
-      Get&nbsp;Started / Log in
+      Get&nbsp;Started&nbsp;/&nbsp;Log&nbsp;in
     </button>
   );
 }
