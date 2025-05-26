@@ -82,17 +82,10 @@ export default function Login() {
 
   /* ── RENDER ─────────────────────────────────────────────── */
   return (
-    <main className="relative min-h-screen flex flex-col bg-black text-[var(--brand)]">
+    <main className="relative isolate min-h-screen flex flex-col text-[var(--brand)]">
       {/* bg */}
-      <Image
-        src="/public/images/hero.jpg"
-        alt=""
-        fill
-        priority
-        unoptimized
-        className="object-cover object-center -z-10"
-      />
-      <div className="absolute inset-0 bg-black/40 -z-10" />
+      <Image ... className="object-cover object-center -z-30" />
+       <div className="absolute inset-0 bg-black/40 -z-20" />
 
       {/* header */}
       <header className="pt-16 md:pt-12 text-center px-4
