@@ -59,9 +59,9 @@ export default function Login() {
 
     const { error } = await supa.auth.verifyOtp({
       email: email.trim().toLowerCase(),
-   token: clean,
-   type : "email"           // correct type for numeric OTP
-  });
+      token: clean,
+      type : "magiclink"       // ← works for 6-digit E-mail OTPs
+    });
 
     if (error) { setErr(error.message); return; }
     setErr("");
@@ -69,11 +69,6 @@ export default function Login() {
   }
 
   /* ---------- allow “auto-submit” when 6 digits typed ---------- */
-  useEffect(() => {
-      if (phase === "code" && code.replace(/[^0-9]/g, "").length === 6 && !autoDone) {
-      setAutoDone(true);                  // run only once per OTP
-      verify();
-    }     }, [phase, code, autoDone]);             // eslint-disable line removed
   return (
     <main
       className="
@@ -186,8 +181,12 @@ export default function Login() {
               maxLength={6}
               required
               placeholder="123 456"
-              value={code}
-              onInput ={(e) => setCode(e.currentTarget.value.replace(/\D/g, ""))}
+             value={code}
+ onChange={(e) => {
+   const digits = e.target.value.replace(/\D/g, "");
+   setCode(digits);
+   if (digits.length === 6) verify();      // 🚀 submit right away
+ }}
               className="
                 w-full text-center tracking-widest text-2xl font-medium
                 bg-transparent border-b-2 border-[var(--brand)]
