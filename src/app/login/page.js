@@ -54,10 +54,7 @@ export default function Login() {
   async function verify(e) {
         e?.preventDefault?.();
     const clean = code.replace(/[^0-9]/g, "");        // digits only
-    if (digits.length === 6 && !autoDone) {
-  setAutoDone(true);
-  verify();
-}
+    if (clean.length !== 6) { codeRef.current?.focus(); return; }
 
 
     const { error } = await supa.auth.verifyOtp({
