@@ -16,11 +16,11 @@ export default function Login() {
   const router = useRouter();
 
   /* ui state ----------------------------------------------------- */
-  const [phase, setPhase]      = useState("cta"); // cta → email → code
-  const [email, setEmail]      = useState("");
-  const [code,  setCode]       = useState("");    // 6-digit OTP
-  const [errorMsg, setErr]     = useState("");
-  const [busy, setBusy]        = useState(false); // disable while verifying
+  const [phase, setPhase]  = useState("cta");          // cta → email → code
+  const [email, setEmail]  = useState("");
+  const [code,  setCode]   = useState("");             // 6-digit OTP
+  const [errorMsg, setErr] = useState("");
+  const [busy, setBusy]    = useState(false);          // lock UI while verifying
 
   const emailRef = useRef(null);
   const codeRef  = useRef(null);
@@ -40,7 +40,7 @@ export default function Login() {
 
     const { error } = await supa.auth.signInWithOtp({
       email  : addr,
-      options: { shouldCreateUser: true }   // numeric code, no redirect
+      options: { shouldCreateUser: true }          // numeric code, no redirect
     });
 
     if (error) { setErr(error.message); return; }
@@ -53,24 +53,26 @@ export default function Login() {
 
   /* ── 2. verify helper (tries login then signup) ──────────────── */
   async function verifyToken(token) {
-    setBusy(true);               // lock UI
+    if (busy) return;                // guard against double-click
+    setBusy(true);
     setErr("");
 
-    // helper for a single attempt
-    const tryVerify = async (type) =>
-      supa.auth.verifyOtp({ email: email.trim().toLowerCase(), token, type });
+    const addr = email.trim().toLowerCase();
 
-    let { error } = await tryVerify("email");      // existing user channel
-    if (error?.status === 403) {
-      // perhaps a first-time visitor – try signup channel
-      ({ error } = await tryVerify("signup"));
+    const attempt = (type) =>
+      supa.auth.verifyOtp({ email: addr, token, type });
+
+    let { error } = await attempt("email");        // existing users
+    if (error?.status === 403) {                   // maybe new user
+      ({ error } = await attempt("signup"));
     }
 
     setBusy(false);
 
     if (error) { setErr(error.message); return; }
 
-    // success ⇒ redirect (cookie is set)
+    /*  success: refresh → redirect so middleware sees cookie  */
+    router.refresh();
     router.replace("/");
   }
 
@@ -78,7 +80,7 @@ export default function Login() {
   function handleCodeInput(e) {
     const digits = e.target.value.replace(/\D/g, "");
     setCode(digits);
-    if (digits.length === 6 && !busy) verifyToken(digits);
+    if (digits.length === 6) verifyToken(digits);   // fires only once
   }
 
   /* ui ----------------------------------------------------------- */
@@ -138,27 +140,48 @@ export default function Login() {
 
         {/* code form */}
         {phase === "code" && (
-          <form onSubmit={e => { e.preventDefault(); if (!busy) verifyToken(code); }}
-                className="w-full max-w-xs mx-auto space-y-4">
-            <input ref={codeRef} inputMode="numeric" maxLength={6} required
-                   placeholder="123456" value={code} onChange={handleCodeInput}
-                   className="w-full text-center tracking-widest text-2xl font-medium
-                              bg-transparent border-b-2 border-[var(--brand)]
-                              placeholder:text-[var(--brand)/60%] py-2
-                              focus:outline-none focus:border-[var(--brand)]" />
-            <button type="submit" disabled={busy}
-                    className="w-full rounded-full py-3 bg-[var(--brand)]
-                               text-[#131B0E] font-medium
-                               hover:bg-[#E8E455] transition disabled:opacity-50">
-              {busy ? "Signing in…" : "Sign in"}
+          <form
+            onSubmit={(e) => { e.preventDefault(); verifyToken(code); }}
+            className="w-full max-w-xs mx-auto space-y-4"
+          >
+            <input
+              ref={codeRef}
+              inputMode="numeric"
+              maxLength={6}
+              required
+              placeholder="123456"
+              value={code}
+              onChange={handleCodeInput}
+              className="w-full text-center tracking-widest text-2xl font-medium
+                         bg-transparent border-b-2 border-[var(--brand)]
+                         placeholder:text-[var(--brand)/60%] py-2
+                         focus:outline-none focus:border-[var(--brand)]"
+            />
+
+            <button
+              type="submit"
+              disabled={busy}
+              className="w-full rounded-full py-3 bg-[var(--brand)]
+                         text-[#131B0E] font-medium
+                         hover:bg-[#E8E455] transition disabled:opacity-50"
+            >
+              {busy ? "Verifying…" : "Sign in"}
             </button>
-            <button type="button" onClick={sendCode} disabled={busy}
-                    className="block w-full text-center text-sm underline
-                               text-[var(--brand)/80%] hover:text-[var(--brand)]
-                               disabled:opacity-50">
+
+            <button
+              type="button"
+              onClick={sendCode}
+              disabled={busy}
+              className="block w-full text-center text-sm underline
+                         text-[var(--brand)/80%] hover:text-[var(--brand)]
+                         disabled:opacity-50"
+            >
               Resend code
             </button>
-            {errorMsg && <p className="text-sm text-red-600 text-center">{errorMsg}</p>}
+
+            {errorMsg && (
+              <p className="text-sm text-red-600 text-center">{errorMsg}</p>
+            )}
           </form>
         )}
       </section>
@@ -169,10 +192,12 @@ export default function Login() {
 /* ─── helpers ──────────────────────────────────────────────────── */
 function CTAButton({ onClick }) {
   return (
-    <button onClick={onClick}
-            className="w-full max-w-xs mx-auto rounded-full py-3 text-lg font-medium
-                       bg-[var(--brand)] text-black hover:bg-[#E8E455] transition
-                       shadow-md shadow-[var(--brand)/30%]">
+    <button
+      onClick={onClick}
+      className="w-full max-w-xs mx-auto rounded-full py-3 text-lg font-medium
+                 bg-[var(--brand)] text-black hover:bg-[#E8E455] transition
+                 shadow-md shadow-[var(--brand)/30%]"
+    >
       Get&nbsp;Started / Log in
     </button>
   );
