@@ -41,7 +41,7 @@ export default function Login() {
 
     const { error } = await supa.auth.signInWithOtp({
       email: addr,
-      options: { shouldCreateUser: true } // ⬅ no redirect link at all    });
+      options: { shouldCreateUser: true }     });
 
     if (error) { setErr(error.message); return; }
     setErr("");
