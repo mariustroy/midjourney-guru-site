@@ -58,10 +58,10 @@ export default function FormulasClient({ initial }) {
             focus:outline-none focus:border-brand
           "
         />
-        <Search className="absolute left-2 top-2.5 h-4 w-4 text-brand" />
+        <Search className="absolute left-2 top-3.5 h-4 w-4 text-brand" />
         {search && (
           <button
-            className="absolute right-2 top-3.5 text-brand"
+            className="absolute right-2 top-2.5 text-brand"
             onClick={() => setSearch("")}
             aria-label="Clear search"
           >
