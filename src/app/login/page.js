@@ -53,34 +53,34 @@ export default function Login() {
 
   /* ── 2. verify helper — with debug logs ─────────────────── */
   async function verifyToken(token) {
-  setBusy(true);
-  setErr("");
+    setBusy(true);
+    setErr("");
 
-  const emailAddr = email.trim().toLowerCase();
-  const tryVerify = (type) =>
-    supa.auth.verifyOtp({ email: emailAddr, token, type });
+    const emailAddr = email.trim().toLowerCase();
+    const tryVerify = (type) =>
+      supa.auth.verifyOtp({ email: emailAddr, token, type });
 
-  // 1) existing user
-  let { data, error } = await tryVerify("email");
+    // 1) existing user
+    let { data, error } = await tryVerify("email");
 
-  // 2) maybe a first-time user
-  if (error?.status === 403) ({ data, error } = await tryVerify("signup"));
+    // 2) maybe a first-time user
+    if (error?.status === 403) ({ data, error } = await tryVerify("signup"));
 
-  setBusy(false);
+    setBusy(false);
 
-  if (error) { setErr(error.message); return; }
+    if (error) { setErr(error.message); return; }
 
-  /* 3) persist session for server components -------------- */
-  const { access_token, refresh_token } = data.session;
-  await fetch("/api/auth/set-cookies", {
-    method : "POST",
-    headers: { "Content-Type": "application/json" },
-    body   : JSON.stringify({ access_token, refresh_token })
-  });
+    /* 3) persist session for server components -------------- */
+    const { access_token, refresh_token } = data.session;
+    await fetch("/api/auth/set-cookies", {
+      method : "POST",
+      headers: { "Content-Type": "application/json" },
+      body   : JSON.stringify({ access_token, refresh_token })
+    });
 
-  // 4) client JS already has the session, now enter the app
-  router.replace("/");
-}
+    /* 4) hard-navigate so the whole app gets the new cookies */
+    window.location.assign("/");                // ← only line changed
+  }
 
   /* ── 3. auto-submit on 6 digits ─────────────────────────── */
   function handleCodeInput(e) {
@@ -90,18 +90,18 @@ export default function Login() {
   }
 
   /* ── RENDER ─────────────────────────────────────────────── */
- return (
-  <main className="relative isolate min-h-screen flex flex-col text-[var(--brand)]">
-    {/* background image */}
-    <Image
-      src="/images/hero.jpg"
-      alt=""
-      fill
-      priority
-      unoptimized
-      className="object-cover object-center -z-30"
-    />
-    <div className="absolute inset-0 bg-black/40 -z-20" />
+  return (
+    <main className="relative isolate min-h-screen flex flex-col text-[var(--brand)]">
+      {/* background image */}
+      <Image
+        src="/images/hero.jpg"
+        alt=""
+        fill
+        priority
+        unoptimized
+        className="object-cover object-center -z-30"
+      />
+      <div className="absolute inset-0 bg-black/40 -z-20" />
 
       {/* header */}
       <header className="pt-16 md:pt-12 text-center px-4
@@ -125,7 +125,6 @@ export default function Login() {
       {/* body */}
       <section className="flex-1 flex flex-col items-center
                           justify-end md:justify-center px-4 pb-32 md:pb-0">
-
         {/* CTA */}
         {phase === "cta" && (
           <>
@@ -144,7 +143,7 @@ export default function Login() {
                 required
                 placeholder="you@example.com"
                 value={email}
-                onChange={e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full rounded-full px-5 py-3
                            border-2 border-[var(--brand)] bg-transparent
                            text-[var(--brand)]
