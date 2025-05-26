@@ -35,10 +35,11 @@ export default function Login() {
   /* ---------- send 6-digit code ---------- */
   async function sendCode(e) {
     e.preventDefault();
-    if (!email) { emailRef.current?.focus(); return; }
+    const addr = email.trim().toLowerCase();
+ if (!addr) { emailRef.current?.focus(); return; }
 
     const { error } = await supa.auth.signInWithOtp({
-      email,
+      email: addr,
       options: {
         shouldCreateUser : true,
         emailRedirectTo  : null           // we’ll use the code, not the link
@@ -54,13 +55,15 @@ export default function Login() {
   /* ---------- verify pasted code ---------- */
   async function verify(e) {
     e.preventDefault();
-    if (code.length !== 6) { codeRef.current?.focus(); return; }
+    const clean = code.trim().replace(/\D/g, "");
+ if (clean.length !== 6) { codeRef.current?.focus(); return; }
+
 
     const { error } = await supa.auth.verifyOtp({
-      email,
-      token: code,
-      type : "email"                       // one-time code
-    });
+      email: email.trim().toLowerCase(),
+   token: clean,
+   type : "email"           // correct type for numeric OTP
+  });
 
     if (error) { setErr(error.message); return; }
     setErr("");
