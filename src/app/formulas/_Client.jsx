@@ -6,8 +6,8 @@ import { Search, X } from "lucide-react";
 
 export default function FormulasClient({ initial }) {
   /* ---------- state ---------- */
-  const [search, setSearch] = useState("");
-  const [activeCat, setCat] = useState(null);
+  const [search, setSearch]   = useState("");
+  const [activeCats, setCats] = useState([]);          // ← now an array
 
   /* ---------- derive categories ---------- */
   const categories = useMemo(() => {
@@ -22,14 +22,21 @@ export default function FormulasClient({ initial }) {
       const q = search.toLowerCase();
       const matchesSearch =
         f.prompt.toLowerCase().includes(q) ||
-        f.title.toLowerCase().includes(q);
+        f.title .toLowerCase().includes(q);
 
       const matchesCat =
-        !activeCat || (f.category ?? []).includes(activeCat);
+        activeCats.length === 0 ||                           // no pill → all
+        (f.category ?? []).some((c) => activeCats.includes(c));
 
       return matchesSearch && matchesCat;
     });
-  }, [search, activeCat, initial]);
+  }, [search, activeCats, initial]);
+
+  /* ---------- helper: toggle cat ---------- */
+  const toggleCat = (cat) =>
+    setCats((prev) =>
+      prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
+    );
 
   /* ---------- render ---------- */
   return (
@@ -67,17 +74,17 @@ export default function FormulasClient({ initial }) {
       {categories.length > 0 && (
         <div className="flex gap-2 overflow-x-auto pb-2">
           {categories.map((cat) => {
-            const active = activeCat === cat;
+            const active = activeCats.includes(cat);
             return (
               <button
                 key={cat}
-                onClick={() => setCat(active ? null : cat)}
+                onClick={() => toggleCat(cat)}
                 className={`
                   whitespace-nowrap rounded-full px-3 py-1 text-sm
                   border border-brand transition-colors
                   ${
                     active
-                      ? "bg-[#FFFD91] text-[#131B0E]"       /* selected */
+                      ? "bg-[#FFFD91] text-[#131B0E]"
                       : "bg-transparent text-brand hover:bg-brand/10"
                   }
                 `}
