@@ -17,8 +17,8 @@ import { Menu } from "lucide-react";
 /* ------------------------------------------------------------------ */
 const links = [
   { href: "/",          label: "Guru"      },
-  { href: "/resources", label: "Resources" },
   { href: "/formulas",  label: "Formulas"  },
+    { href: "/resources", label: "Resources" },
 ];
 
 function NavLinks({ close }) {
