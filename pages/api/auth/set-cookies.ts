@@ -1,15 +1,15 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { NextResponse } from "next/server";
+import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== "POST") return res.status(405).end();
+export async function POST(req: Request) {
+  const { session } = await req.json();
 
-  const { access_token, refresh_token } = JSON.parse(req.body || "{}");
-  if (!access_token || !refresh_token) return res.status(400).end("Missing tokens");
+  const supabase = createRouteHandlerClient({ cookies });
+  await supabase.auth.setSession({
+    access_token:  session.access_token,
+    refresh_token: session.refresh_token,
+  });
 
-  // server-side helper that can set the auth cookies
-  const supabase = createServerSupabaseClient({ req, res });
-  await supabase.auth.setSession({ access_token, refresh_token });
-
-  return res.status(200).end();
+  return NextResponse.json({ ok: true });
 }
