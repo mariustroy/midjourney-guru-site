@@ -21,6 +21,7 @@ export default function Login() {
   const [email, setEmail]  = useState("");
   const [code,  setCode ]  = useState("");          // 6-digit OTP
   const [errorMsg, setErr] = useState("");
+  const [autoDone, setAutoDone] = useState(false);  // prevent double-verify
 
   const emailRef           = useRef(null);
   const codeRef            = useRef(null);
@@ -49,6 +50,7 @@ export default function Login() {
     if (error) { setErr(error.message); return; }
     setErr("");
     setPhase("code");
+    setAutoDone(false);            // reset guard for fresh OTP
     setTimeout(() => codeRef.current?.focus(), 50);
   }
 
@@ -72,9 +74,11 @@ export default function Login() {
 
   /* ---------- allow “auto-submit” when 6 digits typed ---------- */
   useEffect(() => {
-    if (phase === "code" && code.length === 6) verify(new Event("submit"));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [code]);
+    if (phase === "code" && code.length === 6 && !autoDone) {
+      setAutoDone(true);                  // guard: run only once
+      verify(new Event("submit"));
+    }    // eslint-disable-next-line react-hooks/exhaustive-deps
+ }, [phase, code, autoDone]);
 
   return (
     <main
