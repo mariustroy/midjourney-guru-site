@@ -6,73 +6,85 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 
-/* ─── Supabase ──────────────────────────────────────────────── */
+/* ─── Supabase client (browser) ─────────────────────────────── */
 const supa = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
-/* ─── Page Component ────────────────────────────────────────── */
+/* ─── Page component ────────────────────────────────────────── */
 export default function Login() {
   const router = useRouter();
 
-  /* phases: “cta” → “email” → “code” → (redirect) */
-  const [phase, setPhase]       = useState("cta");
-
-  const [email, setEmail]       = useState("");
-  const [code,  setCode]        = useState("");    // 6-digit OTP
-  const [errorMsg, setErr]      = useState("");
-  const [autoDone, setAutoDone] = useState(false); // guard auto-verify
+  /* phases: cta → email → code → (redirect) */
+  const [phase, setPhase] = useState("cta");
+  const [email, setEmail] = useState("");
+  const [code,  setCode ] = useState("");  // six-digit OTP
+  const [errorMsg, setErr] = useState("");
+  const [autoDone, setAutoDone] = useState(false); // guard
 
   const emailRef = useRef(null);
   const codeRef  = useRef(null);
 
-  /* ── redirect if already logged-in ── */
+  /* already signed-in? — redirect home */
   useEffect(() => {
     supa.auth.getSession().then(({ data: { session } }) => {
       if (session) router.replace("/");
     });
   }, [router]);
 
-  /* ── send 6-digit OTP ── */
+  /* ── send OTP ── */
   async function sendCode(e) {
     e.preventDefault();
     const addr = email.trim().toLowerCase();
     if (!addr) { emailRef.current?.focus(); return; }
 
     const { error } = await supa.auth.signInWithOtp({
-      email  : addr,
-      options: { shouldCreateUser: true } // numeric OTP only
+      email: addr,
+      options: { shouldCreateUser: true }     // numeric code only
     });
 
     if (error) { setErr(error.message); return; }
 
     setErr("");
     setPhase("code");
-    setAutoDone(false);               // reset guard for new code
+    setAutoDone(false);
     setTimeout(() => codeRef.current?.focus(), 50);
   }
 
-  /* ── verify OTP ── */
-async function verify(raw) {
-  const clean = raw.replace(/[^0-9]/g, "");
-  if (clean.length !== 6) return;
+  /* ── verify OTP + set server cookies ── */
+  async function verify(raw) {
+    const clean = raw.replace(/[^0-9]/g, "");
+    if (clean.length !== 6) return;
 
-    const { error } = await supa.auth.verifyOtp({
+    /* 1  verify with Supabase JS (client) */
+    const { data, error } = await supa.auth.verifyOtp({
       email: email.trim().toLowerCase(),
       token: clean,
-      type : "email"                  // ← required for 6-digit email codes
+      type : "email"               // numeric e-mail code
     });
 
     if (error) { setErr(error.message); return; }
 
-    router.replace("/");              // session cookie now set
+    /* 2  persist the session cookie on the server
+          mimic what the magic-link callback normally does */
+    const { session } = data;
+    const qs = new URLSearchParams({
+      access_token : session.access_token,
+      refresh_token: session.refresh_token,
+      type         : "email"
+    }).toString();
+
+    await fetch(`/auth/callback?${qs}`);   // sets Http-only cookies
+
+    /* 3  client-side nav is now authorised */
+    router.replace("/");
   }
 
   /* ─────────────────────────────────────────────────────────── */
   return (
     <main className="relative isolate min-h-screen flex flex-col bg-black text-[var(--brand)]">
-      {/* background image */}
+      {/* bg image + overlay */}
       <Image
         src="/images/hero.jpg"
         alt=""
@@ -83,13 +95,12 @@ async function verify(raw) {
       />
       <div className="absolute inset-0 bg-black/40 -z-10" />
 
-      {/* header */}
+      {/* header (logo + tagline) */}
       <header className="pt-16 md:pt-12 text-center px-4 md:absolute md:top-12 md:left-1/2 md:-translate-x-1/2">
         <Image
           src="/images/logo.svg"
           alt="Midjourney Guru"
-          width={176}
-          height={60}
+          width={176} height={60}
           className="w-36 md:w-44 mx-auto mb-6"
           priority
         />
@@ -111,7 +122,7 @@ async function verify(raw) {
           </>
         )}
 
-        {/* email input */}
+        {/* e-mail form */}
         {phase === "email" && (
           <form onSubmit={sendCode} className="w-full max-w-xs mx-auto">
             <div className="relative">
@@ -142,15 +153,14 @@ async function verify(raw) {
                 <ArrowRight className="h-5 w-5" />
               </button>
             </div>
-
             {errorMsg && <p className="mt-2 text-sm text-red-600">{errorMsg}</p>}
             <SubNote className="mt-4" />
           </form>
         )}
 
-        {/* code verification */}
+        {/* code form */}
         {phase === "code" && (
-          <form onSubmit={verify} className="w-full max-w-xs mx-auto space-y-4">
+          <form onSubmit={e => { e.preventDefault(); verify(code); }} className="w-full max-w-xs mx-auto space-y-4">
             <input
               ref={codeRef}
               type="text"
@@ -160,13 +170,13 @@ async function verify(raw) {
               placeholder="123 456"
               value={code}
               onChange={e => {
-    const digits = e.target.value.replace(/\D/g, "");
-    setCode(digits);
-    if (digits.length === 6 && !autoDone) {
-      setAutoDone(true);    // guard
-      verify(digits);       // pass the *fresh* 6-digit string
-    }
-  }}
+                const digits = e.target.value.replace(/\D/g, "");
+                setCode(digits);
+                if (digits.length === 6 && !autoDone) {
+                  setAutoDone(true);
+                  verify(digits);      // 🚀 auto-submit on 6th digit / paste
+                }
+              }}
               className="
                 w-full text-center tracking-widest text-2xl font-medium
                 bg-transparent border-b-2 border-[var(--brand)]
@@ -198,7 +208,7 @@ async function verify(raw) {
   );
 }
 
-/* ─── helper components ─────────────────────────────────────── */
+/* ─── helpers ───────────────────────────────────────────────── */
 function CTAButton({ onClick }) {
   return (
     <button
