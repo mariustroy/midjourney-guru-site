@@ -51,20 +51,38 @@ export default function Login() {
   }
 
   /* ---------- verify code ---------- */
-  async function verify(e) {
-    e?.preventDefault?.();
-    const clean = code.replace(/\D/g, "");   // keep digits only
-    if (clean.length !== 6) return;
+/* --- verify pasted code ---------------------------------------- */
+async function verify(e) {
+  e?.preventDefault?.();
+  const clean = code.replace(/\D/g, "");
+  if (clean.length !== 6) return;
 
+  // helper that tries one channel
+  async function tryVerify(type) {
     const { error } = await supa.auth.verifyOtp({
       email: email.trim().toLowerCase(),
       token: clean,
-      type : "email"             // ✔ channel for numeric OTP
+      type          // "signup" or "signin"
     });
-
-    if (error) { setErr(error.message); return; }
-    router.replace("/");         // session cookie is now set
+    return error;
   }
+
+  // 1️⃣ try as existing user
+  let error = await tryVerify("signin");
+
+  // 2️⃣ if that fails with 403, try as new-user signup
+  if (error?.status === 403) {
+    error = await tryVerify("signup");
+  }
+
+  if (error) {            // still failed → show message
+    setErr(error.message);
+    return;
+  }
+
+  // success!
+  router.replace("/");
+}
 
   return (
     <main
