@@ -54,10 +54,9 @@ export default function Login() {
   }
 
   /* ── verify OTP ── */
-  async function verify(e) {
-    e?.preventDefault?.();
-    const clean = code.replace(/[^0-9]/g, "");
-    if (clean.length !== 6) return;
+async function verify(raw) {
+  const clean = raw.replace(/[^0-9]/g, "");
+  if (clean.length !== 6) return;
 
     const { error } = await supa.auth.verifyOtp({
       email: email.trim().toLowerCase(),
@@ -161,13 +160,13 @@ export default function Login() {
               placeholder="123 456"
               value={code}
               onChange={e => {
-                const digits = e.target.value.replace(/\D/g, "");
-                setCode(digits);
-                if (digits.length === 6 && !autoDone) {
-                  setAutoDone(true);   // avoid double-submit
-                  verify();            // auto-submit on paste / 6th key
-                }
-              }}
+    const digits = e.target.value.replace(/\D/g, "");
+    setCode(digits);
+    if (digits.length === 6 && !autoDone) {
+      setAutoDone(true);    // guard
+      verify(digits);       // pass the *fresh* 6-digit string
+    }
+  }}
               className="
                 w-full text-center tracking-widest text-2xl font-medium
                 bg-transparent border-b-2 border-[var(--brand)]
