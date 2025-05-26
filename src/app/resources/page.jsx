@@ -17,7 +17,8 @@ export default function ResourcesPage() {
         space-y-6
       "
     >
-      <h1 className="text-2xl font-semibold mb-4">Resources</h1>
+      {/* headline --------------------------------------------------- */}
+      <h1 className="text-[36px] leading-tight font-light">Resources</h1>
 
       <Tabs defaultValue="tutorials" className="w-full">
         <TabsList>
