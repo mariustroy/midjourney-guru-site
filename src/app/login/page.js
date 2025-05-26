@@ -53,15 +53,15 @@ export default function Login() {
   }
 
   /* ── verify OTP + set server cookies ── */
-  async function verify(raw) {
-    const clean = raw.replace(/[^0-9]/g, "");
+    e?.preventDefault?.();
+    const clean = code.replace(/\D/g, "");         // digits only
     if (clean.length !== 6) return;
 
     /* 1  verify with Supabase JS (client) */
     const { data, error } = await supa.auth.verifyOtp({
       email: email.trim().toLowerCase(),
       token: clean,
-      type : "magiclink"               // numeric e-mail code
+      type : "email"               // numeric e-mail code
     });
 
     if (error) { setErr(error.message); return; }
