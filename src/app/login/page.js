@@ -6,33 +6,30 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 
-/* ─── Supabase client ─────────────────────────────────────────── */
+/* ─── Supabase ──────────────────────────────────────────────── */
 const supa = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
 export default function Login() {
-  const router = useRouter();
+  const router                       = useRouter();
+  const [phase, setPhase]            = useState("cta");      // cta → email → code
+  const [email, setEmail]            = useState("");
+  const [code, setCode]              = useState("");         // 6-digit OTP
+  const [errorMsg, setErr]           = useState("");
+  const [busy, setBusy]              = useState(false);      // disable UI while verifying
+  const emailRef                     = useRef(null);
+  const codeRef                      = useRef(null);
 
-  /* ui state ----------------------------------------------------- */
-  const [phase, setPhase]      = useState("cta");     // cta → email → code
-  const [email, setEmail]      = useState("");
-  const [code,  setCode]       = useState("");        // 6-digit OTP
-  const [errorMsg, setErr]     = useState("");
-  const [busy, setBusy]        = useState(false);     // lock while verifying
-
-  const emailRef = useRef(null);
-  const codeRef  = useRef(null);
-
-  /* redirect if already signed-in */
+  /* already signed-in? → straight to app */
   useEffect(() => {
     supa.auth.getSession().then(({ data: { session } }) => {
       if (session) router.replace("/");
     });
   }, [router]);
 
-  /* ── 1. send numeric code ───────────────────────────────────── */
+  /* ── 1 ▸ send 6-digit code (numeric OTP) ───────────────────── */
   async function sendCode(e) {
     e.preventDefault();
     const addr = email.trim().toLowerCase();
@@ -40,7 +37,7 @@ export default function Login() {
 
     const { error } = await supa.auth.signInWithOtp({
       email  : addr,
-      options: { shouldCreateUser: true }    // numeric code, no redirect
+      options: { shouldCreateUser: true }   // numeric OTP, no redirect link
     });
 
     if (error) { setErr(error.message); return; }
@@ -51,37 +48,34 @@ export default function Login() {
     setTimeout(() => codeRef.current?.focus(), 50);
   }
 
-  /* ── 2. verify helper (magiclink ➜ signup) ──────────────────── */
-  async function verifyToken(token) {
+  /* ── 2 ▸ verify numeric OTP – *type must be "magiclink"* —— */
+  async function verify(token) {
+    if (busy) return;
     setBusy(true);
     setErr("");
 
-    const base = { email: email.trim().toLowerCase(), token };
-
-    // ① try the channel used for *existing* accounts
-    let { error } = await supa.auth.verifyOtp({ ...base, type: "magiclink" });
-
-    // ② if that fails, treat it as a *new* signup
-    if (error) {
-      ({ error } = await supa.auth.verifyOtp({ ...base, type: "signup" }));
-    }
+    const { error } = await supa.auth.verifyOtp({
+      email: email.trim().toLowerCase(),
+      token,
+      type : "magiclink"           // ← numeric e-mail code
+    });
 
     setBusy(false);
 
     if (error) { setErr(error.message); return; }
 
-    // ✅ success – session cookie is set automatically
+    /* success → go to app */
     router.replace("/");
   }
 
-  /* ── 3. on-input handler with auto-submit ───────────────────── */
-  function handleCodeInput(e) {
+  /* auto-submit when 6 digits typed */
+  function onCodeChange(e) {
     const digits = e.target.value.replace(/\D/g, "");
     setCode(digits);
-    if (digits.length === 6 && !busy) verifyToken(digits);
+    if (digits.length === 6) verify(digits);
   }
 
-  /* ui ---------------------------------------------------------- */
+  /* ─── UI ───────────────────────────────────────────────────── */
   return (
     <main className="relative isolate min-h-screen flex flex-col bg-black text-[var(--brand)]">
       {/* bg */}
@@ -90,19 +84,24 @@ export default function Login() {
       <div className="absolute inset-0 bg-black/40 -z-10" />
 
       {/* header */}
-      <header className="pt-16 md:pt-12 text-center px-4 md:absolute md:top-12 md:left-1/2 md:-translate-x-1/2">
+      <header className="pt-16 md:pt-12 text-center px-4
+                         md:absolute md:top-12 md:left-1/2 md:-translate-x-1/2">
         <Image src="/images/logo.svg" alt="Midjourney Guru"
                width={176} height={60}
                className="w-36 md:w-44 mx-auto mb-6" priority />
-        <ul className="space-y-1 text-lg md:text-xl font-light tracking-wide mb-8 max-w-md mx-auto">
+        <ul className="space-y-1 text-lg md:text-xl font-light tracking-wide
+                       mb-8 max-w-md mx-auto">
           <li>Midjourney AI Copilot</li>
           <li>Prompts Vault</li>
-          <li>Resources &amp; Tutorials</li>
+          <li>Resources & Tutorials</li>
         </ul>
       </header>
 
-      {/* body */}
-      <section className="flex-1 flex flex-col items-center justify-end md:justify-center px-4 pb-32 md:pb-0">
+      {/* main panel */}
+      <section className="flex-1 flex flex-col items-center
+                          justify-end md:justify-center px-4 pb-32 md:pb-0">
+
+        {/* CTA */}
         {phase === "cta" && (
           <>
             <CTAButton onClick={() => setPhase("email")} />
@@ -110,6 +109,7 @@ export default function Login() {
           </>
         )}
 
+        {/* e-mail form */}
         {phase === "email" && (
           <form onSubmit={sendCode} className="w-full max-w-xs mx-auto">
             <div className="relative">
@@ -125,18 +125,21 @@ export default function Login() {
                            placeholder:text-[var(--brand)/60%]
                            focus:outline-none focus:ring-2 focus:ring-[var(--brand)]" />
               <button type="submit" aria-label="Send code"
-                      className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-full
-                                 bg-[var(--brand)] text-black hover:bg-[#E8E455] transition">
+                      className="absolute right-3 top-1/2 -translate-y-1/2
+                                 p-1 rounded-full bg-[var(--brand)]
+                                 text-black hover:bg-[#E8E455] transition">
                 <ArrowRight className="h-5 w-5" />
               </button>
             </div>
+
             {errorMsg && <p className="mt-2 text-sm text-red-600">{errorMsg}</p>}
             <SubNote className="mt-4" />
           </form>
         )}
 
+        {/* code form */}
         {phase === "code" && (
-          <form onSubmit={e => { e.preventDefault(); if (!busy) verifyToken(code); }}
+          <form onSubmit={e => { e.preventDefault(); verify(code); }}
                 className="w-full max-w-xs mx-auto space-y-4">
             <input
               ref={codeRef}
@@ -145,16 +148,17 @@ export default function Login() {
               required
               placeholder="123456"
               value={code}
-              onChange={handleCodeInput}
+              onChange={onCodeChange}
               className="w-full text-center tracking-widest text-2xl font-medium
                          bg-transparent border-b-2 border-[var(--brand)]
                          placeholder:text-[var(--brand)/60%] py-2
                          focus:outline-none focus:border-[var(--brand)]" />
 
             <button type="submit" disabled={busy}
-                    className="w-full rounded-full py-3 bg-[var(--brand)] text-[#131B0E]
-                               font-medium hover:bg-[#E8E455] transition disabled:opacity-50">
-              {busy ? "Signing in…" : "Sign in"}
+                    className="w-full rounded-full py-3 bg-[var(--brand)]
+                               text-[#131B0E] font-medium
+                               hover:bg-[#E8E455] transition disabled:opacity-50">
+              {busy ? "Verifying…" : "Sign in"}
             </button>
 
             <button type="button" onClick={sendCode} disabled={busy}
@@ -172,7 +176,7 @@ export default function Login() {
   );
 }
 
-/* ─── helpers ──────────────────────────────────────────────────── */
+/* ─── helpers ─────────────────────────────────────────────────── */
 function CTAButton({ onClick }) {
   return (
     <button onClick={onClick}
