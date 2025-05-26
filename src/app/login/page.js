@@ -6,7 +6,7 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 
-/* ─── Supabase client ─────────────────────────────────────────── */
+/* ─── Supabase ──────────────────────────────────────────────── */
 const supa = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -15,24 +15,24 @@ const supa = createClient(
 export default function Login() {
   const router = useRouter();
 
-  /* ui state ----------------------------------------------------- */
-  const [phase, setPhase]  = useState("cta"); // cta → email → code
+  /* UI state ---------------------------------------------------- */
+  const [phase, setPhase]  = useState("cta");   // cta → email → code
   const [email, setEmail]  = useState("");
-  const [code,  setCode]   = useState("");    // 6-digit OTP
-  const [busy,  setBusy]   = useState(false);
+  const [code,  setCode]   = useState("");      // six digits
+  const [busy,  setBusy]   = useState(false);   // disable double-submits
   const [errorMsg, setErr] = useState("");
 
   const emailRef = useRef(null);
   const codeRef  = useRef(null);
 
-  /* redirect if already signed-in */
+  /* redirect if already logged-in ------------------------------ */
   useEffect(() => {
     supa.auth.getSession().then(({ data: { session } }) => {
       if (session) router.replace("/");
     });
   }, [router]);
 
-  /* ── 1. send numeric code ───────────────────────────────────── */
+  /* ── 1. send numeric OTP ------------------------------------- */
   async function sendCode(e) {
     e.preventDefault();
     const addr = email.trim().toLowerCase();
@@ -40,7 +40,7 @@ export default function Login() {
 
     const { error } = await supa.auth.signInWithOtp({
       email  : addr,
-      options: { shouldCreateUser: true },  // numeric code, no redirect
+      options: { shouldCreateUser: true }   // **no** redirect link
     });
 
     if (error) { setErr(error.message); return; }
@@ -48,50 +48,39 @@ export default function Login() {
     setErr("");
     setPhase("code");
     setCode("");
-    setTimeout(() => codeRef.current?.focus(), 50);
+    setTimeout(() => codeRef.current?.focus(), 40);
   }
 
-  /* ── 2. verify once, on explicit “Sign in” press ────────────── */
-  async function verify(e) {
-    e.preventDefault();
-    if (busy) return;
-
-    const token = code.trim();
-    if (token.length !== 6) {
-      setErr("Enter the 6-digit code.");
-      return;
-    }
-
+  /* ── 2. verify helper (single attempt) ----------------------- */
+  async function verifyOnce(token) {
     setBusy(true);
     setErr("");
 
     const { error } = await supa.auth.verifyOtp({
-      email: email.trim().toLowerCase(),
+      email : email.trim().toLowerCase(),
       token,
-      type : "email",               // <-- THIS is the correct channel
+      type  : "email"                // numeric E-mail OTP
     });
 
     setBusy(false);
 
     if (error) { setErr(error.message); return; }
 
-    /* optional: bridge session to cookies for RSC / server routes
-       (keep /api/auth/set-cookies if you’re using it)            */
-    try {
-      await fetch("/api/auth/set-cookies", {
-        method : "POST",
-        headers: { "Content-Type": "application/json" },
-        body   : JSON.stringify({ session: (await supa.auth.getSession()).data.session }),
-      });
-    } catch (_) { /* ignore */ }
-
-    router.replace("/");            // ✅ you’re signed-in
+    // success → dashboard
+    router.replace("/");
   }
 
-  /* ui ----------------------------------------------------------- */
+  /* ── 3. input handler (auto-submit) -------------------------- */
+  function onCodeChange(e) {
+    const digits = e.target.value.replace(/\D/g, "");
+    setCode(digits);
+    if (digits.length === 6 && !busy) verifyOnce(digits);   // auto
+  }
+
+  /* render ----------------------------------------------------- */
   return (
     <main className="relative isolate min-h-screen flex flex-col bg-black text-[var(--brand)]">
-      {/* bg */}
+      {/* background */}
       <Image src="/images/hero.jpg" alt="" fill priority unoptimized
              className="object-cover object-center -z-10" />
       <div className="absolute inset-0 bg-black/40 -z-10" />
@@ -121,20 +110,28 @@ export default function Login() {
           </>
         )}
 
-        {/* e-mail form */}
+        {/* email form */}
         {phase === "email" && (
           <form onSubmit={sendCode} className="w-full max-w-xs mx-auto">
             <div className="relative">
-              <input ref={emailRef} type="email" required placeholder="you@example.com"
-                     value={email} onChange={e => setEmail(e.target.value)}
-                     className="w-full rounded-full px-5 py-3 border-2 border-[var(--brand)]
-                                bg-transparent text-[var(--brand)]
-                                placeholder:text-[var(--brand)/60%]
-                                focus:outline-none focus:ring-2 focus:ring-[var(--brand)]" />
-              <button type="submit" aria-label="Send code"
-                      className="absolute right-3 top-1/2 -translate-y-1/2
-                                 p-1 rounded-full bg-[var(--brand)]
-                                 text-black hover:bg-[#E8E455] transition">
+              <input
+                ref={emailRef}
+                type="email"
+                required
+                placeholder="you@example.com"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                className="w-full rounded-full px-5 py-3
+                           border-2 border-[var(--brand)]
+                           bg-transparent text-[var(--brand)]
+                           placeholder:text-[var(--brand)/60%]
+                           focus:outline-none focus:ring-2 focus:ring-[var(--brand)]" />
+              <button
+                type="submit"
+                aria-label="Send code"
+                className="absolute right-3 top-1/2 -translate-y-1/2
+                           p-1 rounded-full bg-[var(--brand)]
+                           text-black hover:bg-[#E8E455] transition">
                 <ArrowRight className="h-5 w-5" />
               </button>
             </div>
@@ -145,30 +142,46 @@ export default function Login() {
 
         {/* code form */}
         {phase === "code" && (
-          <form onSubmit={verify} className="w-full max-w-xs mx-auto space-y-4">
-            <input ref={codeRef} inputMode="numeric" maxLength={6} required
-                   placeholder="123456" value={code}
-                   onChange={e => setCode(e.target.value.replace(/\D/g, ""))}
-                   className="w-full text-center tracking-widest text-2xl font-medium
-                              bg-transparent border-b-2 border-[var(--brand)]
-                              placeholder:text-[var(--brand)/60%] py-2
-                              focus:outline-none focus:border-[var(--brand)]" />
+          <form
+            onSubmit={e => { e.preventDefault(); if (!busy) verifyOnce(code); }}
+            className="w-full max-w-xs mx-auto space-y-4"
+          >
+            <input
+              ref={codeRef}
+              inputMode="numeric"
+              maxLength={6}
+              required
+              placeholder="123456"
+              value={code}
+              onChange={onCodeChange}
+              className="w-full text-center tracking-widest text-2xl font-medium
+                         bg-transparent border-b-2 border-[var(--brand)]
+                         placeholder:text-[var(--brand)/60%] py-2
+                         focus:outline-none focus:border-[var(--brand)]"
+            />
 
-            <button type="submit" disabled={busy}
-                    className="w-full rounded-full py-3 bg-[var(--brand)]
-                               text-[#131B0E] font-medium
-                               hover:bg-[#E8E455] transition disabled:opacity-50">
+            <button
+              type="submit"
+              disabled={busy}
+              className="w-full rounded-full py-3 bg-[var(--brand)]
+                         text-[#131B0E] font-medium
+                         hover:bg-[#E8E455] transition disabled:opacity-50">
               {busy ? "Signing in…" : "Sign in"}
             </button>
 
-            <button type="button" onClick={sendCode} disabled={busy}
-                    className="block w-full text-center text-sm underline
-                               text-[var(--brand)/80%] hover:text-[var(--brand)]
-                               disabled:opacity-50">
+            <button
+              type="button"
+              onClick={sendCode}
+              disabled={busy}
+              className="block w-full text-center text-sm underline
+                         text-[var(--brand)/80%] hover:text-[var(--brand)]
+                         disabled:opacity-50">
               Resend code
             </button>
 
-            {errorMsg && <p className="text-sm text-red-600 text-center">{errorMsg}</p>}
+            {errorMsg && (
+              <p className="text-sm text-red-600 text-center">{errorMsg}</p>
+            )}
           </form>
         )}
       </section>
@@ -176,13 +189,15 @@ export default function Login() {
   );
 }
 
-/* ─── helpers ─────────────────────────────────────────────────── */
+/* ─── helpers ────────────────────────────────────────────────── */
 function CTAButton({ onClick }) {
   return (
-    <button onClick={onClick}
-            className="w-full max-w-xs mx-auto rounded-full py-3 text-lg font-medium
-                       bg-[var(--brand)] text-black hover:bg-[#E8E455] transition
-                       shadow-md shadow-[var(--brand)/30%]">
+    <button
+      onClick={onClick}
+      className="w-full max-w-xs mx-auto rounded-full py-3 text-lg font-medium
+                 bg-[var(--brand)] text-black hover:bg-[#E8E455] transition
+                 shadow-md shadow-[var(--brand)/30%]"
+    >
       Get&nbsp;Started / Log in
     </button>
   );
