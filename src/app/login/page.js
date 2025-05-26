@@ -56,7 +56,7 @@ export default function Login() {
 
   /* ---------- verify pasted code ---------- */
   async function verify(e) {
-    e.preventDefault();
+    e?.preventDefault?.();                  // allow dummy calls
     const clean = code.trim().replace(/\D/g, "");
  if (clean.length !== 6) { codeRef.current?.focus(); return; }
 
@@ -74,12 +74,10 @@ export default function Login() {
 
   /* ---------- allow “auto-submit” when 6 digits typed ---------- */
   useEffect(() => {
-    if (phase === "code" && code.length === 6 && !autoDone) {
-      setAutoDone(true);                  // guard: run only once
-      verify(new Event("submit"));
-    }    // eslint-disable-next-line react-hooks/exhaustive-deps
- }, [phase, code, autoDone]);
-
+     if (phase === "code" && code.length === 6 && !autoDone) {
+      setAutoDone(true);                  // run only once per OTP
+      verify();
+    }     }, [phase, code, autoDone]);             // eslint-disable line removed
   return (
     <main
       className="
