@@ -6,34 +6,33 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 
-/* ─── Supabase client ───────────────────────────── */
+/* ── Supabase ─────────────────────────────────────────────── */
 const supa = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
-/* ─── Page ──────────────────────────────────────── */
 export default function Login() {
   const router = useRouter();
 
-  /* ui state ----------------------------------------------------- */
-  const [phase, setPhase]   = useState("cta");
-  const [email, setEmail]   = useState("");
-  const [code,  setCode]    = useState("");
-  const [err,   setErr]     = useState("");
-  const [busy,  setBusy]    = useState(false);
+  /* UI state */
+  const [phase, setPhase]  = useState("cta"); // cta → email → code
+  const [email, setEmail]  = useState("");
+  const [code,  setCode]   = useState("");
+  const [busy,  setBusy]   = useState(false);
+  const [errorMsg, setErr] = useState("");
 
   const emailRef = useRef(null);
   const codeRef  = useRef(null);
 
-  /* already signed-in? ➜ home */
+  /* redirect if already logged-in */
   useEffect(() => {
     supa.auth.getSession().then(({ data: { session } }) => {
       if (session) router.replace("/");
     });
   }, [router]);
 
-  /* ── send 6-digit OTP ───────────────────────────── */
+  /* ── 1. send OTP ────────────────────────────────────────── */
   async function sendCode(e) {
     e.preventDefault();
     const addr = email.trim().toLowerCase();
@@ -41,8 +40,9 @@ export default function Login() {
 
     const { error } = await supa.auth.signInWithOtp({
       email: addr,
-      options: { shouldCreateUser: true }
+      options: { shouldCreateUser: true }   // 6-digit numeric code
     });
+
     if (error) { setErr(error.message); return; }
 
     setErr("");
@@ -51,34 +51,39 @@ export default function Login() {
     setTimeout(() => codeRef.current?.focus(), 50);
   }
 
-  /* ── verify (signin ➜ signup fallback) ──────────── */
-  async function verify(token) {
-    setBusy(true); setErr("");
+  /* ── 2. verify helper — with debug logs ─────────────────── */
+  async function verifyToken(token) {
+    if (busy) return;
+    setBusy(true);
+    setErr("");
 
-    const tryType = async type =>
-      supa.auth.verifyOtp({ email: email.trim().toLowerCase(), token, type });
+    const addr = email.trim().toLowerCase();
 
-    let { error } = await tryType("email");
-    if (error?.status === 403) ({ error } = await tryType("signup"));
+    const attempt = async (type) => {
+      console.log("🔍 verify", { token, type });
+      return supa.auth.verifyOtp({ email: addr, token, type });
+    };
+
+    let { error } = await attempt("email");
+    if (error?.status === 403) ({ error } = await attempt("signup")); // second try
 
     setBusy(false);
-    if (error) { setErr(error.message); return; }
 
-    router.replace("/");
+    if (error) { setErr(error.message); return; }
+    router.replace("/success");           // <-- change if your post-login route differs
   }
 
-  /* input handler with auto-submit */
-  const onCode = e => {
+  /* ── 3. auto-submit on 6 digits ─────────────────────────── */
+  function handleCodeInput(e) {
     const digits = e.target.value.replace(/\D/g, "");
     setCode(digits);
-    if (digits.length === 6 && !busy) verify(digits);
-  };
+    if (digits.length === 6) verifyToken(digits);
+  }
 
-  /* ─────────── UI ─────────── */
+  /* ── RENDER ─────────────────────────────────────────────── */
   return (
-    /* ⬇️  ONE -- not two -- <main> element  */
     <main className="relative min-h-screen flex flex-col bg-black text-[var(--brand)]">
-      {/* full-bleed background */}
+      {/* bg */}
       <Image
         src="/images/hero.jpg"
         alt=""
@@ -91,7 +96,7 @@ export default function Login() {
 
       {/* header */}
       <header className="pt-16 md:pt-12 text-center px-4
-                         md:absolute md:top-12 md:left-1/2 md:-translate-x-1/2">      
+                         md:absolute md:top-12 md:left-1/2 md:-translate-x-1/2">
         <Image
           src="/images/logo.svg"
           alt="Midjourney Guru"
@@ -109,92 +114,110 @@ export default function Login() {
       </header>
 
       {/* body */}
-      <main className="relative min-h-screen flex flex-col bg-black text-[var(--brand)]">
-            <section className="flex-1 flex flex-col items-center
-                          justify-center px-4 pb-12 md:pb-0">
-          {phase === "cta" && (
-            <>
-              <CTA onClick={() => setPhase("email")} />
-              <Note className="mt-3" />
-            </>
-          )}
+      <section className="flex-1 flex flex-col items-center
+                          justify-end md:justify-center px-4 pb-32 md:pb-0">
 
-          {phase === "email" && (
-            <form onSubmit={sendCode} className="w-full max-w-xs mx-auto">
-              <div className="relative">
-                <input
-                  ref={emailRef}
-                  type="email"
-                  required
-                  placeholder="you@example.com"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  className="w-full rounded-full px-5 py-3 border-2 border-[var(--brand)]
-                             bg-transparent text-[var(--brand)]
-                             placeholder:text-[var(--brand)/60%]
-                             focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
-                />
-                <button type="submit" aria-label="Send code"
-                        className="absolute right-3 top-1/2 -translate-y-1/2
-                                   p-1 rounded-full bg-[var(--brand)]
-                                   text-black hover:bg-[#E8E455] transition">
-                  <ArrowRight className="h-5 w-5" />
-                </button>
-              </div>
-              {err && <p className="mt-2 text-sm text-red-600">{err}</p>}
-              <Note className="mt-4" />
-            </form>
-          )}
+        {/* CTA */}
+        {phase === "cta" && (
+          <>
+            <CTAButton onClick={() => setPhase("email")} />
+            <SubNote className="mt-3" />
+          </>
+        )}
 
-          {phase === "code" && (
-            <form onSubmit={e => { e.preventDefault(); verify(code); }}
-                  className="w-full max-w-xs mx-auto space-y-4">
+        {/* email form */}
+        {phase === "email" && (
+          <form onSubmit={sendCode} className="w-full max-w-xs mx-auto">
+            <div className="relative">
               <input
-                ref={codeRef}
-                inputMode="numeric"
-                maxLength={6}
+                ref={emailRef}
+                type="email"
                 required
-                placeholder="123456"
-                value={code}
-                onChange={onCode}
-                className="w-full text-center tracking-widest text-2xl font-medium
-                           bg-transparent border-b-2 border-[var(--brand)]
-                           placeholder:text-[var(--brand)/60%] py-2
-                           focus:outline-none focus:border-[var(--brand)]"
+                placeholder="you@example.com"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                className="w-full rounded-full px-5 py-3
+                           border-2 border-[var(--brand)] bg-transparent
+                           text-[var(--brand)]
+                           placeholder:text-[var(--brand)/60%]
+                           focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
               />
-              <button type="submit" disabled={busy}
-                      className="w-full rounded-full py-3 bg-[var(--brand)]
-                                 text-[#131B0E] font-medium
-                                 hover:bg-[#E8E455] transition disabled:opacity-50">
-                {busy ? "Signing in…" : "Sign in"}
+              <button
+                type="submit"
+                aria-label="Send code"
+                className="absolute right-3 top-1/2 -translate-y-1/2
+                           p-1 rounded-full bg-[var(--brand)]
+                           text-black hover:bg-[#E8E455] transition"
+              >
+                <ArrowRight className="h-5 w-5" />
               </button>
-              <button type="button" onClick={sendCode} disabled={busy}
-                      className="block w-full text-center text-sm underline
-                                 text-[var(--brand)/80%] hover:text-[var(--brand)]
-                                 disabled:opacity-50">
-                Resend code
-              </button>
-              {err && <p className="text-sm text-red-600 text-center">{err}</p>}
-            </form>
-          )}
-        </section>
-      </main>
-    </div>
+            </div>
+            {errorMsg && <p className="mt-2 text-sm text-red-600">{errorMsg}</p>}
+            <SubNote className="mt-4" />
+          </form>
+        )}
+
+        {/* code form */}
+        {phase === "code" && (
+          <div className="w-full max-w-xs mx-auto space-y-4">
+            <input
+              ref={codeRef}
+              inputMode="numeric"
+              maxLength={6}
+              required
+              placeholder="123456"
+              value={code}
+              onChange={handleCodeInput}
+              className="w-full text-center tracking-widest text-2xl font-medium
+                         bg-transparent border-b-2 border-[var(--brand)]
+                         placeholder:text-[var(--brand)/60%] py-2
+                         focus:outline-none focus:border-[var(--brand)]"
+            />
+            <button
+              disabled
+              className="w-full rounded-full py-3 bg-[var(--brand)]
+                         text-[#131B0E] font-medium opacity-40 cursor-not-allowed"
+            >
+              Auto-submitting…
+            </button>
+            <button
+              type="button"
+              onClick={sendCode}
+              disabled={busy}
+              className="block w-full text-center text-sm underline
+                         text-[var(--brand)/80%] hover:text-[var(--brand)]
+                         disabled:opacity-50"
+            >
+              Resend code
+            </button>
+            {errorMsg && (
+              <p className="text-sm text-red-600 text-center">{errorMsg}</p>
+            )}
+          </div>
+        )}
+      </section>
+    </main>
   );
 }
 
 /* helpers */
-const CTA = ({ onClick }) => (
-  <button onClick={onClick}
-          className="w-full max-w-xs mx-auto rounded-full py-3 text-lg font-medium
-                     bg-[var(--brand)] text-black hover:bg-[#E8E455] transition
-                     shadow-md shadow-[var(--brand)/30%]">
-    Get Started / Log in
-  </button>
-);
+function CTAButton({ onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      className="w-full max-w-xs mx-auto rounded-full py-3 text-lg font-medium
+                 bg-[var(--brand)] text-black hover:bg-[#E8E455] transition
+                 shadow-md shadow-[var(--brand)/30%]"
+    >
+      Get&nbsp;Started / Log in
+    </button>
+  );
+}
 
-const Note = ({ className = "" }) => (
-  <p className={`text-xs text-center text-[var(--brand)/50%] ${className}`}>
-    By signing up you agree to our terms.<br />Subscription is required.
-  </p>
-);
+function SubNote({ className = "" }) {
+  return (
+    <p className={`text-xs text-center text-[var(--brand)/50%] ${className}`}>
+      By signing up you agree to our terms.<br />Subscription is required.
+    </p>
+  );
+}
