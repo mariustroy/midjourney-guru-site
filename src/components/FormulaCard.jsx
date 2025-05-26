@@ -37,7 +37,7 @@ export default function FormulaCard({ data }) {
   return (
     <article
       ref={cardRef}
-      className="border rounded-lg p-4 bg-background/50 space-y-3"
+      className="border rounded-xl p-4 bg-background/50 space-y-3"
     >
       {/* header ----------------------------------------------------- */}
       <header className="flex justify-between items-start">

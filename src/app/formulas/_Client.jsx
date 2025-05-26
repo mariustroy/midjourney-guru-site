@@ -77,7 +77,7 @@ export default function FormulasClient({ initial }) {
                   border border-brand transition-colors
                   ${
                     active
-                      ? "bg-brand text-[#131B0E]"       /* selected */
+                      ? "bg-[#FFFD91] text-[#131B0E]"       /* selected */
                       : "bg-transparent text-brand hover:bg-brand/10"
                   }
                 `}
