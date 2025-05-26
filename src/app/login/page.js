@@ -53,25 +53,37 @@ export default function Login() {
 
   /* ── 2. verify helper (single attempt, type='email') ─────────── */
   async function verifyToken(token) {
-    setBusy(true);
+        setBusy(true);
     setErr("");
 
-    const { error } = await supa.auth.verifyOtp({
+    /* 1️⃣  verify the 6-digit code (type must be "email_otp") */
+    const { data, error } = await supa.auth.verifyOtp({
       email : email.trim().toLowerCase(),
       token,
-      type  : "email"          // ✔ correct for 6-digit e-mail OTP
+      type  : "email_otp",           // ← numeric e-mail codes
     });
 
-    setBusy(false);
-
-    if (error) {                       // invalid / expired
+    if (error) {
+      setBusy(false);
       setErr(error.message);
       return;
     }
 
-    // success ⇒ redirect (session cookie is now set)
-    router.replace("/");
-  }
+    /* 2️⃣  persist the session to HTTP cookies
+            (needed so the initial **server render** of “/”
+             also sees the user as authenticated)            */
+    try {
+      await fetch("/api/auth/set-cookies", {
+        method : "POST",
+        headers: { "Content-Type": "application/json" },
+        body   : JSON.stringify({ session: data.session }),
+      });
+    } catch (_) {
+      /* ignore – client already has the session */
+    }
+
+    setBusy(false);
+    router.replace("/");          // ✅ signed-in – go home  }
 
   /* ── 3. on-input handler with auto-submit ---------------------- */
   function handleCodeInput(e) {
