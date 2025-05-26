@@ -371,10 +371,10 @@ async function sendStarter(text) {
           placeholder="Ask me anything about Midjourney…"
           style={{
             flex: 1,
-            padding: 10,
+            padding: 16,
             border: "1px solid #242724",
             background: "#0D170C",
-            borderRadius: 12,
+            borderRadius: 40,
             resize: "none",
             overflow: "hidden",
             width: "100%",  
