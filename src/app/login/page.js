@@ -14,35 +14,64 @@ const supa = createClient(
 
 export default function Login() {
   const router             = useRouter();
-  const [phase, setPhase]  = useState("cta");      // cta | form | sent
-  const [email, setEmail]  = useState("");
-  const [errorMsg, setErr] = useState("");
-  const inputRef           = useRef(null);
 
-  /* redirect if already logged in */
+  /* phases: cta → email → code → (redirect) */
+  const [phase, setPhase]  = useState("cta");
+
+  const [email, setEmail]  = useState("");
+  const [code,  setCode ]  = useState("");          // 6-digit OTP
+  const [errorMsg, setErr] = useState("");
+
+  const emailRef           = useRef(null);
+  const codeRef            = useRef(null);
+
+  /* redirect if already logged-in */
   useEffect(() => {
     supa.auth.getSession().then(({ data: { session } }) => {
       if (session) router.replace("/");
     });
   }, [router]);
 
-  /* send magic-link */
-  async function sendLink(e) {
+  /* ---------- send 6-digit code ---------- */
+  async function sendCode(e) {
     e.preventDefault();
-    if (!email) { inputRef.current?.focus(); return; }
+    if (!email) { emailRef.current?.focus(); return; }
 
     const { error } = await supa.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo:
-          `${process.env.NEXT_PUBLIC_SITE_URL || window.location.origin}/auth/callback`,
-      },
+        shouldCreateUser : true,
+        emailRedirectTo  : null           // we’ll use the code, not the link
+      }
     });
 
     if (error) { setErr(error.message); return; }
     setErr("");
-    setPhase("sent");
+    setPhase("code");
+    setTimeout(() => codeRef.current?.focus(), 50);
   }
+
+  /* ---------- verify pasted code ---------- */
+  async function verify(e) {
+    e.preventDefault();
+    if (code.length !== 6) { codeRef.current?.focus(); return; }
+
+    const { error } = await supa.auth.verifyOtp({
+      email,
+      token: code,
+      type : "email"                       // one-time code
+    });
+
+    if (error) { setErr(error.message); return; }
+    setErr("");
+    router.replace("/");                  // session cookie now set
+  }
+
+  /* ---------- allow “auto-submit” when 6 digits typed ---------- */
+  useEffect(() => {
+    if (phase === "code" && code.length === 6) verify(new Event("submit"));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [code]);
 
   return (
     <main
@@ -51,7 +80,7 @@ export default function Login() {
         bg-black text-[var(--brand)]
       "
     >
-      {/* -------- background & overlay -------- */}
+      {/* background */}
       <Image
         src="/images/hero.jpg"
         alt=""
@@ -62,29 +91,26 @@ export default function Login() {
       />
       <div className="absolute inset-0 bg-black/40 -z-10" />
 
-      {/* -------- header (logo + tagline) -------- */}
+      {/* header ---------------------------------------------------- */}
       <header
         className="
-          pt-16 md:pt-12            /*  ↓ 64 px from top on mobile, 48 px on desktop */
-          text-center px-4
+          pt-16 md:pt-12 text-center px-4
           md:absolute md:top-12 md:left-1/2 md:-translate-x-1/2
         "
       >
         <Image
           src="/images/logo.svg"
           alt="Midjourney Guru"
-          width={176} height={60}
-          className="w-36 md:w-44 mx-auto mb-6"   /* 144 px mobile */
+          width={176}
+          height={60}
+          className="w-36 md:w-44 mx-auto mb-6"
           priority
         />
 
         <ul
           className="
-            space-y-1
-            text-lg md:text-xl
-            font-light tracking-wide           /*   thinner but readable   */
-            mb-8
-            max-w-md mx-auto
+            space-y-1 text-lg md:text-xl font-light tracking-wide
+            mb-8 max-w-md mx-auto
           "
         >
           <li>Midjourney AI Copilot</li>
@@ -93,31 +119,33 @@ export default function Login() {
         </ul>
       </header>
 
-      {/* -------- CTA / form wrapper -------- */}
+      {/* main area ------------------------------------------------- */}
       <section
         className="
           flex-1 flex flex-col items-center
           justify-end md:justify-center
-          px-4 pb-32 md:pb-0           /*  ↓  keeps CTA clear of iOS bottom bar   */
+          px-4 pb-32 md:pb-0
         "
       >
+        {/* ---------- CTA ---------- */}
         {phase === "cta" && (
           <>
-            <CTAButton onClick={() => setPhase("form")} />
+            <CTAButton onClick={() => setPhase("email")} />
             <SubNote className="mt-3" />
           </>
         )}
 
-        {phase === "form" && (
-          <form onSubmit={sendLink} className="w-full max-w-xs mx-auto">
+        {/* ---------- e-mail form ---------- */}
+        {phase === "email" && (
+          <form onSubmit={sendCode} className="w-full max-w-xs mx-auto">
             <div className="relative">
               <input
-                ref={inputRef}
+                ref={emailRef}
                 type="email"
                 required
                 placeholder="you@example.com"
                 value={email}
-                onChange={e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 className="
                   w-full rounded-full px-5 py-3
                   border-2 border-[var(--brand)]
@@ -128,7 +156,7 @@ export default function Login() {
               />
               <button
                 type="submit"
-                aria-label="Send magic link"
+                aria-label="Send code"
                 className="
                   absolute right-3 top-1/2 -translate-y-1/2
                   p-1 rounded-full bg-[var(--brand)]
@@ -147,15 +175,52 @@ export default function Login() {
           </form>
         )}
 
-        {phase === "sent" && (
-          <div className="text-center space-y-1 mb-10 md:mb-0">
-            <p className="text-lg font-medium text-[var(--brand)]">
-              ✅ Check your inbox!
-            </p>
-            <p className="text-sm opacity-80">
-              We just sent you a magic link to sign&nbsp;in.
-            </p>
-          </div>
+        {/* ---------- code verification ---------- */}
+        {phase === "code" && (
+          <form onSubmit={verify} className="w-full max-w-xs mx-auto space-y-4">
+            <input
+              ref={codeRef}
+              type="text"
+              inputMode="numeric"
+              maxLength={6}
+              required
+              placeholder="123 456"
+              value={code}
+              onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
+              className="
+                w-full text-center tracking-widest text-2xl font-medium
+                bg-transparent border-b-2 border-[var(--brand)]
+                placeholder:text-[var(--brand)/0.6] py-2
+                focus:outline-none focus:border-[var(--brand)]
+              "
+            />
+
+            <button
+              type="submit"
+              className="
+                w-full rounded-full py-3 bg-[var(--brand)] text-[#131B0E]
+                font-medium hover:bg-[#E8E455] transition
+              "
+            >
+              Sign&nbsp;in
+            </button>
+
+            {/* resend link */}
+            <button
+              type="button"
+              onClick={sendCode}
+              className="
+                block w-full text-center text-sm underline
+                text-[var(--brand)/0.8] hover:text-[var(--brand)]
+              "
+            >
+              Resend code
+            </button>
+
+            {errorMsg && (
+              <p className="text-sm text-red-600 text-center">{errorMsg}</p>
+            )}
+          </form>
         )}
       </section>
     </main>
@@ -184,7 +249,7 @@ function CTAButton({ onClick }) {
 function SubNote({ className = "" }) {
   return (
     <p className={`text-xs text-center text-[var(--brand)/0.5] ${className}`}>
-      By signing up you agree to our terms.<br />Subscribtion is required. 
+      By signing up you agree to our terms.<br />Subscription is required.
     </p>
   );
 }
