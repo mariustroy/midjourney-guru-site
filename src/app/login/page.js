@@ -110,8 +110,8 @@ export default function Login() {
 
       {/* body */}
       <main className="relative min-h-screen flex flex-col bg-black text-[var(--brand)]">
-        <section className="flex-1 flex flex-col items-center
-                            justify-end md:justify-center px-4 pb-32 md:pb-0">
+      <section className="flex-1 flex flex-col items-center
+                    justify-center px-4 pb-12 md:pb-0">
           {phase === "cta" && (
             <>
               <CTA onClick={() => setPhase("email")} />
