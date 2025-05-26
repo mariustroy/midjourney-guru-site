@@ -16,11 +16,11 @@ export default function Login() {
   const router = useRouter();
 
   /* ui state ----------------------------------------------------- */
-  const [phase, setPhase]   = useState("cta");   // cta → email → code
-  const [email, setEmail]   = useState("");
-  const [code,  setCode]    = useState("");      // 6-digit OTP
-  const [errorMsg, setErr]  = useState("");
-  const [busy, setBusy]     = useState(false);   // disable while verifying
+  const [phase, setPhase]      = useState("cta"); // cta → email → code
+  const [email, setEmail]      = useState("");
+  const [code,  setCode]       = useState("");    // 6-digit OTP
+  const [errorMsg, setErr]     = useState("");
+  const [busy, setBusy]        = useState(false); // disable while verifying
 
   const emailRef = useRef(null);
   const codeRef  = useRef(null);
@@ -32,7 +32,7 @@ export default function Login() {
     });
   }, [router]);
 
-  /* ── 1. send numeric code ────────────────────────────────────── */
+  /* ── 1. send numeric code ───────────────────────────────────── */
   async function sendCode(e) {
     e.preventDefault();
     const addr = email.trim().toLowerCase();
@@ -40,7 +40,7 @@ export default function Login() {
 
     const { error } = await supa.auth.signInWithOtp({
       email  : addr,
-      options: { shouldCreateUser: true }          // numeric code, no redirect
+      options: { shouldCreateUser: true }   // numeric code, no redirect
     });
 
     if (error) { setErr(error.message); return; }
@@ -51,16 +51,17 @@ export default function Login() {
     setTimeout(() => codeRef.current?.focus(), 50);
   }
 
-  /* ── 2. verify helper (single attempt, type='email') ─────────── */
+  /* ── 2. verify helper ───────────────────────────────────────── */
   async function verifyToken(token) {
-        setBusy(true);
+    if (busy) return;
+    setBusy(true);
     setErr("");
 
-    /* 1️⃣  verify the 6-digit code (type must be "email_otp") */
+    /* 2-a  verify against Supabase (‘email_otp’ is the correct type) */
     const { data, error } = await supa.auth.verifyOtp({
       email : email.trim().toLowerCase(),
       token,
-      type  : "email_otp",           // ← numeric e-mail codes
+      type  : "email_otp",
     });
 
     if (error) {
@@ -69,9 +70,7 @@ export default function Login() {
       return;
     }
 
-    /* 2️⃣  persist the session to HTTP cookies
-            (needed so the initial **server render** of “/”
-             also sees the user as authenticated)            */
+    /* 2-b  bridge the session to HTTP cookies for server components */
     try {
       await fetch("/api/auth/set-cookies", {
         method : "POST",
@@ -79,17 +78,18 @@ export default function Login() {
         body   : JSON.stringify({ session: data.session }),
       });
     } catch (_) {
-      /* ignore – client already has the session */
+      /* ignore — client already has the session */
     }
 
     setBusy(false);
-    router.replace("/");          // ✅ signed-in – go home  }
+    router.replace("/");                    // ✅ signed-in
+  }
 
-  /* ── 3. on-input handler with auto-submit ---------------------- */
+  /* ── 3. on-input handler with auto-submit ───────────────────── */
   function handleCodeInput(e) {
     const digits = e.target.value.replace(/\D/g, "");
     setCode(digits);
-    if (digits.length === 6 && !busy) verifyToken(digits);
+    if (digits.length === 6) verifyToken(digits);
   }
 
   /* ui ----------------------------------------------------------- */
@@ -149,7 +149,7 @@ export default function Login() {
 
         {/* code form */}
         {phase === "code" && (
-          <form onSubmit={e => { e.preventDefault(); if (!busy) verifyToken(code); }}
+          <form onSubmit={e => { e.preventDefault(); verifyToken(code); }}
                 className="w-full max-w-xs mx-auto space-y-4">
             <input ref={codeRef} inputMode="numeric" maxLength={6} required
                    placeholder="123456" value={code} onChange={handleCodeInput}
@@ -177,7 +177,7 @@ export default function Login() {
   );
 }
 
-/* ─── helpers ──────────────────────────────────────────────────── */
+/* ─── helpers ─────────────────────────────────────────────────── */
 function CTAButton({ onClick }) {
   return (
     <button onClick={onClick}
