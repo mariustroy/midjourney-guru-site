@@ -64,7 +64,7 @@ export default function Login() {
 
     let { error } = await attempt("email");        // existing users
     if (error?.status === 403) {                   // maybe new user
-      ({ error } = await attempt("signup"));
+      ({ error, data: session } = await attempt("signup"));
     }
 
     setBusy(false);
@@ -72,8 +72,16 @@ export default function Login() {
     if (error) { setErr(error.message); return; }
 
     /*  success: refresh → redirect so middleware sees cookie  */
-    router.refresh();
-    router.replace("/");
+/*  success: tell the server to drop the auth cookies      */
+    await fetch("/api/auth/set-cookie", {
+      method : "POST",
+      body   : JSON.stringify({
+        access_token  : session.access_token,
+        refresh_token : session.refresh_token
+      })
+    });
+
+    router.replace("/");   // middleware now receives the cookie
   }
 
   /* ── 3. on-input handler with auto-submit ---------------------- */
