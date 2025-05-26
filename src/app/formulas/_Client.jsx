@@ -6,23 +6,23 @@ import { Search, X } from "lucide-react";
 
 export default function FormulasClient({ initial }) {
   /* ---------- state ---------- */
-  const [search, setSearch]   = useState("");
-  const [activeCat, setCat]   = useState(null);
+  const [search, setSearch] = useState("");
+  const [activeCat, setCat] = useState(null);
 
-  /* ---------- derive categories from data ---------- */
+  /* ---------- derive categories ---------- */
   const categories = useMemo(() => {
     const set = new Set();
-    initial.forEach(f => (f.category ?? []).forEach(c => set.add(c)));
-    return Array.from(set).sort();          // alphabetise; remove .sort() if you prefer raw order
+    initial.forEach((f) => (f.category ?? []).forEach((c) => set.add(c)));
+    return Array.from(set).sort();
   }, [initial]);
 
   /* ---------- filtered list ---------- */
   const filtered = useMemo(() => {
-    return initial.filter(f => {
+    return initial.filter((f) => {
       const q = search.toLowerCase();
       const matchesSearch =
         f.prompt.toLowerCase().includes(q) ||
-        f.title .toLowerCase().includes(q);
+        f.title.toLowerCase().includes(q);
 
       const matchesCat =
         !activeCat || (f.category ?? []).includes(activeCat);
@@ -33,28 +33,28 @@ export default function FormulasClient({ initial }) {
 
   /* ---------- render ---------- */
   return (
-    <div
-      className="
-        max-w-2xl mx-auto
-        px-4 py-6
-        pt-22 md:pt-8
-        space-y-6
-      "
-    >
-      <h1 className="text-2xl font-semibold">Formulas</h1>
+    <div className="max-w-2xl mx-auto px-4 py-6 pt-22 md:pt-8 space-y-6">
+      {/* headline --------------------------------------------------- */}
+      <h1 className="text-[36px] leading-tight font-light">Formulas</h1>
 
-      {/* search */}
+      {/* search ----------------------------------------------------- */}
       <div className="relative max-w-sm">
         <input
           value={search}
-          onChange={e => setSearch(e.target.value)}
+          onChange={(e) => setSearch(e.target.value)}
           placeholder="Search formula…"
-          className="w-full bg-background/60 backdrop-blur border rounded pl-10 pr-10 py-2"
+          className="
+            w-full bg-transparent
+            border-0 border-b border-brand
+            pl-10 pr-10 py-2
+            text-[18px] placeholder:text-[18px] placeholder:text-brand/70
+            focus:outline-none focus:border-brand
+          "
         />
-        <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+        <Search className="absolute left-2 top-2.5 h-4 w-4 text-brand" />
         {search && (
           <button
-            className="absolute right-2 top-2.5"
+            className="absolute right-2 top-2.5 text-brand"
             onClick={() => setSearch("")}
             aria-label="Clear search"
           >
@@ -63,10 +63,10 @@ export default function FormulasClient({ initial }) {
         )}
       </div>
 
-      {/* dynamic category chips */}
+      {/* category pills -------------------------------------------- */}
       {categories.length > 0 && (
         <div className="flex gap-2 overflow-x-auto pb-2">
-          {categories.map(cat => {
+          {categories.map((cat) => {
             const active = activeCat === cat;
             return (
               <button
@@ -74,9 +74,12 @@ export default function FormulasClient({ initial }) {
                 onClick={() => setCat(active ? null : cat)}
                 className={`
                   whitespace-nowrap rounded-full px-3 py-1 text-sm
-                  ${active
-                    ? "bg-brand text-black"
-                    : "bg-muted hover:bg-muted/70"}
+                  border border-brand transition-colors
+                  ${
+                    active
+                      ? "bg-brand text-[#131B0E]"       /* selected */
+                      : "bg-transparent text-brand hover:bg-brand/10"
+                  }
                 `}
               >
                 {cat}
@@ -86,9 +89,9 @@ export default function FormulasClient({ initial }) {
         </div>
       )}
 
-      {/* formulas list */}
+      {/* formulas list --------------------------------------------- */}
       <div className="space-y-8">
-        {filtered.map(f => (
+        {filtered.map((f) => (
           <FormulaCard key={f.id} data={f} />
         ))}
       </div>
