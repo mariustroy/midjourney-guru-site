@@ -53,25 +53,34 @@ export default function Login() {
 
   /* ── 2. verify helper — with debug logs ─────────────────── */
   async function verifyToken(token) {
-    if (busy) return;
-    setBusy(true);
-    setErr("");
+  setBusy(true);
+  setErr("");
 
-    const addr = email.trim().toLowerCase();
+  const emailAddr = email.trim().toLowerCase();
+  const tryVerify = (type) =>
+    supa.auth.verifyOtp({ email: emailAddr, token, type });
 
-    const attempt = async (type) => {
-      console.log("🔍 verify", { token, type });
-      return supa.auth.verifyOtp({ email: addr, token, type });
-    };
+  // 1) existing user
+  let { data, error } = await tryVerify("email");
 
-    let { error } = await attempt("email");
-    if (error?.status === 403) ({ error } = await attempt("signup")); // second try
+  // 2) maybe a first-time user
+  if (error?.status === 403) ({ data, error } = await tryVerify("signup"));
 
-    setBusy(false);
+  setBusy(false);
 
-    if (error) { setErr(error.message); return; }
-    router.replace("/success");           // <-- change if your post-login route differs
-  }
+  if (error) { setErr(error.message); return; }
+
+  /* 3) persist session for server components -------------- */
+  const { access_token, refresh_token } = data.session;
+  await fetch("/api/auth/set-cookies", {
+    method : "POST",
+    headers: { "Content-Type": "application/json" },
+    body   : JSON.stringify({ access_token, refresh_token })
+  });
+
+  // 4) client JS already has the session, now enter the app
+  router.replace("/");
+}
 
   /* ── 3. auto-submit on 6 digits ─────────────────────────── */
   function handleCodeInput(e) {
