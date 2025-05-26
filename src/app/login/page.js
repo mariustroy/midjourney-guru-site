@@ -1,4 +1,3 @@
-/* src/app/login/page.js */
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -7,12 +6,13 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 
-/* ─── Supabase client ─────────────────────────────── */
+/* ─── Supabase client ───────────────────────────── */
 const supa = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
+/* ─── Page ──────────────────────────────────────── */
 export default function Login() {
   const router = useRouter();
 
@@ -76,9 +76,9 @@ export default function Login() {
 
   /* ─────────── UI ─────────── */
   return (
-    /* ⬇︎  changed from <main> to <div>  */
-    <div className="relative isolate min-h-screen flex flex-col bg-black text-[var(--brand)]">
-      {/* background image */}
+    /* ⬇️  ONE -- not two -- <main> element  */
+    <main className="relative min-h-screen flex flex-col bg-black text-[var(--brand)]">
+      {/* full-bleed background */}
       <Image
         src="/images/hero.jpg"
         alt=""
@@ -91,7 +91,7 @@ export default function Login() {
 
       {/* header */}
       <header className="pt-16 md:pt-12 text-center px-4
-                         md:absolute md:top-12 md:left-1/2 md:-translate-x-1/2">
+                         md:absolute md:top-12 md:left-1/2 md:-translate-x-1/2">      
         <Image
           src="/images/logo.svg"
           alt="Midjourney Guru"
@@ -110,8 +110,8 @@ export default function Login() {
 
       {/* body */}
       <main className="relative min-h-screen flex flex-col bg-black text-[var(--brand)]">
-      <section className="flex-1 flex flex-col items-center
-                    justify-center px-4 pb-12 md:pb-0">
+            <section className="flex-1 flex flex-col items-center
+                          justify-center px-4 pb-12 md:pb-0">
           {phase === "cta" && (
             <>
               <CTA onClick={() => setPhase("email")} />
