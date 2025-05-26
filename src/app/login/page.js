@@ -85,7 +85,7 @@ export default function Login() {
     <main className="relative min-h-screen flex flex-col bg-black text-[var(--brand)]">
       {/* bg */}
       <Image
-        src="/images/hero.jpg"
+        src="/public/images/hero.jpg"
         alt=""
         fill
         priority
