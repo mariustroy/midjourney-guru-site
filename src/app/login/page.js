@@ -187,7 +187,7 @@ export default function Login() {
               required
               placeholder="123 456"
               value={code}
-              onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
+              onInput ={(e) => setCode(e.currentTarget.value.replace(/\D/g, ""))}
               className="
                 w-full text-center tracking-widest text-2xl font-medium
                 bg-transparent border-b-2 border-[var(--brand)]
