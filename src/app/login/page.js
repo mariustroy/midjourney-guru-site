@@ -61,7 +61,7 @@ export default function Login() {
     const { data, error } = await supa.auth.verifyOtp({
       email: email.trim().toLowerCase(),
       token: clean,
-      type : "email"               // numeric e-mail code
+      type : "email_opt"               // numeric e-mail code
     });
 
     if (error) { setErr(error.message); return; }
