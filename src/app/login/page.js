@@ -40,7 +40,7 @@ export default function Login() {
 
     const { error } = await supa.auth.signInWithOtp({
       email: addr,
-      options: { shouldCreateUser: true }   // 6-digit numeric code
+      options: { shouldCreateUser: true }
     });
 
     if (error) { setErr(error.message); return; }
@@ -51,7 +51,7 @@ export default function Login() {
     setTimeout(() => codeRef.current?.focus(), 50);
   }
 
-  /* ── 2. verify helper — with debug logs ─────────────────── */
+  /* ── 2. verify helper ───────────────────────────────────── */
   async function verifyToken(token) {
     setBusy(true);
     setErr("");
@@ -60,17 +60,12 @@ export default function Login() {
     const tryVerify = (type) =>
       supa.auth.verifyOtp({ email: emailAddr, token, type });
 
-    // 1) existing user
     let { data, error } = await tryVerify("email");
-
-    // 2) maybe a first-time user
     if (error?.status === 403) ({ data, error } = await tryVerify("signup"));
 
     setBusy(false);
-
     if (error) { setErr(error.message); return; }
 
-    /* 3) persist session for server components -------------- */
     const { access_token, refresh_token } = data.session;
     await fetch("/api/auth/set-cookies", {
       method : "POST",
@@ -78,8 +73,7 @@ export default function Login() {
       body   : JSON.stringify({ access_token, refresh_token })
     });
 
-    /* 4) hard-navigate so the whole app gets the new cookies */
-    window.location.assign("/");                // ← only line changed
+    window.location.assign("/");            // full reload with cookies
   }
 
   /* ── 3. auto-submit on 6 digits ─────────────────────────── */
@@ -168,6 +162,10 @@ export default function Login() {
         {/* code form */}
         {phase === "code" && (
           <div className="w-full max-w-xs mx-auto space-y-4">
+            <p className="text-sm text-center text-[var(--brand)/80%]">
+              We’ve sent you a 6-digit verification code. Check your email.
+            </p>
+
             <input
               ref={codeRef}
               inputMode="numeric"
@@ -181,13 +179,19 @@ export default function Login() {
                          placeholder:text-[var(--brand)/60%] py-2
                          focus:outline-none focus:border-[var(--brand)]"
             />
+
+            {/* real Sign-in button */}
             <button
-              disabled
+              onClick={() => verifyToken(code)}
+              disabled={busy || code.length !== 6}
               className="w-full rounded-full py-3 bg-[var(--brand)]
-                         text-[#131B0E] font-medium opacity-40 cursor-not-allowed"
+                         text-[#131B0E] font-medium
+                         hover:bg-[#E8E455] transition
+                         disabled:opacity-40 disabled:cursor-not-allowed"
             >
-              Auto-submitting…
+              {busy ? "Signing in…" : "Sign in"}
             </button>
+
             <button
               type="button"
               onClick={sendCode}
@@ -198,6 +202,7 @@ export default function Login() {
             >
               Resend code
             </button>
+
             {errorMsg && (
               <p className="text-sm text-red-600 text-center">{errorMsg}</p>
             )}
