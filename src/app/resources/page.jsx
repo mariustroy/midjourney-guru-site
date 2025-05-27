@@ -117,13 +117,50 @@ export default function ResourcesPage() {
         </TabsContent>
 
         {/* ---------- GUIDES ---------- */}
-        <TabsContent value="guides" className="mt-4 space-y-2">
-          <ResourceLink
-            href="https://midjourney.com/guide"
-            label="Official Midjourney Guide"
-          />
-        </TabsContent>
+       /* ---------- GUIDES ---------- */
+<TabsContent value="guides" className="mt-4 space-y-6">
+  {/* Official link still first */}
+  <ResourceLink
+    href="https://midjourney.com/guide"
+    label="Official Midjourney Guide"
+  />
 
+  {/* 𝐄-𝐁𝐎𝐎𝐊 𝐏𝐑𝐎𝐌𝐎 */}
+  <section className="flex flex-col md:flex-row gap-6 rounded-xl border p-6 bg-muted/50">
+    {/* cover */}
+    <Image
+      src="/images/cover_2025.jpg"
+      alt="Imagine – Midjourney for Creatives cover"
+      width={200}
+      height={260}
+      className="rounded-lg shadow-md self-center md:self-start"
+      priority
+    />
+
+    {/* copy + CTA */}
+    <div className="space-y-4">
+      <h3 className="text-2xl font-semibold leading-tight">
+        Imagine: <span className="font-light">Midjourney for Creatives</span>
+      </h3>
+
+      <p className="text-sm leading-relaxed">
+        Turn ideas into gallery-worthy images in minutes. <i>Imagine</i> gives you
+        <strong> 120 battle-tested prompt formulas</strong>, step-by-step workflows,
+        printable cheat-sheets and lifetime updates—everything a designer,
+        marketer or maker needs to master Midjourney <em>fast</em>.
+      </p>
+
+      <a
+        href="https://store.mariustroy.com/l/imagine"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-block w-max rounded-lg bg-brand px-5 py-2 text-sm font-medium text-white shadow hover:bg-brand/90 transition"
+      >
+        Buy the e-book – $19
+      </a>
+    </div>
+  </section>
+</TabsContent>
         {/* ---------- TUTORIALS ---------- */}
         <TabsContent value="tutorials" className="mt-4 space-y-6">
           <WelcomeVideo />
