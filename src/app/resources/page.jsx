@@ -6,6 +6,7 @@ import {
   TabsTrigger,
   TabsContent,
 } from "@/components/ui/tabs";
+import Image from "next/image";
 import WelcomeVideo from "@/components/WelcomeVideo";
 
 export default function ResourcesPage() {
