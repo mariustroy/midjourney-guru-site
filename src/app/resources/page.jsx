@@ -91,7 +91,7 @@ export default function ResourcesPage() {
             </ul>
           </section>
 
-          {/* Pinterest boards */}
+          {/* Pinterest boards
           <section className="space-y-2">
             <h2 className="font-medium">Pinterest boards I love</h2>
 
@@ -115,7 +115,7 @@ export default function ResourcesPage() {
                 />
               </li>
             </ul>
-          </section>
+          </section> */}
         </TabsContent>
 
         {/* ---------- GUIDES ---------- */}
