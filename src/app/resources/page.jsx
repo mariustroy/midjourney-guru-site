@@ -118,13 +118,8 @@ export default function ResourcesPage() {
         </TabsContent>
 
         {/* ---------- GUIDES ---------- */}
-       /* ---------- GUIDES ---------- */
 <TabsContent value="guides" className="mt-4 space-y-6">
   {/* Official link still first */}
-  <ResourceLink
-    href="https://midjourney.com/guide"
-    label="Official Midjourney Guide"
-  />
 
   {/* 𝐄-𝐁𝐎𝐎𝐊 𝐏𝐑𝐎𝐌𝐎 */}
   <section className="flex flex-col md:flex-row gap-6 rounded-xl border p-6 bg-muted/50">
@@ -145,19 +140,21 @@ export default function ResourcesPage() {
       </h3>
 
       <p className="text-sm leading-relaxed">
-        Turn ideas into gallery-worthy images in minutes. <i>Imagine</i> gives you
-        <strong> 120 battle-tested prompt formulas</strong>, step-by-step workflows,
-        printable cheat-sheets and lifetime updates—everything a designer,
-        marketer or maker needs to master Midjourney <em>fast</em>.
+       Unlock Midjourney’s full potential in one sitting. <i>Imagine: Midjourney for Creatives</i> walks you
+  through bullet-proof prompt structures, vocabulary, reference-image
+  magic, parameter deep dives and the secret to character
+  consistency. You’ll skip months of trial-and-error and start steering
+  Midjourney like a pro, producing visuals for design, fashion,
+  architecture, photography and more.
       </p>
 
       <a
         href="https://store.mariustroy.com/l/imagine"
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-block w-max rounded-lg bg-brand px-5 py-2 text-sm font-medium text-white shadow hover:bg-brand/90 transition"
+        className="inline-block w-max rounded-lg bg-[#fffd91] px-5 py-2 text-sm font-medium text-[#141A10] shadow transition hover:bg-[#E8E455]"
       >
-        Buy the e-book – $19
+        Buy the e-book – $44
       </a>
     </div>
   </section>
