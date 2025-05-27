@@ -101,13 +101,13 @@ export default function SideDrawer() {
 
   return (
     <>
-      {/* Desktop static sidebar */}
-      <aside
-        className="
-          hidden md:flex md:flex-col
-          md:fixed md:inset-y-0 md:left-0 md:w-64
-          md:bg-background md:text-foreground md:border-r md:p-4
-        "
+       {/* Desktop / large-screen sidebar */}
+ <aside
+   className="
+     hidden lg:flex lg:flex-col
+     lg:fixed lg:inset-y-0 lg:left-0 lg:w-64
+     lg:bg-background lg:text-foreground lg:border-r lg:p-4
+   "
       >
         <NavLinks close={() => {}} />
       </aside>
@@ -118,7 +118,7 @@ export default function SideDrawer() {
           <button
             aria-label="Open menu"
             className="
-              md:hidden
+              lg:hidden
               fixed top-8 left-4 z-50
               p-2 rounded bg-background/80 backdrop-blur
               focus:outline-none focus:ring
@@ -129,8 +129,8 @@ export default function SideDrawer() {
         </SheetTrigger>
 
         <SheetContent
-          side="left"
-          className="w-64 bg-background text-foreground p-4 md:hidden"
+   side="left"
+   className="w-64 bg-background text-foreground p-4 lg:hidden"
         >
           <SheetHeader>
             <SheetTitle className="sr-only">Navigation</SheetTitle>

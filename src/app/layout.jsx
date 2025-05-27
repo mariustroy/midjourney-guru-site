@@ -57,7 +57,7 @@ export default function RootLayout({ children }) {
         <SideDrawer />
 
         {/* main content */}
-        <main className="flex-1 overflow-hidden">{children}</main>
+       <main className="flex-1 overflow-hidden lg:ml-64">{children}</main>
       </body>
     </html>
   );
