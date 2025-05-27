@@ -40,7 +40,7 @@ export default function FormulasClient({ initial }) {
 
   /* ---------- render ---------- */
   return (
-    <div className="max-w-2xl mx-auto px-4 py-6 pt-22 md:pt-8 space-y-6">
+    <div className="max-w-2xl mx-auto px-4 py-6 pt-22 md:pt-8 space-y-6 lg:ml-64">
       {/* headline --------------------------------------------------- */}
       <h1 className="text-[36px] leading-tight font-light">Formulas</h1>
 
