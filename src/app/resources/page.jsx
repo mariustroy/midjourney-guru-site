@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/tabs";
 import Image from "next/image";
 import WelcomeVideo from "@/components/WelcomeVideo";
+import VideoEmbed   from '@/components/VideoEmbed';
 
 export default function ResourcesPage() {
   return (
@@ -162,6 +163,14 @@ export default function ResourcesPage() {
         {/* ---------- TUTORIALS ---------- */}
         <TabsContent value="tutorials" className="mt-4 space-y-6">
           <WelcomeVideo />
+          
+          {/* NEW video just below */}
+  <VideoEmbed
+    id="3dNzvSd3Qdw"             // ← replace with the real YouTube ID
+    title="Finding your voice in Midjourney"
+  />
+
+  {/* any other tutorial blocks… */}
           {/* Add more tutorial links/components here */}
         </TabsContent>
       </Tabs>
