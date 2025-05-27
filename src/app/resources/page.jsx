@@ -109,10 +109,16 @@ export default function ResourcesPage() {
 
         {/* ---------- TUTORIALS ---------- */}
         <TabsContent value="tutorials" className="mt-4 space-y-2">
-          <ResourceLink
-            href="https://www.youtube.com/@mariustroy"
-            label="Marius Troy — YouTube"
-          />
+        import WelcomeVideo from "@/components/WelcomeVideo";
+
+export default function ResourcesPage() {
+  return (
+    <>
+      {/* …other resource blocks… */}
+      <WelcomeVideo />
+    </>
+  );
+}
         </TabsContent>
       </Tabs>
     </div>
