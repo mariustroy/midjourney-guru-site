@@ -98,8 +98,8 @@ export default function Login() {
       <div className="absolute inset-0 bg-black/40 -z-20" />
 
       {/* header */}
-      <header className="pt-16 md:pt-12 text-center px-4
-                         md:absolute md:top-12 md:left-1/2 md:-translate-x-1/2">
+<header className="pt-16 lg:pt-12 text-center px-4
+                   lg:absolute lg:top-12 lg:left-1/2 lg:-translate-x-1/2">
         <Image
           src="/images/logo.svg"
           alt="Midjourney Guru"
@@ -117,8 +117,8 @@ export default function Login() {
       </header>
 
       {/* body */}
-      <section className="flex-1 flex flex-col items-center
-                          justify-end md:justify-center px-4 pb-32 md:pb-0">
+  <section className="flex-1 flex flex-col items-center justify-end
+                    md:justify-center md:mt-40 px-4 pb-12 md:pb-32">
         {/* CTA */}
         {phase === "cta" && (
           <>
