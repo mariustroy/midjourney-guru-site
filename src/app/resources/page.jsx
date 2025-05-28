@@ -150,7 +150,7 @@ export default function ResourcesPage() {
       </p>
 
       <a
-        href="https://store.mariustroy.com/l/imagine"
+        href="https://store.mariustroy.com/b/guide-2025"
         target="_blank"
         rel="noopener noreferrer"
         className="inline-block w-max rounded-lg bg-[#fffd91] px-5 py-2 text-sm font-medium text-[#141A10] shadow transition hover:bg-[#E8E455]"
