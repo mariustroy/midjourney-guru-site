@@ -230,7 +230,16 @@ function CTAButton({ onClick }) {
 function SubNote({ className = "" }) {
   return (
     <p className={`text-xs text-center text-[var(--brand)/50%] ${className}`}>
-      By signing up you agree to our terms.<br />Subscription is required.
+      Subscription is&nbsp;$7&nbsp;a&nbsp;month. Cancel any time.<br />
+      By signing up you agree to our&nbsp;
+      <a
+        href="https://docs.google.com/document/d/12zXgnV7xZQWdRdr99Q99la3engBpTKMW-cCbLReJbS0/edit?usp=sharing"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="underline hover:text-[var(--brand)]"
+      >
+        terms
+      </a>.
     </p>
   );
 }
