@@ -155,7 +155,7 @@ export default function ResourcesPage() {
         rel="noopener noreferrer"
         className="inline-block w-max rounded-lg bg-[#fffd91] px-5 py-2 text-sm font-medium text-[#141A10] shadow transition hover:bg-[#E8E455]"
       >
-        Buy the e-book – $44
+        Buy the e-book – $34
       </a>
     </div>
   </section>
