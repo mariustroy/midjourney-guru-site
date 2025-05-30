@@ -38,6 +38,7 @@ const { data: profile, error: profErr } = await supabase
       // otherwise → go to checkout
       const res = await fetch("/api/stripe/checkout", { method: "POST" });
       const { url } = await res.json();
+      console.log("CHECKOUT URL =", url);
       window.location.href = url;
     }
 
