@@ -27,6 +27,12 @@ export default function SubscribePage() {
         .eq("id", user.id)
         .single();
         
+const { data: profile, error: profErr } = await supabase
+          .from("profiles")
+          .select("plan")
+          .eq("id", user.id)
+          .single();
+        
         console.log("PROFILE", { profile, profErr });
 
       if (profile?.plan === "pro") {
