@@ -1,27 +1,23 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createMiddlewareSupabaseClient } from "@supabase/auth-helpers-nextjs";
 
-export async function middleware(req: Request) {
-  /* create response object so Supabase can attach fresh cookies */
+export async function middleware(req: NextRequest) {
+  /* allow Supabase to refresh cookies */
   const res = NextResponse.next();
   const supabase = createMiddlewareSupabaseClient({ req, res });
 
-  /* read any existing session */
+  /* current auth session (if any) */
   const {
     data: { session },
   } = await supabase.auth.getSession();
 
   const path = req.nextUrl.pathname;
 
-  /* ---------- public (non-guarded) routes ---------- */
-  const isLogin     = path.startsWith("/login");
-  const isWaitlist  = path.startsWith("/waitlist");
-  const isCallback  = path.startsWith("/auth/callback");
-
+  /* ---------- routes that never need a subscription ---------- */
   const isPublic =
-    isLogin ||
-    isWaitlist ||
-    isCallback ||
+    path.startsWith("/login") ||
+    path.startsWith("/waitlist") ||
+    path.startsWith("/auth/callback") ||
     path.startsWith("/subscribe") ||
     path.startsWith("/success") ||
     path.startsWith("/cancelled") ||
@@ -29,38 +25,39 @@ export async function middleware(req: Request) {
     path.startsWith("/favicon.ico") ||
     path.startsWith("/images");
 
-  /* ---------- unauthenticated user hitting a private page ---------- */
+  /* ---------- unauthenticated visitor on a private page ---------- */
   if (!session && !isPublic) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
-  /* ---------- authenticated user: check beta expiry & plan ---------- */
+  /* ---------- authenticated visitor: check plan / beta ---------- */
   if (session && !isPublic) {
-    const { data: profile, error: profErr } = await supabase
+    const { data: profile } = await supabase
       .from("profiles")
       .select("plan, beta_expires")
       .eq("id", session.user.id)
-      .maybeSingle();            // ← no throw if row missing
+      .maybeSingle(); // returns { data: null } if row missing
 
-    // treat any plan that starts with "pro" (case-insensitive) as paid
+    /* treat any plan starting with "pro" as paid */
     const paid =
-      profile?.plan &&
+      !!profile?.plan &&
       profile.plan.trim().toLowerCase().startsWith("pro");
 
-    const expired =
+    /* still inside beta? */
+    const inBeta =
       !!profile?.beta_expires &&
-      new Date(profile.beta_expires) < new Date();
+      new Date(profile.beta_expires) > new Date();
 
-    // redirect only if user is *definitely* unpaid and beta is over
-    if (!paid && expired) {
+    /* block unless user is paid OR still in beta */
+    if (!paid && !inBeta) {
       return NextResponse.redirect(new URL("/subscribe", req.url));
     }
   }
 
-  return res; // everything OK → continue to requested page
+  return res; // everything OK → continue
 }
 
-/* Apply middleware to all routes except Next internal files & API routes */
+/* run on every route except Next internals & API */
 export const config = {
   matcher: ["/((?!_next/|api/).*)"],
 };
