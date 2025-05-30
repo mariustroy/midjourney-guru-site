@@ -27,7 +27,10 @@ export default function SubscribePage() {
         .eq("id", user.id)
         .single();
 
-      if (profile?.plan === "pro") {
+ const isSubscribed =
+           profile?.plan && profile.plan !== "free" && profile.plan !== "none";
+        
+         if (isSubscribed) {
         window.location.href = "/";
         return;
       }
