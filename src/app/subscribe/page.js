@@ -28,6 +28,7 @@ const { data: profile, error: profErr } = await supabase
         .single();
       
       console.log("PROFILE", { profile, profErr });
+      if (profile) console.log("PLAN VALUE =", `"${profile.plan}"`);
 
       if (profile?.plan === "pro") {
         window.location.href = "/";
