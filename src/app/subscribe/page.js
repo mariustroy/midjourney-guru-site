@@ -26,6 +26,8 @@ export default function SubscribePage() {
         .select("plan")
         .eq("id", user.id)
         .single();
+        
+        console.log("PROFILE", { profile, profErr });
 
       if (profile?.plan === "pro") {
         window.location.href = "/";
