@@ -30,31 +30,21 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
-  /* ---------- authenticated visitor: check plan / beta ---------- */
-/* ---------- authenticated visitor: check plan / beta ---------- */
+/* ---------- authenticated visitor: paywall ---------- */
   if (session && !isPublic) {
-    const { data: profile, error: profErr } = await supabase
+    const { data: profile } = await supabase
       .from("profiles")
-      .select("plan, beta_expires")
+      .select("plan")            // we only need the plan column now
       .eq("id", session.user.id)
-      .maybeSingle();          // returns data:null if no row
+      .maybeSingle();            // data === null if the row is missing
   
-    /* paid only when plan is exactly "pro" */
+    /* allow ONLY if plan is exactly "pro" */
     const paid = profile?.plan === "pro";
   
-    /* still inside beta? */
-    const inBeta =
-      !!profile?.beta_expires &&
-      new Date(profile.beta_expires) > new Date();
-  
-    /* block unless user is paid OR still in beta */
-    if (!paid && !inBeta) {
+    if (!paid) {
       return NextResponse.redirect(new URL("/subscribe", req.url));
     }
   }
-
-  return res; // everything OK → continue
-}
 
 /* run on every route except Next internals & API */
 export const config = {
