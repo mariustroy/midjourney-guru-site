@@ -21,19 +21,13 @@ export default function SubscribePage() {
         return;
       }
 
-      const { data: profile } = await supabase
+const { data: profile, error: profErr } = await supabase
         .from("profiles")
         .select("plan")
         .eq("id", user.id)
         .single();
-        
-const { data: profile, error: profErr } = await supabase
-          .from("profiles")
-          .select("plan")
-          .eq("id", user.id)
-          .single();
-        
-        console.log("PROFILE", { profile, profErr });
+      
+      console.log("PROFILE", { profile, profErr });
 
       if (profile?.plan === "pro") {
         window.location.href = "/";
