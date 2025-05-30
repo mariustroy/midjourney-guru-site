@@ -30,21 +30,24 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
-/* ---------- authenticated visitor: paywall ---------- */
+  /* ---------- authenticated visitor: paywall ---------- */
   if (session && !isPublic) {
     const { data: profile } = await supabase
       .from("profiles")
-      .select("plan")            // we only need the plan column now
+      .select("plan")
       .eq("id", session.user.id)
-      .maybeSingle();            // data === null if the row is missing
-  
+      .maybeSingle();            // data === null if no row
+
     /* allow ONLY if plan is exactly "pro" */
     const paid = profile?.plan === "pro";
-  
+
     if (!paid) {
       return NextResponse.redirect(new URL("/subscribe", req.url));
     }
   }
+
+  return res;         // ← close out middleware
+}
 
 /* run on every route except Next internals & API */
 export const config = {
