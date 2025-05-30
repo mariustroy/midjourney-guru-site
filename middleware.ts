@@ -31,23 +31,22 @@ export async function middleware(req: NextRequest) {
   }
 
   /* ---------- authenticated visitor: check plan / beta ---------- */
+/* ---------- authenticated visitor: check plan / beta ---------- */
   if (session && !isPublic) {
-    const { data: profile } = await supabase
+    const { data: profile, error: profErr } = await supabase
       .from("profiles")
       .select("plan, beta_expires")
       .eq("id", session.user.id)
-      .maybeSingle(); // returns { data: null } if row missing
-
-    /* treat any plan starting with "pro" as paid */
-    const paid =
-      !!profile?.plan &&
-      profile.plan.trim().toLowerCase().startsWith("pro");
-
+      .maybeSingle();          // returns data:null if no row
+  
+    /* paid only when plan is exactly "pro" */
+    const paid = profile?.plan === "pro";
+  
     /* still inside beta? */
     const inBeta =
       !!profile?.beta_expires &&
       new Date(profile.beta_expires) > new Date();
-
+  
     /* block unless user is paid OR still in beta */
     if (!paid && !inBeta) {
       return NextResponse.redirect(new URL("/subscribe", req.url));
