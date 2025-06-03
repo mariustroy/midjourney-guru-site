@@ -162,10 +162,18 @@ export default function ResourcesPage() {
 </TabsContent>
         {/* ---------- TUTORIALS ---------- */}
         <TabsContent value="tutorials" className="mt-4 space-y-6">
-<VimeoEmbed id="1090238372" title="Welcome to Midjourney Guru" />
+<VimeoEmbed
+          id="1090238372"
+          hash="8a0a5e4942"
+          title="Welcome to Midjourney Guru"
+        />
           
           {/* NEW video just below */}
-<VimeoEmbed id="1090244026" title="Finding your voice in Midjourney" />
+<VimeoEmbed
+            id="1090244026"
+            hash="b5bfc608f4"
+            title="Finding your voice in Midjourney"
+          />
   
   {/* any other tutorial blocks… */}
           {/* Add more tutorial links/components here */}
