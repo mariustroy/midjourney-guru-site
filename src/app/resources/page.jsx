@@ -167,12 +167,17 @@ export default function ResourcesPage() {
           hash="8a0a5e4942"
           title="Welcome to Midjourney Guru"
         />
-          
-          {/* NEW video just below */}
+        
 <VimeoEmbed
             id="1090244026"
             hash="b5bfc608f4"
             title="Finding your voice in Midjourney"
+          />
+          
+          <VimeoEmbed
+            id="1090389617"
+            hash="8eca7130d9"
+            title="Thoughts on Midjourney v7"
           />
   
   {/* any other tutorial blocks… */}
