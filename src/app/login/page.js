@@ -132,7 +132,9 @@ export default function Login() {
 
         {/* email form */}
         {phase === "email" && (
-          <form onSubmit={sendCode} className="w-full max-w-xs mx-auto">
+          <form
+          id="email-signup"
+           onSubmit={sendCode} className="w-full max-w-xs mx-auto">
             <div className="relative">
               <input
                 ref={emailRef}

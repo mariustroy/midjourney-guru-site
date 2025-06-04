@@ -105,15 +105,15 @@ export default function SignupInfoSection() {
 	  </div>
 
 	  {/* ---------- Secondary CTA ---------- */}
-	  <div className="text-center space-y-4">
+	  <div className="text-center space-y-4 pb-24">
 		<h2 className="text-2xl font-semibold">Ready to create otherworldly images?</h2>
 		<p className="text-sm text-gray-400">
 		  Join hundreds of creatives mastering Midjourney the smart way.
 		</p>
 		<a
-		  href="#signup"
-		  className="inline-block bg-brand text-[#141A10] px-6 py-3 rounded-full font-medium hover:bg-[#E8E455] transition"
-		>
+		   href="#email-signup"
+		   className="inline-block bg-[var(--brand)] text-[#141A10] px-6 py-3 rounded-full font-medium hover:bg-[#E8E455] transition"
+		 >
 		  Get Started – $7 / month
 		</a>
 		<p className="text-xs text-gray-500">Cancel any time.</p>
