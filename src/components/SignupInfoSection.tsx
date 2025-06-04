@@ -67,7 +67,10 @@ function FAQItem({
 /* ---------------- main section ---------------- */
 export default function SignupInfoSection() {
   return (
-	<section id="about" className="w-full max-w-5xl mx-auto mt-24 space-y-24 px-4">
+<section
+    id="about"
+    className="w-full max-w-5xl mx-auto mt-24 space-y-24 px-4 bg-[#131B0E]"
+  >
 	  {/* ---------- Feature grid ---------- */}
 	  <div className="grid gap-10 md:grid-cols-2">
 		{FEATURES.map(({ icon: Icon, title, text }) => (

@@ -86,7 +86,9 @@ export default function Login() {
 
   /* ── RENDER ─────────────────────────────────────────────── */
   return (
-    <main className="relative isolate min-h-screen flex flex-col text-[var(--brand)]">
+      <>
+        {/* ---------- HERO + CTA ---------- */}
+        <main className="relative isolate min-h-screen flex flex-col text-[var(--brand)]">
       {/* background image */}
       <Image
         src="/images/hero.jpg"
@@ -210,8 +212,10 @@ export default function Login() {
           </div>
         )}
       </section>
-      <SignupInfoSection />
+      
     </main>
+    <SignupInfoSection />
+    </>
   );
 }
 
