@@ -196,7 +196,7 @@ function extractPrompt(fullText) {
       >
         {messages.map((m, i) => {
           const isPrompt  = m.id === 1 && m.text.startsWith("/imagine");
-          const bubbleCls = `chat-bubble ${m.id === 0 ? "from-user" : "from-bot"} ${isPrompt ? "relative pr-12" : ""}`;
+          const bubbleCls = `chat-bubble ${m.id === 0 ? "from-user" : "from-bot"} ${isPrompt ? "relative  pr-16 pt-4" : ""}`;
 
           return (
             <div key={i}>
