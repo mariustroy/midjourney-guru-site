@@ -260,8 +260,13 @@ function copyToClipboard(text) {
           const isPrompt = m.id === 1 && m.text.startsWith("/imagine");
           return (
             <div key={i}>
-                  <div
-                    className={`chat-bubble ${m.id === 0 ? 'from-user' : 'from-bot'} relative`}      >
+                   const bubbleClass = `chat-bubble ${
+                     m.id === 0 ? 'from-user' : 'from-bot'
+                   } ${isPrompt ? 'relative pr-12' : ''}`;   // ← extra right padding
+                  
+                   return (
+                     <div key={i}>
+                       <div className={bubbleClass}>
                {isPrompt ? (
   // ----- Prompt parser: base • flags • suggested ref‑image -----
   (() => {
@@ -306,8 +311,8 @@ function copyToClipboard(text) {
             }}
             aria-label="Copy prompt"
             className="
-              absolute top-2 right-2
-              rounded p-1 bg-white/10 hover:bg-white/20
+             absolute top-2 right-2
+                rounded-full p-2 bg-white/10 hover:bg-white/20
               backdrop-blur focus:outline-none focus-visible:ring
             "
           >
