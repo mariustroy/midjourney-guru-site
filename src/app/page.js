@@ -22,6 +22,7 @@ import Link from "next/link";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import { useState, useRef, useEffect } from "react";
+import { Copy } from 'lucide-react';
 
 export default function Home() {
   const [feedbackStatus, setFeedbackStatus] = useState({});
@@ -188,6 +189,11 @@ async function sendStarter(text) {
   await sendMessage(null, text);   // call with override text
 }
 
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text).catch(() =>
+    alert('Could not copy. Please copy manually.')
+  );
+}
 
   return (
 <main
@@ -237,7 +243,7 @@ async function sendStarter(text) {
         {messages.map((m, i) => {
           const isPrompt = m.id === 1 && m.text.startsWith("/imagine");
           return (
-            <div key={i}>
+            <div key={i} className="relative">
               <div className={`chat-bubble ${m.id === 0 ? "from-user" : "from-bot"}`}>
                {isPrompt ? (
   // ----- Prompt parser: base • flags • suggested ref‑image -----
@@ -278,7 +284,20 @@ async function sendStarter(text) {
 ) : (
   <ReactMarkdown className="prose prose-invert leading-relaxed space-y-2">{m.text}</ReactMarkdown>
 )}              </div>
-
+{/* copy button shows only on bot prompts */}
+{isPrompt && (
+  <button
+    onClick={() => copyToClipboard(m.text)}
+    aria-label="Copy prompt"
+    className="
+      absolute top-2 right-2
+      rounded p-1 bg-white/5 hover:bg-white/10
+      backdrop-blur focus:outline-none focus-visible:ring
+    "
+  >
+    <Copy className="h-4 w-4 text-[var(--brand)]" />
+  </button>
+)}
               {m.id === 1 && (
                 feedbackStatus[i] === "submitted" ? (
                   <p className="text-gray-400 text-sm my-1 feedbacktext">
