@@ -295,13 +295,8 @@ function copyToClipboard(text) {
         {suggested && (
           <div className="text-gray-400 mt-1">{suggested}</div>
         )}
-      </div>
-    );
-  })()
-) : (
-  <ReactMarkdown className="prose prose-invert leading-relaxed space-y-2">{m.text}</ReactMarkdown>
-)}              </div>
-{/* copy button – only on bot prompts */}
+        
+        {/* copy button sits INSIDE the bubble */}
         {isPrompt && (
           <button
             onClick={() => {
@@ -319,13 +314,19 @@ function copyToClipboard(text) {
             <Copy className="h-4 w-4 text-[var(--brand)]" />
           </button>
         )}
-
-        {/* tiny “Copied!” toast inside the bubble */}
+        
+        {/* tiny “Copied!” feedback */}
         {copiedIdx === i && (
           <span className="absolute bottom-2 right-4 text-[10px] text-green-400">
             Copied!
           </span>
         )}
+      </div>
+    );
+  })()
+) : (
+  <ReactMarkdown className="prose prose-invert leading-relaxed space-y-2">{m.text}</ReactMarkdown>
+)}              </div>
               {m.id === 1 && (
                 feedbackStatus[i] === "submitted" ? (
                   <p className="text-gray-400 text-sm my-1 feedbacktext">
