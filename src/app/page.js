@@ -233,7 +233,7 @@ function extractPrompt(fullText) {
                       setTimeout(() => setCopiedIdx(null), 2000);
                     }}
                     aria-label="Copy prompt"
-                    className="absolute top-2 right-2 rounded-full p-2 bg-white/10 hover:bg-white/20 backdrop-blur"
+                    className="absolute top-4 right-3 rounded-full p-2 bg-white/10 hover:bg-white/20 backdrop-blur"
                   >
                     <Copy className="h-4 w-4 text-[var(--brand)]" />
                   </button>
