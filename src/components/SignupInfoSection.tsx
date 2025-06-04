@@ -111,7 +111,7 @@ export default function SignupInfoSection() {
 		  Join hundreds of creatives mastering Midjourney the smart way.
 		</p>
 		<a
-		   href="#email-signup"
+		   href="#signup"
 		   className="inline-block bg-[var(--brand)] text-[#141A10] px-6 py-3 rounded-full font-medium hover:bg-[#E8E455] transition"
 		 >
 		  Get Started – $7 / month

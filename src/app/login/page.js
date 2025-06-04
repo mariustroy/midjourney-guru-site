@@ -88,7 +88,7 @@ export default function Login() {
   return (
       <>
         {/* ---------- HERO + CTA ---------- */}
-        <main className="relative isolate min-h-screen flex flex-col text-[var(--brand)]">
+        <main id="signup" className="relative isolate min-h-screen flex flex-col text-[var(--brand)]">
       {/* background image */}
       <Image
         src="/images/hero.jpg"
@@ -132,9 +132,7 @@ export default function Login() {
 
         {/* email form */}
         {phase === "email" && (
-          <form
-          id="email-signup"
-           onSubmit={sendCode} className="w-full max-w-xs mx-auto">
+          <form onSubmit={sendCode} className="w-full max-w-xs mx-auto">
             <div className="relative">
               <input
                 ref={emailRef}
