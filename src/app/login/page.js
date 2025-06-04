@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
+import SignupInfoSection from "@/components/SignupInfoSection";
 
 /* ── Supabase ─────────────────────────────────────────────── */
 const supa = createClient(
@@ -209,6 +210,7 @@ export default function Login() {
           </div>
         )}
       </section>
+      <SignupInfoSection />
     </main>
   );
 }
