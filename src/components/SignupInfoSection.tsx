@@ -75,7 +75,7 @@ export default function SignupInfoSection() {
 	  <div className="grid gap-10 md:grid-cols-2">
 		{FEATURES.map(({ icon: Icon, title, text }) => (
 		  <div key={title} className="flex gap-4">
-			<Icon className="h-10 w-10 text-brand shrink-0" />
+			<Icon className="h-6 w-6 text-brand shrink-0" />
 			<div>
 			  <h3 className="text-lg font-semibold">{title}</h3>
 			  <p className="text-sm text-gray-400 leading-relaxed">{text}</p>
