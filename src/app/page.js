@@ -34,6 +34,7 @@ export default function Home() {
   const bottomRef   = useRef(null);
   const textareaRef = useRef(null);
   const [isTyping, setIsTyping] = useState(false);
+  const [copiedIdx, setCopiedIdx] = useState(null); 
   
   const STARTERS = [
   "I need help enhancing my prompt",
@@ -243,8 +244,9 @@ function copyToClipboard(text) {
         {messages.map((m, i) => {
           const isPrompt = m.id === 1 && m.text.startsWith("/imagine");
           return (
-            <div key={i} className="relative">
-              <div className={`chat-bubble ${m.id === 0 ? "from-user" : "from-bot"}`}>
+            <div key={i}>
+                  <div
+                    className={`chat-bubble ${m.id === 0 ? 'from-user' : 'from-bot'} relative`}      >
                {isPrompt ? (
   // ----- Prompt parser: base • flags • suggested ref‑image -----
   (() => {
@@ -284,20 +286,31 @@ function copyToClipboard(text) {
 ) : (
   <ReactMarkdown className="prose prose-invert leading-relaxed space-y-2">{m.text}</ReactMarkdown>
 )}              </div>
-{/* copy button shows only on bot prompts */}
-{isPrompt && (
-  <button
-    onClick={() => copyToClipboard(m.text)}
-    aria-label="Copy prompt"
-    className="
-      absolute top-2 right-2
-      rounded p-1 bg-white/5 hover:bg-white/10
-      backdrop-blur focus:outline-none focus-visible:ring
-    "
-  >
-    <Copy className="h-4 w-4 text-[var(--brand)]" />
-  </button>
-)}
+{/* copy button – only on bot prompts */}
+        {isPrompt && (
+          <button
+            onClick={() => {
+              copyToClipboard(m.text);
+              setCopiedIdx(i);
+              setTimeout(() => setCopiedIdx(null), 2000);
+            }}
+            aria-label="Copy prompt"
+            className="
+              absolute top-2 right-2
+              rounded p-1 bg-white/10 hover:bg-white/20
+              backdrop-blur focus:outline-none focus-visible:ring
+            "
+          >
+            <Copy className="h-4 w-4 text-[var(--brand)]" />
+          </button>
+        )}
+
+        {/* tiny “Copied!” toast inside the bubble */}
+        {copiedIdx === i && (
+          <span className="absolute bottom-2 right-4 text-[10px] text-green-400">
+            Copied!
+          </span>
+        )}
               {m.id === 1 && (
                 feedbackStatus[i] === "submitted" ? (
                   <p className="text-gray-400 text-sm my-1 feedbacktext">
