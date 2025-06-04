@@ -259,7 +259,7 @@ function copyToClipboard(text) {
         {messages.map((m, i) => {
           const isPrompt = m.id === 1 && m.text.startsWith("/imagine");
           return (
-            <div key={i}>
+            <div key={i} className="relative">
                   <div
                     className={`chat-bubble ${m.id === 0 ? 'from-user' : 'from-bot'} relative`}      >
                {isPrompt ? (
