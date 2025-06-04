@@ -1,17 +1,13 @@
 'use client';
 
+import { useState } from 'react';
 import {
   BrainCog,
   FolderArchive,
   PlaySquare,
   BookOpen,
+  ChevronDown,
 } from 'lucide-react';
-import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from '@/components/ui/accordion';
 
 /* ---------------- feature data ---------------- */
 const FEATURES = [
@@ -37,6 +33,38 @@ const FEATURES = [
   },
 ];
 
+/* ---------------- local accordion ---------------- */
+function FAQItem({
+  q,
+  a,
+  defaultOpen = false,
+}: {
+  q: string;
+  a: string;
+  defaultOpen?: boolean;
+}) {
+  const [open, setOpen] = useState(defaultOpen);
+  return (
+	<div className="border border-gray-700/60 rounded-lg">
+	  <button
+		onClick={() => setOpen(!open)}
+		className="w-full flex items-center justify-between px-4 py-3 text-left"
+	  >
+		<span>{q}</span>
+		<ChevronDown
+		  className={`h-4 w-4 transition-transform ${open ? 'rotate-180' : ''}`}
+		/>
+	  </button>
+	  {open && (
+		<div className="px-4 pb-4 text-sm text-gray-400 leading-relaxed">
+		  {a}
+		</div>
+	  )}
+	</div>
+  );
+}
+
+/* ---------------- main section ---------------- */
 export default function SignupInfoSection() {
   return (
 	<section id="about" className="w-full max-w-5xl mx-auto mt-24 space-y-24 px-4">
@@ -57,31 +85,20 @@ export default function SignupInfoSection() {
 	  <div className="space-y-6 max-w-2xl mx-auto">
 		<h2 className="text-center text-2xl font-semibold">FAQ</h2>
 
-		<Accordion type="single" collapsible className="space-y-2">
-		  <AccordionItem value="q1">
-			<AccordionTrigger>Do I need a paid Midjourney account?</AccordionTrigger>
-			<AccordionContent>
-			  Yes. Guru is a companion that helps you craft prompts; you still need a Midjourney
-			  subscription to generate images on their platform.
-			</AccordionContent>
-		  </AccordionItem>
-
-		  <AccordionItem value="q2">
-			<AccordionTrigger>Does the AI use my private prompts?</AccordionTrigger>
-			<AccordionContent>
-			  No. Guru only sees what you send in the chat. Your private Midjourney prompts remain
-			  private unless you share them.
-			</AccordionContent>
-		  </AccordionItem>
-
-		  <AccordionItem value="q3">
-			<AccordionTrigger>Can I cancel any time?</AccordionTrigger>
-			<AccordionContent>
-			  Absolutely. Manage your subscription in one click from your settings page—no emails,
-			  no phone calls.
-			</AccordionContent>
-		  </AccordionItem>
-		</Accordion>
+		<div className="space-y-3">
+		  <FAQItem
+			q="Do I need a paid Midjourney account?"
+			a="Yes. Guru is a companion that helps you craft prompts; you still need a Midjourney subscription to generate images on their platform."
+		  />
+		  <FAQItem
+			q="Does the AI use my private prompts?"
+			a="No. Guru only sees what you send in the chat. Your private Midjourney prompts remain private unless you share them."
+		  />
+		  <FAQItem
+			q="Can I cancel any time?"
+			a="Absolutely. Manage your subscription in one click from your settings page—no emails, no phone calls."
+		  />
+		</div>
 	  </div>
 
 	  {/* ---------- Secondary CTA ---------- */}
