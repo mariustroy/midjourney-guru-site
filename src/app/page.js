@@ -77,8 +77,9 @@ export default function Home() {
   }
 
   /* Strip “/imagine prompt:” and suggestion, keep flags */
-  function extractPrompt(fullText) {
-    const lines = fullText.split("\n").map((l) => l.trim()).filter(Boolean);
+function extractPrompt(fullText) {
+  fullText = fullText.replace(/\bmj_version\b/gi, "--v");   // normalize
+  const lines = fullText.split("\n").map((l) => l.trim()).filter(Boolean);
     const base  = lines.shift().replace(/^\/imagine\s+prompt:\s*/i, "").trim();
     const flags = lines.filter((l) => l.startsWith("--")).join(" ");
     return `${base} ${flags}`.trim();
@@ -204,7 +205,8 @@ export default function Home() {
                 {/* ----- Prompt vs Markdown ----- */}
                 {isPrompt ? (
                   (() => {
-                    const lines = m.text.split("\n").map((l) => l.trim()).filter(Boolean);
+                    const clean = m.text.replace(/\bmj_version\b/gi, "--v");
+                    const lines = clean.split("\n").map((l) => l.trim()).filter(Boolean);
                     const base = lines.shift();
                     const flags = []; let suggested = "";
                     lines.forEach((l) => l.startsWith("--") ? flags.push(l) : (suggested = l));
