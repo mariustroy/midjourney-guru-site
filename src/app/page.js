@@ -19,7 +19,7 @@ export default function Home() {
   const [isTyping, setIsTyping] = useState(false);
   const [feedbackStatus, setFeedbackStatus] = useState({});
   const [showStarters, setShowStarters] = useState(true);
-  const [copiedIdx, setCopiedIdx] = useState(null);
+  const [copiedIdx, setCopiedIdx] = useState(null); // NEW
 
   const textareaRef = useRef(null);
   const bottomRef = useRef(null);
@@ -30,37 +30,7 @@ export default function Home() {
     "I need a creative prompt idea",
   ];
 
-  /* ----- static help markdown ----- */
-  const HELP_RESPONSE = `
-**Midjourney Guru – Quick Guide**  
-
-1. **Ask anything** → _“sun-drenched brutalist tower”_  
-2. **Shift + Enter** → newline in the box  
-3. **👍 / 👎** under replies → trains the bot  
-4. **Reference tips**  
-   • Warm prompt → add a cold photo for tension  
-   • Use \`--iw\` 0.25 – 0.5 so the ref doesn’t overpower  
-5. **Shortcuts**  
-   \`/imagine\` auto-added – just type the idea  
-   \`--v7\` is default if you omit version  
-6. **Need more?** Ping me on IG @ mariustroy 👋
-`;
-
-  /* ----- helpers ----- */
-  function resizeTextarea() {
-    const ta = textareaRef.current;
-    if (ta) {
-      ta.style.height = "auto";
-      ta.style.height = ta.scrollHeight + "px";
-    }
-  }
-
-  function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).catch(() =>
-      alert("Could not copy. Please copy manually.")
-    );
-  }
-
+  /* ----- helper: extract prompt text ----- */
   function extractPrompt(fullText) {
     const lines = fullText.split("\n").map((l) => l.trim()).filter(Boolean);
     const base = lines
@@ -71,14 +41,13 @@ export default function Home() {
     return `${base} ${flags}`.trim();
   }
 
-  /* ----- auto-scroll ----- */
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).catch(() =>
+      alert("Could not copy. Please copy manually.")
+    );
+  }
 
-  /* (omitting unchanged onboarding, sendMessage, rate, etc. for brevity) */
-
-  /* ----- render ----- */
+  /* ---------- render ---------- */
   return (
     <main
       className="w-full max-w-6xl mx-auto px-3 py-4 md:px-6 lg:pl-64"
@@ -89,9 +58,7 @@ export default function Home() {
         height: "100dvh",
       }}
     >
-      {/* header omitted for brevity */}
-
-      {/* Chat window */}
+      {/* ---------- Chat window ---------- */}
       <div
         style={{
           flex: 1,
@@ -105,12 +72,13 @@ export default function Home() {
           const isPrompt = m.id === 1 && m.text.startsWith("/imagine");
           const bubbleClass = `chat-bubble ${
             m.id === 0 ? "from-user" : "from-bot"
-          } relative ${isPrompt ? "pr-12" : ""}`;
+          } ${isPrompt ? "relative pr-12" : ""}`; // extra padding for icon
 
           return (
             <div key={i}>
+              {/* ---------- bubble ---------- */}
               <div className={bubbleClass}>
-                {/* ----- Prompt or Markdown ----- */}
+                {/* prompt vs markdown ------------------------------- */}
                 {isPrompt ? (
                   (() => {
                     const lines = m.text
@@ -144,7 +112,7 @@ export default function Home() {
                   </ReactMarkdown>
                 )}
 
-                {/* ----- Copy button ----- */}
+                {/* copy button -------------------------------------- */}
                 {isPrompt && (
                   <button
                     onClick={() => {
@@ -159,6 +127,7 @@ export default function Home() {
                   </button>
                 )}
 
+                {/* copied toast ------------------------------------- */}
                 {copiedIdx === i && (
                   <span className="absolute bottom-2 right-3 text-[10px] text-green-400">
                     Copied!
@@ -166,18 +135,133 @@ export default function Home() {
                 )}
               </div>
 
-              {/* 👍 / 👎 feedback block (unchanged) */}
-              {/* ... */}
+              {/* ---------- feedback block (unchanged) ---------- */}
+              {m.id === 1 && (
+                feedbackStatus[i] === "submitted" ? (
+                  <p className="text-gray-400 text-sm my-1 feedbacktext">
+                    Thank you! This will help us make Guru even better.
+                  </p>
+                ) : feedbackStatus[i] === "loading" ? (
+                  <p className="text-gray-500 text-sm my-1 feedbacktext">
+                    Submitting…
+                  </p>
+                ) : (
+                  <div className="mt-1 flex gap-2 text-gray-400 text-sm feedbacktext">
+                    <button
+                      onClick={() => rate(i, 1)}
+                      disabled={feedbackStatus[i] === "loading"}
+                    >
+                      👍
+                    </button>
+                    <button
+                      style={{ marginLeft: "8px" }}
+                      onClick={() => rate(i, -1)}
+                      disabled={feedbackStatus[i] === "loading"}
+                    >
+                      👎
+                    </button>
+                  </div>
+                )
+              )}
             </div>
           );
         })}
 
-        {/* typing indicator + bottomRef */}
-        {/* ... */}
+        {/* typing indicator & anchor */}
+        {isTyping && (
+          <div className="chat-bubble from-bot flex items-center gap-2">
+            <span className="typing-dot" style={{ animationDelay: "0s" }} />
+            <span className="typing-dot" style={{ animationDelay: "0.15s" }} />
+            <span className="typing-dot" style={{ animationDelay: "0.3s" }} />
+            <span className="text-sm text-gray-400">Guru is thinking…</span>
+          </div>
+        )}
+        <div ref={bottomRef} />
       </div>
 
-      {/* textarea, starters, intro modal (unchanged) */}
-      {/* ... */}
+{/* Conversation starters */}
+{showStarters && messages.filter(m => m.id === 0).length === 0 && (
+  <div className="mt-4 flex flex-wrap gap-2 starterpadding">
+    {STARTERS.map((s) => (
+      <button
+        key={s}
+        onClick={() => sendStarter(s)}
+        className="starterbutton px-3 py-1 text-sm rounded-full bg-gray-700 text-gray-100"
+      >
+        {s}
+      </button>
+    ))}
+  </div>
+)}
+
+
+      {/* Input form (auto-resizing textarea) */}
+      
+
+      <form
+  id="inputmessage"
+  onSubmit={sendMessage}
+  style={{
+    display: "flex",
+    flexShrink: 0,
+    width: "100%",
+
+    position: "sticky",
+    bottom: 0,
+    zIndex: 10,
+    marginBottom: "30px",
+    padding: "2rem 0  env(safe-area-inset-bottom, 1rem) 0",
+  }}
+>
+        <textarea
+          ref={textareaRef}
+          value={input}
+          onChange={(e) => {
+            setInput(e.target.value);
+            resizeTextarea();
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              sendMessage(e);
+            }
+          }}
+          rows={1}
+          placeholder="Ask me anything about Midjourney…"
+          style={{
+            flex: 1,
+            padding: 16,
+            border: "1px solid #242724",
+            background: "#0D170C",
+            borderRadius: 40,
+            resize: "none",
+            overflow: "hidden",
+            width: "100%",  
+          }}
+        />
+      </form>
+      {showIntro && (
+  <div
+    className="fixed inset-0 bg-black/60 flex items-center justify-center z-50"
+  >
+    <div className="guruintro rounded-lg max-w-md p-6 shadow-xl text-center">
+      <h2 className="text-xl font-semibold mb-3">Welcome to Midjourney Guru!</h2>
+      <p className="text-sm leading-relaxed mb-4">
+      I am trained on hundreds of Marius Troy&#39;s prompts, his Midjourney guides and all of his experience, and I am here to help you get the most out of Midjourney. <br /><br />
+        Ask me for a prompt idea, paste your own prompt for feedback,
+        or type <code>help</code> to see tips.<br /><br />
+        I am comfortably multilingual - so speak to me in your own language if you wish. <br /><br />
+        Shift+Enter = newline • 👍 / 👎 trains me.
+      </p>
+      <button
+        onClick={closeIntro}
+        className="bg-white text-black py-2 px-4 rounded"
+      >
+        Got it
+      </button>
+    </div>
+  </div>
+)}
     </main>
   );
 }
