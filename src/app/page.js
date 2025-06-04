@@ -46,6 +46,65 @@ export default function Home() {
       alert("Could not copy. Please copy manually.")
     );
   }
+  /* ---------- sendMessage ---------- */
+  async function sendMessage(e, textOverride) {
+    if (e?.preventDefault) e.preventDefault();
+    const text = (textOverride ?? input).trim();
+    if (!text) return;
+  
+    const newMsgs = [...messages, { id: 0, text }];
+    setMessages(newMsgs);
+    setInput("");
+    resizeTextarea();
+  
+    if (text.toLowerCase() === "help" || text.toLowerCase() === "/help") {
+      setMessages([...newMsgs, { id: 1, text: HELP_RESPONSE }]);
+      return;
+    }
+    setIsTyping(true);
+  
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        messages: newMsgs.map((m) =>
+          m.id === 0 ? { role: "user", content: m.text } : { role: "assistant", content: m.text }
+        ),
+      }),
+    });
+  
+    if (!res.ok) {
+      setMessages([...newMsgs, { id: 1, text: "⚠️ Error from server." }]);
+      setIsTyping(false);
+      return;
+    }
+  
+    const data = await res.json();
+    const botText = data.choices[0].message.content;
+    setMessages([...newMsgs, { id: 1, text: botText }]);
+    setIsTyping(false);
+  }
+  
+  /* ---------- rate ---------- */
+  async function rate(index, score) {
+    setFeedbackStatus((prev) => ({ ...prev, [index]: "loading" }));
+    try {
+      await fetch("/api/rate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: messages[index].text, score }),
+      });
+      setFeedbackStatus((prev) => ({ ...prev, [index]: "submitted" }));
+    } catch (e) {
+      setFeedbackStatus((prev) => ({ ...prev, [index]: "idle" }));
+    }
+  }
+  
+  /* ---------- sendStarter ---------- */
+  async function sendStarter(text) {
+    setShowStarters(false);
+    await sendMessage(null, text);
+  }
 
   /* ---------- render ---------- */
   return (
