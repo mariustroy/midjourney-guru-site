@@ -118,6 +118,21 @@ function closeIntro() {
       ta.style.height = ta.scrollHeight + "px";
     }
   }
+  
+  function extractPrompt(fullText) {
+    const lines = fullText.split('\n').map((l) => l.trim()).filter(Boolean);
+  
+    // first line: remove "/imagine prompt:" prefix
+    const base = lines
+      .shift()
+      .replace(/^\/imagine\s+prompt:\s*/i, '')
+      .trim();
+  
+    // keep only the flag lines that start with "--"
+    const flags = lines.filter((l) => l.startsWith('--')).join(' ');
+  
+    return `${base} ${flags}`.trim();
+  }
 
 async function sendMessage(e, textOverride) {
   if (e?.preventDefault) e.preventDefault();      // keep form behaviour
@@ -290,7 +305,7 @@ function copyToClipboard(text) {
         {isPrompt && (
           <button
             onClick={() => {
-              copyToClipboard(m.text);
+              copyToClipboard(extractPrompt(m.text));
               setCopiedIdx(i);
               setTimeout(() => setCopiedIdx(null), 2000);
             }}
