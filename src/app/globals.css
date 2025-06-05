@@ -16,6 +16,12 @@
   40%          { transform: translateY(-6px); }
 }
 
+@layer utilities {
+  .prompt-accent {
+    @apply text-brand/90 text-[17px] leading-relaxed;  /* yellow + bigger */
+  }
+}
+
 @layer base {
   :root {
     --foreground: 240 10% 3.9%;
