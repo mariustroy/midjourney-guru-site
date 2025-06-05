@@ -212,8 +212,14 @@ function extractPrompt(fullText) {
                     lines.forEach((l) => l.startsWith("--") ? flags.push(l) : (suggested = l));
                     return (
                       <div>
-                        {base}{" "}
-                        {flags.map((f, idx) => <span key={idx} className="text-gray-400 mx-1">{f}</span>)}
+                       <span className="text-brand text-opacity-90 text-[17px] leading-relaxed">
+                         {base}{" "}
+                         {flagLines.map((flag, idx) => (
+                           <span key={idx} className="mx-1">
+                             {flag}
+                           </span>
+                         ))}
+                       </span>
                         {suggested && <div className="text-gray-400 mt-1">{suggested}</div>}
                       </div>
                     );
