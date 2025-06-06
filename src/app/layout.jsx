@@ -52,6 +52,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`dark ${geistSans.variable} ${geistMono.variable}`}>
+    <head>
+      <link
+        href="https://assets.calendly.com/assets/external/widget.css"
+        rel="stylesheet"
+      />
+      <script
+        src="https://assets.calendly.com/assets/external/widget.js"
+        async
+      ></script>
+    </head>
       <body className="flex min-h-screen bg-[#131B0E] text-gray-100 antialiased">
         {/* sidebar (desktop + mobile) */}
         <SideDrawer />
