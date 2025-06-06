@@ -19,6 +19,7 @@ const links = [
   { href: "/",          label: "Guru"      },
   { href: "/formulas",  label: "Formulas"  },
     { href: "/resources", label: "Resources" },
+    { href: "/coaching",   label: "1-on-1 Coaching" }, 
 ];
 
 function NavLinks({ close }) {
