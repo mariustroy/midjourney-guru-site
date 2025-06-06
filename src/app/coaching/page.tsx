@@ -1,5 +1,4 @@
-// app/coaching/page.tsx
-export default function CoachingPage() "use client";
+"use client"; // ← this must be the very first line, no comments above it
 
 import { useEffect } from "react";
 
@@ -26,7 +25,7 @@ export default function CoachingPage() {
 
   const openCalendly = () => {
 	window.Calendly.initPopupWidget({
-	  url: "https://calendly.com/mariustroy/60min",
+	  url: "https://calendly.com/mariustroy/60min", // Replace this
 	});
   };
 
@@ -37,7 +36,7 @@ export default function CoachingPage() {
 		Book a personal coaching session with Marius Troy. Explore Midjourney techniques, elevate your creative practice, or refine your visual language.
 	  </p>
 
-	  <button
+	<button
 		onClick={openCalendly}
 		className="px-6 py-3 rounded-xl text-black font-medium transition"
 		style={{
