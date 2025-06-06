@@ -15,6 +15,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+useEffect(() => {
+  const script = document.createElement("script");
+  script.src = "https://assets.calendly.com/assets/external/widget.js";
+  script.async = true;
+  document.body.appendChild(script);
+}, []);
+
 /* ---------- Metadata (Open Graph, Twitter, etc.) ---------- */
 export const metadata = {
   title:       "Midjourney Guru by Marius Troy",

@@ -7,15 +7,17 @@ export default function CoachingPage() {
 		Book a personal coaching session with Marius Troy. Explore Midjourney techniques, elevate your creative practice, or refine your visual language. 60 minutes. Individuals only.
 	  </p>
 	  <div className="w-full overflow-hidden rounded-2xl shadow-sm">
-		<iframe
-		  src="https://calendly.com/mariustroy/60min"
-		  width="100%"
-		  height="1000"
-		  className="w-full border-none min-h-[1000px] max-h-[1000px]"
-		  frameBorder="0"
-		  allow="camera; microphone; fullscreen; speaker; display-capture"
-		  scrolling="yes"
-		></iframe>
+		<button
+		  onClick={() =>
+			window.Calendly.initPopupWidget({
+			  url: "https://calendly.com/mariustroy/60min",
+			})
+		  }
+		  className="px-6 py-3 rounded-xl bg-black text-black hover:bg-neutral-800 transition"
+		  style={{ backgroundColor: "#FFFD91" }}
+		>
+		  Book Your Session
+		</button>
 	  </div>
 	</div>
   );
