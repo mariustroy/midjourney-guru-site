@@ -1,5 +1,14 @@
 "use client";
 
+declare global {
+  interface Window {
+	Calendly: {
+	  initPopupWidget: (options: { url: string }) => void;
+	  closePopupWidget: () => void;
+	};
+  }
+}
+
 export default function CalendlyPopup() {
   const openCalendly = () => {
 	if (typeof window.Calendly !== "undefined") {
