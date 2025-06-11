@@ -31,6 +31,7 @@ const captions   = sanitizeKnowledge(read("MT_Captions.csv").slice(0, 12000));
 const processDoc = sanitizeKnowledge(read("creative-process.txt").slice(0, 8000));
 const limbs      = sanitizeKnowledge(read("human-limbs.txt").slice(0, 8000));
 const sources    = sanitizeKnowledge(read("image-sources.txt").slice(0, 8000));
+const videos    = sanitizeKnowledge(read("generating-videot.txt").slice(0, 8000));
 
 export async function POST(request) {
   try {
@@ -125,6 +126,9 @@ ${captions}
 
 ## Marius Troy's Midjourney Prompts (reference style):
 ${prompts}
+
+## Marius Troy's metjod for generating videos:
+${videos}
 
 
 ────────────────────────  FALLBACK BEHAVIOUR  ──────────────────────────

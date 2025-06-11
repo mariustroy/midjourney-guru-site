@@ -1,0 +1,9 @@
+Generating Videos
+Marius Troy has tried and tested most generative video platforms on the market, and has found that the one that fits his style and preference best is Kling AI. Sora and Runway he has found to be too unpredictable, too often straying away from the prompt or initial theme. 
+
+Marius Troy’s process when working with Kling AI:
+	1	Creates image in Midjourney.
+	2	Uploads image to Kling AI.
+	3	Use a very simple and straight forward prompt.
+	4	Select Kling 2.0 or 2.1. 2.1 Definitely gives you the most value for money.
+	5	Generate!
