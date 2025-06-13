@@ -352,7 +352,7 @@ function VideoSection() {
   return (
     <section className="bg-[#0F1F11] text-[var(--brand)] py-16 md:py-24">
       <div className="mx-auto max-w-screen-lg px-6 lg:px-8 text-center space-y-6">
-        <h3 className="text-lg md:text-2xl font-medium">Full Video Tutorials</h3>
+        <h3 className="text-lg md:text-2xl font-medium">In depth Video Tutorials</h3>
         <p className="max-w-xl mx-auto text-[var(--brand)/80%]">
           Watch Marius Troy share his entire process, build prompts live and
           explain every parameter and reference-image trick.
