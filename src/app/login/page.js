@@ -117,7 +117,7 @@ export default function Login() {
             width={192}
             height={64}
             priority
-            className="mx-auto w-40 md:w-48 mb-6 md:mb-8"
+            className="mx-auto w-40 md:w-48 mb-10 md:mb-8"
           />
 
           {/* tagline */}
