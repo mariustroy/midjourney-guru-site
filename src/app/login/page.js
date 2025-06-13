@@ -436,7 +436,7 @@ function FAQSection() {
 function FinalCTA({ onClick }) {
   return (
     <section className="bg-[#0D1A0E] text-[var(--brand)] py-20 text-center">
-      <h3 className="font-elanor text-xl md:text-3xl font-light mb-6"">
+      <h3 className="font-elanor text-xl md:text-3xl font-light mb-6">
         Start learning with <span className="font-regular">Guru</span> now
       </h3>
       <button
