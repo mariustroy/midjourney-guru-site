@@ -108,7 +108,7 @@ export default function Login() {
         <div className="absolute inset-0 bg-black/50 -z-10" />
 
         {/* content */}
-        <div className="mx-auto max-w-screen-xl px-4 pt-8 lg:pt-8 pb-16 lg:pb-24
+        <div className="mx-auto max-w-screen-xl px-4 pt-10 lg:pt-12 pb-16 lg:pb-24
         text-center text-[var(--brand)]">
           {/* logo */}
           <Image
@@ -117,7 +117,7 @@ export default function Login() {
             width={192}
             height={64}
             priority
-            className="mx-auto w-40 md:w-48 mb-5 lg:mb-8"
+            className="mx-auto w-40 md:w-48 mb-6 md:mb-8"
           />
 
           {/* tagline */}
@@ -284,9 +284,9 @@ function FeatureSection() {
 
         {/* helper blurb – no images here anymore */}
         <div className="text-center space-y-6">
-          <h2 className="text-lg md:text-3xl lg:text-4xl font-medium">
+          <h3 className="text-lg md:text-2xl lg:text-4xl font-medium">
             Guru is a Midjourney and AI Prompts Helper
-          </h2>
+          </h3>
           <p className="max-w-2xl mx-auto text-sm md:text-base                      /* ↓ */
                     text-[var(--brand)/80%] leading-relaxed">
             It can help you refine and adjust your prompts. Talk to it like you
