@@ -17,6 +17,7 @@ const supa = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
+
 export default function Login() {
   const router = useRouter();
 
@@ -316,7 +317,7 @@ function FanOfPromptCards() {
   return (
     <div className="relative flex justify-center md:justify-start">
       <Image
-        src="/images/demo-card.jpg"
+        src="/images/democard1.jpg"
         alt=""
         width={200}
         height={320}
@@ -324,7 +325,7 @@ function FanOfPromptCards() {
         unoptimized
       />
       <Image
-        src="/images/demo-card.jpg"
+        src="/images/democard2.jpg"
         alt=""
         width={200}
         height={320}
@@ -332,7 +333,7 @@ function FanOfPromptCards() {
         unoptimized
       />
       <Image
-        src="/images/demo-card.jpg"
+        src="/images/democard3.jpg"
         alt=""
         width={200}
         height={320}
@@ -371,10 +372,10 @@ function VideoSection() {
           {/* main video thumb with play button */}
           <button aria-label="Play promo video" className="group relative">
             <Image
-              src="/images/video-thumb.jpg"
+              src="/images/videostack.png"
               alt="Play video"
               width={640}
-              height={360}
+              height={423}
               className="rounded-xl ring-1 ring-white/10 shadow-lg"
               unoptimized
             />
@@ -396,27 +397,6 @@ function VideoSection() {
   );
 }
 
-function TestimonialsSection() {
-  return (
-    <section className="bg-[#0D1A0E] text-[var(--brand)] py-16 md:py-24">
-      <div className="mx-auto max-w-screen-md px-6 lg:px-8 text-center space-y-8">
-        <h3 className="text-lg md:text-2xl font-medium">
-          What people say about&nbsp;Guru
-        </h3>
-        <blockquote className="text-[var(--brand)/80%] leading-relaxed">
-          <p>
-            “Steal Marius Troy’s best work: real-world prompts grouped by style,
-            subject &amp; lighting—ready to copy &amp; tweak. New prompts added
-            continuously.”
-          </p>
-          <footer className="mt-4 text-sm opacity-70">
-            — Vinet Lane, Product Designer
-          </footer>
-        </blockquote>
-      </div>
-    </section>
-  );
-}
 
 function FAQSection() {
   const faqs = [
