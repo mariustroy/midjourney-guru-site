@@ -1,0 +1,4 @@
+/* styles/elanor.css  — loads after all Tailwind/plugin CSS */
+.font-elanor {
+  font-family: var(--font-elanor), serif;
+}
