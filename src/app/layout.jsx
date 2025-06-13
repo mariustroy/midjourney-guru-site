@@ -66,7 +66,7 @@ export default function RootLayout({ children }) {
           async
         ></script>
       </head>
-      <body className="font-elanor flex min-h-screen bg-[#131B0E] text-gray-100 antialiased">
+      <body className="flex min-h-screen bg-[#131B0E] text-gray-100 antialiased">
         {/* sidebar (desktop + mobile) */}
         <SideDrawer />
 
