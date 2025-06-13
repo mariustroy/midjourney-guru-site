@@ -296,7 +296,7 @@ function FeatureSection() {
         </div>
 
         {/* Prompts Vault ––– now uses the fan-spread */}
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-24 xl:gap-32 items-center">
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-24 xl:gap-32 items-center mt-10 lg:mt-24 xl:mt-32">
           <FanOfPromptCards />                       {/* <—— swapped in */}
           <div className="space-y-5 md:order-first relative z-20
                           text-center md:text-left">
