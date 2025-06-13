@@ -356,18 +356,7 @@ function VideoSection() {
 
         {/* thumbnail + underlying stack */}
         <div className="relative inline-block">
-          {/* “stack of videos” */}
-          <Image
-            src="/images/vault-cards.jpg"
-            alt=""
-            width={480}
-            height={340}
-            unoptimized
-            className="rounded-xl shadow-lg
-                       absolute -rotate-3 -translate-x-4 translate-y-4
-                       opacity-80 -z-10"
-          />
-
+        
           {/* main video thumb with play button */}
           <button aria-label="Play promo video" className="group relative">
             <Image

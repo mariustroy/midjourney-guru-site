@@ -1,47 +1,41 @@
 /** @type {import('tailwindcss').Config} */
-const defaultColors = require("tailwindcss/colors");
+const defaultColors = require('tailwindcss/colors');
 
 module.exports = {
-  darkMode: "class",
+  darkMode: 'class',
 
-  // Tell Tailwind where to look for class names
+  /* where Tailwind should scan */
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-    "./pages/**/*.{js,jsx,ts,tsx}",
-    "./app/**/*.{js,jsx,ts,tsx}",   // add if you use /app
+    './src/**/*.{js,jsx,ts,tsx}',
+    './pages/**/*.{js,jsx,ts,tsx}',
+    './app/**/*.{js,jsx,ts,tsx}',
   ],
 
-  /* ---------------- palette ---------------- */
   theme: {
+    /* keep default palette + your brand yellow */
     colors: {
-      ...defaultColors,       // keep all Tailwind built-ins
-      brand: "#FFFD91",       // ← your yellow; bg-brand, text-brand, etc.
+      ...defaultColors,
+      brand: '#FFFD91',
     },
 
-    /* -------- anything else goes here -------- */
     extend: {
+      /* custom font family ← the important line */
+      fontFamily: {
+        elanor: ['var(--font-elanor)', 'serif'],
+      },
+
+      /* animations you already had */
       keyframes: {
         fadeIn: { from: { opacity: 0 }, to: { opacity: 1 } },
       },
       animation: {
-        "fade-in": "fadeIn .4s ease-out both",
+        'fade-in': 'fadeIn .4s ease-out both',
       },
     },
   },
 
   plugins: [
-    require("@tailwindcss/typography"),
-    require("tailwindcss-animate"),
+    require('@tailwindcss/typography'),
+    require('tailwindcss-animate'),
   ],
-};
-
-module.exports = {
-  theme: {
-    extend: {
-      fontFamily: {
-        elanor: ['var(--font-elanor)', 'serif'],
-      },
-    },
-  },
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
 };
