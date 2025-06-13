@@ -284,7 +284,7 @@ function FeatureSection() {
 
         {/* helper blurb – no images here anymore */}
         <div className="text-center space-y-6">
-          <h3 className="text-lg md:text-2xl lg:text-4xl font-medium">
+          <h3 className="text-lg md:text-2xl lg:text-4xl font-elanor font-[200]">
             Guru is an AI Prompts Helper
           </h3>
           <p className="max-w-2xl mx-auto text-sm md:text-base                      /* ↓ */
@@ -300,7 +300,7 @@ function FeatureSection() {
           <FanOfPromptCards />                       {/* <—— swapped in */}
           <div className="space-y-5 md:order-first relative z-20
                           text-center md:text-left">
-            <h3 className="text-lg md:text-2xl font-medium">
+            <h3 className="text-lg md:text-2xl font-elanor font-[200]">
               Prompts Vault with 30+ Personal Prompts
             </h3>
             <p className="text-[var(--brand)/80%]">
@@ -352,7 +352,7 @@ function VideoSection() {
   return (
     <section className="bg-[#0F1F11] text-[var(--brand)] py-16 md:py-24">
       <div className="mx-auto max-w-screen-lg px-6 lg:px-8 text-center space-y-6">
-        <h3 className="text-lg md:text-2xl font-medium">In depth Video Tutorials</h3>
+        <h3 className="text-lg md:text-2xl font-elanor font-[200]">In depth Video Tutorials</h3>
         <p className="max-w-xl mx-auto text-[var(--brand)/80%]">
           Watch Marius Troy share his entire process, build prompts live and
           explain every parameter and reference-image trick.
@@ -413,7 +413,7 @@ function FAQSection() {
   return (
     <section className="bg-[#0F1F11] text-[var(--brand)] py-16 md:py-24">
       <div className="mx-auto max-w-screen-md px-6 lg:px-8">
-        <h3 className="text-center text-lg md:text-2xl font-medium mb-10">
+        <h3 className="text-center text-lg md:text-2xl font-elanor font-[200] mb-10">
           FAQs
         </h3>
 
