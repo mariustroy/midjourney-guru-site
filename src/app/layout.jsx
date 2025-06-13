@@ -4,7 +4,7 @@
 import "./globals.css";
 import SideDrawer from "@/components/SideDrawer";
 import { Geist, Geist_Mono } from "next/font/google";
-import { elanor } from "../fonts";           // ← your local web-font
+import { elanor } from "./fonts";           // ← your local web-font
 
 /* ---------- Google fonts ---------- */
 const geistSans = Geist({
