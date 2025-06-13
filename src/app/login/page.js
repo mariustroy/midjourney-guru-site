@@ -120,7 +120,7 @@ export default function Login() {
           />
 
           {/* tagline */}
-          <h1 className="font-elanor font-light leading-relaxed
+          <h1 className="font-elanor font-[200] leading-relaxed
           +            text-2xl md:text-4xl lg:text-5xl
           +            max-w-xl md:max-w-3xl mx-auto mb-8 lg:mb-12">
             Midjourney&nbsp;AI helper. <br className="hidden sm:inline" />
@@ -425,8 +425,8 @@ function FAQSection() {
 function FinalCTA({ onClick }) {
   return (
     <section className="bg-[#0D1A0E] text-[var(--brand)] py-20 text-center">
-      <h3 className="font-elanor text-xl md:text-3xl font-light mb-6">
-        Start learning with <span className="font-regular">Guru</span> now
+      <h3 className="font-elanor text-xl md:text-3xl font-[200] mb-6">
+        Start learning with <span className="font-[400]">Guru</span> now
       </h3>
       <button
         onClick={onClick}
