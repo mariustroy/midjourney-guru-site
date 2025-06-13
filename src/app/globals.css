@@ -7,7 +7,6 @@
 @import "tailwindcss";
 
 @import "tw-animate-css";
-@import "./elanor.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -203,4 +202,9 @@ body {
 a, button { --tw-text-opacity: 1; color: rgb(255 253 145 / var(--tw-text-opacity)); }
 :root {
   --brand: #fffd91;        /* your yellow */
+}
+@layer utilities {
+  .font-elanor {
+    font-family: var(--font-elanor), serif;
+  }
 }
