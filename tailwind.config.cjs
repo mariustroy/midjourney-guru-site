@@ -34,3 +34,14 @@ module.exports = {
     require("tailwindcss-animate"),
   ],
 };
+
+module.exports = {
+  theme: {
+    extend: {
+      fontFamily: {
+        elanor: ['var(--font-elanor)', 'serif'],
+      },
+    },
+  },
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+};
