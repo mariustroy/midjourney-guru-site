@@ -2,6 +2,7 @@
 /*  Root layout – combines fonts, metadata, sidebar & globals         */
 /* ------------------------------------------------------------------ */
 import "./globals.css";
+import { elanor } from '../fonts';
 import SideDrawer from "@/components/SideDrawer";
 import { Geist, Geist_Mono } from "next/font/google";
 
@@ -47,6 +48,16 @@ export const metadata = {
     creator:     "@mariustroy",
   },
 };
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en" className={elanor.variable}>
+      <body className="font-elanor bg-[#131B0E] antialiased">
+        {children}
+      </body>
+    </html>
+  );
+}
 
 /* ---------- Root component ---------- */
 export default function RootLayout({ children }) {
