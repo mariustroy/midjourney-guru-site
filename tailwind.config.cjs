@@ -22,6 +22,10 @@ module.exports = {
       fontFamily: {
         elanor: ['var(--font-elanor)', 'serif'],
       },
+      fontWeight: {
+        light:  '200',   // so font-light → 200
+        medium: '400',   // so font-medium → 400
+      },
 
       /* ---------- animations ---------- */
       keyframes: {
