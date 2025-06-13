@@ -235,7 +235,7 @@ export default function Login() {
       }} />
 
       {/* Existing legal blurb (kept for parity) */}
-      <SignupInfoSection />
+     
     </>
   );
 }
@@ -279,45 +279,69 @@ function FeatureSection() {
   return (
     <section className="bg-[#0D1A0E] text-[var(--brand)] py-16 md:py-24">
       <div className="mx-auto max-w-screen-lg px-6 lg:px-8 space-y-24">
-        {/* helper blurb */}
+
+        {/* helper blurb – no images here anymore */}
         <div className="text-center space-y-6">
           <h2 className="text-xl md:text-3xl lg:text-4xl font-medium">
-            Guru is a Midjourney and&nbsp;AI&nbsp;Prompts Helper
+            Guru is a Midjourney and AI Prompts Helper
           </h2>
           <p className="max-w-2xl mx-auto text-[var(--brand)/80%] leading-relaxed">
             It can help you refine and adjust your prompts. Talk to it like you
             would with a human mentor and walk away with optimized prompts in
             seconds.
           </p>
+        </div>
 
-          {/* demo cards (simple overlapping mock) */}
-          <div className="relative flex justify-center mt-10">
-            <Image
-              src="/images/demo-card1.jpg"
-              alt=""
-              width={200}
-              height={320}
-              className="rounded-xl ring-1 ring-white/10 shadow-lg relative z-10"
-              unoptimized
-            />
-            <Image
-              src="/images/demo-card2.jpg"
-              alt=""
-              width={200}
-              height={320}
-              className="rounded-xl ring-1 ring-white/10 shadow-lg absolute -rotate-6 -translate-x-36 opacity-70"
-              unoptimized
-            />
-            <Image
-              src="/images/demo-card3.jpg"
-              alt=""
-              width={200}
-              height={320}
-              className="rounded-xl ring-1 ring-white/10 shadow-lg absolute rotate-6 translate-x-36 opacity-70"
-              unoptimized
-            />
+        {/* Prompts Vault ––– now uses the fan-spread */}
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <FanOfPromptCards />                       {/* <—— swapped in */}
+          <div className="space-y-5 md:order-first">
+            <h3 className="text-lg md:text-2xl font-medium">
+              A Prompts Vault with 30+ Personal Prompts
+            </h3>
+            <p className="text-[var(--brand)/80%]">
+              Steal Marius Troy’s best work: real-world prompts grouped by
+              style, subject &amp; lighting—ready to copy &amp; tweak. New
+              prompts added continuously.
+            </p>
           </div>
         </div>
+      </div>
+    </section>
+  );
+}
+
+/* fan component extracted so we can reuse it cleanly */
+function FanOfPromptCards() {
+  return (
+    <div className="relative flex justify-center md:justify-start">
+      <Image
+        src="/images/demo-card.jpg"
+        alt=""
+        width={200}
+        height={320}
+        className="rounded-xl ring-1 ring-white/10 shadow-lg relative z-10"
+        unoptimized
+      />
+      <Image
+        src="/images/demo-card.jpg"
+        alt=""
+        width={200}
+        height={320}
+        className="rounded-xl ring-1 ring-white/10 shadow-lg absolute -rotate-6 -translate-x-36 opacity-70"
+        unoptimized
+      />
+      <Image
+        src="/images/demo-card.jpg"
+        alt=""
+        width={200}
+        height={320}
+        className="rounded-xl ring-1 ring-white/10 shadow-lg absolute rotate-6 translate-x-36 opacity-70"
+        unoptimized
+      />
+    </div>
+  );
+}
 
         {/* prompts vault */}
         <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -354,13 +378,25 @@ function VideoSection() {
           Watch Marius Troy share his entire process, build prompts live and
           explain every parameter and reference-image trick.
         </p>
-        <div className="flex justify-center">
-          <button
-            aria-label="Play promo video"
-            className="relative group"
-          >
+
+        {/* thumbnail + underlying stack */}
+        <div className="relative inline-block">
+          {/* “stack of videos” */}
+          <Image
+            src="/images/vault-cards.jpg"
+            alt=""
+            width={480}
+            height={340}
+            unoptimized
+            className="rounded-xl ring-1 ring-white/10 shadow-lg
+                       absolute -rotate-3 -translate-x-4 translate-y-4
+                       opacity-80 -z-10"
+          />
+
+          {/* main video thumb with play button */}
+          <button aria-label="Play promo video" className="group relative">
             <Image
-              src="/images/videothumb.jpg"
+              src="/images/video-thumb.jpg"
               alt="Play video"
               width={640}
               height={360}
