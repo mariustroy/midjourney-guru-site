@@ -124,7 +124,7 @@ export default function Login() {
           <h1 className="hero-heading font-elanor font-[200] leading-snug
                       text-3xl md:text-4xl lg:text-5xl
                       max-w-xl md:max-w-3xl mx-auto mb-8 lg:mb-12">
-            Midjourney&nbsp;AI helper. <br className="hidden sm:inline" />
+            Midjourney&nbsp;AI helper, <br className="hidden sm:inline" />
             Prompts&nbsp;Vault, Tutorials &amp;&nbsp;More
           </h1>
 
