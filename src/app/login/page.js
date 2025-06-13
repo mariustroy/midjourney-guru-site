@@ -395,7 +395,7 @@ function FAQSection() {
     "Do I need a paid Midjourney account?",
     "Can I cancel anytime?",
     "Is there a free trial?",
-    "Will new prompts be added?",
+    "When will new prompts be added?",
   ];
   return (
     <section className="bg-[#0F1F11] text-[var(--brand)] py-16 md:py-24">
@@ -415,7 +415,49 @@ function FAQSection() {
                   />
                 </summary>
                 <div className="px-6 pb-4 pt-0 text-[var(--brand)/80%]">
-                  Absolutely! (placeholder answer) — update with real copy.
+                 Yes. Guru is a companion that helps you craft prompts; you still need a Midjourney subscription to generate images on their platform.
+                </div>
+              </details>
+            </li>
+            <li key={q} className="bg-[#122015] rounded-lg">
+              <details className="group">
+                <summary className="flex items-center justify-between cursor-pointer py-4 px-6">
+                  <span>{q}</span>
+                  <ChevronDown
+                    className="w-5 h-5 shrink-0 transition-transform
+                               group-open:rotate-180"
+                  />
+                </summary>
+                <div className="px-6 pb-4 pt-0 text-[var(--brand)/80%]">
+                 Of course.
+                </div>
+              </details>
+            </li>
+            <li key={q} className="bg-[#122015] rounded-lg">
+              <details className="group">
+                <summary className="flex items-center justify-between cursor-pointer py-4 px-6">
+                  <span>{q}</span>
+                  <ChevronDown
+                    className="w-5 h-5 shrink-0 transition-transform
+                               group-open:rotate-180"
+                  />
+                </summary>
+                <div className="px-6 pb-4 pt-0 text-[var(--brand)/80%]">
+                 Not at the moment, but stay informed on my instagram for offers.
+                </div>
+              </details>
+            </li>
+            <li key={q} className="bg-[#122015] rounded-lg">
+              <details className="group">
+                <summary className="flex items-center justify-between cursor-pointer py-4 px-6">
+                  <span>{q}</span>
+                  <ChevronDown
+                    className="w-5 h-5 shrink-0 transition-transform
+                               group-open:rotate-180"
+                  />
+                </summary>
+                <div className="px-6 pb-4 pt-0 text-[var(--brand)/80%]">
+                 I add new batches of prompts at least twice a month.
                 </div>
               </details>
             </li>
