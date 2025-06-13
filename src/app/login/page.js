@@ -37,7 +37,7 @@ export default function Login() {
       if (session) router.replace("/");
     });
   }, [router]);
-
+ 
   /* ──────────────────────────────────────────────────────────
      AUTH HELPERS (unchanged)
   ────────────────────────────────────────────────────────────*/
