@@ -5,24 +5,24 @@ export const elanor = localFont({
   src: [
 	/* ExtraLight – weight 300 (adjust if your design uses 200) */
 	{
-	  path: "../../public/fonts/Elanor/Elanor-ExtraLight.woff2",
+	  path: "../../public/fonts/elanor/Elanor-ExtraLight.woff2",
 	  weight: "300",
 	  style: "normal",
 	},
 	{
-	  path: "../../public/fonts/Elanor/Elanor-ExtraLight.woff",
+	  path: "../../public/fonts/elanor/Elanor-ExtraLight.woff",
 	  weight: "300",
 	  style: "normal",
 	},
 
 	/* Regular – weight 400 */
 	{
-	  path: "../../public/fonts/Elanor/Elanor-Regular.woff2",
+	  path: "../../public/fonts/elanor/Elanor-Regular.woff2",
 	  weight: "400",
 	  style: "normal",
 	},
 	{
-	  path: "../../public/fonts/Elanor/Elanor-Regular.woff",
+	  path: "../../public/fonts/elanor/Elanor-Regular.woff",
 	  weight: "400",
 	  style: "normal",
 	},
