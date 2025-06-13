@@ -1,9 +1,13 @@
+/* ──────────────────────────────────────────────────────────────
+   app/login/page.js
+   ( only the import list & render tree changed – all logic kept )
+────────────────────────────────────────────────────────────────*/
 "use client";
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 import SignupInfoSection from "@/components/SignupInfoSection";
 
@@ -16,7 +20,7 @@ const supa = createClient(
 export default function Login() {
   const router = useRouter();
 
-  /* UI state */
+  /* UI state (AUTH — DO NOT TOUCH) */
   const [phase, setPhase]  = useState("cta"); // cta → email → code
   const [email, setEmail]  = useState("");
   const [code,  setCode]   = useState("");
@@ -33,7 +37,9 @@ export default function Login() {
     });
   }, [router]);
 
-  /* ── 1. send OTP ────────────────────────────────────────── */
+  /* ──────────────────────────────────────────────────────────
+     AUTH HELPERS (unchanged)
+  ────────────────────────────────────────────────────────────*/
   async function sendCode(e) {
     e.preventDefault();
     const addr = email.trim().toLowerCase();
@@ -52,7 +58,6 @@ export default function Login() {
     setTimeout(() => codeRef.current?.focus(), 50);
   }
 
-  /* ── 2. verify helper ───────────────────────────────────── */
   async function verifyToken(token) {
     setBusy(true);
     setErr("");
@@ -74,161 +79,179 @@ export default function Login() {
       body   : JSON.stringify({ access_token, refresh_token })
     });
 
-    window.location.assign("/");            // full reload with cookies
+    window.location.assign("/");            // hard reload with cookies
   }
 
-  /* ── 3. auto-submit on 6 digits ─────────────────────────── */
   function handleCodeInput(e) {
     const digits = e.target.value.replace(/\D/g, "");
     setCode(digits);
     if (digits.length === 6) verifyToken(digits);
   }
 
-  /* ── RENDER ─────────────────────────────────────────────── */
+  /* ──────────────────────────────────────────────────────────
+     RENDER TREE
+  ────────────────────────────────────────────────────────────*/
   return (
-      <>
-        {/* ---------- HERO + CTA ---------- */}
-        <main id="signup" className="relative isolate min-h-screen flex flex-col text-[var(--brand)]">
-      {/* background image */}
-      <Image
-        src="/images/hero.jpg"
-        alt=""
-        fill
-        priority
-        unoptimized
-        className="object-cover object-center -z-30"
-      />
-      <div className="absolute inset-0 bg-black/40 -z-20" />
-
-      {/* header */}
-<header className="pt-16 lg:pt-12 text-center px-4
-                   lg:absolute lg:top-12 lg:left-1/2 lg:-translate-x-1/2">
+    <>
+      {/* ——— Hero / Signup ——— */}
+      <section id="signup" className="relative isolate overflow-hidden">
+        {/* bg image + overlay */}
         <Image
-          src="/images/logo.svg"
-          alt="Midjourney Guru"
-          width={176}
-          height={60}
-          className="w-36 md:w-44 mx-auto mb-6"
+          src="/images/hero.jpg"
+          alt=""
+          fill
           priority
+          unoptimized
+          className="object-cover object-center absolute inset-0 -z-20"
         />
-        <ul className="space-y-1 text-lg md:text-xl font-light tracking-wide
-                       mb-8 max-w-md mx-auto">
-          <li>Midjourney AI Copilot</li>
-          <li>Prompts Vault</li>
-          <li>Resources &amp; Tutorials</li>
-        </ul>
-      </header>
+        <div className="absolute inset-0 bg-black/50 -z-10" />
 
-      {/* body */}
-  <section className="flex-1 flex flex-col items-center justify-end
-                    md:justify-center md:mt-40 px-4 pb-12 md:pb-32">
-        {/* CTA */}
-        {phase === "cta" && (
-          <>
-            <CTAButton onClick={() => setPhase("email")} />
-            <SubNote className="mt-3" />
-          </>
-        )}
+        {/* content */}
+        <div className="mx-auto max-w-screen-xl px-4 pt-8 pb-16 lg:py-24 text-center text-[var(--brand)]">
+          {/* logo */}
+          <Image
+            src="/images/logo.svg"
+            alt="Midjourney Guru"
+            width={192}
+            height={64}
+            priority
+            className="mx-auto w-40 md:w-48 mb-5 lg:mb-8"
+          />
 
-        {/* email form */}
-        {phase === "email" && (
-          <form onSubmit={sendCode} className="w-full max-w-xs mx-auto">
-            <div className="relative">
-              <input
-                ref={emailRef}
-                type="email"
-                required
-                placeholder="you@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-full px-5 py-3
-                           border-2 border-[var(--brand)] bg-transparent
-                           text-[var(--brand)]
-                           placeholder:text-[var(--brand)/60%]
-                           focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
-              />
-              <button
-                type="submit"
-                aria-label="Send code"
-                className="absolute right-3 top-1/2 -translate-y-1/2
-                           p-1 rounded-full bg-[var(--brand)]
-                           text-black hover:bg-[#E8E455] transition"
-              >
-                <ArrowRight className="h-5 w-5" />
-              </button>
-            </div>
-            {errorMsg && <p className="mt-2 text-sm text-red-600">{errorMsg}</p>}
-            <SubNote className="mt-4" />
-          </form>
-        )}
+          {/* tagline */}
+          <h1 className="font-light leading-relaxed text-2xl md:text-4xl lg:text-5xl max-w-xl md:max-w-3xl mx-auto mb-8 lg:mb-12">
+            Midjourney&nbsp;AI helper. <br className="hidden sm:inline" />
+            Prompts&nbsp;Vault, Tutorials &amp;&nbsp;More
+          </h1>
 
-        {/* code form */}
-        {phase === "code" && (
-          <div className="w-full max-w-xs mx-auto space-y-4">
-            <p className="text-sm text-center text-[var(--brand)/80%]">
-              We’ve sent you a 6-digit verification code. Check your email.
-            </p>
+          {/* CTA / Auth widget */}
+          <div className="w-full sm:max-w-md mx-auto">
+            {/* phase-dependent content */}
+            {phase === "cta" && (
+              <>
+                <CTAButton onClick={() => setPhase("email")} />
+                <SubNote className="mt-3" />
+              </>
+            )}
 
-            <input
-              ref={codeRef}
-              inputMode="numeric"
-              maxLength={6}
-              required
-              placeholder="123456"
-              value={code}
-              onChange={handleCodeInput}
-              className="w-full text-center tracking-widest text-2xl font-medium
-                         bg-transparent border-b-2 border-[var(--brand)]
-                         placeholder:text-[var(--brand)/60%] py-2
-                         focus:outline-none focus:border-[var(--brand)]"
-            />
+            {phase === "email" && (
+              <form onSubmit={sendCode} className="mt-2 space-y-4">
+                <div className="relative">
+                  <input
+                    ref={emailRef}
+                    type="email"
+                    required
+                    placeholder="you@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full rounded-full px-5 py-3
+                               border-2 border-[var(--brand)] bg-transparent
+                               text-[var(--brand)]
+                               placeholder:text-[var(--brand)/60%]
+                               focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
+                  />
+                  <button
+                    type="submit"
+                    aria-label="Send code"
+                    className="absolute right-3 top-1/2 -translate-y-1/2
+                               p-1 rounded-full bg-[var(--brand)]
+                               text-black hover:bg-[#E8E455] transition"
+                  >
+                    <ArrowRight className="h-5 w-5" />
+                  </button>
+                </div>
+                {errorMsg && <p className="text-sm text-red-600">{errorMsg}</p>}
+                <SubNote />
+              </form>
+            )}
 
-            {/* real Sign-in button */}
-            <button
-              onClick={() => verifyToken(code)}
-              disabled={busy || code.length !== 6}
-              className="w-full rounded-full py-3 bg-[var(--brand)]
-                         text-[#131B0E] font-medium
-                         hover:bg-[#E8E455] transition
-                         disabled:opacity-40 disabled:cursor-not-allowed"
-            >
-              {busy ? "Signing in…" : "Sign in"}
-            </button>
+            {phase === "code" && (
+              <div className="space-y-4 mt-2">
+                <p className="text-sm text-[var(--brand)/80%]">
+                  We’ve sent you a 6-digit verification code. Check your email.
+                </p>
 
-            <button
-              type="button"
-              onClick={sendCode}
-              disabled={busy}
-              className="block w-full text-center text-sm underline
-                         text-[var(--brand)/80%] hover:text-[var(--brand)]
-                         disabled:opacity-50"
-            >
-              Resend code
-            </button>
+                <input
+                  ref={codeRef}
+                  inputMode="numeric"
+                  maxLength={6}
+                  required
+                  placeholder="123456"
+                  value={code}
+                  onChange={handleCodeInput}
+                  className="w-full text-center tracking-widest text-2xl font-medium
+                             bg-transparent border-b-2 border-[var(--brand)]
+                             placeholder:text-[var(--brand)/60%] py-2
+                             focus:outline-none focus:border-[var(--brand)]"
+                />
 
-            {errorMsg && (
-              <p className="text-sm text-red-600 text-center">{errorMsg}</p>
+                <button
+                  onClick={() => verifyToken(code)}
+                  disabled={busy || code.length !== 6}
+                  className="w-full rounded-full py-3 bg-[var(--brand)]
+                             text-[#131B0E] font-medium
+                             hover:bg-[#E8E455] transition
+                             disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  {busy ? "Signing in…" : "Sign in"}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={sendCode}
+                  disabled={busy}
+                  className="block w-full text-sm underline
+                             text-[var(--brand)/80%] hover:text-[var(--brand)]
+                             disabled:opacity-50"
+                >
+                  Resend code
+                </button>
+
+                {errorMsg && (
+                  <p className="text-sm text-red-600 text-center">{errorMsg}</p>
+                )}
+              </div>
             )}
           </div>
-        )}
+        </div>
       </section>
-      
-    </main>
-    <SignupInfoSection />
+
+      {/* ——— Explainer / Feature blocks ——— */}
+      <FeatureSection />
+
+      {/* ——— Promo video thumb ——— */}
+      <VideoSection />
+
+      {/* ——— Testimonials ——— */}
+      <TestimonialsSection />
+
+      {/* ——— FAQ accordions ——— */}
+      <FAQSection />
+
+      {/* ——— Bottom CTA ——— */}
+      <FinalCTA onClick={() => {
+        document.getElementById("signup")?.scrollIntoView({ behavior: "smooth" });
+        setPhase("email");
+      }} />
+
+      {/* Existing legal blurb (kept for parity) */}
+      <SignupInfoSection />
     </>
   );
 }
 
-/* helpers */
+/* ──────────────────────────────────────────────────────────────
+   Presentational sub-components
+────────────────────────────────────────────────────────────────*/
 function CTAButton({ onClick }) {
   return (
     <button
       onClick={onClick}
-      className="w-full max-w-xs mx-auto rounded-full py-3 text-lg font-medium
+      className="w-full rounded-full py-3 text-lg font-medium
                  bg-[var(--brand)] text-black hover:bg-[#E8E455] transition
                  shadow-md shadow-[var(--brand)/30%]"
     >
-      Get&nbsp;Started / Log in
+      Get&nbsp;Started&nbsp;/&nbsp;Log&nbsp;in
     </button>
   );
 }
@@ -247,5 +270,193 @@ function SubNote({ className = "" }) {
         terms
       </a>.
     </p>
+  );
+}
+
+/* ––– Marketing sections ––– */
+
+function FeatureSection() {
+  return (
+    <section className="bg-[#0D1A0E] text-[var(--brand)] py-16 md:py-24">
+      <div className="mx-auto max-w-screen-lg px-6 lg:px-8 space-y-24">
+        {/* helper blurb */}
+        <div className="text-center space-y-6">
+          <h2 className="text-xl md:text-3xl lg:text-4xl font-medium">
+            Guru is a Midjourney and&nbsp;AI&nbsp;Prompts Helper
+          </h2>
+          <p className="max-w-2xl mx-auto text-[var(--brand)/80%] leading-relaxed">
+            It can help you refine and adjust your prompts. Talk to it like you
+            would with a human mentor and walk away with optimized prompts in
+            seconds.
+          </p>
+
+          {/* demo cards (simple overlapping mock) */}
+          <div className="relative flex justify-center mt-10">
+            <Image
+              src="/images/demo-card1.jpg"
+              alt=""
+              width={200}
+              height={320}
+              className="rounded-xl ring-1 ring-white/10 shadow-lg relative z-10"
+              unoptimized
+            />
+            <Image
+              src="/images/demo-card2.jpg"
+              alt=""
+              width={200}
+              height={320}
+              className="rounded-xl ring-1 ring-white/10 shadow-lg absolute -rotate-6 -translate-x-36 opacity-70"
+              unoptimized
+            />
+            <Image
+              src="/images/demo-card3.jpg"
+              alt=""
+              width={200}
+              height={320}
+              className="rounded-xl ring-1 ring-white/10 shadow-lg absolute rotate-6 translate-x-36 opacity-70"
+              unoptimized
+            />
+          </div>
+        </div>
+
+        {/* prompts vault */}
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <Image
+            src="/images/vault-cards.jpg"
+            alt=""
+            width={450}
+            height={340}
+            className="rounded-xl ring-1 ring-white/10 shadow-lg"
+            unoptimized
+          />
+          <div className="space-y-5">
+            <h3 className="text-lg md:text-2xl font-medium">
+              A Prompts Vault with 30+ Personal Prompts
+            </h3>
+            <p className="text-[var(--brand)/80%]">
+              Steal Marius Troy’s best work: real-world prompts grouped by
+              style, subject &amp; lighting—ready to copy &amp; tweak. New
+              prompts added continuously.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function VideoSection() {
+  return (
+    <section className="bg-[#0F1F11] text-[var(--brand)] py-16 md:py-24">
+      <div className="mx-auto max-w-screen-lg px-6 lg:px-8 text-center space-y-6">
+        <h3 className="text-lg md:text-2xl font-medium">Full Video Tutorials</h3>
+        <p className="max-w-xl mx-auto text-[var(--brand)/80%]">
+          Watch Marius Troy share his entire process, build prompts live and
+          explain every parameter and reference-image trick.
+        </p>
+        <div className="flex justify-center">
+          <button
+            aria-label="Play promo video"
+            className="relative group"
+          >
+            <Image
+              src="/images/videothumb.jpg"
+              alt="Play video"
+              width={640}
+              height={360}
+              className="rounded-xl ring-1 ring-white/10 shadow-lg"
+              unoptimized
+            />
+            <span className="absolute inset-0 flex items-center justify-center">
+              <span className="w-16 h-16 rounded-full bg-[var(--brand)] flex items-center justify-center group-hover:scale-105 transition-transform">
+                <svg
+                  aria-hidden="true"
+                  className="w-8 h-8 fill-[#131B0E] pl-1"
+                  viewBox="0 0 24 24"
+                >
+                  <polygon points="5,3 19,12 5,21" />
+                </svg>
+              </span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TestimonialsSection() {
+  return (
+    <section className="bg-[#0D1A0E] text-[var(--brand)] py-16 md:py-24">
+      <div className="mx-auto max-w-screen-md px-6 lg:px-8 text-center space-y-8">
+        <h3 className="text-lg md:text-2xl font-medium">
+          What people say about&nbsp;Guru
+        </h3>
+        <blockquote className="text-[var(--brand)/80%] leading-relaxed">
+          <p>
+            “Steal Marius Troy’s best work: real-world prompts grouped by style,
+            subject &amp; lighting—ready to copy &amp; tweak. New prompts added
+            continuously.”
+          </p>
+          <footer className="mt-4 text-sm opacity-70">
+            — Vinet Lane, Product Designer
+          </footer>
+        </blockquote>
+      </div>
+    </section>
+  );
+}
+
+function FAQSection() {
+  const faqs = [
+    "Do I need a paid Midjourney account?",
+    "Can I cancel anytime?",
+    "Is there a free trial?",
+    "Will new prompts be added?",
+  ];
+  return (
+    <section className="bg-[#0F1F11] text-[var(--brand)] py-16 md:py-24">
+      <div className="mx-auto max-w-screen-md px-6 lg:px-8">
+        <h3 className="text-center text-lg md:text-2xl font-medium mb-10">
+          FAQs
+        </h3>
+        <ul className="space-y-4">
+          {faqs.map((q) => (
+            <li key={q} className="bg-[#122015] rounded-lg">
+              <details className="group">
+                <summary className="flex items-center justify-between cursor-pointer py-4 px-6">
+                  <span>{q}</span>
+                  <ChevronDown
+                    className="w-5 h-5 shrink-0 transition-transform
+                               group-open:rotate-180"
+                  />
+                </summary>
+                <div className="px-6 pb-4 pt-0 text-[var(--brand)/80%]">
+                  Absolutely! (placeholder answer) — update with real copy.
+                </div>
+              </details>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+function FinalCTA({ onClick }) {
+  return (
+    <section className="bg-[#0D1A0E] text-[var(--brand)] py-20 text-center">
+      <h3 className="text-xl md:text-3xl font-medium mb-6">
+        Start learning with <span className="font-light">Guru</span> now
+      </h3>
+      <button
+        onClick={onClick}
+        className="inline-block rounded-full py-3 px-10 text-lg font-medium
+                   bg-[var(--brand)] text-black hover:bg-[#E8E455] transition
+                   shadow-md shadow-[var(--brand)/30%]"
+      >
+        Get Started
+      </button>
+    </section>
   );
 }
