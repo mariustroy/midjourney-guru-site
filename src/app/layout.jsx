@@ -2,9 +2,9 @@
 /*  Root layout – combines fonts, metadata, sidebar & globals         */
 /* ------------------------------------------------------------------ */
 import "./globals.css";
-import { elanor } from '../fonts';
 import SideDrawer from "@/components/SideDrawer";
 import { Geist, Geist_Mono } from "next/font/google";
+import { elanor } from "../fonts";           // ← your local web-font
 
 /* ---------- Google fonts ---------- */
 const geistSans = Geist({
@@ -49,36 +49,29 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en" className={elanor.variable}>
-      <body className="font-elanor bg-[#131B0E] antialiased">
-        {children}
-      </body>
-    </html>
-  );
-}
-
 /* ---------- Root component ---------- */
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`dark ${geistSans.variable} ${geistMono.variable}`}>
-    <head>
-      <link
-        href="https://assets.calendly.com/assets/external/widget.css"
-        rel="stylesheet"
-      />
-      <script
-        src="https://assets.calendly.com/assets/external/widget.js"
-        async
-      ></script>
-    </head>
-      <body className="flex min-h-screen bg-[#131B0E] text-gray-100 antialiased">
+    <html
+      lang="en"
+      className={`dark ${geistSans.variable} ${geistMono.variable} ${elanor.variable}`}
+    >
+      <head>
+        <link
+          href="https://assets.calendly.com/assets/external/widget.css"
+          rel="stylesheet"
+        />
+        <script
+          src="https://assets.calendly.com/assets/external/widget.js"
+          async
+        ></script>
+      </head>
+      <body className="font-elanor flex min-h-screen bg-[#131B0E] text-gray-100 antialiased">
         {/* sidebar (desktop + mobile) */}
         <SideDrawer />
 
         {/* main content */}
-       <main className="flex-1 overflow-hidden">{children}</main>
+        <main className="flex-1 overflow-hidden">{children}</main>
       </body>
     </html>
   );
