@@ -1,6 +1,9 @@
 import localFont from 'next/font/local';
 
 export const elanor = localFont({
+	
+	name: 'elanor',
+	
   src: [
 	// ExtraLight → 300
 	{ path: '../../public/fonts/elanor/Elanor-ExtraLight.woff2', weight: '200' },
