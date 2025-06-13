@@ -16,7 +16,7 @@
   40%          { transform: translateY(-6px); }
 }
 
-
+h1.hero-heading { font-family: var(--font-elanor) !important; }
 
 @layer base {
   :root {
