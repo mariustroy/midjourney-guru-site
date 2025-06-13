@@ -285,13 +285,13 @@ function FeatureSection() {
         {/* helper blurb – no images here anymore */}
         <div className="text-center space-y-6">
           <h3 className="text-lg md:text-2xl lg:text-4xl font-medium">
-            Guru is a Midjourney and AI Prompts Helper
+            Guru is an AI Prompts Helper
           </h3>
           <p className="max-w-2xl mx-auto text-sm md:text-base                      /* ↓ */
                     text-[var(--brand)/80%] leading-relaxed">
-            It can help you refine and adjust your prompts. Talk to it like you
+            It can help you refine and adjust your prompts for Midjourney. Talk to it like you
             would with a human mentor and walk away with optimized prompts in
-            seconds.
+            seconds. Guru is comfortably multilingual, so you can talk to it in your language. 
           </p>
         </div>
 
