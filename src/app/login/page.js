@@ -223,9 +223,6 @@ export default function Login() {
       {/* ——— Promo video thumb ——— */}
       <VideoSection />
 
-      {/* ——— Testimonials ——— */}
-      <TestimonialsSection />
-
       {/* ——— FAQ accordions ——— */}
       <FAQSection />
 
