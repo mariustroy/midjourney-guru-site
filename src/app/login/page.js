@@ -108,7 +108,8 @@ export default function Login() {
         <div className="absolute inset-0 bg-black/50 -z-10" />
 
         {/* content */}
-        <div className="mx-auto max-w-screen-xl px-4 pt-8 pb-16 lg:py-24 text-center text-[var(--brand)]">
+        <div className="mx-auto max-w-screen-xl px-4 pt-8 lg:pt-8 pb-16 lg:pb-24
+        text-center text-[var(--brand)]">
           {/* logo */}
           <Image
             src="/images/logo.svg"
@@ -120,7 +121,7 @@ export default function Login() {
           />
 
           {/* tagline */}
-          <h1 className="hero-heading font-elanor font-[200] leading-relaxed
+          <h1 className="hero-heading font-elanor font-[200] leading-snug
           +            text-2xl md:text-4xl lg:text-5xl
           +            max-w-xl md:max-w-3xl mx-auto mb-8 lg:mb-12">
             Midjourney&nbsp;AI helper. <br className="hidden sm:inline" />
@@ -293,11 +294,11 @@ function FeatureSection() {
         </div>
 
         {/* Prompts Vault ––– now uses the fan-spread */}
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-24 xl:gap-32 items-center">
           <FanOfPromptCards />                       {/* <—— swapped in */}
-          <div className="space-y-5 md:order-first">
+          <div className="space-y-5 md:order-first relative z-20">
             <h3 className="text-lg md:text-2xl font-medium">
-              A Prompts Vault with 30+ Personal Prompts
+              Prompts Vault with 30+ Personal Prompts
             </h3>
             <p className="text-[var(--brand)/80%]">
               Steal Marius Troy’s best work: real-world prompts grouped by
