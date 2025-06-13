@@ -120,7 +120,9 @@ export default function Login() {
           />
 
           {/* tagline */}
-          <h1 className="font-elanor leading-relaxed text-2xl md:text-4xl lg:text-5xl max-w-xl md:max-w-3xl mx-auto mb-8 lg:mb-12">
+          <h1 className="font-elanor font-light leading-relaxed
+          +            text-2xl md:text-4xl lg:text-5xl
+          +            max-w-xl md:max-w-3xl mx-auto mb-8 lg:mb-12">
             Midjourney&nbsp;AI helper. <br className="hidden sm:inline" />
             Prompts&nbsp;Vault, Tutorials &amp;&nbsp;More
           </h1>
@@ -314,7 +316,7 @@ function FanOfPromptCards() {
   return (
     <div className="relative flex justify-center md:justify-start">
       <Image
-        src="/images/democard1.jpg"
+        src="/images/demo-card1.jpg"
         alt=""
         width={200}
         height={320}
@@ -322,7 +324,7 @@ function FanOfPromptCards() {
         unoptimized
       />
       <Image
-        src="/images/democard2.jpg"
+        src="/images/demo-card2.jpg"
         alt=""
         width={200}
         height={320}
@@ -330,7 +332,7 @@ function FanOfPromptCards() {
         unoptimized
       />
       <Image
-        src="/images/democard3.jpg"
+        src="/images/demo-card3.jpg"
         alt=""
         width={200}
         height={320}
@@ -361,7 +363,7 @@ function VideoSection() {
             width={480}
             height={340}
             unoptimized
-            className="rounded-xl ring-1 ring-white/10 shadow-lg
+            className="rounded-xl shadow-lg
                        absolute -rotate-3 -translate-x-4 translate-y-4
                        opacity-80 -z-10"
           />
@@ -434,8 +436,8 @@ function FAQSection() {
 function FinalCTA({ onClick }) {
   return (
     <section className="bg-[#0D1A0E] text-[var(--brand)] py-20 text-center">
-      <h3 className="text-xl md:text-3xl font-medium mb-6">
-        Start learning with <span className="font-light">Guru</span> now
+      <h3 className="font-elanor text-xl md:text-3xl font-light mb-6"">
+        Start learning with <span className="font-regular">Guru</span> now
       </h3>
       <button
         onClick={onClick}
