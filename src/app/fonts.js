@@ -1,32 +1,15 @@
-// src/app/fonts.js
-import localFont from "next/font/local";
+import localFont from 'next/font/local';
 
 export const elanor = localFont({
   src: [
-	/* ExtraLight – weight 300 (adjust if your design uses 200) */
-	{
-	  path: "../../public/fonts/elanor/Elanor-ExtraLight.woff2",
-	  weight: "300",
-	  style: "normal",
-	},
-	{
-	  path: "../../public/fonts/elanor/Elanor-ExtraLight.woff",
-	  weight: "300",
-	  style: "normal",
-	},
+	// ExtraLight → 300
+	{ path: '../../public/fonts/elanor/Elanor-ExtraLight.woff2', weight: '300' },
+	{ path: '../../public/fonts/elanor/Elanor-ExtraLight.woff',  weight: '300' },
 
-	/* Regular – weight 400 */
-	{
-	  path: "../../public/fonts/elanor/Elanor-Regular.woff2",
-	  weight: "400",
-	  style: "normal",
-	},
-	{
-	  path: "../../public/fonts/elanor/Elanor-Regular.woff",
-	  weight: "400",
-	  style: "normal",
-	},
+	// Regular → 400
+	{ path: '../../public/fonts/elanor/Elanor-Regular.woff2', weight: '400' },
+	{ path: '../../public/fonts/elanor/Elanor-Regular.woff',  weight: '400' },
   ],
-  display: "swap",          // avoids flash of invisible text
-  variable: "--font-elanor" // makes Tailwind utility `font-elanor` work
+  display: 'swap',
+  variable: '--font-elanor',
 });

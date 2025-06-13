@@ -4,7 +4,6 @@ const defaultColors = require('tailwindcss/colors');
 module.exports = {
   darkMode: 'class',
 
-  /* where Tailwind should scan */
   content: [
     './src/**/*.{js,jsx,ts,tsx}',
     './pages/**/*.{js,jsx,ts,tsx}',
@@ -12,19 +11,19 @@ module.exports = {
   ],
 
   theme: {
-    /* keep default palette + your brand yellow */
-    colors: {
-      ...defaultColors,
-      brand: '#FFFD91',
-    },
-
     extend: {
-      /* custom font family ← the important line */
+      /* ---------- palette ---------- */
+      colors: {
+        ...defaultColors,
+        brand: '#FFFD91',
+      },
+
+      /* ---------- custom font ---------- */
       fontFamily: {
         elanor: ['var(--font-elanor)', 'serif'],
       },
 
-      /* animations you already had */
+      /* ---------- animations ---------- */
       keyframes: {
         fadeIn: { from: { opacity: 0 }, to: { opacity: 1 } },
       },
