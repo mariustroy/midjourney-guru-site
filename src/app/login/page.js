@@ -343,31 +343,6 @@ function FanOfPromptCards() {
   );
 }
 
-        {/* prompts vault */}
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <Image
-            src="/images/vault-cards.jpg"
-            alt=""
-            width={450}
-            height={340}
-            className="rounded-xl ring-1 ring-white/10 shadow-lg"
-            unoptimized
-          />
-          <div className="space-y-5">
-            <h3 className="text-lg md:text-2xl font-medium">
-              A Prompts Vault with 30+ Personal Prompts
-            </h3>
-            <p className="text-[var(--brand)/80%]">
-              Steal Marius Troy’s best work: real-world prompts grouped by
-              style, subject &amp; lighting—ready to copy &amp; tweak. New
-              prompts added continuously.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function VideoSection() {
   return (
