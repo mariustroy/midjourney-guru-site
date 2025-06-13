@@ -392,72 +392,44 @@ function VideoSection() {
 
 function FAQSection() {
   const faqs = [
-    "Do I need a paid Midjourney account?",
-    "Can I cancel anytime?",
-    "Is there a free trial?",
-    "When will new prompts be added?",
+    {
+      q: 'Do I need a paid Midjourney account?',
+      a: 'Yes. Guru is a companion that helps you craft prompts; you still need a Midjourney subscription to generate images on their platform.',
+    },
+    {
+      q: 'Can I cancel anytime?',
+      a: 'Of course. Cancel whenever you like from your account page.',
+    },
+    {
+      q: 'Is there a free trial?',
+      a: 'Not at the moment, but watch my Instagram for occasional offers.',
+    },
+    {
+      q: 'When will new prompts be added?',
+      a: 'I add new batches of prompts at least twice a month.',
+    },
   ];
+
   return (
     <section className="bg-[#0F1F11] text-[var(--brand)] py-16 md:py-24">
       <div className="mx-auto max-w-screen-md px-6 lg:px-8">
         <h3 className="text-center text-lg md:text-2xl font-medium mb-10">
           FAQs
         </h3>
+
         <ul className="space-y-4">
-          {faqs.map((q) => (
+          {faqs.map(({ q, a }) => (
             <li key={q} className="bg-[#122015] rounded-lg">
               <details className="group">
                 <summary className="flex items-center justify-between cursor-pointer py-4 px-6">
                   <span>{q}</span>
                   <ChevronDown
-                    className="w-5 h-5 shrink-0 transition-transform
-                               group-open:rotate-180"
+                    className="w-5 h-5 shrink-0 transition-transform group-open:rotate-180"
                   />
                 </summary>
+
                 <div className="px-6 pb-4 pt-0 text-[var(--brand)/80%]">
-                 Yes. Guru is a companion that helps you craft prompts; you still need a Midjourney subscription to generate images on their platform.
-                </div>
-              </details>
-            </li>
-            <li key={q} className="bg-[#122015] rounded-lg">
-              <details className="group">
-                <summary className="flex items-center justify-between cursor-pointer py-4 px-6">
-                  <span>{q}</span>
-                  <ChevronDown
-                    className="w-5 h-5 shrink-0 transition-transform
-                               group-open:rotate-180"
-                  />
-                </summary>
-                <div className="px-6 pb-4 pt-0 text-[var(--brand)/80%]">
-                 Of course.
-                </div>
-              </details>
-            </li>
-            <li key={q} className="bg-[#122015] rounded-lg">
-              <details className="group">
-                <summary className="flex items-center justify-between cursor-pointer py-4 px-6">
-                  <span>{q}</span>
-                  <ChevronDown
-                    className="w-5 h-5 shrink-0 transition-transform
-                               group-open:rotate-180"
-                  />
-                </summary>
-                <div className="px-6 pb-4 pt-0 text-[var(--brand)/80%]">
-                 Not at the moment, but stay informed on my instagram for offers.
-                </div>
-              </details>
-            </li>
-            <li key={q} className="bg-[#122015] rounded-lg">
-              <details className="group">
-                <summary className="flex items-center justify-between cursor-pointer py-4 px-6">
-                  <span>{q}</span>
-                  <ChevronDown
-                    className="w-5 h-5 shrink-0 transition-transform
-                               group-open:rotate-180"
-                  />
-                </summary>
-                <div className="px-6 pb-4 pt-0 text-[var(--brand)/80%]">
-                 I add new batches of prompts at least twice a month.
+                  {a}
                 </div>
               </details>
             </li>
