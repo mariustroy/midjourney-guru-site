@@ -375,7 +375,7 @@ function VideoSection() {
               alt="Play video"
               width={640}
               height={423}
-              className="rounded-xl ring-1 ring-white/10 shadow-lg"
+              className="rounded-xl shadow-lg"
               unoptimized
             />
             <span className="absolute inset-0 flex items-center justify-center">
