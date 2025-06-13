@@ -122,8 +122,8 @@ export default function Login() {
 
           {/* tagline */}
           <h1 className="hero-heading font-elanor font-[200] leading-snug
-          +            text-2xl md:text-4xl lg:text-5xl
-          +            max-w-xl md:max-w-3xl mx-auto mb-8 lg:mb-12">
+                      text-3xl md:text-4xl lg:text-5xl
+                      max-w-xl md:max-w-3xl mx-auto mb-8 lg:mb-12">
             Midjourney&nbsp;AI helper. <br className="hidden sm:inline" />
             Prompts&nbsp;Vault, Tutorials &amp;&nbsp;More
           </h1>
@@ -279,14 +279,16 @@ function SubNote({ className = "" }) {
 function FeatureSection() {
   return (
     <section className="bg-[#0D1A0E] text-[var(--brand)] py-16 md:py-24">
-      <div className="mx-auto max-w-screen-lg px-6 lg:px-8 space-y-24">
+      <div className="mx-auto max-w-screen-lg px-6 lg:px-8
+                     space-y-12 md:space-y-2">
 
         {/* helper blurb – no images here anymore */}
         <div className="text-center space-y-6">
-          <h2 className="text-xl md:text-3xl lg:text-4xl font-medium">
+          <h2 className="text-lg md:text-3xl lg:text-4xl font-medium">
             Guru is a Midjourney and AI Prompts Helper
           </h2>
-          <p className="max-w-2xl mx-auto text-[var(--brand)/80%] leading-relaxed">
+          <p className="max-w-2xl mx-auto text-sm md:text-base                      /* ↓ */
+                    text-[var(--brand)/80%] leading-relaxed">
             It can help you refine and adjust your prompts. Talk to it like you
             would with a human mentor and walk away with optimized prompts in
             seconds.
@@ -296,7 +298,8 @@ function FeatureSection() {
         {/* Prompts Vault ––– now uses the fan-spread */}
         <div className="grid md:grid-cols-2 gap-12 lg:gap-24 xl:gap-32 items-center">
           <FanOfPromptCards />                       {/* <—— swapped in */}
-          <div className="space-y-5 md:order-first relative z-20">
+          <div className="space-y-5 md:order-first relative z-20
+                          text-center md:text-left">
             <h3 className="text-lg md:text-2xl font-medium">
               Prompts Vault with 30+ Personal Prompts
             </h3>
