@@ -419,7 +419,7 @@ function FAQSection() {
 
         <ul className="space-y-4">
           {faqs.map(({ q, a }) => (
-            <li key={q} className="bg-[#122015] rounded-lg">
+            <li key={q} className="bg-[#122015] rounded-lg border border-[var(--brand)/30%]">
               <details className="group">
                 <summary className="flex items-center justify-between cursor-pointer py-4 px-6">
                   <span>{q}</span>
