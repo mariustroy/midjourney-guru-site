@@ -214,7 +214,7 @@ function extractPrompt(fullText) {
                       <div>
                        <span className="text-brand text-opacity-90 text-[17px] leading-relaxed">
                          {base}{" "}
-                         {flagLines.map((flag, idx) => (
+                         {flags.map((flag, idx) => (
                            <span key={idx} className="mx-1">
                              {flag}
                            </span>
