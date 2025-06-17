@@ -11,7 +11,7 @@ export default function VimeoEmbed({ id, hash, title = 'Vimeo video' }: Props) {
     title: '0',
     byline: '0',
     portrait: '0',
-    dnt: '1',
+    dnt: '0',
   }).toString();
 
   const src = `https://player.vimeo.com/video/${id}${hash ? `?h=${hash}&${params}` : `?${params}`}`;
