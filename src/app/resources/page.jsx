@@ -179,6 +179,12 @@ export default function ResourcesPage() {
             hash="8eca7130d9"
             title="Thoughts on Midjourney v7"
           />
+          
+          <VimeoEmbed
+            id="1094011237"
+            hash="83f8411687"
+            title="Midjourney Session 1: Colorful Public Space"
+          />
   
   {/* any other tutorial blocks… */}
           {/* Add more tutorial links/components here */}
