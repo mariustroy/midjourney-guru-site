@@ -300,10 +300,10 @@ function FeatureSection() {
           <div className="space-y-5 md:order-first relative z-20
                           text-center md:text-left">
             <h3 className="text-2xl md:text-4xl lg:text-4xl font-elanor font-[200]">
-              Prompts Vault with Marius Troy's Personal Prompts
+              Prompts Vault with Marius Troy&apos;s Personal Prompts
             </h3>
             <p className="text-[var(--brand)/80%]">
-              Steal Marius Troy’s best work: real-world prompts grouped by
+              Steal Marius Troy&apos;s best work: real-world prompts grouped by
               style, subject &amp; lighting—ready to copy &amp; tweak. New
               prompts added continuously.
             </p>
