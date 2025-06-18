@@ -124,8 +124,7 @@ export default function Login() {
           <h1 className="hero-heading font-elanor font-[200] leading-snug
                       text-3xl md:text-4xl lg:text-5xl
                       max-w-xl md:max-w-3xl mx-auto mb-8 lg:mb-12">
-            Midjourney&nbsp;AI helper, <br className="hidden sm:inline" />
-            Prompts&nbsp;Vault, Tutorials &amp;&nbsp;More
+            Your Shortcut to becoming a Midjourney Pro.
           </h1>
 
           {/* CTA / Auth widget */}
@@ -285,11 +284,11 @@ function FeatureSection() {
         {/* helper blurb – no images here anymore */}
         <div className="text-center space-y-6">
           <h3 className="text-2xl md:text-4xl lg:text-4xl font-elanor font-[200]">
-            Guru is an AI Prompts Helper
+            Guru includes an AI Prompts Helper..
           </h3>
           <p className="max-w-2xl mx-auto text-sm md:text-base                      /* ↓ */
                     text-[var(--brand)/80%] leading-relaxed">
-            It can help you refine and adjust your prompts for Midjourney. Talk to it like you
+            ..that helps you refine and adjust your prompts for Midjourney. Talk to it like you
             would with a human mentor and walk away with optimized prompts in
             seconds. Guru is comfortably multilingual, so you can talk to it in your language. 
           </p>
@@ -301,7 +300,7 @@ function FeatureSection() {
           <div className="space-y-5 md:order-first relative z-20
                           text-center md:text-left">
             <h3 className="text-2xl md:text-4xl lg:text-4xl font-elanor font-[200]">
-              Prompts Vault with 30+ Personal Prompts
+              Prompts Vault with Marius Troy's Personal Prompts
             </h3>
             <p className="text-[var(--brand)/80%]">
               Steal Marius Troy’s best work: real-world prompts grouped by
@@ -352,7 +351,7 @@ function VideoSection() {
   return (
     <section className="bg-[#0F1F11] text-[var(--brand)] py-16 md:py-24">
       <div className="mx-auto max-w-screen-lg px-6 lg:px-8 text-center space-y-6">
-        <h3 className="text-2xl md:text-4xl font-elanor lg:text-4xl font-[200]">In depth Video Tutorials</h3>
+        <h3 className="text-2xl md:text-4xl font-elanor lg:text-4xl font-[200]">In depth Video Tutorials and Watch Alongs</h3>
         <p className="max-w-xl mx-auto text-[var(--brand)/80%]">
           Watch Marius Troy share his entire process, build prompts live and
           explain every parameter and reference-image trick.
