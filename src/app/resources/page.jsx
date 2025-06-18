@@ -23,7 +23,7 @@ export default function ResourcesPage() {
       {/* headline --------------------------------------------------- */}
       <h1 className="text-[36px] leading-tight font-light">Resources</h1>
 
-      <Tabs defaultValue="tutorials" className="w-full">
+      <Tabs defaultValue="guides" className="w-full">
         <TabsList>
           <TabsTrigger value="guides">Guides</TabsTrigger>
           <TabsTrigger value="images">Image Libraries</TabsTrigger>
