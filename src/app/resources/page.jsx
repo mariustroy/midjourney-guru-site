@@ -158,6 +158,7 @@ export default function ResourcesPage() {
       </a>
     </div>
   </section>
+</TabsContent>
       </Tabs>
     </div>
   );
