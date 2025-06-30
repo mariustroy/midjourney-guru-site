@@ -94,6 +94,7 @@ export default function FormulaCard({ data }) {
           autoPlay
           muted
           loop
+          playsInline
           className="rounded object-contain object-center h-64 md:h-80 w-auto"
         >
           Your browser does not support the video tag.
