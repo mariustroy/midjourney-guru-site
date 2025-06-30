@@ -15,7 +15,7 @@ export default async function FormulasPage() {
 
   const { data: formulas, error } = await supabase
     .from("formulas")
-    .select("id,title,prompt,category,images,refs")
+    .select("id,title,prompt,category,images,videos,refs")
     .order("created_at", { ascending: false });
 
   if (error) {

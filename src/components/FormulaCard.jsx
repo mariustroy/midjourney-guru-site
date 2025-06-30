@@ -17,16 +17,16 @@ export default function FormulaCard({ data }) {
     }
   };
 
-  /* ---------- lazy-render images when card is near viewport ---------- */
+  /* ---------- lazy-render content when card is near viewport ---------- */
   const cardRef = useRef(null);
-  const [showImages, setShowImages] = useState(false);
+  const [showMedia, setShowMedia] = useState(false);
 
   useEffect(() => {
     const el = cardRef.current;
     if (!el) return;
 
     const io = new IntersectionObserver(
-      ([entry]) => entry.isIntersecting && setShowImages(true),
+      ([entry]) => entry.isIntersecting && setShowMedia(true),
       { rootMargin: "200px 0px" } // start loading 200 px before visible
     );
 
@@ -64,27 +64,44 @@ export default function FormulaCard({ data }) {
         {data.prompt}
       </code>
 
-      {/* images + refs – rendered only after the card scrolls into view */}
-      {showImages && (
+      {/* media (images + videos) + refs – rendered only after the card scrolls into view */}
+      {showMedia && (
         <div className="space-y-2">
           {/* image carousel */}
-          <div className="flex gap-2 overflow-x-auto [&>*]:shrink-0">
-            {data.images.map((img, i) => (
-              <Image
-                key={img.id}
-                src={img.src}
-                alt={img.alt}
-                width={512}
-                height={512}
-                unoptimized
-                loading="lazy"
-                className={`
-                  rounded object-contain object-center
-                  h-64 md:h-80 w-auto
-                `}
-              />
-            ))}
-          </div>
+          {data.images?.length > 0 && (
+            <div className="flex gap-2 overflow-x-auto [&>*]:shrink-0">
+              {data.images.map((img, i) => (
+                <Image
+                  key={img.id}
+                  src={img.src}
+                  alt={img.alt}
+                  width={512}
+                  height={512}
+                  unoptimized
+                  loading="lazy"
+                  className={`rounded object-contain object-center h-64 md:h-80 w-auto`}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* video carousel */}
+          {data.videos?.length > 0 && (
+            <div className="flex gap-2 overflow-x-auto [&>*]:shrink-0">
+              {data.videos.map((videoSrc, idx) => (
+                <video
+                  key={idx}
+                  src={videoSrc}
+                  autoplay
+                  loop
+                  muted
+                  className="rounded object-contain object-center h-64 md:h-80 w-auto"
+                >
+                  Your browser does not support the video tag.
+                </video>
+              ))}
+            </div>
+          )}
 
           {/* reference images (if any) */}
           {data.refs?.length > 0 && (
