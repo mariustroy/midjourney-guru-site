@@ -18,8 +18,10 @@ export default async function FormulasPage() {
     .select("id,title,prompt,category,images,videos,refs")
     .order("created_at", { ascending: false });
 
+  // Debugging logs
+  console.log("Fetched formulas:", formulas);
   if (error) {
-    console.error("Supabase error:", error);
+    console.error("Supabase Error:", error);
   }
 
   return <FormulasClient initial={formulas ?? []} />;

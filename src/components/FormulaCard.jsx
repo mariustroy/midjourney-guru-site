@@ -84,25 +84,24 @@ export default function FormulaCard({ data }) {
               ))}
             </div>
           )}
-
-          {/* video carousel */}
-          {data.videos?.length > 0 && (
-            <div className="flex gap-2 overflow-x-auto [&>*]:shrink-0">
-              {data.videos.map((videoSrc, idx) => (
-                <video
-                  key={idx}
-                  src={videoSrc}
-                  autoplay
-                  loop
-                  muted
-                  className="rounded object-contain object-center h-64 md:h-80 w-auto"
-                >
-                  Your browser does not support the video tag.
-                </video>
-              ))}
-            </div>
-          )}
-
+{data.videos && Array.isArray(data.videos) && data.videos.length > 0 && (
+  <div className="flex gap-2 overflow-x-auto [&>*]:shrink-0">
+    {data.videos.map((videoSrc, idx) => (
+      videoSrc && typeof videoSrc === 'string' && (
+        <video
+          key={idx}
+          src={videoSrc}
+          autoPlay
+          muted
+          loop
+          className="rounded object-contain object-center h-64 md:h-80 w-auto"
+        >
+          Your browser does not support the video tag.
+        </video>
+      )
+    ))}
+  </div>
+)}
           {/* reference images (if any) */}
           {data.refs?.length > 0 && (
             <div className="flex gap-2 overflow-x-auto">
