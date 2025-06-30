@@ -1,12 +1,10 @@
-// src/app/formulas/page.jsx  (server component)
+// src/app/formulas/page.jsx (server component)
 
 import { createClient } from "@supabase/supabase-js";
 import FormulasClient from "./_Client";
 
-// Revalidate at most once per minute (keep if you already had this)
-export const revalidate = 60;
+export const revalidate = 0; // Temporarily disable caching for immediate results
 
-/** Server side: fetch formulas with *anon* creds only. */
 export default async function FormulasPage() {
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -15,14 +13,19 @@ export default async function FormulasPage() {
 
   const { data: formulas, error } = await supabase
     .from("formulas")
-    .select("id,title,prompt,category,images,videos,refs")
+    .select("*") // simplified for debugging
     .order("created_at", { ascending: false });
 
-  // Debugging logs
-  console.log("Fetched formulas:", formulas);
+  console.log("Fetched formulas (full):", JSON.stringify(formulas, null, 2));
   if (error) {
-    console.error("Supabase Error:", error);
+    console.error("Supabase error (full query):", error);
+    return <div>Supabase Error: {error.message}</div>;
   }
 
-  return <FormulasClient initial={formulas ?? []} />;
+  return (
+    <div>
+      <pre>{JSON.stringify(formulas, null, 2)}</pre>
+      <FormulasClient initial={formulas ?? []} />
+    </div>
+  );
 }
