@@ -84,10 +84,10 @@ export default function FormulaCard({ data }) {
               ))}
             </div>
           )}
-{data.videos && Array.isArray(data.videos) && data.videos.length > 0 && (
+{Array.isArray(data.videos) && data.videos.length > 0 && (
   <div className="flex gap-2 overflow-x-auto [&>*]:shrink-0">
-    {data.videos.map((videoSrc, idx) => (
-      videoSrc && typeof videoSrc === 'string' && (
+    {data.videos.map((videoSrc, idx) =>
+      typeof videoSrc === 'string' ? (
         <video
           key={idx}
           src={videoSrc}
@@ -98,8 +98,8 @@ export default function FormulaCard({ data }) {
         >
           Your browser does not support the video tag.
         </video>
-      )
-    ))}
+      ) : null
+    )}
   </div>
 )}
           {/* reference images (if any) */}
