@@ -3,15 +3,24 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { Copy, Check } from "lucide-react";
+import {
+  Copy,
+  Check,
+  ChevronDown,
+  ChevronUp,
+  Image as ImageIcon,
+  FileText,
+} from "lucide-react";
 
 /*
   FormulaCard – full-width strip with floating info panel
   ------------------------------------------------------
+  • open === true  ➜ panel visible (default)
+  • open === false ➜ panel hidden, only “Show” button appears
 */
 
 export default function FormulaCard({ data }) {
-  /* ---------- copy prompt feedback ---------- */
+  /* ---------- copy-to-clipboard feedback ---------- */
   const [copied, setCopied] = useState(false);
   const copy = async () => {
     try {
@@ -90,93 +99,119 @@ export default function FormulaCard({ data }) {
       {open && (
         <aside
           className="
-            relative z-20 w-full rounded-2xl bg-black/60 p-6 text-white backdrop-blur-md
-            -mt-16                           /* pull up 64 px on mobile */
-            lg:mt-0 lg:absolute lg:right-6 lg:top-12 lg:w-[320px]       /* 24 px gap on desktop */
+            relative z-20 w-full rounded-2xl bg-black/60 p-6 backdrop-blur-md
+            -mt-16                           /* overlap 64 px on mobile   */
+            lg:mt-0 lg:absolute lg:right-6 lg:top-12 lg:w-[320px]         /* desktop: 24 px gap */
           "
+          style={{ border: "1px solid #3E4A32" }}
         >
-          {/* title ------------------------------------------------ */}
-          <h2 className="mb-2 text-lg font-medium">{data.title}</h2>
+          {/* header row ------------------------------------------ */}
+          <div className="mb-4 flex items-start justify-between">
+            {/* Copy button -------------------------------------- */}
+            <button
+              onClick={copy}
+              className="flex items-center gap-2 text-lg font-medium text-[#FFFD91] hover:opacity-90"
+            >
+              {copied ? (
+                <>
+                  <Check className="h-5 w-5" /> Copied
+                </>
+              ) : (
+                <>
+                  <Copy className="h-5 w-5" /> Copy Prompt
+                </>
+              )}
+            </button>
 
-          {/* copy button ----------------------------------------- */}
-          <button
-            onClick={copy}
-            className="mb-4 flex items-center gap-1 rounded-md bg-yellow-400 px-3 py-1 text-sm font-medium text-black hover:bg-yellow-300"
-          >
-            {copied ? (
-              <>
-                <Check className="h-4 w-4" /> Copied!
-              </>
-            ) : (
-              <>
-                <Copy className="h-4 w-4" /> Copy prompt
-              </>
-            )}
-          </button>
+            {/* Hide button -------------------------------------- */}
+            <button
+              onClick={() => setOpen(false)}
+              aria-label="Hide info"
+              className="text-[#FFFD91] hover:opacity-90"
+            >
+              <ChevronUp className="h-5 w-5" />
+            </button>
+          </div>
 
           {/* prompt text ----------------------------------------- */}
-          <p className="whitespace-pre-wrap text-sm leading-relaxed">
+          <p className="mb-6 whitespace-pre-wrap text-[17px] leading-relaxed text-[#FFFEE6]">
             {data.prompt}
           </p>
 
-          {/* reference images ------------------------------------ */}
-          {Array.isArray(data.refs) && data.refs.length > 0 && (
-            <details className="mt-4">
-              <summary className="cursor-pointer text-sm font-medium">
-                Reference Images
-              </summary>
-              <ul className="mt-2 flex flex-wrap gap-2">
-                {data.refs.map((ref) => (
-                  <li key={ref.id} className="flex flex-col items-center gap-1">
-                    <a
-                      href={ref.href || ref.src}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <Image
-                        src={ref.src}
-                        alt={ref.label || ""}
-                        width={80}
-                        height={80}
-                        unoptimized
-                        loading="lazy"
-                        className="h-20 w-20 rounded-lg object-cover"
-                      />
-                    </a>
-                    {ref.label && (
-                      <span className="text-center text-xs opacity-80">
-                        {ref.label}
-                      </span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </details>
-          )}
+          {/* drawers --------------------------------------------- */}
+          <div className="space-y-4">
+            {/* Reference Images drawer ------------------------- */}
+            {Array.isArray(data.refs) && data.refs.length > 0 && (
+              <details className="group border-t border-[#3E4A32] pt-4">
+                <summary className="flex cursor-pointer items-center justify-between gap-4 text-[#FFFEE6]">
+                  <span className="flex items-center gap-2 text-[17px]">
+                    <ImageIcon className="h-5 w-5 text-[#FFFD91]" />
+                    Reference Images ({data.refs.length})
+                  </span>
+                  <ChevronDown className="h-5 w-5 transform transition-transform group-open:rotate-180 text-[#FFFD91]" />
+                </summary>
 
-          {/* method drawer --------------------------------------- */}
-          {data.method && (
-            <details className="mt-4">
-              <summary className="cursor-pointer text-sm font-medium">
-                Method
-              </summary>
-              <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed">
-                {data.method}
-              </p>
-            </details>
-          )}
+                <ul className="mt-4 flex flex-wrap gap-3">
+                  {data.refs.map((ref) => (
+                    <li key={ref.id} className="flex flex-col items-center">
+                      <a
+                        href={ref.href || ref.src}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="rounded-lg"
+                      >
+                        <Image
+                          src={ref.src}
+                          alt={ref.label || ""}
+                          width={96}
+                          height={96}
+                          unoptimized
+                          loading="lazy"
+                          className="h-24 w-24 rounded-lg object-cover"
+                        />
+                      </a>
+                      {ref.label && (
+                        <span className="mt-1 text-xs text-[#FFFD91]">
+                          {ref.label}
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            )}
+
+            {/* Method drawer ----------------------------------- */}
+            {data.method && (
+              <details className="group border-t border-[#3E4A32] pt-4">
+                <summary className="flex cursor-pointer items-center justify-between gap-4 text-[#FFFEE6]">
+                  <span className="flex items-center gap-2 text-[17px]">
+                    <FileText className="h-5 w-5 text-[#FFFD91]" />
+                    Method
+                  </span>
+                  <ChevronDown className="h-5 w-5 transform transition-transform group-open:rotate-180 text-[#FFFD91]" />
+                </summary>
+
+                <p className="mt-4 whitespace-pre-wrap text-[17px] leading-relaxed text-[#FFFEE6]">
+                  {data.method}
+                </p>
+              </details>
+            )}
+          </div>
         </aside>
       )}
 
       {/* ---------------------------------------------------------- */}
-      {/* 3 · Show / Hide button                                   */}
+      {/* 3 · Show button (only when panel is hidden)                */}
       {/* ---------------------------------------------------------- */}
-      <button
-        onClick={() => setOpen((p) => !p)}
-        className="absolute right-6 top-6 z-30 rounded-full bg-black/60 px-4 py-1 text-sm text-white backdrop-blur-md hover:bg-black/70"
-      >
-        {open ? "Hide" : "Show"}
-      </button>
+      {!open && (
+        <button
+          onClick={() => setOpen(true)}
+          className="absolute right-6 top-6 z-30 rounded-full bg-black/60 px-4 py-1 text-sm text-[#FFFD91] backdrop-blur-md hover:bg-black/70"
+        >
+          Show
+        </button>
+      )}
     </article>
   );
 }
