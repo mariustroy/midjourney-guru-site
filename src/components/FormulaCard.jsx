@@ -33,7 +33,7 @@ export default function FormulaCard({ data }) {
     io.observe(el);
     return () => io.disconnect();
   }, []);
-
+ 
   return (
     <article
       ref={cardRef}
