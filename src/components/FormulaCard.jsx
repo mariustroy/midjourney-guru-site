@@ -12,9 +12,7 @@ import {
   FileText,
 } from "lucide-react";
 
-/* ------------------------------------------------------------------ */
-/* Drawer helper – full-width border + animated height                */
-/* ------------------------------------------------------------------ */
+/* ---------- Drawer helper ---------- */
 function Drawer({ summary, icon, children, accent, textClr }) {
   const [open, setOpen] = useState(false);
   return (
@@ -43,11 +41,9 @@ function Drawer({ summary, icon, children, accent, textClr }) {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* FormulaCard                                                        */
-/* ------------------------------------------------------------------ */
+/* ---------- FormulaCard ---------- */
 export default function FormulaCard({ data }) {
-  /* copy-prompt feedback */
+  /* copy feedback */
   const [copied, setCopied] = useState(false);
   const copy = async () => {
     try {
@@ -60,7 +56,7 @@ export default function FormulaCard({ data }) {
   /* info-box state */
   const [boxOpen, setBoxOpen] = useState(true);
 
-  /* lazy-render media */
+  /* lazy media */
   const cardRef = useRef(null);
   const [showMedia, setShowMedia] = useState(false);
   useEffect(() => {
@@ -76,7 +72,7 @@ export default function FormulaCard({ data }) {
 
   return (
     <article ref={cardRef} className="relative px-6 pt-6">
-      {/* -------------------- media strip -------------------- */}
+      {/* -------- media strip -------- */}
       {showMedia && (
         <div className="-mx-6 flex gap-2 overflow-x-auto scrollbar-hide">
           {data.images?.map((img) => (
@@ -108,23 +104,19 @@ export default function FormulaCard({ data }) {
         </div>
       )}
 
-      {/* -------------------- info box ----------------------- */}
+      {/* -------- info box -------- */}
       <aside
         className={`
           relative z-20 w-full rounded-2xl
           -mt-16 lg:mt-0 lg:absolute lg:right-6 lg:top-12 lg:w-[320px]
-          overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out
+          overflow-hidden transition-[max-height] duration-300 ease-in-out
           ${boxOpen
-            ? "max-h-[2000px] bg-black/60 p-6 opacity-100 border border-[#3E4A32] backdrop-blur-md"
-            : "max-h-[64px] p-6 opacity-100 bg-transparent border-none backdrop-blur-0"}
+            ? "max-h-[2000px] bg-black/60 p-6 border border-[#3E4A32] backdrop-blur-md"
+            : "max-h-[64px] p-6"}                /* 64 px keeps the Show area */
         `}
       >
-        {/* header row ---------------------------------------- */}
-        <div
-          className={`flex items-start ${
-            boxOpen ? "justify-between" : "justify-end"
-          }`}
-        >
+        {/* header row */}
+        <div className="flex items-start justify-between">
           {boxOpen && (
             <button
               onClick={copy}
@@ -153,14 +145,14 @@ export default function FormulaCard({ data }) {
             <button
               onClick={() => setBoxOpen(true)}
               style={{ border: "1px solid rgba(87,92,85,0.3)" }}
-              className="flex items-center gap-2 rounded-full px-4 py-1 text-sm font-medium text-[#FFFD91] hover:opacity-90"
+              className="flex items-center gap-2 rounded-full bg-black/60 px-4 py-1 text-sm font-medium text-[#FFFD91] hover:opacity-90"
             >
               <ChevronDown className="h-4 w-4" /> Show
             </button>
           )}
         </div>
 
-        {/* body ---------------------------------------------- */}
+        {/* body */}
         {boxOpen && (
           <>
             <p className="mt-6 mb-6 whitespace-pre-wrap text-[16px] leading-[19px] text-[#FFFEE6]">
