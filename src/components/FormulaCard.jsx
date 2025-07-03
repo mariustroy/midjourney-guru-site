@@ -6,23 +6,14 @@ import Image from "next/image";
 import { Copy, Check } from "lucide-react";
 
 /*
-  --------------------------------------------------------------------
-  FormulaCard – full-width horizontal strip with a blurred info overlay
-  --------------------------------------------------------------------
-  Expected data shape (already coming from Supabase):
-    {
-      id,
-      title,
-      prompt,
-      images:  [{ id, alt, src }],
-      videos:  [".mp4", ...]      // optional array
-      refs:    [{ id, src, href, label }],
-      method:  "multi-line description"
-    }
+  FormulaCard – full-width strip with a right-hand info box
+  ---------------------------------------------------------
+  • open === true  ➜ panel shown   (default)
+  • open === false ➜ panel removed (only the Show button remains)
 */
 
 export default function FormulaCard({ data }) {
-  /* ---------- copy-to-clipboard feedback ---------- */
+  /* ---------- copy prompt feedback ---------- */
   const [copied, setCopied] = useState(false);
   const copy = async () => {
     try {
@@ -34,10 +25,10 @@ export default function FormulaCard({ data }) {
     }
   };
 
-  /* ---------- show / hide info overlay ------------ */
-  const [open, setOpen] = useState(false);
+  /* ---------- show / hide panel ------------- */
+  const [open, setOpen] = useState(true);
 
-  /* ---------- lazy-render media when near viewport */
+  /* ---------- lazy-load media --------------- */
   const cardRef = useRef(null);
   const [showMedia, setShowMedia] = useState(false);
 
@@ -47,9 +38,8 @@ export default function FormulaCard({ data }) {
 
     const io = new IntersectionObserver(
       ([entry]) => entry.isIntersecting && setShowMedia(true),
-      { rootMargin: "200px 0px" } // load 200 px before visible
+      { rootMargin: "200px 0px" }
     );
-
     io.observe(el);
     return () => io.disconnect();
   }, []);
@@ -58,132 +48,141 @@ export default function FormulaCard({ data }) {
   /*  Render                                                          */
   /* ---------------------------------------------------------------- */
   return (
-    <article ref={cardRef} className="relative w-full py-8">
-      {/* horizontal media row -------------------------------------- */}
-      {showMedia && (
-        <div className="flex gap-2 overflow-x-auto px-6 scrollbar-hide">
-          {/* images ------------------------------------------------ */}
-          {Array.isArray(data.images) &&
-            data.images.map((img) => (
-              <Image
-                key={img.id}
-                src={img.src}
-                alt={img.alt}
-                width={512}
-                height={512}
-                unoptimized
-                loading="lazy"
-                className="h-64 w-auto shrink-0 rounded object-contain object-center md:h-80"
-              />
-            ))}
+    <article ref={cardRef} className="w-full px-6 pt-6 lg:pt-6">
+      <div className="relative flex flex-col gap-4 lg:flex-row">
+        {/* ---------------------------------------------------------- */}
+        {/* 1 · Info box (static in flow, floats right on desktop)     */}
+        {/* ---------------------------------------------------------- */}
+        {open && (
+          <aside className="order-1 w-full rounded-2xl bg-black/60 p-6 text-white backdrop-blur-md lg:order-2 lg:ml-auto lg:w-[320px]">
+            {/* title ---------------------------------------------- */}
+            <h2 className="mb-2 text-lg font-medium">{data.title}</h2>
 
-          {/* videos ------------------------------------------------ */}
-          {Array.isArray(data.videos) &&
-            data.videos.map(
-              (videoSrc, idx) =>
-                typeof videoSrc === "string" && (
-                  <video
-                    key={idx}
-                    src={videoSrc}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="h-64 w-auto shrink-0 rounded object-contain object-center md:h-80"
-                  />
-                )
-            )}
-        </div>
-      )}
+            {/* copy prompt button --------------------------------- */}
+            <button
+              onClick={copy}
+              className="mb-4 flex items-center gap-1 rounded-md bg-yellow-400 px-3 py-1 text-sm font-medium text-black hover:bg-yellow-300"
+            >
+              {copied ? (
+                <>
+                  <Check className="h-4 w-4" /> Copied!
+                </>
+              ) : (
+                <>
+                  <Copy className="h-4 w-4" /> Copy prompt
+                </>
+              )}
+            </button>
 
-      {/* SHOW / HIDE toggle --------------------------------------- */}
-      <button
-        onClick={() => setOpen((p) => !p)}
-        className="absolute bottom-4 right-4 z-20 rounded-full bg-black/60 px-4 py-1 text-sm text-white backdrop-blur-md hover:bg-black/70"
-      >
-        {open ? "Hide" : "Show"}
-      </button>
+            {/* prompt text ---------------------------------------- */}
+            <p className="whitespace-pre-wrap text-sm leading-relaxed">
+              {data.prompt}
+            </p>
 
-      {/* info overlay --------------------------------------------- */}
-      <div
-        className={`absolute right-6 top-6 z-10 w-[calc(100%-3rem)] max-w-sm overflow-hidden rounded-2xl bg-black/60 text-white backdrop-blur-md transition-all duration-300 ease-in-out ${
-          open
-            ? "pointer-events-auto max-h-[90vh] opacity-100"
-            : "pointer-events-none max-h-0 opacity-0"
-        }`}
-      >
-        <div className="flex max-h-[85vh] flex-col gap-4 overflow-y-auto p-6">
-          {/* title ------------------------------------------------ */}
-          <h2 className="text-lg font-medium">{data.title}</h2>
-
-          {/* copy prompt button ----------------------------------- */}
-          <button
-            onClick={copy}
-            className="flex items-center gap-1 self-start rounded-md bg-yellow-400 px-3 py-1 text-sm font-medium text-black hover:bg-yellow-300"
-          >
-            {copied ? (
-              <>
-                <Check className="h-4 w-4" /> Copied!
-              </>
-            ) : (
-              <>
-                <Copy className="h-4 w-4" /> Copy prompt
-              </>
-            )}
-          </button>
-
-          {/* prompt text ----------------------------------------- */}
-          <p className="whitespace-pre-wrap text-sm leading-relaxed">
-            {data.prompt}
-          </p>
-
-          {/* reference images ------------------------------------ */}
-          {Array.isArray(data.refs) && data.refs.length > 0 && (
-            <details>
-              <summary className="cursor-pointer text-sm font-medium">
-                Reference Images
-              </summary>
-              <ul className="mt-2 flex flex-wrap gap-2">
-                {data.refs.map((ref) => (
-                  <li key={ref.id} className="flex flex-col items-center gap-1">
-                    <a
-                      href={ref.href || ref.src}
-                      target="_blank"
-                      rel="noreferrer"
+            {/* reference images ----------------------------------- */}
+            {Array.isArray(data.refs) && data.refs.length > 0 && (
+              <details className="mt-4">
+                <summary className="cursor-pointer text-sm font-medium">
+                  Reference Images
+                </summary>
+                <ul className="mt-2 flex flex-wrap gap-2">
+                  {data.refs.map((ref) => (
+                    <li
+                      key={ref.id}
+                      className="flex flex-col items-center gap-1"
                     >
-                      <Image
-                        src={ref.src}
-                        alt={ref.label || ""}
-                        width={80}
-                        height={80}
-                        unoptimized
-                        loading="lazy"
-                        className="h-20 w-20 rounded-lg object-cover"
-                      />
-                    </a>
-                    {ref.label && (
-                      <span className="text-center text-xs opacity-80">
-                        {ref.label}
-                      </span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </details>
-          )}
+                      <a
+                        href={ref.href || ref.src}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <Image
+                          src={ref.src}
+                          alt={ref.label || ""}
+                          width={80}
+                          height={80}
+                          unoptimized
+                          loading="lazy"
+                          className="h-20 w-20 rounded-lg object-cover"
+                        />
+                      </a>
+                      {ref.label && (
+                        <span className="text-center text-xs opacity-80">
+                          {ref.label}
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            )}
 
-          {/* method drawer --------------------------------------- */}
-          {data.method && (
-            <details>
-              <summary className="cursor-pointer text-sm font-medium">
-                Method
-              </summary>
-              <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed">
-                {data.method}
-              </p>
-            </details>
-          )}
-        </div>
+            {/* method drawer -------------------------------------- */}
+            {data.method && (
+              <details className="mt-4">
+                <summary className="cursor-pointer text-sm font-medium">
+                  Method
+                </summary>
+                <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed">
+                  {data.method}
+                </p>
+              </details>
+            )}
+          </aside>
+        )}
+
+        {/* ---------------------------------------------------------- */}
+        {/* 2 · Media row (always visible)                            */}
+        {/* ---------------------------------------------------------- */}
+        {showMedia && (
+          <div
+            className={`order-2 flex gap-2 overflow-x-auto scrollbar-hide lg:order-1 ${
+              open ? "" : "lg:mr-auto"
+            }`}
+          >
+            {/* images */}
+            {Array.isArray(data.images) &&
+              data.images.map((img) => (
+                <Image
+                  key={img.id}
+                  src={img.src}
+                  alt={img.alt}
+                  width={512}
+                  height={512}
+                  unoptimized
+                  loading="lazy"
+                  className="h-64 w-auto shrink-0 rounded object-contain object-center md:h-80"
+                />
+              ))}
+
+            {/* videos */}
+            {Array.isArray(data.videos) &&
+              data.videos.map(
+                (src, i) =>
+                  typeof src === "string" && (
+                    <video
+                      key={i}
+                      src={src}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="h-64 w-auto shrink-0 rounded object-contain object-center md:h-80"
+                    />
+                  )
+              )}
+          </div>
+        )}
+
+        {/* ---------------------------------------------------------- */}
+        {/* 3 · Show / Hide button (absolute, top-right)              */}
+        {/* ---------------------------------------------------------- */}
+        <button
+          onClick={() => setOpen((p) => !p)}
+          className="absolute right-6 top-6 z-20 rounded-full bg-black/60 px-4 py-1 text-sm text-white backdrop-blur-md hover:bg-black/70"
+        >
+          {open ? "Hide" : "Show"}
+        </button>
       </div>
     </article>
   );
