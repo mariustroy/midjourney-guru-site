@@ -12,6 +12,16 @@ import {
   FileText,
 } from "lucide-react";
 
+/*
+  Tweaks in this revision
+  -----------------------
+  • Drawer borders now run truly edge-to-edge (no side gaps).
+  • When the info box is collapsed, only the Show button is visible;
+    the underlying container has no background/border.
+  • Show button keeps 16 px horizontal padding and a
+    rgba(87,92,85,0.3) stroke.
+*/
+
 export default function FormulaCard({ data }) {
   /* copy-prompt feedback */
   const [copied, setCopied] = useState(false);
@@ -25,7 +35,7 @@ export default function FormulaCard({ data }) {
     }
   };
 
-  /* show / hide whole panel */
+  /* toggle whole info box */
   const [boxOpen, setBoxOpen] = useState(true);
 
   /* lazy-render media */
@@ -42,37 +52,36 @@ export default function FormulaCard({ data }) {
     return () => io.disconnect();
   }, []);
 
-  /* Drawer helper (keeps full-width border via -mx-6 trick) */
-  const Drawer = ({
-    summary,
-    icon,
-    children,
-    accent = "#FFFD91",
-    textClr = "#FFFEE6",
-  }) => (
-    <details className="-mx-6 border-t border-[#3E4A32] px-6 pt-4 group">
-      <summary className="flex cursor-pointer items-center justify-between">
-        <span className="flex items-center gap-2 text-sm" style={{ color: textClr }}>
-          {icon}
-          {summary}
-        </span>
-        <ChevronDown
-          className="h-4 w-4 transform transition-transform group-open:rotate-180"
-          style={{ color: accent }}
-        />
-      </summary>
+  /* Drawer helper (edge-to-edge border) */
+  function Drawer({ summary, icon, children, accent = "#FFFD91", textClr = "#FFFEE6" }) {
+    return (
+      <details className="-mx-6 border-t border-[#3E4A32] pt-4 group">
+        <summary
+          className="flex cursor-pointer items-center justify-between px-6"
+        >
+          <span className="flex items-center gap-2 text-sm" style={{ color: textClr }}>
+            {icon}
+            {summary}
+          </span>
+          <ChevronDown
+            className="h-4 w-4 transform transition-transform group-open:rotate-180"
+            style={{ color: accent }}
+          />
+        </summary>
 
-      {/* animated body */}
-      <div className="grid max-h-0 overflow-hidden transition-all duration-300 ease-in-out group-open:mt-4 group-open:max-h-96">
-        {children}
-      </div>
-    </details>
-  );
+        {/* animated body */}
+        <div className="grid max-h-0 overflow-hidden px-6 transition-all duration-300 ease-in-out group-open:mt-4 group-open:max-h-96">
+          {children}
+        </div>
+      </details>
+    );
+  }
 
+  /* ------------------------------ render ------------------------------ */
   return (
     <article ref={cardRef} className="relative px-6 pt-6">
       {/* ---------------------------------------------------------------- */}
-      {/* MEDIA STRIP (edge-to-edge)                                       */}
+      {/* 1 · MEDIA STRIP (edge-to-edge)                                   */}
       {/* ---------------------------------------------------------------- */}
       {showMedia && (
         <div className="-mx-6 flex gap-2 overflow-x-auto scrollbar-hide">
@@ -107,20 +116,17 @@ export default function FormulaCard({ data }) {
       )}
 
       {/* ---------------------------------------------------------------- */}
-      {/* INFO BOX  (position & size unchanged)                            */}
+      {/* 2 · INFO BOX (position unchanged)                                */}
       {/* ---------------------------------------------------------------- */}
       <aside
         className={`
-          relative z-20 w-full rounded-2xl bg-black/60 backdrop-blur-md
+          relative z-20 w-full rounded-2xl backdrop-blur-md
           transition-all duration-300 ease-in-out
-          ${boxOpen ? "p-6" : "p-2"}
           -mt-16 lg:mt-0 lg:absolute lg:right-6 lg:top-12 lg:w-[320px]
+          ${boxOpen ? "bg-black/60 p-6 border border-[#3E4A32]" : "p-6 bg-transparent border-none"}
         `}
-        style={{ border: "1px solid #3E4A32" }}
       >
-        {/* -------------------------------------------------------------- */}
-        {/* HEADER ROW  (Copy + Hide  OR  Show)                            */}
-        {/* -------------------------------------------------------------- */}
+        {/* header: Copy + Hide OR Show -------------------------------- */}
         <div className="flex items-start justify-between">
           {boxOpen ? (
             <>
@@ -149,20 +155,20 @@ export default function FormulaCard({ data }) {
               </button>
             </>
           ) : (
-            /* Show — sits exactly where Hide was */
+            /* Show button (same spot, no surrounding box visible) */
             <button
               onClick={() => setBoxOpen(true)}
-              style={{ border: "1px solid rgba(87,92,85,0.3)" }} // #575C55 @ 30 %
-              className="flex items-center gap-2 rounded-full px-4 py-1 text-sm font-medium text-[#FFFD91] hover:opacity-90"
+              style={{ border: "1px solid rgba(87,92,85,0.3)" }}
+              className="flex items-center gap-2 rounded-full bg-black/60 px-4 py-1 text-sm font-medium text-[#FFFD91] hover:opacity-90"
             >
               <ChevronDown className="h-4 w-4" /> Show
             </button>
           )}
         </div>
 
-        {/* -------------------------------------------------------------- */}
-        {/* COLLAPSIBLE CONTENT                                            */}
-        {/* -------------------------------------------------------------- */}
+        {/* ------------------------------------------------------------ */}
+        {/* COLLAPSIBLE CONTENT                                          */}
+        {/* ------------------------------------------------------------ */}
         <div
           className={`overflow-hidden transition-all duration-300 ease-in-out ${
             boxOpen ? "max-h-[1000px] mt-6" : "max-h-0"
