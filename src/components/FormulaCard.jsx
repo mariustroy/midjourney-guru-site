@@ -72,7 +72,7 @@ export default function FormulaCard({ data }) {
 
   return (
     <article ref={cardRef} className="relative px-6 pt-6">
-      {/* media strip */}
+      {/* -------- media strip (larger) -------- */}
       {showMedia && (
         <div className="-mx-6 flex gap-2 overflow-x-auto scrollbar-hide">
           {data.images?.map((img) => (
@@ -84,9 +84,10 @@ export default function FormulaCard({ data }) {
               height={512}
               unoptimized
               loading="lazy"
-              className="h-64 w-auto shrink-0 rounded object-contain object-center md:h-80"
+              className="h-96 w-auto shrink-0 rounded object-contain object-center md:h-[480px]"
             />
           ))}
+
           {data.videos?.map(
             (src, i) =>
               typeof src === "string" && (
@@ -97,14 +98,14 @@ export default function FormulaCard({ data }) {
                   muted
                   loop
                   playsInline
-                  className="h-64 w-auto shrink-0 rounded object-contain object-center md:h-80"
+                  className="h-96 w-auto shrink-0 rounded object-contain object-center md:h-[480px]"
                 />
               )
           )}
         </div>
       )}
 
-      {/* info box */}
+      {/* -------- info box -------- */}
       <aside
         className={`
           relative z-20 w-full rounded-2xl
