@@ -143,10 +143,10 @@ export default function FormulaCard({ data }) {
             </button>
           ) : (
             <button
-              onClick={() => setBoxOpen(true)}
-              style={{ border: "1px solid rgba(87,92,85,0.3)" }}
-              className="flex items-center gap-2 rounded-full bg-black/60 px-4 py-1 text-sm font-medium text-[#FFFD91] hover:opacity-90"
-            >
+           onClick={() => setBoxOpen(true)}
+           style={{ border: "1px solid rgba(87,92,85,0.3)" }}
+           className="absolute right-6 top-6 flex items-center gap-2 rounded-full bg-black/60 px-4 py-1 text-sm font-medium text-[#FFFD91] hover:opacity-90"
+          >
               <ChevronDown className="h-4 w-4" /> Show
             </button>
           )}
