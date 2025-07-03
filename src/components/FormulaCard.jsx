@@ -13,16 +13,13 @@ import {
 } from "lucide-react";
 
 /*
-  Requested fixes
-  ---------------
-  • Drawer expand/collapse animated (max-height transition).
-  • Info-box collapse/expand animated (max-height + opacity).
-  • Show button appears exactly where Hide sits (bottom-right on
-    mobile, top-right on desktop — same as Hide).
+  ➜ Fix: Hide / Show buttons now sit bottom-right of the *FormulaCard*,
+    not bottom-right of the info box.
+  (All previous animations and drawer borders retained.)
 */
 
 export default function FormulaCard({ data }) {
-  /* --- copy-prompt feedback --- */
+  /* copy-prompt feedback */
   const [copied, setCopied] = useState(false);
   const copy = async () => {
     try {
@@ -34,10 +31,10 @@ export default function FormulaCard({ data }) {
     }
   };
 
-  /* --- info-box open/close --- */
+  /* info-box open / closed */
   const [boxOpen, setBoxOpen] = useState(true);
 
-  /* --- lazy-render media --- */
+  /* lazy-render media */
   const cardRef = useRef(null);
   const [showMedia, setShowMedia] = useState(false);
   useEffect(() => {
@@ -51,19 +48,13 @@ export default function FormulaCard({ data }) {
     return () => io.disconnect();
   }, []);
 
-  /* --- Drawer helper (edge-to-edge border + animated) --- */
-  const Drawer = ({
-    summary,
-    icon,
-    children,
-    accent = "#FFFD91",
-    textClr = "#FFFEE6",
-  }) => {
+  /* Drawer helper (edge-to-edge border + animation) */
+  const Drawer = ({ summary, icon, children, accent = "#FFFD91", textClr = "#FFFEE6" }) => {
     const [open, setOpen] = useState(false);
     return (
       <div className="-mx-6 border-t border-[#3E4A32]">
         <button
-          onClick={() => setOpen((o) => !o)}
+          onClick={() => setOpen(!open)}
           className="flex w-full items-center justify-between px-6 pt-4"
         >
           <span className="flex items-center gap-2 text-sm" style={{ color: textClr }}>
@@ -77,10 +68,8 @@ export default function FormulaCard({ data }) {
         </button>
 
         <div
-          style={{
-            maxHeight: open ? "600px" : "0px",
-          }}
-          className="overflow-hidden px-6 transition-max-height duration-300 ease-in-out"
+          style={{ maxHeight: open ? "600px" : "0px" }}
+          className="overflow-hidden px-6 transition-[max-height] duration-300 ease-in-out"
         >
           {open && <div className="mt-4">{children}</div>}
         </div>
@@ -88,10 +77,10 @@ export default function FormulaCard({ data }) {
     );
   };
 
-  /* ------------------------- render ------------------------ */
+  /* ------------------------------------------------ render ------------------------------------------------ */
   return (
     <article ref={cardRef} className="relative px-6 pt-6">
-      {/* 1 · media strip (edge-to-edge) */}
+      {/* media strip (edge-to-edge) */}
       {showMedia && (
         <div className="-mx-6 flex gap-2 overflow-x-auto scrollbar-hide">
           {data.images?.map((img) => (
@@ -106,7 +95,6 @@ export default function FormulaCard({ data }) {
               className="h-64 w-auto shrink-0 rounded object-contain object-center md:h-80"
             />
           ))}
-
           {data.videos?.map(
             (src, i) =>
               typeof src === "string" && (
@@ -124,7 +112,7 @@ export default function FormulaCard({ data }) {
         </div>
       )}
 
-      {/* 2 · info box (animated collapse) */}
+      {/* info box (animated height) */}
       <aside
         className={`
           relative z-20 w-full rounded-2xl
@@ -137,7 +125,7 @@ export default function FormulaCard({ data }) {
       >
         {boxOpen && (
           <>
-            {/* copy prompt */}
+            {/* Copy Prompt */}
             <button
               onClick={copy}
               className="flex items-center gap-2 text-sm font-medium text-[#FFFD91] hover:opacity-90"
@@ -207,28 +195,23 @@ export default function FormulaCard({ data }) {
                 </Drawer>
               )}
             </div>
-
-            {/* hide button (bottom-right on mobile, top-right on lg) */}
-            <button
-              onClick={() => setBoxOpen(false)}
-              className="absolute right-6 bottom-4 lg:top-6 lg:bottom-auto flex items-center gap-1 text-sm text-[#FFFD91] hover:opacity-90"
-            >
-              Hide <ChevronUp className="h-4 w-4" />
-            </button>
           </>
         )}
       </aside>
 
-      {/* 3 · show button (same coords as hide) */}
-      {!boxOpen && (
+      {/* Hide / Show buttons (bottom-right of card) */}
+      {boxOpen ? (
+        <button
+          onClick={() => setBoxOpen(false)}
+          className="absolute right-6 bottom-4 z-30 flex items-center gap-1 text-sm text-[#FFFD91] hover:opacity-90"
+        >
+          Hide <ChevronUp className="h-4 w-4" />
+        </button>
+      ) : (
         <button
           onClick={() => setBoxOpen(true)}
           style={{ border: "1px solid rgba(87,92,85,0.3)" }}
-          className="
-            absolute right-6 bottom-4 lg:top-6 lg:bottom-auto z-30
-            flex items-center gap-2 rounded-full bg-black/60 px-4 py-1
-            text-sm font-medium text-[#FFFD91] hover:opacity-90
-          "
+          className="absolute right-6 bottom-4 z-30 flex items-center gap-2 rounded-full bg-black/60 px-4 py-1 text-sm font-medium text-[#FFFD91] hover:opacity-90"
         >
           <ChevronDown className="h-4 w-4" /> Show
         </button>
