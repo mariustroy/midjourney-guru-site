@@ -6,14 +6,12 @@ import Image from "next/image";
 import { Copy, Check } from "lucide-react";
 
 /*
-  FormulaCard – strip with floating info box
-  -----------------------------------------
-  • open === true  ➜ panel visible (default)
-  • open === false ➜ panel hidden, only “Show” button remains
+  FormulaCard – full-width strip with floating info panel
+  ------------------------------------------------------
 */
 
 export default function FormulaCard({ data }) {
-  /* ---------- copy-to-clipboard feedback ---------- */
+  /* ---------- copy prompt feedback ---------- */
   const [copied, setCopied] = useState(false);
   const copy = async () => {
     try {
@@ -50,11 +48,10 @@ export default function FormulaCard({ data }) {
   return (
     <article ref={cardRef} className="relative px-6 pt-6">
       {/* ---------------------------------------------------------- */}
-      {/* 1 · Media row (edge-to-edge with -mx-6)                    */}
+      {/* 1 · Media row (edge-to-edge)                               */}
       {/* ---------------------------------------------------------- */}
       {showMedia && (
         <div className="-mx-6 flex gap-2 overflow-x-auto scrollbar-hide">
-          {/* images ------------------------------------------------ */}
           {Array.isArray(data.images) &&
             data.images.map((img) => (
               <Image
@@ -69,7 +66,6 @@ export default function FormulaCard({ data }) {
               />
             ))}
 
-          {/* videos ------------------------------------------------ */}
           {Array.isArray(data.videos) &&
             data.videos.map(
               (src, i) =>
@@ -89,20 +85,20 @@ export default function FormulaCard({ data }) {
       )}
 
       {/* ---------------------------------------------------------- */}
-      {/* 2 · Floating info panel                                   */}
+      {/* 2 · Info panel                                            */}
       {/* ---------------------------------------------------------- */}
       {open && (
         <aside
           className="
-            absolute inset-x-6 bottom-16 z-20
-            rounded-2xl bg-black/60 p-6 text-white backdrop-blur-md
-            lg:bottom-auto lg:right-6 lg:top-6 lg:h-auto lg:w-[320px] lg:inset-x-auto
+            relative z-20 w-full rounded-2xl bg-black/60 p-6 text-white backdrop-blur-md
+            -mt-16                           /* pull upward 64 px on mobile  */
+            lg:mt-0 lg:absolute lg:right-6 lg:top-6 lg:w-[320px] lg:-translate-y-0
           "
         >
           {/* title ------------------------------------------------ */}
           <h2 className="mb-2 text-lg font-medium">{data.title}</h2>
 
-          {/* copy prompt button ---------------------------------- */}
+          {/* copy button ----------------------------------------- */}
           <button
             onClick={copy}
             className="mb-4 flex items-center gap-1 rounded-md bg-yellow-400 px-3 py-1 text-sm font-medium text-black hover:bg-yellow-300"
@@ -118,12 +114,12 @@ export default function FormulaCard({ data }) {
             )}
           </button>
 
-          {/* prompt ---------------------------------------------- */}
+          {/* prompt text ----------------------------------------- */}
           <p className="whitespace-pre-wrap text-sm leading-relaxed">
             {data.prompt}
           </p>
 
-          {/* references ------------------------------------------ */}
+          {/* reference images ------------------------------------ */}
           {Array.isArray(data.refs) && data.refs.length > 0 && (
             <details className="mt-4">
               <summary className="cursor-pointer text-sm font-medium">
@@ -131,10 +127,7 @@ export default function FormulaCard({ data }) {
               </summary>
               <ul className="mt-2 flex flex-wrap gap-2">
                 {data.refs.map((ref) => (
-                  <li
-                    key={ref.id}
-                    className="flex flex-col items-center gap-1"
-                  >
+                  <li key={ref.id} className="flex flex-col items-center gap-1">
                     <a
                       href={ref.href || ref.src}
                       target="_blank"
@@ -161,7 +154,7 @@ export default function FormulaCard({ data }) {
             </details>
           )}
 
-          {/* method ---------------------------------------------- */}
+          {/* method drawer --------------------------------------- */}
           {data.method && (
             <details className="mt-4">
               <summary className="cursor-pointer text-sm font-medium">
@@ -176,7 +169,7 @@ export default function FormulaCard({ data }) {
       )}
 
       {/* ---------------------------------------------------------- */}
-      {/* 3 · Show / Hide button (always top-right 24 px)           */}
+      {/* 3 · Show / Hide button                                   */}
       {/* ---------------------------------------------------------- */}
       <button
         onClick={() => setOpen((p) => !p)}
