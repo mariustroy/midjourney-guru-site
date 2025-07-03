@@ -12,8 +12,15 @@ import {
   FileText,
 } from "lucide-react";
 
+/*
+  FormulaCard – UI-polished strip
+  - Reference & Method summary text: 14 px
+  - Drawer borders stretch edge-to-edge via -mx-6
+  - Drawer content animates open / close (max-height transition)
+*/
+
 export default function FormulaCard({ data }) {
-  /* ---------- copy prompt feedback ---------- */
+  /* copy prompt feedback */
   const [copied, setCopied] = useState(false);
   const copy = async () => {
     try {
@@ -25,17 +32,15 @@ export default function FormulaCard({ data }) {
     }
   };
 
-  /* ---------- show / hide panel ---------- */
+  /* show / hide info box */
   const [open, setOpen] = useState(true);
 
-  /* ---------- lazy-load media ------------- */
+  /* lazy-load media */
   const cardRef = useRef(null);
   const [showMedia, setShowMedia] = useState(false);
-
   useEffect(() => {
     const el = cardRef.current;
     if (!el) return;
-
     const io = new IntersectionObserver(
       ([entry]) => entry.isIntersecting && setShowMedia(true),
       { rootMargin: "200px 0px" }
@@ -46,7 +51,7 @@ export default function FormulaCard({ data }) {
 
   return (
     <article ref={cardRef} className="relative px-6 pt-6">
-      {/* media row — edge-to-edge */}
+      {/* media row ------------------------------------------------ */}
       {showMedia && (
         <div className="-mx-6 flex gap-2 overflow-x-auto scrollbar-hide">
           {data.images?.map((img) => (
@@ -79,7 +84,7 @@ export default function FormulaCard({ data }) {
         </div>
       )}
 
-      {/* info panel */}
+      {/* info box ------------------------------------------------- */}
       {open && (
         <aside
           className="
@@ -90,7 +95,6 @@ export default function FormulaCard({ data }) {
         >
           {/* header row */}
           <div className="mb-4 flex items-start justify-between">
-            {/* copy prompt */}
             <button
               onClick={copy}
               className="flex items-center gap-2 text-sm font-medium text-[#FFFD91] hover:opacity-90"
@@ -106,7 +110,6 @@ export default function FormulaCard({ data }) {
               )}
             </button>
 
-            {/* hide */}
             <button
               onClick={() => setOpen(false)}
               className="flex items-center gap-1 text-sm text-[#FFFD91] hover:opacity-90"
@@ -120,63 +123,67 @@ export default function FormulaCard({ data }) {
             {data.prompt}
           </p>
 
-          {/* drawers */}
+          {/* drawers --------------------------------------------- */}
           <div className="space-y-4">
-            {/* reference images */}
+            {/* Reference Images --------------------------------- */}
             {data.refs?.length > 0 && (
-              <details className="group border-t border-[#3E4A32] pt-4">
+              <details className="group -mx-6 border-t border-[#3E4A32] px-6 pt-4">
                 <summary className="flex cursor-pointer items-center justify-between">
-                  <span className="flex items-center gap-2 text-[17px] text-[#7A947D]">
+                  <span className="flex items-center gap-2 text-sm text-[#7A947D]">
                     <ImageIcon className="h-4 w-4 text-[#7A947D]" />
                     Reference Images ({data.refs.length})
                   </span>
                   <ChevronDown className="h-4 w-4 transform text-[#7A947D] transition-transform group-open:rotate-180" />
                 </summary>
 
-                <ul className="mt-4 flex flex-wrap gap-3">
-                  {data.refs.map((ref) => (
-                    <li key={ref.id} className="flex flex-col items-center">
-                      <a
-                        href={ref.href || ref.src}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="rounded-lg"
-                      >
-                        <Image
-                          src={ref.src}
-                          alt={ref.label || ""}
-                          width={96}
-                          height={96}
-                          unoptimized
-                          loading="lazy"
-                          className="h-24 w-24 rounded-lg object-cover"
-                        />
-                      </a>
-                      {ref.label && (
-                        <span className="mt-1 text-xs text-[#FFFD91]">
-                          {ref.label}
-                        </span>
-                      )}
-                    </li>
-                  ))}
-                </ul>
+                {/* animated content */}
+                <div className="grid max-h-0 overflow-hidden transition-all duration-300 ease-in-out group-open:mt-4 group-open:max-h-96">
+                  <ul className="flex flex-wrap gap-3">
+                    {data.refs.map((ref) => (
+                      <li key={ref.id} className="flex flex-col items-center">
+                        <a
+                          href={ref.href || ref.src}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <Image
+                            src={ref.src}
+                            alt={ref.label || ""}
+                            width={96}
+                            height={96}
+                            unoptimized
+                            loading="lazy"
+                            className="h-24 w-24 rounded-lg object-cover"
+                          />
+                        </a>
+                        {ref.label && (
+                          <span className="mt-1 text-xs text-[#FFFD91]">
+                            {ref.label}
+                          </span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </details>
             )}
 
-            {/* method */}
+            {/* Method ------------------------------------------- */}
             {data.method && (
-              <details className="group border-t border-[#3E4A32] pt-4">
-                <summary className="flex cursor-pointer items-center justify-between gap-4 text-[#FFFEE6]">
-                  <span className="flex items-center gap-2 text-[17px]">
-                    <FileText className="h-5 w-5 text-[#FFFD91]" />
+              <details className="group -mx-6 border-t border-[#3E4A32] px-6 pt-4">
+                <summary className="flex cursor-pointer items-center justify-between">
+                  <span className="flex items-center gap-2 text-sm text-[#FFFEE6]">
+                    <FileText className="h-4 w-4 text-[#FFFD91]" />
                     Method
                   </span>
-                  <ChevronDown className="h-5 w-5 transform transition-transform group-open:rotate-180 text-[#FFFD91]" />
+                  <ChevronDown className="h-4 w-4 transform text-[#FFFD91] transition-transform group-open:rotate-180" />
                 </summary>
 
-                <p className="mt-4 whitespace-pre-wrap text-[17px] leading-relaxed text-[#FFFEE6]">
-                  {data.method}
-                </p>
+                <div className="grid max-h-0 overflow-hidden transition-all duration-300 ease-in-out group-open:mt-4 group-open:max-h-96">
+                  <p className="whitespace-pre-wrap text-[17px] leading-relaxed text-[#FFFEE6]">
+                    {data.method}
+                  </p>
+                </div>
               </details>
             )}
           </div>
