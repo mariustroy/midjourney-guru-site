@@ -21,10 +21,7 @@ function Drawer({ summary, icon, children, accent, textClr }) {
         onClick={() => setOpen(!open)}
         className="flex w-full items-center justify-between px-6 pt-4"
       >
-        <span
-          className="flex items-center gap-2 text-sm"
-          style={{ color: textClr }}
-        >
+        <span className="flex items-center gap-2 text-sm" style={{ color: textClr }}>
           {icon}
           {summary}
         </span>
@@ -46,7 +43,7 @@ function Drawer({ summary, icon, children, accent, textClr }) {
 
 /* ---------- FormulaCard ---------- */
 export default function FormulaCard({ data }) {
-  /* copy feedback */
+  /* copy-prompt feedback */
   const [copied, setCopied] = useState(false);
   const copy = async () => {
     try {
@@ -56,7 +53,7 @@ export default function FormulaCard({ data }) {
     } catch {}
   };
 
-  /* info box state */
+  /* info-box state */
   const [boxOpen, setBoxOpen] = useState(true);
 
   /* lazy media */
@@ -193,7 +190,7 @@ export default function FormulaCard({ data }) {
                           />
                         </a>
                         {ref.label && (
-                          <span className="mt-1 w-[72px] bg-[#232E21] px-1 py-0.5 text-left text-xs text-[#7A947D]">
+                          <span className="mt-1 inline-block rounded-md bg-[#232E21] px-1.5 py-0.5 text-left text-xs text-[#7A947D]">
                             {ref.label}
                           </span>
                         )}
