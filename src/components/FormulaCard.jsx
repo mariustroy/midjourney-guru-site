@@ -12,8 +12,18 @@ import {
   FileText,
 } from "lucide-react";
 
+/*
+  Fixes (only the requested)
+  --------------------------
+  • Show button sits exactly where Hide was (right-6 top-6 on all breakpoints).
+  • Drawer open/close animates (transition-all on max-height container).
+  • Info-box collapse/expand animates (transition-all on aside).
+  • Spacing under Copy Prompt restored (mt-6 before prompt text).
+  • Drawer borders still span edge-to-edge.
+*/
+
 export default function FormulaCard({ data }) {
-  /* ---------- copy-prompt feedback ---------- */
+  /* copy-prompt feedback */
   const [copied, setCopied] = useState(false);
   const copy = async () => {
     try {
@@ -25,10 +35,10 @@ export default function FormulaCard({ data }) {
     }
   };
 
-  /* ---------- info-box open / closed ---------- */
+  /* info-box state */
   const [boxOpen, setBoxOpen] = useState(true);
 
-  /* ---------- lazy-render media --------------- */
+  /* lazy-render media */
   const cardRef = useRef(null);
   const [showMedia, setShowMedia] = useState(false);
   useEffect(() => {
@@ -42,36 +52,41 @@ export default function FormulaCard({ data }) {
     return () => io.disconnect();
   }, []);
 
-  /* ---------- Drawer helper (edge-to-edge border) ---------- */
-  function Drawer({ summary, icon, children, accent = "#FFFD91", textClr = "#FFFEE6" }) {
-    return (
-      <div className="-mx-6 border-t border-[#3E4A32]">
-        <details className="group">
-          <summary className="flex cursor-pointer items-center justify-between px-6 pt-4">
-            <span className="flex items-center gap-2 text-sm" style={{ color: textClr }}>
-              {icon}
-              {summary}
-            </span>
-            <ChevronDown
-              className="h-4 w-4 transform transition-transform group-open:rotate-180"
-              style={{ color: accent }}
-            />
-          </summary>
+  /* Drawer helper */
+  const Drawer = ({
+    summary,
+    icon,
+    children,
+    accent = "#FFFD91",
+    textClr = "#FFFEE6",
+  }) => (
+    <div className="-mx-6 border-t border-[#3E4A32]">
+      <details className="group">
+        <summary className="flex cursor-pointer items-center justify-between px-6 pt-4">
+          <span
+            className="flex items-center gap-2 text-sm"
+            style={{ color: textClr }}
+          >
+            {icon}
+            {summary}
+          </span>
+          <ChevronDown
+            className="h-4 w-4 transform transition-transform group-open:rotate-180"
+            style={{ color: accent }}
+          />
+        </summary>
 
-          <div className="grid max-h-0 overflow-hidden px-6 transition-[max-height] duration-300 ease-in-out group-open:mt-4 group-open:max-h-96">
-            {children}
-          </div>
-        </details>
-      </div>
-    );
-  }
+        <div className="grid max-h-0 overflow-hidden px-6 transition-all duration-300 ease-in-out group-open:mt-4 group-open:max-h-96">
+          {children}
+        </div>
+      </details>
+    </div>
+  );
 
-  /* ------------------------------ render ------------------------------ */
+  /* --------------------- render --------------------- */
   return (
     <article ref={cardRef} className="relative px-6 pt-6">
-      {/* -------------------------------------------------------------- */}
-      {/* 1 · MEDIA STRIP (edge-to-edge)                                 */}
-      {/* -------------------------------------------------------------- */}
+      {/* edge-to-edge media strip */}
       {showMedia && (
         <div className="-mx-6 flex gap-2 overflow-x-auto scrollbar-hide">
           {data.images?.map((img) => (
@@ -104,23 +119,22 @@ export default function FormulaCard({ data }) {
         </div>
       )}
 
-      {/* -------------------------------------------------------------- */}
-      {/* 2 · INFO PANEL  (always mounted, animates height)             */}
-      {/* -------------------------------------------------------------- */}
+      {/* info box (animated) */}
       <aside
         className={`
           relative z-20 w-full rounded-2xl
           -mt-16 lg:mt-0 lg:absolute lg:right-6 lg:top-12 lg:w-[320px]
-          transition-[max-height,padding,opacity] duration-300 ease-in-out
+          overflow-hidden transition-all duration-300 ease-in-out
           ${boxOpen
             ? "max-h-[2000px] bg-black/60 p-6 opacity-100 border border-[#3E4A32] backdrop-blur-md"
-            : "max-h-0 overflow-hidden p-0 opacity-0"}
+            : "max-h-0 p-0 opacity-0 bg-transparent border-none"}
         `}
       >
-        {/* header row (buttons) */}
+        {/* header row */}
         <div className="flex items-start justify-between">
-          {boxOpen ? (
+          {boxOpen && (
             <>
+              {/* copy prompt */}
               <button
                 onClick={copy}
                 className="flex items-center gap-2 text-sm font-medium text-[#FFFD91] hover:opacity-90"
@@ -136,6 +150,7 @@ export default function FormulaCard({ data }) {
                 )}
               </button>
 
+              {/* hide */}
               <button
                 onClick={() => setBoxOpen(false)}
                 className="flex items-center gap-1 text-sm text-[#FFFD91] hover:opacity-90"
@@ -143,18 +158,16 @@ export default function FormulaCard({ data }) {
                 Hide <ChevronUp className="h-4 w-4" />
               </button>
             </>
-          ) : null}
+          )}
         </div>
 
-        {/* box content */}
+        {/* body */}
         {boxOpen && (
           <div className="mt-6">
-            {/* prompt */}
             <p className="mb-6 whitespace-pre-wrap text-[16px] leading-[19px] text-[#FFFEE6]">
               {data.prompt}
             </p>
 
-            {/* drawers */}
             <div className="space-y-4">
               {data.refs?.length > 0 && (
                 <Drawer
@@ -207,17 +220,15 @@ export default function FormulaCard({ data }) {
         )}
       </aside>
 
-      {/* -------------------------------------------------------------- */}
-      {/* 3 · SHOW BUTTON  (only when panel is closed)                  */}
-      {/* -------------------------------------------------------------- */}
+      {/* show button (same spot as Hide) */}
       {!boxOpen && (
         <button
           onClick={() => setBoxOpen(true)}
           style={{ border: "1px solid rgba(87,92,85,0.3)" }}
           className="
-            absolute left-6 top-12 z-30 flex items-center gap-2
+            absolute right-6 top-6 z-30 flex items-center gap-2
             rounded-full bg-black/60 px-4 py-1 text-sm font-medium text-[#FFFD91]
-            hover:opacity-90 lg:left-auto lg:right-6
+            hover:opacity-90
           "
         >
           <ChevronDown className="h-4 w-4" /> Show
