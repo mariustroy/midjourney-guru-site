@@ -21,7 +21,10 @@ function Drawer({ summary, icon, children, accent, textClr }) {
         onClick={() => setOpen(!open)}
         className="flex w-full items-center justify-between px-6 pt-4"
       >
-        <span className="flex items-center gap-2 text-sm" style={{ color: textClr }}>
+        <span
+          className="flex items-center gap-2 text-sm"
+          style={{ color: textClr }}
+        >
           {icon}
           {summary}
         </span>
@@ -50,10 +53,10 @@ export default function FormulaCard({ data }) {
       await navigator.clipboard.writeText(data.prompt);
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
-    } catch {/* ignore */}
+    } catch {}
   };
 
-  /* info-box state */
+  /* info box state */
   const [boxOpen, setBoxOpen] = useState(true);
 
   /* lazy media */
@@ -72,7 +75,7 @@ export default function FormulaCard({ data }) {
 
   return (
     <article ref={cardRef} className="relative px-6 pt-6">
-      {/* -------- media strip -------- */}
+      {/* media strip */}
       {showMedia && (
         <div className="-mx-6 flex gap-2 overflow-x-auto scrollbar-hide">
           {data.images?.map((img) => (
@@ -104,19 +107,23 @@ export default function FormulaCard({ data }) {
         </div>
       )}
 
-      {/* -------- info box -------- */}
+      {/* info box */}
       <aside
         className={`
           relative z-20 w-full rounded-2xl
           -mt-16 lg:mt-0 lg:absolute lg:right-6 lg:top-12 lg:w-[320px]
-         transition-[max-height] duration-300 ease-in-out
-            ${boxOpen
-    ? "max-h-[2000px] bg-black/60 p-6 border border-[#3E4A32] backdrop-blur-md"
-    : "max-h-[96px] p-6 overflow-visible"}                /* 96 px gives the pill full clearance */
+          overflow-hidden transition-[max-height] duration-300 ease-in-out
+          ${boxOpen
+            ? "max-h-[2000px] bg-black/60 p-6 border border-[#3E4A32] backdrop-blur-md"
+            : "max-h-[64px] p-6"}
         `}
       >
-        {/* header row */}
-        <div className="flex items-start justify-between">
+        {/* header */}
+        <div
+          className={`flex items-start ${
+            boxOpen ? "justify-between" : "justify-end"
+          }`}
+        >
           {boxOpen && (
             <button
               onClick={copy}
@@ -143,10 +150,10 @@ export default function FormulaCard({ data }) {
             </button>
           ) : (
             <button
-           onClick={() => setBoxOpen(true)}
-           style={{ border: "1px solid rgba(87,92,85,0.3)" }}
-           className="absolute right-6 top-6 flex items-center gap-2 rounded-full bg-black/60 px-4 py-1 text-sm font-medium text-[#FFFD91] hover:opacity-90"
-          >
+              onClick={() => setBoxOpen(true)}
+              style={{ border: "1px solid rgba(87,92,85,0.3)" }}
+              className="flex items-center gap-2 rounded-full bg-black/60 px-4 py-1 text-sm font-medium text-[#FFFD91] hover:opacity-90"
+            >
               <ChevronDown className="h-4 w-4" /> Show
             </button>
           )}
@@ -169,7 +176,7 @@ export default function FormulaCard({ data }) {
                 >
                   <ul className="flex flex-wrap gap-3">
                     {data.refs.map((ref) => (
-                      <li key={ref.id} className="flex flex-col items-center">
+                      <li key={ref.id} className="flex flex-col items-start">
                         <a
                           href={ref.href || ref.src}
                           target="_blank"
@@ -178,15 +185,15 @@ export default function FormulaCard({ data }) {
                           <Image
                             src={ref.src}
                             alt={ref.label || ""}
-                            width={96}
-                            height={96}
+                            width={72}
+                            height={72}
                             unoptimized
                             loading="lazy"
-                            className="h-24 w-24 rounded-lg object-cover"
+                            className="h-[72px] w-[72px] rounded-lg object-cover"
                           />
                         </a>
                         {ref.label && (
-                          <span className="mt-1 text-xs text-[#FFFD91]">
+                          <span className="mt-1 w-[72px] bg-[#232E21] px-1 py-0.5 text-left text-xs text-[#7A947D]">
                             {ref.label}
                           </span>
                         )}
