@@ -12,15 +12,8 @@ import {
   FileText,
 } from "lucide-react";
 
-/*
-  Fixes (July 3):
-  • Drawer borders now truly span the full width of the info box.
-  • When the panel is collapsed, only the Show button remains
-    (no invisible container / bounding box).
-*/
-
 export default function FormulaCard({ data }) {
-  /* copy-prompt feedback */
+  /* ---------- copy-prompt feedback ---------- */
   const [copied, setCopied] = useState(false);
   const copy = async () => {
     try {
@@ -32,10 +25,10 @@ export default function FormulaCard({ data }) {
     }
   };
 
-  /* info-box open / closed */
+  /* ---------- info-box open / closed ---------- */
   const [boxOpen, setBoxOpen] = useState(true);
 
-  /* lazy-load media */
+  /* ---------- lazy-render media --------------- */
   const cardRef = useRef(null);
   const [showMedia, setShowMedia] = useState(false);
   useEffect(() => {
@@ -49,14 +42,8 @@ export default function FormulaCard({ data }) {
     return () => io.disconnect();
   }, []);
 
-  /* Drawer helper – border goes edge-to-edge via wrapper div */
-  function Drawer({
-    summary,
-    icon,
-    children,
-    accent = "#FFFD91",
-    textClr = "#FFFEE6",
-  }) {
+  /* ---------- Drawer helper (edge-to-edge border) ---------- */
+  function Drawer({ summary, icon, children, accent = "#FFFD91", textClr = "#FFFEE6" }) {
     return (
       <div className="-mx-6 border-t border-[#3E4A32]">
         <details className="group">
@@ -71,7 +58,7 @@ export default function FormulaCard({ data }) {
             />
           </summary>
 
-          <div className="grid max-h-0 overflow-hidden px-6 transition-all duration-300 ease-in-out group-open:mt-4 group-open:max-h-96">
+          <div className="grid max-h-0 overflow-hidden px-6 transition-[max-height] duration-300 ease-in-out group-open:mt-4 group-open:max-h-96">
             {children}
           </div>
         </details>
@@ -79,10 +66,12 @@ export default function FormulaCard({ data }) {
     );
   }
 
-  /* -------------------------- render -------------------------- */
+  /* ------------------------------ render ------------------------------ */
   return (
     <article ref={cardRef} className="relative px-6 pt-6">
-      {/* MEDIA STRIP (edge-to-edge) */}
+      {/* -------------------------------------------------------------- */}
+      {/* 1 · MEDIA STRIP (edge-to-edge)                                 */}
+      {/* -------------------------------------------------------------- */}
       {showMedia && (
         <div className="-mx-6 flex gap-2 overflow-x-auto scrollbar-hide">
           {data.images?.map((img) => (
@@ -115,108 +104,120 @@ export default function FormulaCard({ data }) {
         </div>
       )}
 
-      {/* INFO PANEL (only rendered when open) */}
-      {boxOpen && (
-        <aside
-          className="
-            relative z-20 w-full rounded-2xl bg-black/60 p-6 backdrop-blur-md
-            -mt-16 lg:mt-0 lg:absolute lg:right-6 lg:top-12 lg:w-[320px]
-            border border-[#3E4A32] transition-all duration-300 ease-in-out
-          "
-        >
-          {/* header row */}
-          <div className="flex items-start justify-between">
-            {/* Copy prompt */}
-            <button
-              onClick={copy}
-              className="flex items-center gap-2 text-sm font-medium text-[#FFFD91] hover:opacity-90"
-            >
-              {copied ? (
-                <>
-                  <Check className="h-4 w-4" /> Copied
-                </>
-              ) : (
-                <>
-                  <Copy className="h-4 w-4" /> Copy Prompt
-                </>
+      {/* -------------------------------------------------------------- */}
+      {/* 2 · INFO PANEL  (always mounted, animates height)             */}
+      {/* -------------------------------------------------------------- */}
+      <aside
+        className={`
+          relative z-20 w-full rounded-2xl
+          -mt-16 lg:mt-0 lg:absolute lg:right-6 lg:top-12 lg:w-[320px]
+          transition-[max-height,padding,opacity] duration-300 ease-in-out
+          ${boxOpen
+            ? "max-h-[2000px] bg-black/60 p-6 opacity-100 border border-[#3E4A32] backdrop-blur-md"
+            : "max-h-0 overflow-hidden p-0 opacity-0"}
+        `}
+      >
+        {/* header row (buttons) */}
+        <div className="flex items-start justify-between">
+          {boxOpen ? (
+            <>
+              <button
+                onClick={copy}
+                className="flex items-center gap-2 text-sm font-medium text-[#FFFD91] hover:opacity-90"
+              >
+                {copied ? (
+                  <>
+                    <Check className="h-4 w-4" /> Copied
+                  </>
+                ) : (
+                  <>
+                    <Copy className="h-4 w-4" /> Copy Prompt
+                  </>
+                )}
+              </button>
+
+              <button
+                onClick={() => setBoxOpen(false)}
+                className="flex items-center gap-1 text-sm text-[#FFFD91] hover:opacity-90"
+              >
+                Hide <ChevronUp className="h-4 w-4" />
+              </button>
+            </>
+          ) : null}
+        </div>
+
+        {/* box content */}
+        {boxOpen && (
+          <div className="mt-6">
+            {/* prompt */}
+            <p className="mb-6 whitespace-pre-wrap text-[16px] leading-[19px] text-[#FFFEE6]">
+              {data.prompt}
+            </p>
+
+            {/* drawers */}
+            <div className="space-y-4">
+              {data.refs?.length > 0 && (
+                <Drawer
+                  summary={`Reference Images (${data.refs.length})`}
+                  accent="#7A947D"
+                  textClr="#7A947D"
+                  icon={<ImageIcon className="h-4 w-4 text-[#7A947D]" />}
+                >
+                  <ul className="flex flex-wrap gap-3">
+                    {data.refs.map((ref) => (
+                      <li key={ref.id} className="flex flex-col items-center">
+                        <a
+                          href={ref.href || ref.src}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <Image
+                            src={ref.src}
+                            alt={ref.label || ""}
+                            width={96}
+                            height={96}
+                            unoptimized
+                            loading="lazy"
+                            className="h-24 w-24 rounded-lg object-cover"
+                          />
+                        </a>
+                        {ref.label && (
+                          <span className="mt-1 text-xs text-[#FFFD91]">
+                            {ref.label}
+                          </span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </Drawer>
               )}
-            </button>
 
-            {/* Hide */}
-            <button
-              onClick={() => setBoxOpen(false)}
-              className="flex items-center gap-1 text-sm text-[#FFFD91] hover:opacity-90"
-            >
-              Hide <ChevronUp className="h-4 w-4" />
-            </button>
+              {data.method && (
+                <Drawer
+                  summary="Method"
+                  icon={<FileText className="h-4 w-4 text-[#FFFD91]" />}
+                >
+                  <p className="whitespace-pre-wrap text-[17px] leading-relaxed text-[#FFFEE6]">
+                    {data.method}
+                  </p>
+                </Drawer>
+              )}
+            </div>
           </div>
+        )}
+      </aside>
 
-          {/* prompt */}
-          <p className="mb-6 whitespace-pre-wrap text-[16px] leading-[19px] text-[#FFFEE6]">
-            {data.prompt}
-          </p>
-
-          {/* drawers */}
-          <div className="space-y-4">
-            {data.refs?.length > 0 && (
-              <Drawer
-                summary={`Reference Images (${data.refs.length})`}
-                accent="#7A947D"
-                textClr="#7A947D"
-                icon={<ImageIcon className="h-4 w-4 text-[#7A947D]" />}
-              >
-                <ul className="flex flex-wrap gap-3">
-                  {data.refs.map((ref) => (
-                    <li key={ref.id} className="flex flex-col items-center">
-                      <a
-                        href={ref.href || ref.src}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <Image
-                          src={ref.src}
-                          alt={ref.label || ""}
-                          width={96}
-                          height={96}
-                          unoptimized
-                          loading="lazy"
-                          className="h-24 w-24 rounded-lg object-cover"
-                        />
-                      </a>
-                      {ref.label && (
-                        <span className="mt-1 text-xs text-[#FFFD91]">
-                          {ref.label}
-                        </span>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </Drawer>
-            )}
-
-            {data.method && (
-              <Drawer
-                summary="Method"
-                icon={<FileText className="h-4 w-4 text-[#FFFD91]" />}
-              >
-                <p className="whitespace-pre-wrap text-[17px] leading-relaxed text-[#FFFEE6]">
-                  {data.method}
-                </p>
-              </Drawer>
-            )}
-          </div>
-        </aside>
-      )}
-
-      {/* SHOW BUTTON (appears when panel is closed) */}
+      {/* -------------------------------------------------------------- */}
+      {/* 3 · SHOW BUTTON  (only when panel is closed)                  */}
+      {/* -------------------------------------------------------------- */}
       {!boxOpen && (
         <button
           onClick={() => setBoxOpen(true)}
           style={{ border: "1px solid rgba(87,92,85,0.3)" }}
           className="
-            absolute right-6 top-12 z-30 flex items-center gap-2
+            absolute left-6 top-12 z-30 flex items-center gap-2
             rounded-full bg-black/60 px-4 py-1 text-sm font-medium text-[#FFFD91]
-            hover:opacity-90
+            hover:opacity-90 lg:left-auto lg:right-6
           "
         >
           <ChevronDown className="h-4 w-4" /> Show
