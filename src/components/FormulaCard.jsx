@@ -12,15 +12,8 @@ import {
   FileText,
 } from "lucide-react";
 
-/*
-  FormulaCard – full-width strip with floating info panel
-  ------------------------------------------------------
-  • open === true  ➜ panel visible (default)
-  • open === false ➜ panel hidden, only “Show” button appears
-*/
-
 export default function FormulaCard({ data }) {
-  /* ---------- copy-to-clipboard feedback ---------- */
+  /* ---------- copy prompt feedback ---------- */
   const [copied, setCopied] = useState(false);
   const copy = async () => {
     try {
@@ -51,104 +44,93 @@ export default function FormulaCard({ data }) {
     return () => io.disconnect();
   }, []);
 
-  /* ---------------------------------------------------------------- */
-  /*  Render                                                          */
-  /* ---------------------------------------------------------------- */
   return (
     <article ref={cardRef} className="relative px-6 pt-6">
-      {/* ---------------------------------------------------------- */}
-      {/* 1 · Media row (edge-to-edge)                               */}
-      {/* ---------------------------------------------------------- */}
+      {/* media row — edge-to-edge */}
       {showMedia && (
         <div className="-mx-6 flex gap-2 overflow-x-auto scrollbar-hide">
-          {Array.isArray(data.images) &&
-            data.images.map((img) => (
-              <Image
-                key={img.id}
-                src={img.src}
-                alt={img.alt}
-                width={512}
-                height={512}
-                unoptimized
-                loading="lazy"
-                className="h-64 w-auto shrink-0 rounded object-contain object-center md:h-80"
-              />
-            ))}
+          {data.images?.map((img) => (
+            <Image
+              key={img.id}
+              src={img.src}
+              alt={img.alt}
+              width={512}
+              height={512}
+              unoptimized
+              loading="lazy"
+              className="h-64 w-auto shrink-0 rounded object-contain object-center md:h-80"
+            />
+          ))}
 
-          {Array.isArray(data.videos) &&
-            data.videos.map(
-              (src, i) =>
-                typeof src === "string" && (
-                  <video
-                    key={i}
-                    src={src}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="h-64 w-auto shrink-0 rounded object-contain object-center md:h-80"
-                  />
-                )
-            )}
+          {data.videos?.map(
+            (src, i) =>
+              typeof src === "string" && (
+                <video
+                  key={i}
+                  src={src}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="h-64 w-auto shrink-0 rounded object-contain object-center md:h-80"
+                />
+              )
+          )}
         </div>
       )}
 
-      {/* ---------------------------------------------------------- */}
-      {/* 2 · Info panel                                            */}
-      {/* ---------------------------------------------------------- */}
+      {/* info panel */}
       {open && (
         <aside
           className="
             relative z-20 w-full rounded-2xl bg-black/60 p-6 backdrop-blur-md
-            -mt-16                           /* overlap 64 px on mobile   */
-            lg:mt-0 lg:absolute lg:right-6 lg:top-12 lg:w-[320px]         /* desktop: 24 px gap */
+            -mt-16 lg:mt-0 lg:absolute lg:right-6 lg:top-12 lg:w-[320px]
           "
           style={{ border: "1px solid #3E4A32" }}
         >
-          {/* header row ------------------------------------------ */}
+          {/* header row */}
           <div className="mb-4 flex items-start justify-between">
-            {/* Copy button -------------------------------------- */}
+            {/* copy prompt */}
             <button
               onClick={copy}
-              className="flex items-center gap-2 text-lg font-medium text-[#FFFD91] hover:opacity-90"
+              className="flex items-center gap-2 text-sm font-medium text-[#FFFD91] hover:opacity-90"
             >
               {copied ? (
                 <>
-                  <Check className="h-5 w-5" /> Copied
+                  <Check className="h-4 w-4" /> Copied
                 </>
               ) : (
                 <>
-                  <Copy className="h-5 w-5" /> Copy Prompt
+                  <Copy className="h-4 w-4" /> Copy Prompt
                 </>
               )}
             </button>
 
-            {/* Hide button -------------------------------------- */}
+            {/* hide */}
             <button
               onClick={() => setOpen(false)}
-              aria-label="Hide info"
-              className="text-[#FFFD91] hover:opacity-90"
+              className="flex items-center gap-1 text-sm text-[#FFFD91] hover:opacity-90"
             >
-              <ChevronUp className="h-5 w-5" />
+              Hide <ChevronUp className="h-4 w-4" />
             </button>
           </div>
 
-          {/* prompt text ----------------------------------------- */}
-          <p className="mb-6 whitespace-pre-wrap text-[17px] leading-relaxed text-[#FFFEE6]">
+          {/* prompt text */}
+          <p className="mb-6 whitespace-pre-wrap text-[16px] leading-[19px] text-[#FFFEE6]">
             {data.prompt}
           </p>
 
-          {/* drawers --------------------------------------------- */}
+          {/* drawers */}
           <div className="space-y-4">
-            {/* Reference Images drawer ------------------------- */}
-            {Array.isArray(data.refs) && data.refs.length > 0 && (
+            {/* reference images */}
+            {data.refs?.length > 0 && (
               <details className="group border-t border-[#3E4A32] pt-4">
-                <summary className="flex cursor-pointer items-center justify-between gap-4 text-[#FFFEE6]">
-                  <span className="flex items-center gap-2 text-[17px]">
-                    <ImageIcon className="h-5 w-5 text-[#FFFD91]" />
+                <summary className="flex cursor-pointer items-center justify-between">
+                  <span className="flex items-center gap-2 text-[17px] text-[#7A947D]">
+                    <ImageIcon className="h-4 w-4 text-[#7A947D]" />
                     Reference Images ({data.refs.length})
                   </span>
-                  <ChevronDown className="h-5 w-5 transform transition-transform group-open:rotate-180 text-[#FFFD91]" />
+                  <ChevronDown className="h-4 w-4 transform text-[#7A947D] transition-transform group-open:rotate-180" />
                 </summary>
 
                 <ul className="mt-4 flex flex-wrap gap-3">
@@ -181,7 +163,7 @@ export default function FormulaCard({ data }) {
               </details>
             )}
 
-            {/* Method drawer ----------------------------------- */}
+            {/* method */}
             {data.method && (
               <details className="group border-t border-[#3E4A32] pt-4">
                 <summary className="flex cursor-pointer items-center justify-between gap-4 text-[#FFFEE6]">
@@ -201,9 +183,7 @@ export default function FormulaCard({ data }) {
         </aside>
       )}
 
-      {/* ---------------------------------------------------------- */}
-      {/* 3 · Show button (only when panel is hidden)                */}
-      {/* ---------------------------------------------------------- */}
+      {/* show button */}
       {!open && (
         <button
           onClick={() => setOpen(true)}
