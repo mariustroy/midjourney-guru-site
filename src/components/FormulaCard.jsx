@@ -91,8 +91,8 @@ export default function FormulaCard({ data }) {
         <aside
           className="
             relative z-20 w-full rounded-2xl bg-black/60 p-6 text-white backdrop-blur-md
-            -mt-16                           /* pull upward 64 px on mobile  */
-            lg:mt-0 lg:absolute lg:right-6 lg:top-6 lg:w-[320px] lg:-translate-y-0
+            -mt-16                           /* pull up 64 px on mobile */
+            lg:mt-0 lg:absolute lg:right-6 lg:top-12 lg:w-[320px]       /* 24 px gap on desktop */
           "
         >
           {/* title ------------------------------------------------ */}
