@@ -12,85 +12,71 @@ import {
   FileText,
 } from "lucide-react";
 
-/*
-  ✱ Requested fixes
-  -----------------
-  1. Hide button back at **top-right inside** the info box.
-  2. Show button appears **exactly** there when the box is collapsed,
-     on every breakpoint.
-  3. Drawer and info-box both animate open *and* close via max-height.
-  4. Gap beneath “Copy Prompt” restored (mt-6).
-*/
+/* ------------------------------------------------------------------ */
+/* Drawer helper – full-width border + animated height                */
+/* ------------------------------------------------------------------ */
+function Drawer({ summary, icon, children, accent, textClr }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="-mx-6 border-t border-[#3E4A32]">
+      <button
+        onClick={() => setOpen(!open)}
+        className="flex w-full items-center justify-between px-6 pt-4"
+      >
+        <span className="flex items-center gap-2 text-sm" style={{ color: textClr }}>
+          {icon}
+          {summary}
+        </span>
+        <ChevronDown
+          className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`}
+          style={{ color: accent }}
+        />
+      </button>
 
+      <div
+        className="overflow-hidden px-6 transition-[max-height] duration-300 ease-in-out"
+        style={{ maxHeight: open ? 600 : 0 }}
+      >
+        <div className="mt-4">{children}</div>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* FormulaCard                                                        */
+/* ------------------------------------------------------------------ */
 export default function FormulaCard({ data }) {
-  /* ---------- copy-prompt feedback ---------- */
+  /* copy-prompt feedback */
   const [copied, setCopied] = useState(false);
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(data.prompt);
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
-    } catch {
-      /* no-op */
-    }
+    } catch {/* ignore */}
   };
 
-  /* ---------- info-box open / closed ---------- */
+  /* info-box state */
   const [boxOpen, setBoxOpen] = useState(true);
 
-  /* ---------- lazy-render media --------------- */
+  /* lazy-render media */
   const cardRef = useRef(null);
   const [showMedia, setShowMedia] = useState(false);
   useEffect(() => {
     const el = cardRef.current;
     if (!el) return;
     const io = new IntersectionObserver(
-      ([entry]) => entry.isIntersecting && setShowMedia(true),
+      ([e]) => e.isIntersecting && setShowMedia(true),
       { rootMargin: "200px 0px" }
     );
     io.observe(el);
     return () => io.disconnect();
   }, []);
 
-  /* ---------- Drawer helper (edge-to-edge + animation) ---------- */
-  const Drawer = ({
-    summary,
-    icon,
-    children,
-    accent = "#FFFD91",
-    textClr = "#FFFEE6",
-  }) => {
-    const [open, setOpen] = useState(false);
-    return (
-      <div className="-mx-6 border-t border-[#3E4A32]">
-        <button
-          onClick={() => setOpen(!open)}
-          className="flex w-full items-center justify-between px-6 pt-4"
-        >
-          <span className="flex items-center gap-2 text-sm" style={{ color: textClr }}>
-            {icon}
-            {summary}
-          </span>
-          <ChevronDown
-            className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`}
-            style={{ color: accent }}
-          />
-        </button>
-
-        <div
-          className="overflow-hidden px-6 transition-[max-height] duration-300 ease-in-out"
-          style={{ maxHeight: open ? 600 : 0 }}
-        >
-          <div className="mt-4">{children}</div>
-        </div>
-      </div>
-    );
-  };
-
-  /* ------------------------------ render ------------------------------ */
   return (
     <article ref={cardRef} className="relative px-6 pt-6">
-      {/* --- media strip --- */}
+      {/* -------------------- media strip -------------------- */}
       {showMedia && (
         <div className="-mx-6 flex gap-2 overflow-x-auto scrollbar-hide">
           {data.images?.map((img) => (
@@ -122,7 +108,7 @@ export default function FormulaCard({ data }) {
         </div>
       )}
 
-      {/* --- info box (animates via max-height) --- */}
+      {/* -------------------- info box ----------------------- */}
       <aside
         className={`
           relative z-20 w-full rounded-2xl
@@ -130,48 +116,51 @@ export default function FormulaCard({ data }) {
           overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out
           ${boxOpen
             ? "max-h-[2000px] bg-black/60 p-6 opacity-100 border border-[#3E4A32] backdrop-blur-md"
-            : "max-h-[64px] bg-black/60 p-6 opacity-100 border border-[#575C55]/30 backdrop-blur-md"}
+            : "max-h-[64px] p-6 opacity-100 bg-transparent border-none backdrop-blur-0"}
         `}
-        style={{ WebkitOverflowScrolling: "touch" }}
       >
-        {/* header row: left = copy / right = hide OR show */}
-        <div className="flex items-start justify-between">
-          {boxOpen ? (
-            <>
-              <button
-                onClick={copy}
-                className="flex items-center gap-2 text-sm font-medium text-[#FFFD91] hover:opacity-90"
-              >
-                {copied ? (
-                  <>
-                    <Check className="h-4 w-4" /> Copied
-                  </>
-                ) : (
-                  <>
-                    <Copy className="h-4 w-4" /> Copy Prompt
-                  </>
-                )}
-              </button>
+        {/* header row ---------------------------------------- */}
+        <div
+          className={`flex items-start ${
+            boxOpen ? "justify-between" : "justify-end"
+          }`}
+        >
+          {boxOpen && (
+            <button
+              onClick={copy}
+              className="flex items-center gap-2 text-sm font-medium text-[#FFFD91] hover:opacity-90"
+            >
+              {copied ? (
+                <>
+                  <Check className="h-4 w-4" /> Copied
+                </>
+              ) : (
+                <>
+                  <Copy className="h-4 w-4" /> Copy Prompt
+                </>
+              )}
+            </button>
+          )}
 
-              <button
-                onClick={() => setBoxOpen(false)}
-                className="flex items-center gap-1 text-sm text-[#FFFD91] hover:opacity-90"
-              >
-                Hide <ChevronUp className="h-4 w-4" />
-              </button>
-            </>
+          {boxOpen ? (
+            <button
+              onClick={() => setBoxOpen(false)}
+              className="flex items-center gap-1 text-sm text-[#FFFD91] hover:opacity-90"
+            >
+              Hide <ChevronUp className="h-4 w-4" />
+            </button>
           ) : (
             <button
               onClick={() => setBoxOpen(true)}
-              className="flex items-center gap-2 rounded-full px-4 py-1 text-sm font-medium text-[#FFFD91] hover:opacity-90"
               style={{ border: "1px solid rgba(87,92,85,0.3)" }}
+              className="flex items-center gap-2 rounded-full px-4 py-1 text-sm font-medium text-[#FFFD91] hover:opacity-90"
             >
               <ChevronDown className="h-4 w-4" /> Show
             </button>
           )}
         </div>
 
-        {/* body (rendered only when open) */}
+        {/* body ---------------------------------------------- */}
         {boxOpen && (
           <>
             <p className="mt-6 mb-6 whitespace-pre-wrap text-[16px] leading-[19px] text-[#FFFEE6]">
@@ -219,6 +208,8 @@ export default function FormulaCard({ data }) {
                 <Drawer
                   summary="Method"
                   icon={<FileText className="h-4 w-4 text-[#FFFD91]" />}
+                  accent="#FFFD91"
+                  textClr="#FFFEE6"
                 >
                   <p className="whitespace-pre-wrap text-[17px] leading-relaxed text-[#FFFEE6]">
                     {data.method}
