@@ -12,16 +12,6 @@ import {
   FileText,
 } from "lucide-react";
 
-/*
-  FormulaCard
-  -----------
-  • Drawers have 14 px labels + full-width borders (-mx-6 trick).
-  • Drawer bodies animate open *and* close (max-height transition).
-  • Info box collapses into the Show button; the button sits exactly
-    where the Hide button was.  Both directions are animated.
-  • **Positioning of the info box itself is untouched**.
-*/
-
 export default function FormulaCard({ data }) {
   /* copy-prompt feedback */
   const [copied, setCopied] = useState(false);
@@ -52,14 +42,17 @@ export default function FormulaCard({ data }) {
     return () => io.disconnect();
   }, []);
 
-  /* --------------- helpers for drawer animation ---------------- */
-  const Drawer = ({ summary, icon, children, accent = "#FFFD91", textClr = "#FFFEE6" }) => (
-    <details className="group -mx-6 border-t border-[#3E4A32] px-6 pt-4">
+  /* Drawer helper (keeps full-width border via -mx-6 trick) */
+  const Drawer = ({
+    summary,
+    icon,
+    children,
+    accent = "#FFFD91",
+    textClr = "#FFFEE6",
+  }) => (
+    <details className="-mx-6 border-t border-[#3E4A32] px-6 pt-4 group">
       <summary className="flex cursor-pointer items-center justify-between">
-        <span
-          className="flex items-center gap-2 text-sm"
-          style={{ color: textClr }}
-        >
+        <span className="flex items-center gap-2 text-sm" style={{ color: textClr }}>
           {icon}
           {summary}
         </span>
@@ -69,16 +62,18 @@ export default function FormulaCard({ data }) {
         />
       </summary>
 
+      {/* animated body */}
       <div className="grid max-h-0 overflow-hidden transition-all duration-300 ease-in-out group-open:mt-4 group-open:max-h-96">
         {children}
       </div>
     </details>
   );
 
-  /* ------------------------------ render ----------------------- */
   return (
     <article ref={cardRef} className="relative px-6 pt-6">
-      {/* 1 · edge-to-edge media row */}
+      {/* ---------------------------------------------------------------- */}
+      {/* MEDIA STRIP (edge-to-edge)                                       */}
+      {/* ---------------------------------------------------------------- */}
       {showMedia && (
         <div className="-mx-6 flex gap-2 overflow-x-auto scrollbar-hide">
           {data.images?.map((img) => (
@@ -111,7 +106,9 @@ export default function FormulaCard({ data }) {
         </div>
       )}
 
-      {/* 2 · floating info box (position unchanged) */}
+      {/* ---------------------------------------------------------------- */}
+      {/* INFO BOX  (position & size unchanged)                            */}
+      {/* ---------------------------------------------------------------- */}
       <aside
         className={`
           relative z-20 w-full rounded-2xl bg-black/60 backdrop-blur-md
@@ -121,7 +118,9 @@ export default function FormulaCard({ data }) {
         `}
         style={{ border: "1px solid #3E4A32" }}
       >
-        {/* header row (copy + hide OR show) */}
+        {/* -------------------------------------------------------------- */}
+        {/* HEADER ROW  (Copy + Hide  OR  Show)                            */}
+        {/* -------------------------------------------------------------- */}
         <div className="flex items-start justify-between">
           {boxOpen ? (
             <>
@@ -150,24 +149,26 @@ export default function FormulaCard({ data }) {
               </button>
             </>
           ) : (
-            /* Show (exact same place) */
+            /* Show — sits exactly where Hide was */
             <button
               onClick={() => setBoxOpen(true)}
-              className="flex items-center gap-2 text-sm font-medium text-[#FFFD91] hover:opacity-90"
+              style={{ border: "1px solid rgba(87,92,85,0.3)" }} // #575C55 @ 30 %
+              className="flex items-center gap-2 rounded-full px-4 py-1 text-sm font-medium text-[#FFFD91] hover:opacity-90"
             >
               <ChevronDown className="h-4 w-4" /> Show
             </button>
           )}
         </div>
 
-        {/* collapsible content */}
+        {/* -------------------------------------------------------------- */}
+        {/* COLLAPSIBLE CONTENT                                            */}
+        {/* -------------------------------------------------------------- */}
         <div
-          className={`
-            overflow-hidden transition-all duration-300 ease-in-out
-            ${boxOpen ? "max-h-[1000px] mt-6" : "max-h-0"}
-          `}
+          className={`overflow-hidden transition-all duration-300 ease-in-out ${
+            boxOpen ? "max-h-[1000px] mt-6" : "max-h-0"
+          }`}
         >
-          {/* prompt text */}
+          {/* prompt */}
           <p className="mb-6 whitespace-pre-wrap text-[16px] leading-[19px] text-[#FFFEE6]">
             {data.prompt}
           </p>
