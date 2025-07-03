@@ -13,13 +13,10 @@ import {
 } from "lucide-react";
 
 /*
-  Tweaks in this revision
-  -----------------------
-  • Drawer borders now run truly edge-to-edge (no side gaps).
-  • When the info box is collapsed, only the Show button is visible;
-    the underlying container has no background/border.
-  • Show button keeps 16 px horizontal padding and a
-    rgba(87,92,85,0.3) stroke.
+  Fixes (July 3):
+  • Drawer borders now truly span the full width of the info box.
+  • When the panel is collapsed, only the Show button remains
+    (no invisible container / bounding box).
 */
 
 export default function FormulaCard({ data }) {
@@ -35,10 +32,10 @@ export default function FormulaCard({ data }) {
     }
   };
 
-  /* toggle whole info box */
+  /* info-box open / closed */
   const [boxOpen, setBoxOpen] = useState(true);
 
-  /* lazy-render media */
+  /* lazy-load media */
   const cardRef = useRef(null);
   const [showMedia, setShowMedia] = useState(false);
   useEffect(() => {
@@ -52,37 +49,40 @@ export default function FormulaCard({ data }) {
     return () => io.disconnect();
   }, []);
 
-  /* Drawer helper (edge-to-edge border) */
-  function Drawer({ summary, icon, children, accent = "#FFFD91", textClr = "#FFFEE6" }) {
+  /* Drawer helper – border goes edge-to-edge via wrapper div */
+  function Drawer({
+    summary,
+    icon,
+    children,
+    accent = "#FFFD91",
+    textClr = "#FFFEE6",
+  }) {
     return (
-      <details className="-mx-6 border-t border-[#3E4A32] pt-4 group">
-        <summary
-          className="flex cursor-pointer items-center justify-between px-6"
-        >
-          <span className="flex items-center gap-2 text-sm" style={{ color: textClr }}>
-            {icon}
-            {summary}
-          </span>
-          <ChevronDown
-            className="h-4 w-4 transform transition-transform group-open:rotate-180"
-            style={{ color: accent }}
-          />
-        </summary>
+      <div className="-mx-6 border-t border-[#3E4A32]">
+        <details className="group">
+          <summary className="flex cursor-pointer items-center justify-between px-6 pt-4">
+            <span className="flex items-center gap-2 text-sm" style={{ color: textClr }}>
+              {icon}
+              {summary}
+            </span>
+            <ChevronDown
+              className="h-4 w-4 transform transition-transform group-open:rotate-180"
+              style={{ color: accent }}
+            />
+          </summary>
 
-        {/* animated body */}
-        <div className="grid max-h-0 overflow-hidden px-6 transition-all duration-300 ease-in-out group-open:mt-4 group-open:max-h-96">
-          {children}
-        </div>
-      </details>
+          <div className="grid max-h-0 overflow-hidden px-6 transition-all duration-300 ease-in-out group-open:mt-4 group-open:max-h-96">
+            {children}
+          </div>
+        </details>
+      </div>
     );
   }
 
-  /* ------------------------------ render ------------------------------ */
+  /* -------------------------- render -------------------------- */
   return (
     <article ref={cardRef} className="relative px-6 pt-6">
-      {/* ---------------------------------------------------------------- */}
-      {/* 1 · MEDIA STRIP (edge-to-edge)                                   */}
-      {/* ---------------------------------------------------------------- */}
+      {/* MEDIA STRIP (edge-to-edge) */}
       {showMedia && (
         <div className="-mx-6 flex gap-2 overflow-x-auto scrollbar-hide">
           {data.images?.map((img) => (
@@ -115,65 +115,42 @@ export default function FormulaCard({ data }) {
         </div>
       )}
 
-      {/* ---------------------------------------------------------------- */}
-      {/* 2 · INFO BOX (position unchanged)                                */}
-      {/* ---------------------------------------------------------------- */}
-      <aside
-        className={`
-          relative z-20 w-full rounded-2xl backdrop-blur-md
-          transition-all duration-300 ease-in-out
-          -mt-16 lg:mt-0 lg:absolute lg:right-6 lg:top-12 lg:w-[320px]
-          ${boxOpen ? "bg-black/60 p-6 border border-[#3E4A32]" : "p-6 bg-transparent border-none"}
-        `}
-      >
-        {/* header: Copy + Hide OR Show -------------------------------- */}
-        <div className="flex items-start justify-between">
-          {boxOpen ? (
-            <>
-              {/* Copy prompt */}
-              <button
-                onClick={copy}
-                className="flex items-center gap-2 text-sm font-medium text-[#FFFD91] hover:opacity-90"
-              >
-                {copied ? (
-                  <>
-                    <Check className="h-4 w-4" /> Copied
-                  </>
-                ) : (
-                  <>
-                    <Copy className="h-4 w-4" /> Copy Prompt
-                  </>
-                )}
-              </button>
-
-              {/* Hide */}
-              <button
-                onClick={() => setBoxOpen(false)}
-                className="flex items-center gap-1 text-sm text-[#FFFD91] hover:opacity-90"
-              >
-                Hide <ChevronUp className="h-4 w-4" />
-              </button>
-            </>
-          ) : (
-            /* Show button (same spot, no surrounding box visible) */
-            <button
-              onClick={() => setBoxOpen(true)}
-              style={{ border: "1px solid rgba(87,92,85,0.3)" }}
-              className="flex items-center gap-2 rounded-full bg-black/60 px-4 py-1 text-sm font-medium text-[#FFFD91] hover:opacity-90"
-            >
-              <ChevronDown className="h-4 w-4" /> Show
-            </button>
-          )}
-        </div>
-
-        {/* ------------------------------------------------------------ */}
-        {/* COLLAPSIBLE CONTENT                                          */}
-        {/* ------------------------------------------------------------ */}
-        <div
-          className={`overflow-hidden transition-all duration-300 ease-in-out ${
-            boxOpen ? "max-h-[1000px] mt-6" : "max-h-0"
-          }`}
+      {/* INFO PANEL (only rendered when open) */}
+      {boxOpen && (
+        <aside
+          className="
+            relative z-20 w-full rounded-2xl bg-black/60 p-6 backdrop-blur-md
+            -mt-16 lg:mt-0 lg:absolute lg:right-6 lg:top-12 lg:w-[320px]
+            border border-[#3E4A32] transition-all duration-300 ease-in-out
+          "
         >
+          {/* header row */}
+          <div className="flex items-start justify-between">
+            {/* Copy prompt */}
+            <button
+              onClick={copy}
+              className="flex items-center gap-2 text-sm font-medium text-[#FFFD91] hover:opacity-90"
+            >
+              {copied ? (
+                <>
+                  <Check className="h-4 w-4" /> Copied
+                </>
+              ) : (
+                <>
+                  <Copy className="h-4 w-4" /> Copy Prompt
+                </>
+              )}
+            </button>
+
+            {/* Hide */}
+            <button
+              onClick={() => setBoxOpen(false)}
+              className="flex items-center gap-1 text-sm text-[#FFFD91] hover:opacity-90"
+            >
+              Hide <ChevronUp className="h-4 w-4" />
+            </button>
+          </div>
+
           {/* prompt */}
           <p className="mb-6 whitespace-pre-wrap text-[16px] leading-[19px] text-[#FFFEE6]">
             {data.prompt}
@@ -228,8 +205,23 @@ export default function FormulaCard({ data }) {
               </Drawer>
             )}
           </div>
-        </div>
-      </aside>
+        </aside>
+      )}
+
+      {/* SHOW BUTTON (appears when panel is closed) */}
+      {!boxOpen && (
+        <button
+          onClick={() => setBoxOpen(true)}
+          style={{ border: "1px solid rgba(87,92,85,0.3)" }}
+          className="
+            absolute right-6 top-12 z-30 flex items-center gap-2
+            rounded-full bg-black/60 px-4 py-1 text-sm font-medium text-[#FFFD91]
+            hover:opacity-90
+          "
+        >
+          <ChevronDown className="h-4 w-4" /> Show
+        </button>
+      )}
     </article>
   );
 }
