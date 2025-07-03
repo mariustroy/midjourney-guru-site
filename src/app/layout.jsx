@@ -2,7 +2,7 @@
 /*  Root layout – combines fonts, metadata, sidebar & globals         */
 /* ------------------------------------------------------------------ */
 import "./globals.css";
-import SideDrawer from "@/components/SideDrawer";
+import TopMenu   from "@/components/TopMenu";
 import { Geist, Geist_Mono } from "next/font/google";
 import { elanor } from "./fonts";           // ← your local web-font
 
@@ -66,12 +66,9 @@ export default function RootLayout({ children }) {
           async
         ></script>
       </head>
-      <body className="flex min-h-screen bg-[#131B0E] text-gray-100 antialiased">
-        {/* sidebar (desktop + mobile) */}
-        <SideDrawer />
-
-        {/* main content */}
-        <main className="flex-1 overflow-hidden">{children}</main>
+     <body className="min-h-screen bg-[#131B0E] text-gray-100 antialiased">
+        <TopMenu />
+        <main className="overflow-hidden">{children}</main>
       </body>
     </html>
   );
