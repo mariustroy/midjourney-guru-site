@@ -106,7 +106,7 @@ function extractPrompt(fullText) {
   useEffect(() => {
     if (messages.length === 0)
       setMessages(() => [
-        { id: 1, text: "Hi there! I'm Midjourney Guru. How can I help you today?" },
+        { id: 1, text: "Hi there! I'm Guru, I can help you with Midjourney. Ask me, or check out any of the tutorials, formulas or resources in the menu above :)" },
       ]);
   }, [messages.length, setMessages]);
 
