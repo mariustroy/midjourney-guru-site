@@ -108,7 +108,7 @@ export default function FormulaCard({ data }) {
       {/* -------- info box -------- */}
       <aside
         className={`
-	        -mx-6 px-6                  /* cancel L & R article padding, keep interior gap */
+	       -ml-6 w-[calc(100%+1.5rem)] 
     lg:mx-0 lg:px-6 
           relative z-20 w-full rounded-2xl
           -mt-16 lg:mt-0 lg:absolute lg:right-6 lg:top-12 lg:w-[320px]
