@@ -41,33 +41,33 @@ export default function FormulasClient({ initial }) {
   /* ---------- render ---------- */
   return (
     <div className="py-6 space-y-6 bg-[#182012] min-h-screen">
-      {/* headline --------------------------------------------------- */}
-      <h1 className="pl-6 text-[36px] leading-tight font-light">Formulas</h1>
+     
 
       {/* search ----------------------------------------------------- */}
-      <div className="ml-6 relative max-w-sm">
+      <div className="px-6">
+      <div className="relative">
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search formula…"
           className="
-            w-full bg-transparent
-            border-0 border-b border-brand
-            pl-10 pr-10 py-2
-            text-[18px] placeholder:text-[18px] placeholder:text-brand/70
-            focus:outline-none focus:border-brand
+          w-full bg-transparent
+          border-0 border-b border-brand
+          pl-10 pr-10 py-2
+          text-[18px] placeholder:text-[18px] placeholder:text-[#3F4E3D]
+          focus:outline-none focus:border-brand
           "
         />
-        <Search className="absolute left-2 top-3.5 h-4 w-4 text-brand" />
+        <Search className="absolute left-0 top-3.5 h-4 w-4 text-[#FFFD91]" />
         {search && (
-          <button
-            className="absolute right-2 top-2.5 text-brand"
+          <button className="absolute right-0 top-2.5 text-brand"
             onClick={() => setSearch("")}
             aria-label="Clear search"
           >
             <X className="h-4 w-4" />
           </button>
         )}
+        </div>
       </div>
 
       {/* category pills -------------------------------------------- */}
@@ -80,7 +80,7 @@ export default function FormulasClient({ initial }) {
                 key={cat}
                 onClick={() => toggleCat(cat)}
                 className={`
-                  whitespace-nowrap rounded-full px-3 py-1 text-sm
+                  whitespace-nowrap rounded-full px-4 py-1.5 text-sm
                   border border-brand transition-colors
                   ${
                     active
