@@ -13,7 +13,7 @@ export default function TutorialsPage() {
 		space-y-6 lg:ml-64
 	  "
 	>
-	  <h1 className="text-[36px] leading-tight font-light">Tutorials</h1>
+	
 
 	  <VimeoEmbed
 		id="1090238372"

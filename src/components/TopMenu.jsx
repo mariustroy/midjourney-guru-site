@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import clsx from "clsx";
@@ -32,13 +33,28 @@ export default function TopMenu() {
     const active = navRef.current.querySelector("[data-active]");
     if (active) {
       const nav   = navRef.current;
-      const left  = active.offsetLeft - (nav.clientWidth - active.clientWidth) / 2;
+      const left  =
+        active.offsetLeft - (nav.clientWidth - active.clientWidth) / 2;
       nav.scrollTo({ left, behavior: "instant" });
     }
   }, [pathname]);
 
   return (
     <header className="sticky top-0 z-40 w-full" style={{ background: "#131B0E" }}>
+      {/* logo row -------------------------------------------------- */}
+      <div className="flex px-4 py-2 sm:justify-start lg:justify-center">
+        <Link href="/">
+          <Image
+            src="/images/logo.svg"
+            alt="Logo"
+            width={120}
+            height={28}
+            priority
+          />
+        </Link>
+      </div>
+
+      {/* nav row --------------------------------------------------- */}
       <nav
         ref={navRef}
         className="
@@ -55,8 +71,7 @@ export default function TopMenu() {
               href={href}
               data-active={active || undefined}
               className={clsx(
-                "flex shrink-0 items-center gap-1 rounded-full px-4 py-1 text-sm transition-colors",
-                "border",
+                "flex shrink-0 items-center gap-1 rounded-full px-4 py-1 text-sm transition-colors border",
                 active
                   ? "bg-[#FFFD91] text-[#131B0E] border-[#374739]"
                   : "bg-transparent text-[#FFFD91] border-[#374739] hover:bg-[#374739]/20"
@@ -68,7 +83,7 @@ export default function TopMenu() {
           );
         })}
 
-        {/* settings: icon only ------------------------------------ */}
+        {/* settings – icon only ----------------------------------- */}
         <Link
           href="/settings"
           data-active={pathname.startsWith("/settings") || undefined}

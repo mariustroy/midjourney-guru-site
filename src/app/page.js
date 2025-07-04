@@ -179,9 +179,6 @@ function extractPrompt(fullText) {
         className="w-full py-4 flex justify-center"
         style={{ position: "sticky", top: 0, zIndex: 10, flexShrink: 0 }}
       >
-        <Link href="/" className="flex items-center gap-2">
-          <Image src="/images/logo.svg" alt="Midjourney Guru" width={32} height={32} className="h-8 w-auto" />
-        </Link>
       </header>
 
       {/* ---------- Chat window ---------- */}
