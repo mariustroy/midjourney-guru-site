@@ -45,7 +45,7 @@ export default function SettingsPage() {
       </button>
 
       <Link
-        href="https://YOUR-GOOGLE-FORM"
+        href="https://docs.google.com/forms/d/e/1FAIpQLScpfr6zzb0JBkTRkeEgzeU4eV6_b7SsX27q-nPLNMIiBQ1tDA/viewform?usp=dialog"
         target="_blank"
         className="block w-full rounded-lg bg-white/10 px-4 py-2 text-left hover:bg-white/20"
       >

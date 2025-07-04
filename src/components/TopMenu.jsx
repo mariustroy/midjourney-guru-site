@@ -15,35 +15,35 @@ import {
 
 /* nav data --------------------------------------------------------- */
 const links = [
-  { href: "/",          label: "Guru",      icon: Home       },
-  { href: "/tutorials", label: "Tutorials", icon: Video      },
-  { href: "/formulas",  label: "Formulas",  icon: Sparkle    },
-  { href: "/resources", label: "Resources", icon: BookOpen   },
-  { href: "/coaching",  label: "Coaching",  icon: Users      },
+  { href: "/",          label: "Guru",      icon: Home    },
+  { href: "/tutorials", label: "Tutorials", icon: Video   },
+  { href: "/formulas",  label: "Formulas",  icon: Sparkle },
+  { href: "/resources", label: "Resources", icon: BookOpen},
+  { href: "/coaching",  label: "Coaching",  icon: Users   },
 ];
 
 export default function TopMenu() {
   const pathname = usePathname() ?? "/";
   const navRef   = useRef(null);
 
-  /* center active item on mobile at mount ----------------------- */
+  /* center active pill on mobile ---------------------------------- */
   useEffect(() => {
     if (!navRef.current) return;
-    const active = navRef.current.querySelector("[data-active='true']");
+    const active = navRef.current.querySelector("[data-active]");
     if (active) {
-      const nav = navRef.current;
-      const left = active.offsetLeft - (nav.clientWidth - active.clientWidth) / 2;
+      const nav   = navRef.current;
+      const left  = active.offsetLeft - (nav.clientWidth - active.clientWidth) / 2;
       nav.scrollTo({ left, behavior: "instant" });
     }
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-[#0f120b]">
+    <header className="sticky top-0 z-40 w-full" style={{ background: "#131B0E" }}>
       <nav
         ref={navRef}
         className="
           mx-auto flex gap-2 overflow-x-auto px-4 py-3
-          sm:justify-start lg:justify-center   /* ← left on mobile, centered desktop */
+          sm:justify-start lg:justify-center
           lg:max-w-7xl
         "
       >
@@ -56,26 +56,27 @@ export default function TopMenu() {
               data-active={active || undefined}
               className={clsx(
                 "flex shrink-0 items-center gap-1 rounded-full px-4 py-1 text-sm transition-colors",
+                "border",
                 active
-                  ? "bg-yellow-400 text-black"
-                  : "bg-white/5 text-white hover:bg-white/10"
+                  ? "bg-[#FFFD91] text-[#131B0E] border-[#374739]"
+                  : "bg-transparent text-[#FFFD91] border-[#374739] hover:bg-[#374739]/20"
               )}
             >
               <Icon className="h-4 w-4" />
-              <span className="hidden sm:inline">{label}</span>
+              <span>{label}</span>
             </Link>
           );
         })}
 
-        {/* settings link — icon only -------------------------------- */}
+        {/* settings: icon only ------------------------------------ */}
         <Link
           href="/settings"
           data-active={pathname.startsWith("/settings") || undefined}
           className={clsx(
-            "flex shrink-0 items-center rounded-full px-3 py-1 transition-colors",
+            "flex shrink-0 items-center rounded-full p-2 transition-colors border",
             pathname.startsWith("/settings")
-              ? "bg-yellow-400 text-black"
-              : "bg-white/5 text-white hover:bg-white/10"
+              ? "bg-[#FFFD91] text-[#131B0E] border-[#374739]"
+              : "bg-transparent text-[#FFFD91] border-[#374739] hover:bg-[#374739]/20"
           )}
         >
           <Cog className="h-4 w-4" />
