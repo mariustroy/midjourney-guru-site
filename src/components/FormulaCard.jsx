@@ -108,12 +108,11 @@ export default function FormulaCard({ data }) {
       {/* -------- info box -------- */}
       <aside
         className={`
-	       -ml-6 w-[calc(100%+1.5rem)] 
-    lg:mx-0 lg:px-6 
-          relative z-20 w-full rounded-2xl
-          -mt-16 lg:mt-0 lg:absolute lg:right-6 lg:top-12 lg:w-[320px]
-          overflow-hidden transition-[max-height] duration-300 ease-in-out
-          ${boxOpen
+	      left-6 right-6 lg:mx-0
+    relative z-20 w-auto rounded-2xl
+    -mt-16 lg:mt-0 lg:absolute lg:right-6 lg:top-12 lg:w-[320px]
+    overflow-hidden transition-[max-height] duration-300 ease-in-out
+              ${boxOpen
             ? "max-h-[2000px] bg-black/60 p-6 border border-[#3E4A32] backdrop-blur-md"
             : "max-h-[64px] p-6"}
         `}
