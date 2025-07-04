@@ -40,7 +40,7 @@ export default function FormulasClient({ initial }) {
 
   /* ---------- render ---------- */
   return (
-    <div className="px-6 py-6 space-y-6 bg-[#182012] min-h-screen">
+    <div className="pl-6 py-6 space-y-6 bg-[#182012] min-h-screen">
       {/* headline --------------------------------------------------- */}
       <h1 className="text-[36px] leading-tight font-light">Formulas</h1>
 
@@ -72,7 +72,7 @@ export default function FormulasClient({ initial }) {
 
       {/* category pills -------------------------------------------- */}
       {categories.length > 0 && (
-        <div className="flex gap-2 overflow-x-auto pb-2">
+        <div className="flex gap-2 overflow-x-auto pb-2 -mr-6">
           {categories.map((cat) => {
             const active = activeCats.includes(cat);
             return (
