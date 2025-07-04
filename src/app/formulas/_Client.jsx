@@ -40,12 +40,12 @@ export default function FormulasClient({ initial }) {
 
   /* ---------- render ---------- */
   return (
-    <div className="pl-6 py-6 space-y-6 bg-[#182012] min-h-screen">
+    <div className="py-6 space-y-6 bg-[#182012] min-h-screen">
       {/* headline --------------------------------------------------- */}
-      <h1 className="text-[36px] leading-tight font-light">Formulas</h1>
+      <h1 className="pl-6 text-[36px] leading-tight font-light">Formulas</h1>
 
       {/* search ----------------------------------------------------- */}
-      <div className="relative max-w-sm">
+      <div className="pl-6 relative max-w-sm">
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
