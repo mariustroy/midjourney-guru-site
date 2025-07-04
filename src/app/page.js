@@ -172,7 +172,7 @@ function extractPrompt(fullText) {
   return (
     <main
       className="w-full max-w-6xl mx-auto px-3 py-4 md:px-6 lg:pl-64"
-      style={{ fontFamily: "sans-serif", display: "flex", flexDirection: "column", height: "100dvh" }}
+      style={{ fontFamily: "sans-serif", display: "flex", flexDirection: "column", height: "90dvh" }}
     >
       {/* ---------- Header ---------- */}
       <header
