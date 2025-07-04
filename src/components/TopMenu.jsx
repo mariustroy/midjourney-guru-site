@@ -25,6 +25,14 @@ const links = [
 
 export default function TopMenu() {
   const pathname = usePathname() ?? "/";
+   if (
+    pathname.startsWith("/login")   ||
+    pathname.startsWith("/signup")  ||   // if you have a /signup
+    pathname.startsWith("/auth")    ||
+    pathname.startsWith("/waitlist")
+  ) {
+    return null;
+  }
   const navRef   = useRef(null);
 
   /* center active pill on mobile ---------------------------------- */
