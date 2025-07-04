@@ -175,11 +175,6 @@ function extractPrompt(fullText) {
       style={{ fontFamily: "sans-serif", display: "flex", flexDirection: "column", height: "90dvh" }}
     >
       {/* ---------- Header ---------- */}
-      <header
-        className="w-full py-4 flex justify-center"
-        style={{ position: "sticky", top: 0, zIndex: 10, flexShrink: 0 }}
-      >
-      </header>
 
       {/* ---------- Chat window ---------- */}
       <div
