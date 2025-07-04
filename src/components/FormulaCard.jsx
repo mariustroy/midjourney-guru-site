@@ -74,7 +74,7 @@ export default function FormulaCard({ data }) {
     <article ref={cardRef} className="relative px-6 pt-6">
       {/* -------- media strip (larger) -------- */}
       {showMedia && (
-        <div className="-ml-12 pl-6 -mr-6 flex gap-2 overflow-x-auto scrollbar-hide">
+        <div className="-ml-6  pl-6 -mr-6 flex gap-2 overflow-x-auto scrollbar-hide">
           {data.images?.map((img) => (
             <Image
               key={img.id}

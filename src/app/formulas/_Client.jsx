@@ -45,7 +45,7 @@ export default function FormulasClient({ initial }) {
       <h1 className="pl-6 text-[36px] leading-tight font-light">Formulas</h1>
 
       {/* search ----------------------------------------------------- */}
-      <div className="pl-6 relative max-w-sm">
+      <div className="ml-6 relative max-w-sm">
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -72,7 +72,7 @@ export default function FormulasClient({ initial }) {
 
       {/* category pills -------------------------------------------- */}
       {categories.length > 0 && (
-        <div className="flex gap-2 overflow-x-auto pb-2 -ml-6 pl-6 -mr-6">
+        <div className="flex gap-2 overflow-x-auto pb-2 pl-6 -mr-6">
           {categories.map((cat) => {
             const active = activeCats.includes(cat);
             return (
