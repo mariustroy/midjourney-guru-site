@@ -109,7 +109,7 @@ export default function FormulaCard({ data }) {
       <aside
         className={`
 	      left-6 right-6 lg:mx-0
-   relative z-20 w-[calc(100%+1.5rem)] rounded-2xl  /* +24 px = 1.5 rem */
+  relative z-20 w-auto rounded-2xl
     -mt-16 lg:mt-0 lg:absolute lg:right-6 lg:top-12 lg:w-[320px]
     overflow-hidden transition-[max-height] duration-300 ease-in-out
               ${boxOpen
