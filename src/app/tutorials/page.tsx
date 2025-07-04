@@ -7,10 +7,7 @@ export default function TutorialsPage() {
   return (
 	<div
 	  className="
-		max-w-2xl mx-auto
-		px-4 py-6
-		pt-22 md:pt-8
-		space-y-6 lg:ml-64
+		   max-w-2xl mx-auto   px-4 py-6   pt-2 md:pt-0   space-y-6 lg:ml-64  
 	  "
 	>
 	
