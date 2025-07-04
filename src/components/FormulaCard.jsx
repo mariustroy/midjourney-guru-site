@@ -108,7 +108,7 @@ export default function FormulaCard({ data }) {
       {/* -------- info box -------- */}
       <aside
         className={`
-	        -ml-6 -mr-6 lg:ml-0 lg:mr-0
+	        -ml-6  pr-6 -mr-6 lg:ml-0 lg:mr-0
           relative z-20 w-full rounded-2xl
           -mt-16 lg:mt-0 lg:absolute lg:right-6 lg:top-12 lg:w-[320px]
           overflow-hidden transition-[max-height] duration-300 ease-in-out
