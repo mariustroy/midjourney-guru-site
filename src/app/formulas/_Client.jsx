@@ -72,7 +72,7 @@ export default function FormulasClient({ initial }) {
 
       {/* category pills -------------------------------------------- */}
       {categories.length > 0 && (
-        <div className="flex gap-2 overflow-x-auto pb-2 -mr-6">
+        <div className="flex gap-2 overflow-x-auto pb-2 -ml-6 pl-6 -mr-6">
           {categories.map((cat) => {
             const active = activeCats.includes(cat);
             return (
