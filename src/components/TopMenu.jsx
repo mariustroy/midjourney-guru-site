@@ -42,13 +42,13 @@ export default function TopMenu() {
   return (
     <header className="sticky top-0 z-40 w-full" style={{ background: "#131B0E" }}>
       {/* logo row -------------------------------------------------- */}
-      <div className="flex px-4 py-2 sm:justify-start lg:justify-center">
+      <div className="flex px-4 pt-12 py-2 sm:justify-start lg:justify-center">
         <Link href="/">
           <Image
             src="/images/logo.svg"
             alt="Logo"
-            width={120}
-            height={28}
+            width={88}
+            height={21}
             priority
           />
         </Link>
